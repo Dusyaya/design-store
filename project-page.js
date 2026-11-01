@@ -19,6 +19,7 @@ if (!project) {
     ["05 / Вывод", project.conclusion]
   ];
   const next = PROJECTS[(PROJECTS.indexOf(project) + 1) % PROJECTS.length];
+  const previous = PROJECTS[(PROJECTS.indexOf(project) - 1 + PROJECTS.length) % PROJECTS.length];
 
   const gallery = ["Главный визуал / обложка кейса", "Работы и детали", "Мокапы и применение"]
     .map((label, index) => {
@@ -111,7 +112,7 @@ if (!project) {
       typography(description) + '</p></div>').join("") + '</div>' +
     showcaseHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
     (showcase.length || project.id === 'babushka' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
-    '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
+    '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
   bindImages(main);
   const zinBook = main.querySelector('.zin-book');
   if (zinBook) {
