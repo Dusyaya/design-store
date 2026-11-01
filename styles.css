@@ -245,3 +245,11 @@ button,.contact{font-size:15px;line-height:1.4}
 /* Email-рассылки: сохраняем исходные пропорции макетов без обрезки. */
 .case-showcase .showcase-item:has(.showcase-media.is-email) .showcase-slide{aspect-ratio:var(--email-ratio,9/16);height:82%;width:auto}
 .case-showcase .showcase-item:has(.showcase-media.is-email) .showcase-slide img{object-fit:contain}
+
+/* Галерея разноформатных рекламных баннеров Уфы — без карусели и обрезки. */
+.ufa-gallery{margin:65px 0 90px}
+.ufa-gallery .section-head{margin-bottom:24px}
+.ufa-banner{margin:0 0 26px;width:100%;display:block}
+.ufa-banner img{display:block;width:100%;height:auto;object-fit:contain;border-radius:12px}
+.ufa-banner .placeholder{min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;border:1px dashed #ffffff55;border-radius:12px;color:#bbb}
+@media(max-width:760px){.ufa-banner{margin-bottom:16px}.ufa-banner img{border-radius:7px}}
