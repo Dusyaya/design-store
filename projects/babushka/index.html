@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080a0e">
   <meta name="description" content="Портфолио графического дизайнера.">
   <title>ZIN BABUSHKA — Портфолио</title>
-  <link rel="stylesheet" href="../../styles.css?v=20261101-zin-repair2">
+  <link rel="stylesheet" href="../../styles.css?v=20261101-zin-hard-refresh-3">
 </head>
 <body>
   <div class="ambient ambient-a"></div>
@@ -14,12 +14,36 @@
   <header class="topbar">
     <a class="brand" href="../../">ATROKHINA</a>
     <nav></nav>
-  </header>  <main id="app"></main>
+  </header>  <main id="app"><div class="wrap case"><h1>ZIN BABUSHKA</h1><p>Авторский зин · 20 страниц</p><p>Загрузка интерактивного журнала…</p></div></main>
   <script>document.body.dataset.project = "babushka";</script>
   <footer></footer>
   <script src="../../content.js?v=20261101-message1"></script>
   <script src="../../projects.js?v=20261101-fix4"></script>
   <script src="../../shared.js?v=20261101-contact-mail2"></script>
-  <script src="../../project-page.js?v=20261101-zin-blank-fix"></script>
+  <script src="../../project-page.js?v=20261101-zin-hard-refresh-3"></script>
+  <script>
+  // Independent fallback: keep the project visible if the shared renderer fails.
+  (function(){
+    const main=document.getElementById('app');
+    if(main.querySelector('.zin-book')) return;
+    const pairs=[[20,1],...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
+    main.innerHTML='<div class="wrap case"><a class="back" href="../../#catalog">← Вернуться в коллекцию</a><div class="eyebrow">Редакционный дизайн / 2026</div><h1>ZIN BABUSHKA</h1><p>Авторский зин о бабушкином платке как современном модном аксессуаре, выполненный в коллажной технике.</p><section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div><div class="zin-reader"><div class="zin-book">'+pairs.map((p,i)=>'<div class="zin-spread'+(i===0?' is-visible':'')+'">'+p.map((n,j)=>'<div class="zin-page zin-page-'+(j?'right':'left')+'"><img src="../../assets/projects/babushka/Babushka'+n+'.jpg" alt="Страница '+n+'"></div>').join('')+'</div>').join('')+'<div class="zin-turn-sheet"><div class="zin-turn-front"></div><div class="zin-turn-back"></div></div></div><div class="zin-controls"><button class="zin-prev" disabled>←</button><span class="zin-count">01 / 10</span><button class="zin-next">→</button></div></div></section></div>';
+    const spreads=[...main.querySelectorAll('.zin-spread')],sheet=main.querySelector('.zin-turn-sheet'),prev=main.querySelector('.zin-prev'),next=main.querySelector('.zin-next'),count=main.querySelector('.zin-count');
+    let index=0,busy=false;
+    function turn(dir){
+      const target=index+dir;if(busy||target<0||target>=spreads.length)return;busy=true;
+      const old=spreads[index],newer=spreads[target];
+      const oldImgs=old.querySelectorAll('img'),newImgs=newer.querySelectorAll('img');
+      sheet.querySelector('.zin-turn-front').style.backgroundImage='url("'+oldImgs[dir>0?1:0].src+'")';
+      sheet.querySelector('.zin-turn-back').style.backgroundImage='url("'+newImgs[dir>0?0:1].src+'")';
+      newer.classList.add('is-visible');newer.style.zIndex=1;old.style.zIndex=2;
+      old.classList.add(dir>0?'zin-leaving-forward':'zin-leaving-backward');
+      sheet.classList.toggle('is-reverse',dir<0);sheet.style.display='block';sheet.classList.remove('is-turning');
+      void sheet.offsetWidth;sheet.classList.add('is-turning');
+      setTimeout(()=>{old.classList.remove('is-visible','zin-leaving-forward','zin-leaving-backward');old.style.zIndex='';newer.style.zIndex='';sheet.style.display='none';sheet.classList.remove('is-turning');index=target;busy=false;prev.disabled=index===0;next.disabled=index===9;count.textContent=String(index+1).padStart(2,'0')+' / 10';},850);
+    }
+    prev.onclick=()=>turn(-1);next.onclick=()=>turn(1);
+  })();
+  </script>
 </body>
 </html>
