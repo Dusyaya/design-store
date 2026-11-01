@@ -26,7 +26,7 @@ document.querySelector("#about h2").textContent = SITE.about.title;
 document.querySelector("#about .about-text").innerHTML =
   SITE.about.paragraphs.map(text => "<p>" + typography(text) + "</p>").join("");
 document.querySelector("#about .next").textContent = SITE.about.button;
-document.querySelector("#about .next").href = SITE.contacts.telegram;
+document.querySelector("#about .next").href = telegramContactUrl();
 document.querySelector("#about .contact-links").innerHTML = socialLinks();
 
 let activeFilter = "Все";
