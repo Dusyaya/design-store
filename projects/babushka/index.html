@@ -1,49 +1,102 @@
 <!doctype html>
 <html lang="ru" data-root="../../">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080a0e">
-  <meta name="description" content="Портфолио графического дизайнера.">
-  <title>ZIN BABUSHKA — Портфолио</title>
-  <link rel="stylesheet" href="../../styles.css?v=20261101-zin-hard-refresh-3">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080a0e">
+<title>ZIN BABUSHKA — Портфолио</title>
+<link rel="stylesheet" href="../../styles.css?v=20261101-zin-reader5">
+<style>
+.zin-reader{max-width:1100px;margin:32px auto 0}
+.zin-book{position:relative;width:100%;aspect-ratio:1.48;perspective:2200px;isolation:isolate;filter:drop-shadow(0 18px 20px #0004)}
+.zin-spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;visibility:hidden}
+.zin-spread.is-visible{visibility:visible}
+.zin-page{position:relative;min-width:0;overflow:hidden}
+.zin-page img{display:block;width:100%;height:100%;object-fit:fill}
+.zin-page.is-empty{background:transparent!important;box-shadow:none!important}
+.zin-page:not(.is-empty){background:#e7dfd3;box-shadow:inset 0 0 12px #0002}
+.zin-page.left:not(.is-empty){border-radius:4px 0 0 4px}
+.zin-page.right:not(.is-empty){border-radius:0 4px 4px 0}
+.zin-spread:not(.is-first):not(.is-last):after{content:"";position:absolute;left:49.7%;width:.6%;height:100%;pointer-events:none;background:linear-gradient(90deg,#0004,#fff5,#0002);z-index:1}
+.zin-spread.leaving-forward .right,.zin-spread.leaving-backward .left{visibility:hidden}
+.zin-sheet{position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:10;display:none;transform-style:preserve-3d;transform-origin:left center;pointer-events:none}
+.zin-sheet-face{position:absolute;inset:0;backface-visibility:hidden;background-size:100% 100%;background-position:center;background-color:#e7dfd3;box-shadow:inset 0 0 20px #0003}
+.zin-sheet-back{transform:rotateY(180deg)}
+.zin-sheet.forward.turning{animation:zinForward .9s cubic-bezier(.42,.02,.55,.98) forwards}
+.zin-sheet.backward{left:0;transform-origin:right center;transform:rotateY(-180deg)}
+.zin-sheet.backward.turning{animation:zinBackward .9s cubic-bezier(.42,.02,.55,.98) forwards}
+@keyframes zinForward{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
+@keyframes zinBackward{from{transform:rotateY(-180deg)}to{transform:rotateY(0)}}
+.zin-controls{display:flex;align-items:center;justify-content:center;gap:28px;margin-top:26px}
+.zin-controls button{width:46px;height:46px;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;cursor:pointer;font-size:22px}
+.zin-controls button:disabled{opacity:.25;cursor:default}
+.zin-count{min-width:85px;text-align:center;letter-spacing:.12em;font-size:13px}
+.zin-section{margin:75px 0 90px}
+@media(max-width:700px){.zin-section{margin:45px 0}.zin-reader{margin-top:20px}.zin-controls{gap:20px}}
+</style>
 </head>
 <body>
-  <div class="ambient ambient-a"></div>
-  <div class="ambient ambient-b"></div>
-  <header class="topbar">
-    <a class="brand" href="../../">ATROKHINA</a>
-    <nav></nav>
-  </header>  <main id="app"><div class="wrap case"><h1>ZIN BABUSHKA</h1><p>Авторский зин · 20 страниц</p><p>Загрузка интерактивного журнала…</p></div></main>
-  <script>document.body.dataset.project = "babushka";</script>
-  <footer></footer>
-  <script src="../../content.js?v=20261101-message1"></script>
-  <script src="../../projects.js?v=20261101-fix4"></script>
-  <script src="../../shared.js?v=20261101-contact-mail2"></script>
-  <script src="../../project-page.js?v=20261101-zin-hard-refresh-3"></script>
-  <script>
-  // Independent fallback: keep the project visible if the shared renderer fails.
-  (function(){
-    const main=document.getElementById('app');
-    if(main.querySelector('.zin-book')) return;
-    const pairs=[[20,1],...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
-    main.innerHTML='<div class="wrap case"><a class="back" href="../../#catalog">← Вернуться в коллекцию</a><div class="eyebrow">Редакционный дизайн / 2026</div><h1>ZIN BABUSHKA</h1><p>Авторский зин о бабушкином платке как современном модном аксессуаре, выполненный в коллажной технике.</p><section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div><div class="zin-reader"><div class="zin-book">'+pairs.map((p,i)=>'<div class="zin-spread'+(i===0?' is-visible':'')+'">'+p.map((n,j)=>'<div class="zin-page zin-page-'+(j?'right':'left')+'"><img src="../../assets/projects/babushka/Babushka'+n+'.jpg" alt="Страница '+n+'"></div>').join('')+'</div>').join('')+'<div class="zin-turn-sheet"><div class="zin-turn-front"></div><div class="zin-turn-back"></div></div></div><div class="zin-controls"><button class="zin-prev" disabled>←</button><span class="zin-count">01 / 10</span><button class="zin-next">→</button></div></div></section></div>';
-    const spreads=[...main.querySelectorAll('.zin-spread')],sheet=main.querySelector('.zin-turn-sheet'),prev=main.querySelector('.zin-prev'),next=main.querySelector('.zin-next'),count=main.querySelector('.zin-count');
-    let index=0,busy=false;
-    function turn(dir){
-      const target=index+dir;if(busy||target<0||target>=spreads.length)return;busy=true;
-      const old=spreads[index],newer=spreads[target];
-      const oldImgs=old.querySelectorAll('img'),newImgs=newer.querySelectorAll('img');
-      sheet.querySelector('.zin-turn-front').style.backgroundImage='url("'+oldImgs[dir>0?1:0].src+'")';
-      sheet.querySelector('.zin-turn-back').style.backgroundImage='url("'+newImgs[dir>0?0:1].src+'")';
-      newer.classList.add('is-visible');newer.style.zIndex=1;old.style.zIndex=2;
-      old.classList.add(dir>0?'zin-leaving-forward':'zin-leaving-backward');
-      sheet.classList.toggle('is-reverse',dir<0);sheet.style.display='block';sheet.classList.remove('is-turning');
-      void sheet.offsetWidth;sheet.classList.add('is-turning');
-      setTimeout(()=>{old.classList.remove('is-visible','zin-leaving-forward','zin-leaving-backward');old.style.zIndex='';newer.style.zIndex='';sheet.style.display='none';sheet.classList.remove('is-turning');index=target;busy=false;prev.disabled=index===0;next.disabled=index===9;count.textContent=String(index+1).padStart(2,'0')+' / 10';},850);
-    }
-    prev.onclick=()=>turn(-1);next.onclick=()=>turn(1);
-  })();
-  </script>
-</body>
-</html>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<header class="topbar"><a class="brand" href="../../">ATROKHINA</a><nav></nav></header>
+<main id="app">
+<div class="wrap case">
+<a class="back" href="../../#catalog">← Вернуться в коллекцию</a>
+<div class="eyebrow">РЕДАКЦИОННЫЙ ДИЗАЙН / ЖУРНАЛ / 2026</div>
+<h1>ZIN BABUSHKA</h1>
+<div class="case-intro"><p>Авторский зин о бабушкином платке как современном модном аксессуаре, выполненный в коллажной технике.</p></div>
+<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 11 СОСТОЯНИЙ</span></div>
+<div class="zin-reader"><div class="zin-book" aria-label="Интерактивный журнал BABUSHKA"></div>
+<div class="zin-controls"><button type="button" class="zin-prev" aria-label="Листать назад" disabled>←</button><span class="zin-count">01 / 11</span><button type="button" class="zin-next" aria-label="Листать вперед">→</button></div></div>
+</section></div>
+</main>
+<footer></footer>
+<script src="../../content.js?v=20261101-message1"></script>
+<script src="../../projects.js?v=20261101-fix4"></script>
+<script src="../../shared.js?v=20261101-contact-mail2"></script>
+<script>
+(function(){
+  try { if(typeof renderLayout==='function') renderLayout(); }catch(e){console.warn('Header layout',e);}
+  const book=document.querySelector('.zin-book');
+  const states=[[null,1],...Array.from({length:9},(_,i)=>[2+i*2,3+i*2]),[20,null]];
+  const url=n=>'../../assets/projects/babushka/Babushka'+n+'.jpg';
+  const page=(n,side)=>'<div class="zin-page '+side+(n===null?' is-empty':'')+'">'+(n===null?'':'<img src="'+url(n)+'" alt="Страница '+n+'" loading="eager">')+'</div>';
+  book.innerHTML=states.map((pair,i)=>'<div class="zin-spread '+(i===0?'is-visible is-first':i===10?'is-last':'')+'" data-index="'+i+'">'+page(pair[0],'left')+page(pair[1],'right')+'</div>').join('')+
+    '<div class="zin-sheet" aria-hidden="true"><div class="zin-sheet-face zin-sheet-front"></div><div class="zin-sheet-face zin-sheet-back"></div></div>';
+  const spreads=[...book.querySelectorAll('.zin-spread')],sheet=book.querySelector('.zin-sheet');
+  const prev=document.querySelector('.zin-prev'),next=document.querySelector('.zin-next'),counter=document.querySelector('.zin-count');
+  let current=0,busy=false;
+  function turn(dir){
+    const target=current+dir;
+    if(busy||target<0||target>=states.length)return;
+    busy=true;prev.disabled=true;next.disabled=true;
+    const outgoing=spreads[current],incoming=spreads[target];
+    const frontPage=dir>0?states[current][1]:states[current][0];
+    const backPage=dir>0?states[target][0]:states[target][1];
+    const front=sheet.querySelector('.zin-sheet-front'),back=sheet.querySelector('.zin-sheet-back');
+    front.style.backgroundImage='url("'+url(frontPage)+'")';
+    back.style.backgroundImage='url("'+url(backPage)+'")';
+    incoming.classList.add('is-visible');
+    incoming.style.zIndex='1';outgoing.style.zIndex='2';
+    outgoing.classList.add(dir>0?'leaving-forward':'leaving-backward');
+    sheet.className='zin-sheet '+(dir>0?'forward':'backward');
+    sheet.style.display='block';
+    void sheet.offsetWidth;
+    sheet.classList.add('turning');
+    setTimeout(()=>{
+      outgoing.classList.remove('is-visible','leaving-forward','leaving-backward');
+      outgoing.style.zIndex='';incoming.style.zIndex='';
+      sheet.style.display='none';sheet.classList.remove('turning');
+      current=target;busy=false;
+      counter.textContent=String(current+1).padStart(2,'0')+' / 11';
+      prev.disabled=current===0;next.disabled=current===10;
+    },920);
+  }
+  prev.addEventListener('click',()=>turn(-1));
+  next.addEventListener('click',()=>turn(1));
+  book.addEventListener('click',e=>{
+    if(busy)return;
+    const rect=book.getBoundingClientRect();
+    turn(e.clientX-rect.left>rect.width/2?1:-1);
+  });
+})();
+</script>
+</body></html>
