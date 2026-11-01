@@ -104,6 +104,7 @@ if (!project) {
       danceCarousel(Array.from({length:9},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
       '</div></article></section>'
     : '';
+  const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + imagePath('assets/projects/owl/Сова и Лисенок.png') + '" alt="Дизайн лендинга Сова и Лисёнок" loading="eager"></section>' : '';
   const sevstarHtml = project.id === 'sevstar'
     ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
       '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0" aria-label="Экран телевизора. Первый макет прокручивается вертикально.">' +
@@ -130,14 +131,14 @@ if (!project) {
     '<div class="case-intro"><p>' + typography(project.short) + '</p>' +
     '<div class="tags">' + project.tags.map(tag =>
       '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div></div>' +
-    '<div class="case-stage" style="--glow:' +
+    (project.id === 'owl' ? '' : '<div class="case-stage" style="--glow:' +
     (COLORS[project.tone] || COLORS.silver) + '77">' +
-    productArtwork(project) + '</div>' +
+    productArtwork(project) + '</div>') +
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
-    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    owlHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
+    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
