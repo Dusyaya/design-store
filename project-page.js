@@ -74,7 +74,7 @@ if (!project) {
   const merchHtml = project.id === 'gold'
     ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">03 / 04</span><h2>Мерч для благотворительного марафона</h2><p>Разработка футболок для благотворительного марафона: от визуальной концепции и графики до подготовки макетов к производству и воплощения идеи в готовом изделии.</p></div>' +
       '<div class="showcase-media is-carousel is-3d-deck zp-merch"><div class="showcase-track">' +
-      Array.from({length:4}, (_,i) => {
+      Array.from({length:3}, (_,i) => {
         const path = 'assets/projects/gold/merch/merch-' + String(i+1).padStart(2,'0') + (i < 2 ? '.jpg' : '.png');
         return '<div class="showcase-slide"><img src="' + imagePath(path) + '" alt="Мерч благотворительного марафона, фото ' + (i+1) + '" loading="lazy"></div>';
       }).join('') + '</div></div></article>'
@@ -104,18 +104,18 @@ if (!project) {
       danceCarousel(Array.from({length:9},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
       '</div></article></section>'
     : '';
-  const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + imagePath('assets/projects/owl/Сова и Лисенок.png') + '" alt="Дизайн лендинга Сова и Лисёнок" loading="eager"></section>' : '';
+  const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + imagePath('projects/owl/Сова и Лисенок.png') + '" alt="Дизайн лендинга Сова и Лисёнок" loading="eager"></section>' : '';
   const bakerHtml = project.id === 'baker'
-    ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>06 ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
+    ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>05 ЗАГРУЖЕННЫХ ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
       '<p class="baker-description">Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.</p>' +
       '<div class="baker-carousel"><div class="baker-slides">' +
-      Array.from({length:6},(_,i)=>'<img src="' + imagePath('assets/projects/baker/screen-'+String(i+1).padStart(2,'0')+'.png') + '" alt="Весёлый Пекарь — экран '+(i+1)+'" loading="lazy"'+(i?' hidden':'')+'>').join('') +
-      '</div><div class="baker-controls"><button type="button" class="baker-prev" aria-label="Предыдущий экран">←</button><span class="baker-count">01 / 06</span><button type="button" class="baker-next" aria-label="Следующий экран">→</button></div></div></section>'
+      Array.from({length:5},(_,i)=>'<img src="' + imagePath('assets/projects/baker/screen-'+String(i+1).padStart(2,'0')+'.png') + '" alt="Весёлый Пекарь — экран '+(i+1)+'" loading="lazy"'+(i?' hidden':'')+'>').join('') +
+      '</div><div class="baker-controls"><button type="button" class="baker-prev" aria-label="Предыдущий экран">←</button><span class="baker-count">01 / 05</span><button type="button" class="baker-next" aria-label="Следующий экран">→</button></div></div></section>'
     : '';
   const extraGroups = [
     {title:'Иллюстрации',folder:'illustrations',count:4,description:'Авторские цифровые иллюстрации.'},
     {title:'3D',folder:'3d',count:4,description:'Трёхмерные модели и визуализации.'},
-    {title:'Ретушь',folder:'retouch',count:2,description:'Обработка фотографий и работа с деталями изображения.'}
+    {title:'Ретушь',folder:'retouch',count:1,description:'Обработка фотографий и работа с деталями изображения.'}
   ];
   const extraHtml = project.id === 'extra'
     ? '<section class="extra-cases"><div class="section-head"><span>ГАЛЕРЕИ РАБОТ</span><span>ИЛЛЮСТРАЦИИ / 3D / РЕТУШЬ</span></div>' +
@@ -158,7 +158,7 @@ if (!project) {
       typography(description) + '</p></div>').join("") + '</div>' +
     owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
     (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
-    '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
+    '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + SITE_ROOT + '#catalog">Назад к коллекции →</a></nav></div>';
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
     const slides=[...carousel.querySelectorAll('.dance-carousel-slide')];
@@ -181,9 +181,9 @@ if (!project) {
   const bakerSlides=[...main.querySelectorAll('.baker-slides img')];
   if(bakerSlides.length){
     let index=0;
-    const show=()=>{bakerSlides.forEach((img,i)=>{img.hidden=i!==index;});main.querySelector('.baker-count').textContent=String(index+1).padStart(2,'0')+' / 06';};
-    main.querySelector('.baker-prev').addEventListener('click',()=>{index=(index+5)%6;show();});
-    main.querySelector('.baker-next').addEventListener('click',()=>{index=(index+1)%6;show();});
+    const show=()=>{bakerSlides.forEach((img,i)=>{img.hidden=i!==index;});main.querySelector('.baker-count').textContent=String(index+1).padStart(2,'0')+' / 05';};
+    main.querySelector('.baker-prev').addEventListener('click',()=>{index=(index+4)%5;show();});
+    main.querySelector('.baker-next').addEventListener('click',()=>{index=(index+1)%5;show();});
     show();
   }
   const sevstarScreen=main.querySelector('.sevstar-screen');
