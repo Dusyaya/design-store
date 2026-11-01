@@ -65,3 +65,21 @@ footer .social-links img{width:17px;height:17px}
 .software-dock .app-js b{font-size:25px;font-weight:700;letter-spacing:-.07em}
 .software-dock .app-blender{background:#101820}
 @media(max-width:760px){footer{align-items:flex-start}footer .social-links{order:3;width:100%}.project-image-slot:first-child{grid-column:span 1}}
+
+/* Контакты, увеличенный портрет и единый стиль программ */
+.hero-portrait{width:77%;height:610px;top:-35px}
+.hero-composition{height:610px}
+.portrait-photo{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.intro-panel,.skills-panel{z-index:5}
+.software-dock{z-index:6}
+.software-dock .app-js{background:#112a23!important;color:#85e9c3!important}
+.software-dock .app-js b{font-size:25px;font-weight:700;letter-spacing:-.07em}
+.software-dock .app-blender{background:#101820!important}
+.social-links{margin:26px 0 0}
+.about .social-links a{color:#d9dfe8;border:1px solid #485160;padding:13px 17px;font-size:14px}
+.about .social-links img{width:23px;height:23px}
+.mail-symbol{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;font-size:21px}
+.machine-label{justify-content:flex-start}
+.machine-bottom{justify-content:space-between}
+@media(max-width:850px){.hero-composition{height:auto}.hero-portrait{width:100%;height:460px;top:auto}}
+@media(max-width:500px){.hero-portrait{height:350px}.about .social-links a{font-size:12px;padding:10px 12px}}
