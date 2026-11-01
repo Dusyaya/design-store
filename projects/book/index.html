@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080a0e">
-<title>Книга в твёрдом переплёте — Портфолио</title>
-<link rel="stylesheet" href="../../styles.css?v=20261101-unified-nav2">
+<title>Папа знает всё — Портфолио</title>
+<link rel="stylesheet" href="../../styles.css?v=final-polish-3">
 <style>
 .book-reader{max-width:1100px;margin:32px auto 0}
-.book-book{position:relative;width:100%;aspect-ratio:1.48;perspective:2200px;isolation:isolate;filter:drop-shadow(0 18px 20px #0004)}
+.book-book{border-radius:13px;position:relative;width:100%;aspect-ratio:1.48;perspective:2200px;isolation:isolate;filter:drop-shadow(0 18px 20px #0004)}
 .book-spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;visibility:hidden}
 .book-spread.is-visible{visibility:visible}
 .book-spread.is-first .book-page.left,.book-spread[data-index="0"] .book-page.left{visibility:hidden!important;background:transparent!important;box-shadow:none!important}
@@ -16,8 +16,8 @@
 .book-page img{display:block;width:100%;height:100%;object-fit:fill}
 .book-page.is-empty{background:transparent!important;box-shadow:none!important}
 .book-page:not(.is-empty){background:#e7dfd3;box-shadow:inset 0 0 12px #0002}
-.book-page.left:not(.is-empty){border-radius:4px 0 0 4px}
-.book-page.right:not(.is-empty){border-radius:0 4px 4px 0}
+.book-page.left:not(.is-empty){border-radius:13px 0 0 13px}
+.book-page.right:not(.is-empty){border-radius:0 13px 13px 0}
 .book-spread:not(.is-first):not(.is-last):after{content:"";position:absolute;left:49.7%;width:.6%;height:100%;pointer-events:none;background:linear-gradient(90deg,#0004,#fff5,#0002);z-index:1}
 .book-spread.leaving-forward .right,.book-spread.leaving-backward .left{visibility:hidden}
 .book-spread.entering-backward .right,.book-spread.entering-forward .left{visibility:hidden}
@@ -25,7 +25,7 @@
 .book-sheet-face{position:absolute;inset:0;backface-visibility:hidden;background-size:100% 100%;background-position:center;background-color:#e7dfd3;box-shadow:inset 0 0 20px #0003}
 .book-sheet-back{transform:rotateY(180deg)}
 .book-sheet.forward.turning{animation:zinForward .9s cubic-bezier(.42,.02,.55,.98) forwards}
-.book-sheet.backward{left:0;transform-origin:right center;transform:rotateY(-180deg)}
+.book-sheet.backward{left:0;transform-origin:right center;transform:rotateY(180deg)}
 .book-sheet.backward.turning{animation:zinBackward .9s cubic-bezier(.42,.02,.55,.98) forwards}
 @keyframes zinForward{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
 @keyframes zinBackward{from{transform:rotateY(-180deg)}to{transform:rotateY(0)}}
@@ -44,7 +44,7 @@
 <div class="wrap case">
 <a class="back" href="../../#catalog">← Вернуться к коллекции</a>
 <div class="eyebrow">РЕДАКЦИОННЫЙ ДИЗАЙН / ПОДАРОЧНАЯ КНИГА / 2025</div>
-<h1>Книга в твёрдом переплёте</h1>
+<h1>Папа знает всё</h1>
 <div class="case-intro"><p>Подарочная книга к 50-летию папы, созданная в 2025 году. В ней собраны воспоминания близких людей — истории, которые хотелось сохранить. Книга была подготовлена к печати с полным циклом предпечатной подготовки.</p></div>
 <div class="case-stage" id="book-case-stage"></div>
 <div class="case-rows">
@@ -54,14 +54,14 @@
 <div class="case-row"><h2>04 / Результат</h2><p>В 2025 году книга в твёрдом переплёте была передана в печать как подарок папе на 50-летие.</p></div>
 <div class="case-row"><h2>05 / Вывод</h2><p>Дизайн помог сохранить семейные истории и воспоминания в настоящей печатной книге.</p></div>
 </div>
-<section class="book-section"><div class="section-head"><span>ПЕРЕЛИСТЫВАНИЕ КНИГИ</span><span>ТВЁРДЫЙ ПЕРЕПЛЁТ</span></div>
+<section class="book-section"><div class="section-head"><span></span><span>ТВЁРДЫЙ ПЕРЕПЛЁТ</span></div>
 <div class="book-reader"><div class="book-book" aria-label="Интерактивная книга"></div>
 <div class="book-controls"><button type="button" class="book-prev" aria-label="Листать назад" disabled>←</button><span class="book-count">01 / 11</span><button type="button" class="book-next" aria-label="Листать вперед">→</button></div></div>
 </section><nav class="project-navigation" id="book-project-navigation" aria-label="Навигация по проектам"></nav></div>
 </main>
 <footer></footer>
 <script src="../../content.js?v=20261101-message1"></script>
-<script src="../../projects.js?v=book-story-2025"></script>
+<script src="../../projects.js?v=final-polish-3"></script>
 <script src="../../shared.js?v=20261101-contact-mail2"></script>
 <script>
 (function(){
