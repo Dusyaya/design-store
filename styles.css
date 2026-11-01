@@ -148,3 +148,15 @@ button,.contact{font-size:15px;line-height:1.4}
 .showcase-controls button:hover{background:#ffffff25}
 .showcase-counter{color:#e6e2eb;font-size:13px;letter-spacing:.13em;min-width:72px;text-align:center}
 @media(max-width:760px){.showcase-slide{height:440px;padding:16px 15px 70px}}
+
+/* Объёмная карусель по референсу: три перекрывающиеся карточки в перспективе. */
+.showcase-media.is-3d-deck{background:#050505;border:0;border-radius:0;box-shadow:none;overflow:hidden;min-height:530px;perspective:1100px;perspective-origin:50% 42%}
+.is-3d-deck .showcase-track{position:relative;width:100%;height:530px;display:block;transform:none!important;transition:none;transform-style:preserve-3d}
+.is-3d-deck .showcase-slide{position:absolute;top:10%;left:10%;width:59%;height:76%;min-height:0;padding:0;flex:none;border-radius:14px;background:#151519;box-shadow:0 22px 55px #000b;overflow:hidden;cursor:pointer;transform-origin:center;transform:translate3d(var(--deck-x,0%),0,var(--deck-depth,0px)) rotateY(var(--deck-rotate,0deg)) scale(var(--deck-scale,1));transition:transform .65s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,filter .35s ease;filter:brightness(calc(1 - var(--deck-offset,0)*.12));backface-visibility:hidden}
+.is-3d-deck .showcase-slide img{width:100%;height:100%;object-fit:cover;filter:none;pointer-events:none}
+.is-3d-deck .showcase-slide:hover{transform:translate3d(var(--deck-x,0%),-12px,var(--deck-depth,0px)) rotateY(var(--deck-rotate,0deg)) scale(calc(var(--deck-scale,1)*1.09));box-shadow:0 35px 75px #000e;filter:brightness(1.12)}
+.is-3d-deck .showcase-slide:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.is-3d-deck .showcase-controls{z-index:10;bottom:12px}
+.is-3d-deck .showcase-slide .placeholder{inset:0}
+@media(max-width:760px){.showcase-media.is-3d-deck{min-height:360px}.is-3d-deck .showcase-track{height:360px}.is-3d-deck .showcase-slide{top:10%;left:6%;width:64%;height:75%}}
+@media(prefers-reduced-motion:reduce){.is-3d-deck .showcase-slide{transition:none}.is-3d-deck .showcase-slide:hover{transform:translate3d(var(--deck-x,0%),0,var(--deck-depth,0px)) rotateY(var(--deck-rotate,0deg)) scale(var(--deck-scale,1))}}
