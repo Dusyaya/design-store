@@ -160,3 +160,8 @@ button,.contact{font-size:15px;line-height:1.4}
 .is-3d-deck .showcase-slide .placeholder{inset:0}
 @media(max-width:760px){.showcase-media.is-3d-deck{min-height:360px}.is-3d-deck .showcase-track{height:360px}.is-3d-deck .showcase-slide{top:10%;left:6%;width:64%;height:75%}}
 @media(prefers-reduced-motion:reduce){.is-3d-deck .showcase-slide{transition:none}.is-3d-deck .showcase-slide:hover{transform:translate3d(var(--deck-x,0%),0,var(--deck-depth,0px)) rotateY(var(--deck-rotate,0deg)) scale(var(--deck-scale,1))}}
+
+/* Вертикальный формат 9:16 для карточек в объёмной карусели Laser&Beauty. */
+.is-3d-deck .showcase-slide{width:auto;height:82%;aspect-ratio:9/16;left:15%;top:5%;padding:0}
+.is-3d-deck .showcase-slide img{width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){.is-3d-deck .showcase-slide{height:78%;left:8%;top:7%}}
