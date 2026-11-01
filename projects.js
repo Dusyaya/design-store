@@ -39,9 +39,9 @@ window.PORTFOLIO_PROJECTS = [
         "title": "AI-визуалы",
         "description": "Разработка рекламных сюжетов с применением генеративных инструментов: создание изображений, отбор решений, графическая доработка и интеграция в материалы бренда.",
         "images": [
-          "assets/projects/laser/ai-1.jpg",
-          "assets/projects/laser/ai-2.jpg",
-          "assets/projects/laser/ai-3.png"
+          "assets/ai-1.jpg",
+          "assets/ai-2.jpg",
+          "assets/ai-3.png"
         ]
       },
       {
