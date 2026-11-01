@@ -503,3 +503,7 @@ button,.contact{font-size:15px;line-height:1.4}
 .sevstar-controls button{width:46px;height:46px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:transparent;color:inherit;font-size:20px;cursor:pointer}
 .sevstar-counter{font-size:13px;letter-spacing:.12em}
 .sevstar-hint{text-align:center;color:#9b9ca8;font-size:13px;margin-top:14px}
+
+/* Full-length landing page presentation for Owl and Fox. */
+.owl-visual{width:100%;max-width:1100px;margin:64px auto 90px;background:transparent}
+.owl-visual img{display:block;width:100%;height:auto;max-width:100%;border:0;border-radius:0;box-shadow:none;object-fit:contain}
