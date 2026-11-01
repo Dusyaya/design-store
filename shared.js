@@ -57,11 +57,30 @@ function bindImages(root = document) {
   });
 }
 
+// Сообщение для обращения редактируется в content.js.
+function contactMessage() {
+  return SITE.contacts.message || "";
+}
+
+function telegramContactUrl() {
+  return SITE.contacts.telegram + "?text=" + encodeURIComponent(contactMessage());
+}
+
+function whatsappContactUrl() {
+  return SITE.contacts.whatsapp + "?text=" + encodeURIComponent(contactMessage());
+}
+
+function emailContactUrl() {
+  return "mailto:" + SITE.contacts.email +
+    "?subject=" + encodeURIComponent("Запрос на дизайн-проект") +
+    "&body=" + encodeURIComponent(contactMessage());
+}
+
 function socialLinks() {
   const links = [
-    ["Telegram", SITE.contacts.telegram, "telegram", "26A5E4"],
+    ["Telegram", telegramContactUrl(), "telegram", "26A5E4"],
     ["Instagram", SITE.contacts.instagram, "instagram", "E4405F"],
-    ["WhatsApp", SITE.contacts.whatsapp, "whatsapp", "25D366"]
+    ["WhatsApp", whatsappContactUrl(), "whatsapp", "25D366"]
   ];
   return '<div class="social-links" aria-label="Мои контакты">' +
     links.map(([name, url, icon, color]) =>
@@ -69,7 +88,7 @@ function socialLinks() {
       '<img src="https://cdn.simpleicons.org/' + icon + '/' + color + '" alt="" loading="lazy">' +
       '<span>' + name + '</span></a>'
     ).join("") +
-    '<a href="mailto:' + escapeHtml(SITE.contacts.email) + '">' +
+    '<a href="' + escapeHtml(emailContactUrl()) + '">' +
     '<span class="mail-symbol">✉</span><span>Почта</span></a></div>';
 }
 
@@ -80,7 +99,7 @@ function renderLayout() {
   if (nav) nav.innerHTML =
     '<a href="' + SITE_ROOT + '#catalog">' + typography(SITE.header.catalog) + '</a>' +
     '<a href="' + SITE_ROOT + '#about">' + typography(SITE.header.about) + '</a>' +
-    '<a class="contact" href="' + escapeHtml(SITE.contacts.telegram) +
+    '<a class="contact" href="' + escapeHtml(telegramContactUrl()) +
     '" target="_blank" rel="noopener noreferrer">' + typography(SITE.header.contact) + ' ↗</a>';
   const footer = document.querySelector("footer");
   if (footer) footer.innerHTML = '<span>' + typography(SITE.footer) + '</span>';
