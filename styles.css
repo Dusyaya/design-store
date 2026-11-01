@@ -319,3 +319,41 @@ button,.contact{font-size:15px;line-height:1.4}
 .zp-cases .zp-merch .showcase-slide img{width:100%;height:100%;object-fit:contain!important}
 @media(max-width:900px){.zp-cases .zp-case{grid-template-columns:1fr;overflow:hidden}.zp-cases .zp-presentation-layout{grid-template-columns:minmax(0,.22fr) minmax(0,.78fr)!important}.zp-cases .zp-merch,.zp-cases .zp-merch .showcase-track{height:470px!important;min-height:470px!important}}
 @media(max-width:540px){.zp-cases .zp-presentation-layout{grid-template-columns:1fr!important}.zp-cases .zp-presentation-photo img{max-height:200px;width:auto;max-width:100%;margin:auto}.zp-cases .zp-presentation-slides{height:240px}.zp-cases .zp-merch,.zp-cases .zp-merch .showcase-track{height:370px!important;min-height:370px!important}}
+
+/* Hard layout lock: presentation copy always on the left, media always on the right. */
+@media (min-width: 761px) {
+  .zp-cases .zp-presentation-case {
+    display:grid!important;
+    grid-template-columns:minmax(0, 40%) minmax(0, 60%)!important;
+    gap:0!important;
+    align-items:center!important;
+    direction:ltr!important;
+    overflow:hidden!important;
+  }
+  .zp-cases .zp-presentation-case > .showcase-copy {
+    grid-column:1!important;
+    grid-row:1!important;
+    order:0!important;
+    width:100%!important;
+    padding-right:clamp(20px,3vw,50px)!important;
+    transform:none!important;
+    position:relative!important;
+    z-index:3!important;
+  }
+  .zp-cases .zp-presentation-case > .zp-presentation-layout {
+    grid-column:2!important;
+    grid-row:1!important;
+    order:0!important;
+    width:100%!important;
+    max-width:100%!important;
+    transform:none!important;
+    position:relative!important;
+    z-index:1!important;
+    overflow:hidden!important;
+  }
+}
+@media (max-width:760px) {
+  .zp-cases .zp-presentation-case{display:flex!important;flex-direction:column!important;gap:24px!important}
+  .zp-cases .zp-presentation-case > .showcase-copy{order:0!important;width:100%!important;transform:none!important}
+  .zp-cases .zp-presentation-case > .zp-presentation-layout{order:1!important;width:100%!important;transform:none!important}
+}
