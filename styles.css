@@ -428,3 +428,10 @@ button,.contact{font-size:15px;line-height:1.4}
 .zin-book{isolation:isolate}
 .zin-turn-sheet{pointer-events:none}
 @media(prefers-reduced-motion:reduce){.zin-turn-sheet.is-turning{animation-duration:.85s}}
+
+/* Shared project navigation and breathing room below return link */
+.case > .back{display:inline-flex;margin-bottom:54px!important}
+.project-navigation{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:76px 0 35px;padding-top:24px;border-top:1px solid rgba(255,255,255,.15)}
+.project-navigation a{display:inline-flex;align-items:center;justify-content:center;padding:15px 20px;border:1px solid rgba(255,255,255,.26);border-radius:999px;color:inherit;text-decoration:none;transition:background .2s,border-color .2s}
+.project-navigation a:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.6)}
+@media(max-width:620px){.case > .back{margin-bottom:36px!important}.project-navigation{gap:12px;margin-top:50px}.project-navigation a{padding:12px;font-size:12px;text-align:center}}
