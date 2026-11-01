@@ -30,6 +30,24 @@ if (!project) {
         escapeHtml(path) + '</small></div></div>';
     }).join("");
 
+
+  // Дополнительные секции кейса настраиваются в projects.js.
+  const showcase = Array.isArray(project.showcase) ? project.showcase : [];
+  const showcaseHtml = showcase.length
+    ? '<section class="case-showcase"><div class="section-head"><span>НАПРАВЛЕНИЯ РАБОТЫ</span><span>ПРИМЕРЫ ДИЗАЙНА</span></div>' +
+      showcase.map((item, index) =>
+        '<article class="showcase-item"><div class="showcase-copy"><span class="eyebrow">' +
+        String(index + 1).padStart(2, "0") + ' / ' + String(showcase.length).padStart(2, "0") +
+        '</span><h2>' + typography(item.title) + '</h2><p>' +
+        typography(item.description) + '</p></div>' +
+        '<div class="project-image-slot"><img data-file="' + escapeHtml(item.image) +
+        '" src="' + imagePath(item.image) + '" alt="' + escapeHtml(item.title) + '">' +
+        '<div class="placeholder" style="display:none"><span>＋</span><strong>' +
+        typography(item.title) + '</strong><small>' + escapeHtml(item.image) +
+        '</small></div></div></article>'
+      ).join("") + '</section>'
+    : "";
+
   main.innerHTML =
     '<div class="wrap case">' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в магазин</a>' +
@@ -45,9 +63,8 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span>' +
-    '<span>ФОТОГРАФИИ И МАКЕТЫ</span></div>' +
-    '<div class="gallery">' + gallery + '</div>' +
+    showcaseHtml +
+    (showcase.length ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
 }
