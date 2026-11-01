@@ -66,6 +66,16 @@ if (!project) {
           '</strong><small>' + path + '</small></div></figure>';
       }).join('') + '</section>'
     : "";
+  const presentationHtml = project.id === "gold"
+    ? '<section class="zp-presentations"><div class="section-head"><span>ПРЕЗЕНТАЦИИ</span><span>ВИЗУАЛЬНЫЕ МАТЕРИАЛЫ</span></div>' +
+      '<div class="zp-presentation-layout">' +
+      '<figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold/presentations/photo.png') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
+      '<div class="zp-presentation-right"><div class="zp-presentation-slides">' +
+      Array.from({length:10}, (_,i) => {
+        const path = 'assets/projects/gold/presentations/slide-' + String(i+1).padStart(2,'0') + '.jpg';
+        return '<img src="' + imagePath(path) + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">';
+      }).join('') + '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 10</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></section>'
+    : "";
   main.innerHTML =
     '<div class="wrap case">' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в магазин</a>' +
@@ -81,10 +91,22 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    showcaseHtml + ufaGallery +
+    showcaseHtml + presentationHtml + ufaGallery +
     (showcase.length || project.id === 'gold-ufa' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
+  const zpSlides = [...main.querySelectorAll('.zp-presentation-slides img')];
+  if (zpSlides.length) {
+    let active = 0;
+    const showZpSlide = () => {
+      zpSlides.forEach((img, i) => { img.hidden = i !== active; });
+      main.querySelector('.zp-count').textContent = String(active + 1).padStart(2, '0') + ' / ' + zpSlides.length;
+    };
+    main.querySelector('.zp-prev').addEventListener('click', () => { active = (active - 1 + zpSlides.length) % zpSlides.length; showZpSlide(); });
+    main.querySelector('.zp-next').addEventListener('click', () => { active = (active + 1) % zpSlides.length; showZpSlide(); });
+    showZpSlide();
+  }
+
   main.querySelectorAll(".showcase-media.is-email .showcase-slide").forEach(slide => {
     const img = slide.querySelector("img");
     const updateRatio = () => {
