@@ -72,7 +72,7 @@
     if(i>=0){
       const prev=PROJECTS[(i-1+PROJECTS.length)%PROJECTS.length];
       const next=PROJECTS[(i+1)%PROJECTS.length];
-      nav.innerHTML='<a href="../../projects/'+prev.id+'/">← Предыдущий проект</a><a href="../../projects/'+next.id+'/">Следующий проект →</a>';
+      nav.innerHTML='<a href="../../projects/'+prev.id+'/">← Предыдущий проект</a><a href="../../#catalog">Назад к коллекции →</a>';
     }
   }
   const stage=document.getElementById('book-case-stage');
