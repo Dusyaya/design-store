@@ -138,10 +138,12 @@ if (!project) {
       newSpread.classList.add('is-visible');
       newSpread.style.zIndex='1';
       oldSpread.style.zIndex='2';
+      oldSpread.classList.toggle('zin-leaving-forward',direction>0);
+      oldSpread.classList.toggle('zin-leaving-backward',direction<0);
       void sheet.offsetWidth;
       sheet.classList.add('is-turning');
       setTimeout(() => {
-        oldSpread.classList.remove('is-visible');
+        oldSpread.classList.remove('is-visible','zin-leaving-forward','zin-leaving-backward');
         oldSpread.style.zIndex='';
         newSpread.style.zIndex='';
         sheet.classList.remove('is-turning');
