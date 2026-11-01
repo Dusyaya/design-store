@@ -473,3 +473,19 @@ button,.contact{font-size:15px;line-height:1.4}
 .dance-carousel-controls button{width:44px;height:44px;border:1px solid #777;border-radius:50%;background:transparent;color:inherit;font-size:19px;cursor:pointer}
 .dance-carousel-count{font-size:13px;letter-spacing:.1em}
 @media(max-width:800px){.dance-cases .dance-case{grid-template-columns:1fr;gap:28px}.dance-carousel-photos .dance-image{min-height:320px}}
+
+/* Dance Soul: transparent image presentation, branding stacked vertically. */
+.dance-cases .dance-logos{display:flex!important;flex-direction:column!important;gap:30px!important}
+.dance-cases .dance-logos figure{width:100%!important}
+.dance-cases .dance-image,
+.dance-cases .dance-carousel-slide,
+.dance-cases .dance-carousel-slides,
+.dance-cases .dance-poster,
+.dance-cases .dance-branding-media,
+.dance-cases .dance-merch-media{background:transparent!important;background-color:transparent!important;box-shadow:none!important;border:0!important}
+.dance-cases .dance-image{border-radius:0!important;overflow:visible!important;min-height:0!important;padding:0!important}
+.dance-cases .dance-image img{border-radius:0!important;box-shadow:none!important;object-fit:contain!important}
+.dance-cases .dance-poster .dance-image{max-width:100%!important}
+.dance-cases .dance-carousel-research .dance-image{aspect-ratio:auto!important}
+.dance-cases .dance-carousel-research .dance-image img{height:auto!important;max-height:none!important;width:100%!important}
+.dance-cases .dance-carousel-photos .dance-image{min-height:0!important}
