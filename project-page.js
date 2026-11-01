@@ -112,6 +112,18 @@ if (!project) {
       Array.from({length:6},(_,i)=>'<img src="' + imagePath('assets/projects/baker/screen-'+String(i+1).padStart(2,'0')+'.png') + '" alt="Весёлый Пекарь — экран '+(i+1)+'" loading="lazy"'+(i?' hidden':'')+'>').join('') +
       '</div><div class="baker-controls"><button type="button" class="baker-prev" aria-label="Предыдущий экран">←</button><span class="baker-count">01 / 06</span><button type="button" class="baker-next" aria-label="Следующий экран">→</button></div></div></section>'
     : '';
+  const extraGroups = [
+    {title:'Иллюстрации',folder:'illustrations',count:4,description:'Авторские цифровые иллюстрации.'},
+    {title:'3D',folder:'3d',count:4,description:'Трёхмерные модели и визуализации.'},
+    {title:'Ретушь',folder:'retouch',count:2,description:'Обработка фотографий и работа с деталями изображения.'}
+  ];
+  const extraHtml = project.id === 'extra'
+    ? '<section class="extra-cases"><div class="section-head"><span>ГАЛЕРЕИ РАБОТ</span><span>ИЛЛЮСТРАЦИИ / 3D / РЕТУШЬ</span></div>' +
+      extraGroups.map((group,i)=>'<article class="extra-case"><div class="extra-case-copy"><span class="eyebrow">0'+(i+1)+' / 03</span><h2>'+group.title+'</h2><p>'+group.description+'</p></div>' +
+      '<div class="extra-carousel"><div class="extra-slides">' +
+      Array.from({length:group.count},(_,j)=>'<img src="'+imagePath('assets/projects/extra/'+group.folder+'/'+String(j+1).padStart(2,'0')+'.jpg')+'" alt="'+group.title+', работа '+(j+1)+'" loading="lazy"'+(j?' hidden':'')+'>').join('') +
+      '</div><div class="extra-controls"><button type="button" class="extra-prev" aria-label="Предыдущее изображение">←</button><span class="extra-count">01 / '+String(group.count).padStart(2,'0')+'</span><button type="button" class="extra-next" aria-label="Следующее изображение">→</button></div></div></article>').join('')+'</section>'
+    : '';
   const sevstarHtml = project.id === 'sevstar'
     ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
       '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0" aria-label="Экран телевизора. Первый макет прокручивается вертикально.">' +
@@ -144,8 +156,8 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    owlHtml + bakerHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
-    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
+    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
@@ -156,6 +168,15 @@ if (!project) {
     carousel.querySelector('.dance-carousel-prev').addEventListener('click',()=>show(current-1));
     carousel.querySelector('.dance-carousel-next').addEventListener('click',()=>show(current+1));
     show(0);
+  });
+  main.querySelectorAll('.extra-carousel').forEach(carousel=>{
+    const slides=[...carousel.querySelectorAll('.extra-slides img')];
+    const count=carousel.querySelector('.extra-count');
+    let active=0;
+    const show=()=>{slides.forEach((img,i)=>{img.hidden=i!==active;});count.textContent=String(active+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');};
+    carousel.querySelector('.extra-prev').addEventListener('click',()=>{active=(active-1+slides.length)%slides.length;show();});
+    carousel.querySelector('.extra-next').addEventListener('click',()=>{active=(active+1)%slides.length;show();});
+    show();
   });
   const bakerSlides=[...main.querySelectorAll('.baker-slides img')];
   if(bakerSlides.length){
