@@ -7,16 +7,6 @@ const project = PROJECTS.find(item => item.id === projectId);
 const main = document.querySelector("main");
 
 if (!project) {
-  const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
-  const zinHtml = project.id === 'babushka'
-    ? '<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div>' +
-      '<div class="zin-reader"><div class="zin-book" aria-label="Интерактивный журнал BABUSHKA">' +
-      zinPairs.map((pair,i) => '<div class="zin-spread' + (i===0?' is-visible':'') + '" data-spread="' + i + '">' +
-        pair.map((n,j) => '<div class="zin-page zin-page-' + (j===0?'left':'right') + '"><span class="zin-page-fallback">BABUSHKA <strong>'+String(n).padStart(2,'0')+'</strong><small>Страница ожидает загрузки</small></span><img src="' + imagePath('assets/projects/babushka/Babushka'+n+'.jpg') + '" alt="Зин BABUSHKA, страница '+n+'" loading="'+(i<2?'eager':'lazy')+'" onerror="this.style.display=\'none\'" onload="this.style.display=\'block\'"></div>').join('') +
-      '</div>').join('') +
-      '<div class="zin-turn-sheet" aria-hidden="true"><div class="zin-turn-front"></div><div class="zin-turn-back"></div></div>' +
-      '</div><div class="zin-controls"><button type="button" class="zin-prev" aria-label="Предыдущий разворот">←</button><span class="zin-count">01 / 10</span><button type="button" class="zin-next" aria-label="Следующий разворот">→</button></div></div></section>'
-    : '';
   main.innerHTML = '<div class="wrap case"><h1>Проект не найден</h1>' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в каталог</a></div>';
 } else {
@@ -93,6 +83,16 @@ if (!project) {
       '<div class="showcase-media zp-print-carousel"><div class="zp-print-slides">' +
       ['print-01.jpg','print-02.jpg'].map((name,i) => '<img src="' + imagePath('assets/projects/gold/print/' + name) + '" alt="Полиграфия Золотое Правило, работа ' + (i+1) + '" loading="lazy">').join('') +
       '</div><div class="zp-print-controls"><button type="button" class="zp-print-prev" aria-label="Предыдущее изображение">←</button><span class="zp-print-count">01 / 02</span><button type="button" class="zp-print-next" aria-label="Следующее изображение">→</button></div></div></article>'
+    : '';
+  const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
+  const zinHtml = project.id === 'babushka'
+    ? '<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div>' +
+      '<div class="zin-reader"><div class="zin-book" aria-label="Интерактивный журнал BABUSHKA">' +
+      zinPairs.map((pair,i) => '<div class="zin-spread' + (i===0?' is-visible':'') + '" data-spread="' + i + '">' +
+        pair.map((n,j) => '<div class="zin-page zin-page-' + (j===0?'left':'right') + '"><span class="zin-page-fallback">BABUSHKA <strong>'+String(n).padStart(2,'0')+'</strong><small>Страница ожидает загрузки</small></span><img src="' + imagePath('assets/projects/babushka/Babushka'+n+'.jpg') + '" alt="Зин BABUSHKA, страница '+n+'" loading="'+(i<2?'eager':'lazy')+'" onerror="this.style.display=\'none\'" onload="this.style.display=\'block\'"></div>').join('') +
+      '</div>').join('') +
+      '<div class="zin-turn-sheet" aria-hidden="true"><div class="zin-turn-front"></div><div class="zin-turn-back"></div></div>' +
+      '</div><div class="zin-controls"><button type="button" class="zin-prev" aria-label="Предыдущий разворот">←</button><span class="zin-count">01 / 10</span><button type="button" class="zin-next" aria-label="Следующий разворот">→</button></div></div></section>'
     : '';
   main.innerHTML =
     '<div class="wrap case">' +
