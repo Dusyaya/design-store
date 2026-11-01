@@ -58,16 +58,16 @@ if (!project) {
 
   const bannerImages = ['banner-01.jpg', 'banner-02.jpg', 'banner-03.jpg'];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
-    ? '<section class="zp-direction"><div class="zp-direction-copy"><span class="eyebrow">01 / 02</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе. Разработка баннеров для «ПроДокторов» с акцентом на узнаваемость бренда и ясную подачу информации.</p></div><div class="zp-banner-stack">' +
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 02</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе. Разработка баннеров для «ПроДокторов» с акцентом на узнаваемость бренда и ясную подачу информации.</p></div><div class="showcase-media zp-banner-stack">' +
       bannerImages.map((name, i) => '<img src="' + imagePath('assets/projects/gold-ufa/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" loading="lazy">').join('') +
-      '</div></section>'
+      '</div></article>'
     : '';
   const presentationHtml = (project.id === 'gold' || project.id === 'gold-ufa')
-    ? '<section class="zp-direction"><div class="zp-direction-copy"><span class="eyebrow">02 / 02</span><h2>Презентации</h2><p>Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.</p></div>' +
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">02 / 02</span><h2>Презентации</h2><p>Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.</p></div>' +
       '<div class="zp-presentation-layout"><figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold-ufa/photo.PNG') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
       '<div class="zp-presentation-right"><div class="zp-presentation-slides">' +
       Array.from({length:10}, (_,i) => '<img src="' + imagePath('assets/projects/gold-ufa/slide-' + String(i+1).padStart(2,'0') + '.jpg') + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">').join('') +
-      '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 10</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></section>'
+      '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 10</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></article>'
     : '';
   main.innerHTML =
     '<div class="wrap case">' +
@@ -84,7 +84,7 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    showcaseHtml + bannerSection + presentationHtml +
+    showcaseHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + '</section>' : '') +
     (showcase.length || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
