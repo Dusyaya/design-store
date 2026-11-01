@@ -532,3 +532,33 @@ button,.contact{font-size:15px;line-height:1.4}
 .extra-controls button{width:44px;height:44px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:transparent;color:inherit;font-size:20px;cursor:pointer}
 .extra-count{font-size:13px;letter-spacing:.12em}
 @media(max-width:760px){.extra-case{grid-template-columns:1fr;gap:22px;padding:38px 0}.extra-case-copy p{max-width:none}}
+
+/* Final unified image viewing and perspective carousels. */
+.portfolio-zoomable{cursor:zoom-in}
+.portfolio-lightbox{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:5vh 5vw;background:rgba(3,4,8,.94);backdrop-filter:blur(10px)}
+.portfolio-lightbox.is-open{display:flex}
+.portfolio-lightbox img{max-width:100%;max-height:90vh;width:auto;height:auto;object-fit:contain}
+.portfolio-lightbox-close{position:absolute;top:20px;right:24px;border:1px solid #777;background:#15161a;color:white;border-radius:50%;width:48px;height:48px;font-size:28px;z-index:2}
+body.lightbox-open{overflow:hidden}
+.portfolio-perspective .dance-carousel-slides,.portfolio-perspective .extra-slides,.portfolio-perspective .baker-slides,.portfolio-perspective .showcase-track{position:relative!important;display:block!important;height:clamp(300px,48vw,580px)!important;min-height:0!important;perspective:1400px!important;overflow:visible!important}
+.portfolio-perspective .dance-carousel-slide,.portfolio-perspective .extra-slides>img,.portfolio-perspective .baker-slides>img,.portfolio-perspective .showcase-slide{position:absolute!important;top:50%!important;left:50%!important;width:68%!important;height:88%!important;max-height:88%!important;max-width:68%!important;display:flex!important;align-items:center!important;justify-content:center!important;opacity:1!important;visibility:visible!important;transform:translate(calc(-50% + var(--perspective-offset)*48%),-50%) rotateY(calc(var(--perspective-offset)*-19deg)) scale(calc(1 - var(--perspective-offset)*var(--perspective-offset)*.15))!important;transition:transform .45s ease,opacity .45s ease!important;transform-origin:center!important;pointer-events:auto!important;box-shadow:none!important;background:transparent!important}
+.portfolio-perspective .extra-slides>img,.portfolio-perspective .baker-slides>img{object-fit:contain!important}
+.portfolio-perspective .dance-carousel-slide .dance-image{height:100%!important;min-height:0!important}
+.portfolio-perspective .dance-carousel-slide img,.portfolio-perspective .showcase-slide img{max-width:100%!important;max-height:100%!important;width:100%!important;height:100%!important;object-fit:contain!important}
+.portfolio-perspective .portfolio-offstage{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+.portfolio-perspective .portfolio-active{z-index:25!important}
+.portfolio-perspective .showcase-track .showcase-slide{--deck-offset:0;--deck-depth:0px;--deck-x:0%;--deck-scale:1;--deck-rotate:0deg}
+.portfolio-perspective-controls{display:flex;justify-content:center;align-items:center;gap:24px;margin:18px 0 0}
+.portfolio-perspective-controls button{border:1px solid rgba(255,255,255,.4);border-radius:50%;background:transparent;color:inherit;width:44px;height:44px;font-size:20px}
+.portfolio-perspective-count{font-size:13px;letter-spacing:.12em}
+.dance-cases .dance-logos{align-items:start!important}
+.dance-cases .dance-logos figure{max-width:380px!important;margin:0 auto!important}
+.dance-cases .dance-logos .dance-image img{max-height:230px!important;width:100%!important;object-fit:contain!important}
+.dance-cases .dance-logos .dance-image{min-height:0!important}
+.dance-cases .dance-case{border-bottom:0!important}
+.dance-cases .dance-case + .dance-case{border-top:0!important}
+.zp-cases .zp-merch .showcase-slide img{border-radius:18px!important}
+.sevstar-screen{left:10.3%!important;top:10.3%!important;width:80.3%!important;height:69.5%!important;overflow:hidden}
+.sevstar-screen .sevstar-slide img{width:102%!important;max-width:none!important;margin-left:-1%!important}
+.sevstar-screen.is-scrollable{overflow-y:auto!important;overflow-x:hidden!important}
+@media(max-width:650px){.portfolio-perspective .dance-carousel-slides,.portfolio-perspective .extra-slides,.portfolio-perspective .baker-slides,.portfolio-perspective .showcase-track{height:330px!important}.portfolio-perspective .dance-carousel-slide,.portfolio-perspective .extra-slides>img,.portfolio-perspective .baker-slides>img,.portfolio-perspective .showcase-slide{width:78%!important;max-width:78%!important;transform:translate(calc(-50% + var(--perspective-offset)*36%),-50%) rotateY(calc(var(--perspective-offset)*-15deg)) scale(calc(1 - var(--perspective-offset)*var(--perspective-offset)*.15))!important}}
