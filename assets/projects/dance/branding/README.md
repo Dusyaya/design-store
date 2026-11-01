@@ -1,0 +1,1 @@
+Загрузите сюда logo-before.jpg, logo-after.jpg и poster.jpg.
