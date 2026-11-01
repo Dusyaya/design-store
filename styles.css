@@ -299,3 +299,23 @@ button,.contact{font-size:15px;line-height:1.4}
 .zp-cases .zp-merch{min-height:460px}
 .zp-cases .zp-merch .showcase-slide img{object-fit:contain!important}
 @media(max-width:900px){.zp-cases .zp-presentation-slides{height:clamp(220px,60vw,420px)}.zp-cases .zp-merch{min-height:380px}}
+
+/* ZP layout repair: isolated from the Laser&Beauty deck rules. */
+.zp-cases .zp-case{grid-template-columns:minmax(0,.83fr) minmax(0,1.17fr);gap:clamp(28px,4vw,64px);align-items:center;overflow:hidden}
+.zp-cases .zp-case .showcase-copy{order:1!important;position:relative;z-index:1}
+.zp-cases .zp-case .showcase-media{order:2!important;transform:none!important;min-width:0}
+.zp-cases .zp-presentation-layout{display:grid!important;grid-template-columns:minmax(0,.22fr) minmax(0,.78fr)!important;gap:18px!important;align-items:center;padding:0;border:0;background:transparent;box-shadow:none;overflow:hidden!important}
+.zp-cases .zp-presentation-photo{margin:0;min-width:0;align-self:center}
+.zp-cases .zp-presentation-photo img{display:block;width:100%;height:auto;max-height:270px;object-fit:contain;border-radius:8px}
+.zp-cases .zp-presentation-right{min-width:0;overflow:hidden!important}
+.zp-cases .zp-presentation-slides{position:relative;display:block;height:clamp(235px,25vw,400px);perspective:950px;overflow:hidden!important;isolation:isolate}
+.zp-cases .zp-presentation-slides img{position:absolute;top:50%;left:8%;width:84%;height:auto;max-height:94%;object-fit:contain;transform:translateY(-50%) translateX(calc(var(--slide-offset,0)*58%)) rotateY(calc(var(--slide-offset,0)*-24deg)) scale(calc(1 - var(--slide-offset,0)*var(--slide-offset,0)*.22));opacity:.38;transition:transform .5s ease,opacity .5s ease;filter:drop-shadow(0 12px 20px #0008)}
+.zp-cases .zp-presentation-slides img.is-active{opacity:1}
+.zp-cases .zp-presentation-slides img[hidden]{display:none}
+.zp-cases .zp-presentation-controls{margin:8px 0 0;position:relative;z-index:4}
+.zp-cases .zp-merch{min-height:620px!important;overflow:hidden!important}
+.zp-cases .zp-merch .showcase-track{height:620px!important}
+.zp-cases .zp-merch .showcase-slide{height:86%!important;aspect-ratio:4/5!important;left:3%!important;top:5%!important;width:auto!important;max-width:75%;overflow:hidden}
+.zp-cases .zp-merch .showcase-slide img{width:100%;height:100%;object-fit:contain!important}
+@media(max-width:900px){.zp-cases .zp-case{grid-template-columns:1fr;overflow:hidden}.zp-cases .zp-presentation-layout{grid-template-columns:minmax(0,.22fr) minmax(0,.78fr)!important}.zp-cases .zp-merch,.zp-cases .zp-merch .showcase-track{height:470px!important;min-height:470px!important}}
+@media(max-width:540px){.zp-cases .zp-presentation-layout{grid-template-columns:1fr!important}.zp-cases .zp-presentation-photo img{max-height:200px;width:auto;max-width:100%;margin:auto}.zp-cases .zp-presentation-slides{height:240px}.zp-cases .zp-merch,.zp-cases .zp-merch .showcase-track{height:370px!important;min-height:370px!important}}
