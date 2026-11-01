@@ -4,12 +4,14 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080a0e">
 <title>ZIN BABUSHKA — Портфолио</title>
-<link rel="stylesheet" href="../../styles.css?v=20261101-zin-reader5">
+<link rel="stylesheet" href="../../styles.css?v=20261101-zin-reader6">
 <style>
 .zin-reader{max-width:1100px;margin:32px auto 0}
 .zin-book{position:relative;width:100%;aspect-ratio:1.48;perspective:2200px;isolation:isolate;filter:drop-shadow(0 18px 20px #0004)}
 .zin-spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;visibility:hidden}
 .zin-spread.is-visible{visibility:visible}
+.zin-spread.is-first .zin-page.left,.zin-spread[data-index="0"] .zin-page.left{visibility:hidden!important;background:transparent!important;box-shadow:none!important}
+.zin-spread.is-last .zin-page.right,.zin-spread[data-index="10"] .zin-page.right{visibility:hidden!important;background:transparent!important;box-shadow:none!important}
 .zin-page{position:relative;min-width:0;overflow:hidden}
 .zin-page img{display:block;width:100%;height:100%;object-fit:fill}
 .zin-page.is-empty{background:transparent!important;box-shadow:none!important}
