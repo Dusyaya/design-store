@@ -75,6 +75,14 @@ if (!project) {
     (showcase.length ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
+  main.querySelectorAll(".showcase-media.is-email .showcase-slide").forEach(slide => {
+    const img = slide.querySelector("img");
+    const updateRatio = () => {
+      if (img.naturalWidth && img.naturalHeight) slide.style.setProperty("--email-ratio", img.naturalWidth + "/" + img.naturalHeight);
+    };
+    if (img.complete) updateRatio();
+    img.addEventListener("load", updateRatio);
+  });
   main.querySelectorAll(".showcase-media.is-carousel").forEach(carousel => {
     const track = carousel.querySelector(".showcase-track");
     const slides = [...track.children];
