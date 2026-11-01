@@ -309,7 +309,7 @@ button,.contact{font-size:15px;line-height:1.4}
 .zp-cases .zp-presentation-photo img{display:block;width:100%;height:auto;max-height:270px;object-fit:contain;border-radius:8px}
 .zp-cases .zp-presentation-right{min-width:0;overflow:hidden!important}
 .zp-cases .zp-presentation-slides{position:relative;display:block;height:clamp(235px,25vw,400px);perspective:950px;overflow:hidden!important;isolation:isolate}
-.zp-cases .zp-presentation-slides img{position:absolute;top:50%;left:8%;width:84%;height:auto;max-height:94%;object-fit:contain;transform:translateY(-50%) translateX(calc(var(--slide-offset,0)*58%)) rotateY(calc(var(--slide-offset,0)*-24deg)) scale(calc(1 - var(--slide-offset,0)*var(--slide-offset,0)*.22));opacity:.38;transition:transform .5s ease,opacity .5s ease;filter:drop-shadow(0 12px 20px #0008)}
+.zp-cases .zp-presentation-slides img{position:absolute;top:50%;left:8%;width:84%;height:auto;max-height:94%;object-fit:contain;transform:translateY(-50%) translateX(calc(var(--slide-offset,0)*58%)) rotateY(calc(var(--slide-offset,0)*-24deg)) scale(var(--slide-scale,1));opacity:.38;transition:transform .5s ease,opacity .5s ease;filter:drop-shadow(0 12px 20px #0008)}
 .zp-cases .zp-presentation-slides img.is-active{opacity:1}
 .zp-cases .zp-presentation-slides img[hidden]{display:none}
 .zp-cases .zp-presentation-controls{margin:8px 0 0;position:relative;z-index:4}
