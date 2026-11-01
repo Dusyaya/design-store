@@ -107,6 +107,7 @@ if (!project) {
         img.hidden = Math.abs(offset) > 1;
         img.classList.toggle('is-active', offset === 0);
         img.style.setProperty('--slide-offset', String(offset));
+        img.style.setProperty('--slide-scale', offset === 0 ? '1' : '.78');
         img.style.zIndex = String(3 - Math.abs(offset));
         img.setAttribute('aria-hidden', String(offset !== 0));
       });
