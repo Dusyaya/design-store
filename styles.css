@@ -94,3 +94,21 @@ footer .social-links img{width:17px;height:17px}
 .case .gallery .project-image-slot{min-height:320px}
 .case .gallery .project-image-slot:first-child{grid-column:span 2}
 @media(max-width:760px){.case .gallery .project-image-slot:first-child{grid-column:span 1}}
+
+/* Единая система значков приложений и видимые контакты. */
+.software-dock .app-icon{background:#111a2a;border-radius:12px}
+.software-dock .app-ps{background:#001e36;color:#31a8ff}
+.software-dock .app-ai{background:#330000;color:#ff9a00}
+.software-dock .app-js{background:#171717;color:#f7df1e}
+.software-dock .app-figma{background:#17171c}
+.software-dock .app-blender{background:#201b18}
+.software-dock .app-icon b{font-size:27px;line-height:1;font-weight:700;letter-spacing:-.06em}
+.software-dock .app-blender img{width:44px;height:44px;object-fit:contain}
+.machine-bottom{display:none!important}
+.artifact .stamp{display:none!important}
+.about .contact-links{margin-top:34px;display:block;position:relative;z-index:5}
+.about .contact-links .social-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:0}
+.about .contact-links .social-links a{display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border:1px solid #5a6170;border-radius:30px;font-size:15px;color:#fff;background:#ffffff0a;min-height:50px}
+.about .contact-links .social-links a:hover{background:#ffffff20;border-color:#fff}
+.about .contact-links .social-links img{width:22px;height:22px}
+.about .next{display:inline-flex;align-items:center;min-height:46px}
