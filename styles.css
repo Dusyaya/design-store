@@ -507,3 +507,14 @@ button,.contact{font-size:15px;line-height:1.4}
 /* Full-length landing page presentation for Owl and Fox. */
 .owl-visual{width:100%;max-width:1100px;margin:64px auto 90px;background:transparent}
 .owl-visual img{display:block;width:100%;height:auto;max-width:100%;border:0;border-radius:0;box-shadow:none;object-fit:contain}
+
+/* Six-screen game UI carousel */
+.baker-case{margin:72px auto 90px;max-width:1120px}
+.baker-description{max-width:740px;color:#a9aab6;line-height:1.7;margin:28px 0}
+.baker-carousel{display:flex;flex-direction:column;align-items:center}
+.baker-slides{display:flex;justify-content:center;align-items:center;width:100%;min-height:320px}
+.baker-slides img{display:block;width:auto;max-width:100%;max-height:740px;height:auto;object-fit:contain;border-radius:0;box-shadow:none}
+.baker-slides img[hidden]{display:none!important}
+.baker-controls{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:24px}
+.baker-controls button{width:46px;height:46px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:transparent;color:inherit;font-size:20px;cursor:pointer}
+.baker-count{font-size:13px;letter-spacing:.12em}
