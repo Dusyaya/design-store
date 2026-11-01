@@ -357,3 +357,8 @@ button,.contact{font-size:15px;line-height:1.4}
   .zp-cases .zp-presentation-case > .showcase-copy{order:0!important;width:100%!important;transform:none!important}
   .zp-cases .zp-presentation-case > .zp-presentation-layout{order:1!important;width:100%!important;transform:none!important}
 }
+
+/* ZP print case: two original-ratio images, no carousel. */
+.zp-cases .zp-print-gallery{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:center;overflow:hidden!important;transform:none!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+.zp-cases .zp-print-gallery img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;border-radius:10px}
+@media(max-width:540px){.zp-cases .zp-print-gallery{grid-template-columns:1fr;gap:14px}.zp-cases .zp-print-gallery img{max-height:none}}
