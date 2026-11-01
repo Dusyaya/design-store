@@ -97,7 +97,7 @@ if (!project) {
     : '';
   main.innerHTML =
     '<div class="wrap case">' +
-    '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в магазин</a>' +
+    '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться к коллекции</a>' +
     '<div class="eyebrow">' + typography(project.category) + ' / ' +
     typography(project.field) + ' / ' + escapeHtml(project.year) + '</div>' +
     '<h1>' + typography(project.name) + '</h1>' +
