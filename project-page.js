@@ -92,16 +92,16 @@ if (!project) {
   const danceHtml = project.id === 'dance'
     ? '<section class="case-showcase dance-cases"><div class="section-head"><span>КЕЙСЫ</span><span>DANCE SOUL</span></div>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">01 / 02</span><h2>Брендинг</h2><p>Разработка первоначального логотипа танцевальной студии Dance Soul. Через год — ребрендинг с адаптацией названия и логотипа на русский язык в связи с новыми требованиями к оформлению вывесок.</p></div><div class="dance-branding-media"><div class="dance-logos"><figure><figcaption>ДО / ПЕРВЫЙ ЛОГОТИП</figcaption>' +
-      danceImage('assets/projects/dance/branding/logo-before.jpg','Первый логотип Dance Soul') +
+      danceImage('assets/projects/dance/branding/logo-before.png','Первый логотип Dance Soul') +
       '</figure><figure><figcaption>ПОСЛЕ / РЕБРЕНДИНГ</figcaption>' +
-      danceImage('assets/projects/dance/branding/logo-after.jpg','Новый логотип Dance Soul') +
+      danceImage('assets/projects/dance/branding/logo-after.png','Новый логотип Dance Soul') +
       '</figure></div><div class="dance-poster"><p>Афиша для расклейки</p>' +
       danceImage('assets/projects/dance/branding/poster.jpg','Афиша Dance Soul для расклейки') +
       '</div></div></article>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">02 / 02</span><h2>Мерч</h2><p>Небольшое исследование и подбор визуальных направлений для будущего мерча студии: идеи, референсы и предложения по оформлению.</p></div><div class="dance-merch-media"><h3>Исследование и предложения</h3>' +
       danceCarousel(Array.from({length:7},(_,i)=>'assets/projects/dance/research/Slide 16_9 - '+i+'.jpg'),'research') +
-      '<h3>Результат</h3><p>Реализация мерча: серия из 11 фотографий готовых изделий.</p>' +
-      danceCarousel(Array.from({length:11},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
+      '<h3>Результат</h3><p>В результате созданы футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена с ковровым орнаментом. Контраст лаконичной чёрной основы и насыщенных узоров объединяет эстетику уличной одежды с характером танцевальной студии.</p>' +
+      danceCarousel(Array.from({length:9},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
       '</div></article></section>'
     : '';
   const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
