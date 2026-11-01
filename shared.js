@@ -70,9 +70,11 @@ function whatsappContactUrl() {
   return SITE.contacts.whatsapp + "?text=" + encodeURIComponent(contactMessage());
 }
 
+// Веб-редактор Gmail работает даже без настроенного почтового приложения.
 function emailContactUrl() {
-  return "mailto:" + SITE.contacts.email +
-    "?subject=" + encodeURIComponent("Запрос на дизайн-проект") +
+  return "https://mail.google.com/mail/?view=cm&fs=1" +
+    "&to=" + encodeURIComponent(SITE.contacts.email) +
+    "&su=" + encodeURIComponent("Запрос на дизайн-проект") +
     "&body=" + encodeURIComponent(contactMessage());
 }
 
@@ -88,7 +90,7 @@ function socialLinks() {
       '<img src="https://cdn.simpleicons.org/' + icon + '/' + color + '" alt="" loading="lazy">' +
       '<span>' + name + '</span></a>'
     ).join("") +
-    '<a href="' + escapeHtml(emailContactUrl()) + '">' +
+    '<a href="' + escapeHtml(emailContactUrl()) + '" target="_blank" rel="noopener noreferrer">' +
     '<span class="mail-symbol">✉</span><span>Почта</span></a></div>';
 }
 
