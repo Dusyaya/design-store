@@ -58,7 +58,7 @@ if (!project) {
 
   const bannerImages = ['banner-01.jpg', 'banner-02.jpg', 'banner-03.jpg'];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
-    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе. Разработка баннеров для «ПроДокторов» с акцентом на узнаваемость бренда и ясную подачу информации.</p></div><div class="showcase-media zp-banner-stack">' +
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.</p></div><div class="showcase-media zp-banner-stack">' +
       bannerImages.map((name, i) => '<img src="' + imagePath('assets/projects/gold/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" loading="lazy">').join('') +
       '</div></article>'
     : '';
