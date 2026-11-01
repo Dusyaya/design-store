@@ -443,3 +443,33 @@ button,.contact{font-size:15px;line-height:1.4}
 .project-navigation a{display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:19px 26px!important;border:1px solid rgba(255,255,255,.28)!important;border-radius:999px!important;background:transparent!important;color:#e7e7eb!important;text-decoration:none!important;font-size:clamp(15px,1.35vw,21px)!important;font-weight:400!important;line-height:1.2!important;white-space:nowrap!important}
 .project-navigation a:hover{border-color:rgba(255,255,255,.65)!important;background:rgba(255,255,255,.06)!important}
 @media(max-width:620px){.case > .back{margin-bottom:48px!important}.project-navigation{gap:12px!important;margin-top:56px!important;padding-top:24px!important}.project-navigation a{padding:13px 12px!important;font-size:13px!important;white-space:normal!important;text-align:center!important}}
+
+/* DANCE SOUL case studies */
+.dance-cases{margin-top:80px}
+.dance-cases .dance-case{display:grid;grid-template-columns:minmax(240px,36%) minmax(0,1fr);gap:48px;padding:54px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.dance-case-copy h2{font-size:clamp(28px,3vw,44px);margin:16px 0}
+.dance-case-copy p{color:#a8aab4;line-height:1.7;max-width:450px}
+.dance-branding-media,.dance-merch-media{min-width:0}
+.dance-logos{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dance-logos figure{margin:0;min-width:0}
+.dance-logos figcaption{font-size:11px;letter-spacing:.08em;color:#aaa;margin-bottom:12px}
+.dance-image{position:relative;width:100%;min-height:160px;background:#191b22;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.dance-image img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain}
+.dance-image img[hidden]{display:none}
+.dance-image-placeholder{padding:32px 14px;text-align:center;color:#b4b5bf;font-size:14px;line-height:1.8}
+.dance-image-placeholder small{overflow-wrap:anywhere;font-size:11px;color:#858692}
+.dance-poster{margin-top:32px}
+.dance-poster p,.dance-merch-media>h3{font-size:18px;font-weight:500;margin:0 0 14px}
+.dance-poster .dance-image{max-width:550px}
+.dance-merch-media>h3:not(:first-child){margin-top:48px}
+.dance-merch-media>p{color:#a8aab4;margin:0 0 20px}
+.dance-carousel-slide[hidden]{display:none!important}
+.dance-carousel-slides{min-width:0}
+.dance-carousel-research .dance-image{aspect-ratio:16/9}
+.dance-carousel-research .dance-image img{height:100%;max-height:none}
+.dance-carousel-photos .dance-image{min-height:480px}
+.dance-carousel-photos .dance-image img{width:auto;max-width:100%;max-height:650px}
+.dance-carousel-controls{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:18px}
+.dance-carousel-controls button{width:44px;height:44px;border:1px solid #777;border-radius:50%;background:transparent;color:inherit;font-size:19px;cursor:pointer}
+.dance-carousel-count{font-size:13px;letter-spacing:.1em}
+@media(max-width:800px){.dance-cases .dance-case{grid-template-columns:1fr;gap:28px}.dance-carousel-photos .dance-image{min-height:320px}}
