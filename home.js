@@ -19,7 +19,7 @@ document.querySelector("#catalog .section-head span:first-child").textContent = 
 document.querySelector("#catalog .section-head span:last-child").textContent =
   PROJECTS.length + " ПРОЕКТОВ";
 document.querySelector(".machine-label").textContent = catalog.machine;
-document.querySelector(".machine-bottom").textContent = catalog.bottom;
+document.querySelector(".machine-bottom").remove();
 
 document.querySelector("#about .section-head").textContent = SITE.about.heading;
 document.querySelector("#about h2").textContent = SITE.about.title;
