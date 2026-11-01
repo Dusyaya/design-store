@@ -241,3 +241,7 @@ button,.contact{font-size:15px;line-height:1.4}
 /* Мерч: все три кадра показываются в пропорциях первой фотографии (841:1111). */
 .case-showcase .showcase-item:has(.showcase-media.is-3d-deck) .showcase-slide img{object-fit:cover}
 .case-showcase .showcase-item:has(.showcase-media.is-3d-deck):nth-of-type(2) .showcase-slide{aspect-ratio:841/1111}
+
+/* Email-рассылки: сохраняем исходные пропорции макетов без обрезки. */
+.case-showcase .showcase-item:has(.showcase-media.is-email) .showcase-slide{aspect-ratio:var(--email-ratio,9/16);height:82%;width:auto}
+.case-showcase .showcase-item:has(.showcase-media.is-email) .showcase-slide img{object-fit:contain}
