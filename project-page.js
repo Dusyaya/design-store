@@ -105,6 +105,13 @@ if (!project) {
       '</div></article></section>'
     : '';
   const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + imagePath('assets/projects/owl/Сова и Лисенок.png') + '" alt="Дизайн лендинга Сова и Лисёнок" loading="eager"></section>' : '';
+  const bakerHtml = project.id === 'baker'
+    ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>06 ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
+      '<p class="baker-description">Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.</p>' +
+      '<div class="baker-carousel"><div class="baker-slides">' +
+      Array.from({length:6},(_,i)=>'<img src="' + imagePath('assets/projects/baker/screen-'+String(i+1).padStart(2,'0')+'.png') + '" alt="Весёлый Пекарь — экран '+(i+1)+'" loading="lazy"'+(i?' hidden':'')+'>').join('') +
+      '</div><div class="baker-controls"><button type="button" class="baker-prev" aria-label="Предыдущий экран">←</button><span class="baker-count">01 / 06</span><button type="button" class="baker-next" aria-label="Следующий экран">→</button></div></div></section>'
+    : '';
   const sevstarHtml = project.id === 'sevstar'
     ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
       '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0" aria-label="Экран телевизора. Первый макет прокручивается вертикально.">' +
@@ -137,8 +144,8 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    owlHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
-    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    owlHtml + bakerHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
+    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
@@ -150,6 +157,14 @@ if (!project) {
     carousel.querySelector('.dance-carousel-next').addEventListener('click',()=>show(current+1));
     show(0);
   });
+  const bakerSlides=[...main.querySelectorAll('.baker-slides img')];
+  if(bakerSlides.length){
+    let index=0;
+    const show=()=>{bakerSlides.forEach((img,i)=>{img.hidden=i!==index;});main.querySelector('.baker-count').textContent=String(index+1).padStart(2,'0')+' / 06';};
+    main.querySelector('.baker-prev').addEventListener('click',()=>{index=(index+5)%6;show();});
+    main.querySelector('.baker-next').addEventListener('click',()=>{index=(index+1)%6;show();});
+    show();
+  }
   const sevstarScreen=main.querySelector('.sevstar-screen');
   if(sevstarScreen){
     const slides=[...sevstarScreen.querySelectorAll('.sevstar-slide')];
