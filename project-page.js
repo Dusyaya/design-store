@@ -49,7 +49,7 @@ if (!project) {
           String(index + 1).padStart(2, "0") + ' / ' + String(showcase.length).padStart(2, "0") +
           '</span><h2>' + typography(item.title) + '</h2><p>' +
           typography(item.description) + '</p></div>' +
-          '<div class="showcase-media' + (carousel ? ' is-carousel' : '') + '">' +
+          '<div class="showcase-media' + (carousel ? ' is-carousel is-3d-deck' : '') + '">' +
           '<div class="showcase-track">' + slides + '</div>' +
           (carousel ? '<div class="showcase-controls"><button type="button" class="showcase-prev" aria-label="Предыдущая работа">←</button><span class="showcase-counter">01 / ' +
           String(images.length).padStart(2, "0") + '</span><button type="button" class="showcase-next" aria-label="Следующая работа">→</button></div>' : '') +
@@ -83,10 +83,32 @@ if (!project) {
     let current = 0;
     const show = index => {
       current = (index + slides.length) % slides.length;
-      track.style.transform = "translateX(-" + (current * 100) + "%)";
+      slides.forEach((slide, i) => {
+        // Ближняя карточка расположена слева, остальные уходят в перспективу вправо.
+        const offset = (i - current + slides.length) % slides.length;
+        slide.style.setProperty("--deck-offset", offset);
+        slide.style.setProperty("--deck-depth", -offset * 105 + "px");
+        slide.style.setProperty("--deck-x", offset * 43 + "%");
+        slide.style.setProperty("--deck-scale", 1 - offset * .13);
+        slide.style.setProperty("--deck-rotate", offset * -10 + "deg");
+        slide.style.zIndex = String(slides.length - offset);
+        slide.classList.toggle("is-front", offset === 0);
+        slide.setAttribute("aria-hidden", String(offset !== 0));
+        slide.tabIndex = offset === 0 ? 0 : -1;
+      });
       counter.textContent = String(current + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
     };
+    slides.forEach((slide, i) => {
+      slide.addEventListener("click", () => show(i));
+      slide.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          show(i);
+        }
+      });
+    });
     carousel.querySelector(".showcase-prev").addEventListener("click", () => show(current - 1));
     carousel.querySelector(".showcase-next").addEventListener("click", () => show(current + 1));
+    show(0);
   });
 }
