@@ -7,16 +7,6 @@ const project = PROJECTS.find(item => item.id === projectId);
 const main = document.querySelector("main");
 
 if (!project) {
-  const ufaGallery = project.id === "gold-ufa"
-    ? '<section class="ufa-gallery"><div class="section-head"><span>РЕКЛАМНАЯ КАМПАНИЯ В УФЕ</span><span>БАННЕРЫ</span></div>' +
-      ['banner-01.jpg','banner-02.jpg','banner-03.jpg'].map((name, index) => {
-        const path = 'assets/projects/gold-ufa/' + name;
-        return '<figure class="ufa-banner"><img data-file="' + path + '" src="' + imagePath(path) +
-          '" alt="Рекламный баннер Золотое Правило ' + (index + 1) + '" loading="lazy">' +
-          '<div class="placeholder" style="display:none"><strong>Баннер ' + (index + 1) +
-          '</strong><small>' + path + '</small></div></figure>';
-      }).join('') + '</section>'
-    : "";
   main.innerHTML = '<div class="wrap case"><h1>Проект не найден</h1>' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в каталог</a></div>';
 } else {
@@ -66,6 +56,16 @@ if (!project) {
       }).join("") + '</section>'
     : "";
 
+  const ufaGallery = project.id === "gold-ufa"
+    ? '<section class="ufa-gallery"><div class="section-head"><span>РЕКЛАМНАЯ КАМПАНИЯ В УФЕ</span><span>БАННЕРЫ</span></div>' +
+      ['banner-01.jpg','banner-02.jpg','banner-03.jpg'].map((name, index) => {
+        const path = 'assets/projects/gold-ufa/' + name;
+        return '<figure class="ufa-banner"><img data-file="' + path + '" src="' + imagePath(path) +
+          '" alt="Рекламный баннер Золотое Правило ' + (index + 1) + '" loading="lazy">' +
+          '<div class="placeholder" style="display:none"><strong>Баннер ' + (index + 1) +
+          '</strong><small>' + path + '</small></div></figure>';
+      }).join('') + '</section>'
+    : "";
   main.innerHTML =
     '<div class="wrap case">' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в магазин</a>' +
@@ -82,7 +82,7 @@ if (!project) {
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
     showcaseHtml + ufaGallery +
-    (showcase.length ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    (showcase.length || project.id === 'gold-ufa' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
   main.querySelectorAll(".showcase-media.is-email .showcase-slide").forEach(slide => {
