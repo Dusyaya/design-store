@@ -51,8 +51,7 @@ if (!project) {
           typography(item.description) + '</p></div>' +
           '<div class="showcase-media' + (carousel ? ' is-carousel is-3d-deck' : '') + '">' +
           '<div class="showcase-track">' + slides + '</div>' +
-          (carousel ? '<div class="showcase-controls"><button type="button" class="showcase-prev" aria-label="Предыдущая работа"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="showcase-counter">01 / ' +
-          String(images.length).padStart(2, "0") + '</span><button type="button" class="showcase-next" aria-label="Следующая работа"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>' : '') +
+          (carousel ? '' : '') +
           '</div></article>';
       }).join("") + '</section>'
     : "";
@@ -79,7 +78,6 @@ if (!project) {
   main.querySelectorAll(".showcase-media.is-carousel").forEach(carousel => {
     const track = carousel.querySelector(".showcase-track");
     const slides = [...track.children];
-    const counter = carousel.querySelector(".showcase-counter");
     let current = 0;
     const show = index => {
       current = (index + slides.length) % slides.length;
@@ -96,7 +94,6 @@ if (!project) {
         slide.setAttribute("aria-label", "Показать работу " + (i + 1));
         slide.tabIndex = 0;
       });
-      counter.textContent = String(current + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
     };
     slides.forEach((slide, i) => {
       slide.addEventListener("click", () => show(i === current ? current + 1 : i));
@@ -107,8 +104,6 @@ if (!project) {
         }
       });
     });
-    carousel.querySelector(".showcase-prev").addEventListener("click", () => show(current - 1));
-    carousel.querySelector(".showcase-next").addEventListener("click", () => show(current + 1));
     show(0);
   });
 }
