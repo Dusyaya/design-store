@@ -234,3 +234,6 @@ button,.contact{font-size:15px;line-height:1.4}
   .case-showcase .showcase-item:has(.is-3d-deck) .showcase-media{transform:none!important}
   .is-3d-deck .showcase-controls{left:5%;right:auto;width:90%}
 }
+
+/* Кнопки навигации полностью удалены из карусели. */
+.is-3d-deck .showcase-controls{display:none!important}
