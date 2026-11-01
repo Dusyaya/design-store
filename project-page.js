@@ -104,6 +104,13 @@ if (!project) {
       danceCarousel(Array.from({length:9},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
       '</div></article></section>'
     : '';
+  const sevstarHtml = project.id === 'sevstar'
+    ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
+      '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0" aria-label="Экран телевизора. Первый макет прокручивается вертикально.">' +
+      Array.from({length:9},(_,i)=>'<div class="sevstar-slide"' +(i?' hidden':'')+ '><img src="' + imagePath('assets/projects/sevstar/Рисунок'+(i+1)+'.png') + '" alt="Севстар Кулинария, экран '+(i+1)+'" loading="'+(i?'lazy':'eager')+'"></div>').join('') +
+      '</div><img class="sevstar-tv-frame" src="' + imagePath('assets/projects/sevstar/tv.png') + '" alt="" aria-hidden="true">' +
+      '</div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">←</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">→</button></div><p class="sevstar-hint">Первый экран можно прокручивать вверх и вниз внутри телевизора.</p></section>'
+    : '';
   const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
   const zinHtml = project.id === 'babushka'
     ? '<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div>' +
@@ -129,8 +136,8 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    showcaseHtml + danceHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
-    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
+    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
@@ -142,6 +149,22 @@ if (!project) {
     carousel.querySelector('.dance-carousel-next').addEventListener('click',()=>show(current+1));
     show(0);
   });
+  const sevstarScreen=main.querySelector('.sevstar-screen');
+  if(sevstarScreen){
+    const slides=[...sevstarScreen.querySelectorAll('.sevstar-slide')];
+    const counter=main.querySelector('.sevstar-counter');
+    let active=0;
+    function showSevstar(n){
+      active=(n+slides.length)%slides.length;
+      slides.forEach((slide,i)=>{slide.hidden=i!==active;});
+      sevstarScreen.scrollTop=0;
+      sevstarScreen.classList.toggle('is-scrollable',active===0);
+      counter.textContent=String(active+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+    }
+    main.querySelector('.sevstar-prev').addEventListener('click',()=>showSevstar(active-1));
+    main.querySelector('.sevstar-next').addEventListener('click',()=>showSevstar(active+1));
+    showSevstar(0);
+  }
   const zinBook = main.querySelector('.zin-book');
   if (zinBook) {
     const spreads = [...zinBook.querySelectorAll('.zin-spread')];
