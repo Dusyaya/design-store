@@ -96,16 +96,18 @@ if (!project) {
     (showcase.length || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
-  const zpPresentation = main.querySelector('.zp-presentation-slides');
-  if (zpPresentation) {
-    zpPresentation.classList.add('is-3d-deck');
-    zpPresentation.querySelectorAll('img').forEach(img => img.classList.add('zp-perspective-slide'));
-  }
   const zpSlides = [...main.querySelectorAll('.zp-presentation-slides img')];
   if (zpSlides.length) {
     let active = 0;
     const showZpSlide = () => {
-      zpSlides.forEach((img, i) => { img.hidden = i !== active; });
+      zpSlides.forEach((img, i) => {
+        const delta = (i - active + zpSlides.length) % zpSlides.length;
+        const offset = delta > zpSlides.length / 2 ? delta - zpSlides.length : delta;
+        img.hidden = Math.abs(offset) > 1;
+        img.style.transform = offset === 0 ? 'translateX(0) scale(1)' : 'translateX(' + (offset * 60) + '%) scale(.77) rotateY(' + (offset * -32) + 'deg)';
+        img.style.opacity = offset === 0 ? '1' : '.45';
+        img.style.zIndex = String(3 - Math.abs(offset));
+      });
       main.querySelector('.zp-count').textContent = String(active + 1).padStart(2, '0') + ' / ' + zpSlides.length;
     };
     main.querySelector('.zp-prev').addEventListener('click', () => { active = (active - 1 + zpSlides.length) % zpSlides.length; showZpSlide(); });
