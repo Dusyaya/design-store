@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ru" data-root="../../">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080a0e">
+<title>Книга в твёрдом переплёте — Портфолио</title>
+<link rel="stylesheet" href="../../styles.css?v=20261101-unified-nav2">
+<style>
+.book-reader{max-width:1100px;margin:32px auto 0}
+.book-book{position:relative;width:100%;aspect-ratio:1.48;perspective:2200px;isolation:isolate;filter:drop-shadow(0 18px 20px #0004)}
+.book-spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;visibility:hidden}
+.book-spread.is-visible{visibility:visible}
+.book-spread.is-first .book-page.left,.book-spread[data-index="0"] .book-page.left{visibility:hidden!important;background:transparent!important;box-shadow:none!important}
+.book-spread.is-last .book-page.right,.book-spread[data-index="10"] .book-page.right{visibility:hidden!important;background:transparent!important;box-shadow:none!important}
+.book-page{position:relative;min-width:0;overflow:hidden}
+.book-page img{display:block;width:100%;height:100%;object-fit:fill}
+.book-page.is-empty{background:transparent!important;box-shadow:none!important}
+.book-page:not(.is-empty){background:#e7dfd3;box-shadow:inset 0 0 12px #0002}
+.book-page.left:not(.is-empty){border-radius:4px 0 0 4px}
+.book-page.right:not(.is-empty){border-radius:0 4px 4px 0}
+.book-spread:not(.is-first):not(.is-last):after{content:"";position:absolute;left:49.7%;width:.6%;height:100%;pointer-events:none;background:linear-gradient(90deg,#0004,#fff5,#0002);z-index:1}
+.book-spread.leaving-forward .right,.book-spread.leaving-backward .left{visibility:hidden}
+.book-spread.entering-backward .right,.book-spread.entering-forward .left{visibility:hidden}
+.book-sheet{position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:10;display:none;transform-style:preserve-3d;transform-origin:left center;pointer-events:none}
+.book-sheet-face{position:absolute;inset:0;backface-visibility:hidden;background-size:100% 100%;background-position:center;background-color:#e7dfd3;box-shadow:inset 0 0 20px #0003}
+.book-sheet-back{transform:rotateY(180deg)}
+.book-sheet.forward.turning{animation:zinForward .9s cubic-bezier(.42,.02,.55,.98) forwards}
+.book-sheet.backward{left:0;transform-origin:right center;transform:rotateY(-180deg)}
+.book-sheet.backward.turning{animation:zinBackward .9s cubic-bezier(.42,.02,.55,.98) forwards}
+@keyframes zinForward{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
+@keyframes zinBackward{from{transform:rotateY(-180deg)}to{transform:rotateY(0)}}
+.book-controls{display:flex;align-items:center;justify-content:center;gap:28px;margin-top:26px}
+.book-controls button{width:46px;height:46px;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;cursor:pointer;font-size:22px}
+.book-controls button:disabled{opacity:.25;cursor:default}
+.book-count{min-width:85px;text-align:center;letter-spacing:.12em;font-size:13px}
+.book-section{margin:75px 0 90px}
+@media(max-width:700px){.book-section{margin:45px 0}.book-reader{margin-top:20px}.book-controls{gap:20px}}
+</style>
+</head>
+<body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<header class="topbar"><a class="brand" href="../../">ATROKHINA</a><nav></nav></header>
+<main id="app">
+<div class="wrap case">
+<a class="back" href="../../#catalog">← Вернуться к коллекции</a>
+<div class="eyebrow">РЕДАКЦИОННЫЙ ДИЗАЙН / КНИГА / 2026</div>
+<h1>Книга в твёрдом переплёте</h1>
+<div class="case-intro"><p>Дизайн книги в твёрдом переплёте: обложка, форзацы и внутренние страницы. Листайте книгу как настоящее печатное издание.</p></div>
+<div class="case-stage" id="book-case-stage"></div>
+<div class="case-rows">
+<div class="case-row"><h2>01 / Задача</h2><p>Показать привычный аксессуар с неожиданной стороны через редакционный дизайн.</p></div>
+<div class="case-row"><h2>02 / Контекст и подход</h2><p>Визуальная концепция строится на сочетании архивных изображений, модной фотографии, выразительной типографики и коллажа.</p></div>
+<div class="case-row"><h2>03 / Моя работа</h2><p>Создала оформление обложки и разворотов журнала, типографические композиции и коллажи.</p></div>
+<div class="case-row"><h2>04 / Результат</h2><p>Разработан авторский журнал с единой графической системой.</p></div>
+<div class="case-row"><h2>05 / Вывод</h2><p>Коллаж и типографика позволяют соединить ностальгию и актуальную визуальную культуру.</p></div>
+</div>
+<section class="book-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>ТВЁРДЫЙ ПЕРЕПЛЁТ</span></div>
+<div class="book-reader"><div class="book-book" aria-label="Интерактивный журнал КНИГА"></div>
+<div class="book-controls"><button type="button" class="book-prev" aria-label="Листать назад" disabled>←</button><span class="book-count">01 / 11</span><button type="button" class="book-next" aria-label="Листать вперед">→</button></div></div>
+</section><nav class="project-navigation" id="book-project-navigation" aria-label="Навигация по проектам"></nav></div>
+</main>
+<footer></footer>
+<script src="../../content.js?v=20261101-message1"></script>
+<script src="../../projects.js?v=20261101-fix4"></script>
+<script src="../../shared.js?v=20261101-contact-mail2"></script>
+<script>
+(function(){
+  try { if(typeof renderLayout==='function') renderLayout(); }catch(e){console.warn('Header layout',e);}
+  const nav=document.getElementById('book-project-navigation');
+  if(nav && typeof PROJECTS!=='undefined'){
+    const i=PROJECTS.findIndex(p=>p.id==='book');
+    if(i>=0){
+      const prev=PROJECTS[(i-1+PROJECTS.length)%PROJECTS.length];
+      const next=PROJECTS[(i+1)%PROJECTS.length];
+      nav.innerHTML='<a href="../../projects/'+prev.id+'/">← Предыдущий проект</a><a href="../../projects/'+next.id+'/">Следующий проект →</a>';
+    }
+  }
+  const stage=document.getElementById('book-case-stage');
+  if(stage && typeof productArtwork==='function' && typeof PROJECTS!=='undefined'){
+    const project=PROJECTS.find(p=>p.id==='book');
+    if(project) stage.innerHTML=productArtwork(project);
+  }
+  const book=document.querySelector('.book-book');
+  const folder='../../assets/projects/book/';
+  const fileNames=['обложка1.jpg','01Forzac1.jpg'];
+  const exists=src=>new Promise(resolve=>{const img=new Image();img.onload=()=>resolve(true);img.onerror=()=>resolve(false);img.src=src;});
+  // Detect sequential numbered pages without requiring a fixed page count.
+  (async()=>{
+    for(let n=2;n<=150;n++){
+      const name=String(n).padStart(3,'0')+'.jpg';
+      if(!(await exists(folder+encodeURIComponent(name))))break;
+      fileNames.push(name);
+    }
+    fileNames.push('Forzac_posledniy.jpg','обложка_последняя.jpg');
+    const available=[];
+    for(const name of fileNames)if(await exists(folder+encodeURIComponent(name)))available.push(name);
+    const info=document.querySelector('.book-count');
+    const page=(name,side)=>'<div class="book-page '+side+(name?'':' is-empty')+'">'+(name?'<img src="'+folder+encodeURIComponent(name)+'" alt="'+name+'" loading="lazy">':'')+'</div>';
+    if(!available.length){book.innerHTML='<p class="book-await">Загрузите страницы книги в папку assets/projects/book/ — здесь появится интерактивное перелистывание.</p>';document.querySelector('.book-prev').disabled=true;document.querySelector('.book-next').disabled=true;info.textContent='00 / 00';return;}
+    // Opening: cover on right. Then each facing spread, ending with a single left page.
+    const states=[[null,available[0]]];
+    for(let i=1;i<available.length;i+=2)states.push([available[i],available[i+1]||null]);
+    if(states[states.length-1][1]!==null)states.push([null,null]);
+    book.innerHTML=states.map((pair,i)=>'<div class="book-spread '+(i===0?'is-visible is-first':i===states.length-1?'is-last':'')+'" data-index="'+i+'">'+page(pair[0],'left')+page(pair[1],'right')+'</div>').join('')+
+      '<div class="book-sheet" aria-hidden="true"><div class="book-sheet-face book-sheet-front"></div><div class="book-sheet-face book-sheet-back"></div></div>';
+    const spreads=[...book.querySelectorAll('.book-spread')],sheet=book.querySelector('.book-sheet');
+    const prev=document.querySelector('.book-prev'),next=document.querySelector('.book-next');
+    let current=0,busy=false;
+    const image=name=>name?'url("'+folder+encodeURIComponent(name)+'")':'none';
+    const update=()=>{info.textContent=String(current+1).padStart(2,'0')+' / '+String(states.length).padStart(2,'0');prev.disabled=current===0;next.disabled=current===states.length-1;};
+    function turn(dir){
+      const target=current+dir;
+      if(busy||target<0||target>=states.length)return;
+      busy=true;prev.disabled=true;next.disabled=true;
+      const outgoing=spreads[current],incoming=spreads[target];
+      const frontPage=dir>0?states[current][1]:states[target][1];
+      const backPage=dir>0?states[target][0]:states[current][0];
+      sheet.querySelector('.book-sheet-front').style.backgroundImage=image(frontPage);
+      sheet.querySelector('.book-sheet-back').style.backgroundImage=image(backPage);
+      incoming.classList.add('is-visible');
+      incoming.classList.toggle('entering-backward',dir<0);
+      incoming.classList.toggle('entering-forward',dir>0);
+      incoming.style.zIndex='1';outgoing.style.zIndex='2';
+      outgoing.classList.add(dir>0?'leaving-forward':'leaving-backward');
+      sheet.className='book-sheet '+(dir>0?'forward':'backward');
+      sheet.style.display='block';void sheet.offsetWidth;sheet.classList.add('turning');
+      setTimeout(()=>{
+        outgoing.classList.remove('is-visible','leaving-forward','leaving-backward');
+        incoming.classList.remove('entering-backward','entering-forward');
+        outgoing.style.zIndex='';incoming.style.zIndex='';
+        sheet.style.display='none';sheet.classList.remove('turning');
+        current=target;busy=false;update();
+      },920);
+    }
+    prev.addEventListener('click',()=>turn(-1));next.addEventListener('click',()=>turn(1));
+    book.addEventListener('click',e=>{if(busy)return;const rect=book.getBoundingClientRect();turn(e.clientX-rect.left>rect.width/2?1:-1);});
+    update();
+  })();
+})();
+</script>
+</body></html>
