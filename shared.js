@@ -63,10 +63,10 @@ function socialLinks() {
     ["Instagram", SITE.contacts.instagram, "instagram", "E4405F"],
     ["WhatsApp", SITE.contacts.whatsapp, "whatsapp", "25D366"]
   ];
-  return '<div class="social-links" aria-label="Контакты">' +
+  return '<div class="social-links" aria-label="Мои контакты">' +
     links.map(([name, url, icon, color]) =>
       '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' +
-      '<img src="https://cdn.simpleicons.org/' + icon + '/' + color + '" alt="">' +
+      '<img src="https://cdn.simpleicons.org/' + icon + '/' + color + '" alt="" loading="lazy">' +
       '<span>' + name + '</span></a>'
     ).join("") +
     '<a href="mailto:' + escapeHtml(SITE.contacts.email) + '">' +
@@ -95,7 +95,7 @@ const COLORS = {
 function productArtwork(project) {
   const tone = COLORS[project.tone] || COLORS.silver;
   return '<div class="artifact" style="--tone:' + tone + '">' +
-    '<span class="small">КОЛЛЕКЦИЯ / ' + escapeHtml(project.year) + '</span>' +
+    '<span class="small">' + escapeHtml(project.year) + '</span>' +
     '<strong>' + escapeHtml(project.object) + '</strong>' +
-    '<span class="stamp">' + typography(project.field) + '</span></div>';
+    '</div>';
 }
