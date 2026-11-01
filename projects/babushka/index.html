@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080a0e">
 <title>ZIN BABUSHKA — Портфолио</title>
-<link rel="stylesheet" href="../../styles.css?v=20261101-zin-reader6">
+<link rel="stylesheet" href="../../styles.css?v=20261101-zin-reader7">
 <style>
 .zin-reader{max-width:1100px;margin:32px auto 0}
 .zin-book{position:relative;width:100%;aspect-ratio:1.48;perspective:2200px;isolation:isolate;filter:drop-shadow(0 18px 20px #0004)}
@@ -20,6 +20,7 @@
 .zin-page.right:not(.is-empty){border-radius:0 4px 4px 0}
 .zin-spread:not(.is-first):not(.is-last):after{content:"";position:absolute;left:49.7%;width:.6%;height:100%;pointer-events:none;background:linear-gradient(90deg,#0004,#fff5,#0002);z-index:1}
 .zin-spread.leaving-forward .right,.zin-spread.leaving-backward .left{visibility:hidden}
+.zin-spread.entering-backward .right,.zin-spread.entering-forward .left{visibility:hidden}
 .zin-sheet{position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:10;display:none;transform-style:preserve-3d;transform-origin:left center;pointer-events:none}
 .zin-sheet-face{position:absolute;inset:0;backface-visibility:hidden;background-size:100% 100%;background-position:center;background-color:#e7dfd3;box-shadow:inset 0 0 20px #0003}
 .zin-sheet-back{transform:rotateY(180deg)}
@@ -71,12 +72,14 @@
     if(busy||target<0||target>=states.length)return;
     busy=true;prev.disabled=true;next.disabled=true;
     const outgoing=spreads[current],incoming=spreads[target];
-    const frontPage=dir>0?states[current][1]:states[current][0];
-    const backPage=dir>0?states[target][0]:states[target][1];
+    const frontPage=dir>0?states[current][1]:states[target][1];
+    const backPage=dir>0?states[target][0]:states[current][0];
     const front=sheet.querySelector('.zin-sheet-front'),back=sheet.querySelector('.zin-sheet-back');
     front.style.backgroundImage='url("'+url(frontPage)+'")';
     back.style.backgroundImage='url("'+url(backPage)+'")';
     incoming.classList.add('is-visible');
+    incoming.classList.toggle('entering-backward',dir<0);
+    incoming.classList.toggle('entering-forward',dir>0);
     incoming.style.zIndex='1';outgoing.style.zIndex='2';
     outgoing.classList.add(dir>0?'leaving-forward':'leaving-backward');
     sheet.className='zin-sheet '+(dir>0?'forward':'backward');
@@ -85,6 +88,7 @@
     sheet.classList.add('turning');
     setTimeout(()=>{
       outgoing.classList.remove('is-visible','leaving-forward','leaving-backward');
+      incoming.classList.remove('entering-backward','entering-forward');
       outgoing.style.zIndex='';incoming.style.zIndex='';
       sheet.style.display='none';sheet.classList.remove('turning');
       current=target;busy=false;
