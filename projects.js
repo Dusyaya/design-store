@@ -38,7 +38,11 @@ window.PORTFOLIO_PROJECTS = [
       {
         "title": "AI-визуалы",
         "description": "Разработка рекламных сюжетов с применением генеративных инструментов: создание изображений, отбор решений, графическая доработка и интеграция в материалы бренда.",
-        "image": "assets/projects/laser/ai.webp"
+        "images": [
+          "assets/projects/laser/ai-1.jpg",
+          "assets/projects/laser/ai-2.jpg",
+          "assets/projects/laser/ai-3.png"
+        ]
       },
       {
         "title": "Email-рассылки",
