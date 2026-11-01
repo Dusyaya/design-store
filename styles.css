@@ -178,3 +178,7 @@ button,.contact{font-size:15px;line-height:1.4}
 /* Коррекция композиции: вся 3D-стопка сдвинута левее и визуально центрирована. */
 .is-3d-deck .showcase-slide{left:4%}
 @media(max-width:760px){.is-3d-deck .showcase-slide{left:1%}}
+
+/* Позиционирование всей карусели целиком по разметке: вправо вместе с навигацией. */
+@media(min-width:761px){.showcase-media.is-3d-deck{transform:translateX(27%)}}
+@media(max-width:760px){.showcase-media.is-3d-deck{transform:translateX(5%)}}
