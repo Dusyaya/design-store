@@ -64,7 +64,7 @@ if (!project) {
     : '';
   const presentationHtml = (project.id === 'gold' || project.id === 'gold-ufa')
     ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">02 / 02</span><h2>Презентации</h2><p>Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.</p></div>' +
-      '<div class="zp-presentation-layout"><figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold-ufa/photo.PNG') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
+      '<div class="showcase-media zp-presentation-layout"><figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold-ufa/photo.PNG') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
       '<div class="zp-presentation-right"><div class="zp-presentation-slides">' +
       Array.from({length:10}, (_,i) => '<img src="' + imagePath('assets/projects/gold-ufa/slide-' + String(i+1).padStart(2,'0') + '.jpg') + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">').join('') +
       '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 10</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></article>'
