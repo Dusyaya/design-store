@@ -182,3 +182,22 @@ button,.contact{font-size:15px;line-height:1.4}
 /* Позиционирование всей карусели целиком по разметке: вправо вместе с навигацией. */
 @media(min-width:761px){.showcase-media.is-3d-deck{transform:translateX(43%)}}
 @media(max-width:760px){.showcase-media.is-3d-deck{transform:translateX(5%)}}
+
+/* Навигация под центром видимой стопки, не под центром широкого контейнера. */
+@media(min-width:761px){
+  .is-3d-deck .showcase-controls{
+    left:0;
+    right:auto;
+    width:72%;
+    justify-content:center;
+    transform:none;
+  }
+}
+@media(max-width:760px){
+  .is-3d-deck .showcase-controls{
+    left:0;
+    right:auto;
+    width:85%;
+    justify-content:center;
+  }
+}
