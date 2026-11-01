@@ -362,3 +362,13 @@ button,.contact{font-size:15px;line-height:1.4}
 .zp-cases .zp-print-gallery{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:center;overflow:hidden!important;transform:none!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
 .zp-cases .zp-print-gallery img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;border-radius:10px}
 @media(max-width:540px){.zp-cases .zp-print-gallery{grid-template-columns:1fr;gap:14px}.zp-cases .zp-print-gallery img{max-height:none}}
+
+/* Larger print portfolio visuals: preserve original proportions. */
+@media(min-width:901px){
+.zp-cases .zp-print-case{grid-template-columns:minmax(0,32%) minmax(0,68%)!important;gap:0!important;overflow:visible!important}
+.zp-cases .zp-print-case>.showcase-copy{padding-right:38px;grid-column:1!important;order:0!important}
+.zp-cases .zp-print-case>.zp-print-gallery{grid-column:2!important;order:1!important;width:100%!important}
+.zp-cases .zp-print-gallery{gap:12px!important}
+.zp-cases .zp-print-gallery img{max-height:750px!important}
+}
+@media(max-width:900px){.zp-cases .zp-print-gallery img{max-height:680px!important}}
