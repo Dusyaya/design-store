@@ -420,3 +420,11 @@ button,.contact{font-size:15px;line-height:1.4}
 .zin-page-fallback small{font-size:clamp(8px,1vw,12px);letter-spacing:0}
 .zin-page img{position:relative;z-index:2}
 .zin-book{overflow:visible}
+
+/* Reveal the next spread underneath the turning paper, not beneath the old page. */
+.zin-spread.zin-leaving-forward>.zin-page-right{visibility:hidden}
+.zin-spread.zin-leaving-backward>.zin-page-left{visibility:hidden}
+.zin-spread.zin-leaving-forward>.zin-page-left,.zin-spread.zin-leaving-backward>.zin-page-right{visibility:visible}
+.zin-book{isolation:isolate}
+.zin-turn-sheet{pointer-events:none}
+@media(prefers-reduced-motion:reduce){.zin-turn-sheet.is-turning{animation-duration:.85s}}
