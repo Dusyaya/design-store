@@ -7,14 +7,6 @@ const project = PROJECTS.find(item => item.id === projectId);
 const main = document.querySelector("main");
 
 if (!project) {
-  const merchHtml = project.id === 'gold'
-    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">03 / 03</span><h2>Мерч для благотворительного марафона</h2><p>Разработка футболок для благотворительного марафона: от визуальной концепции и графики до подготовки макетов к производству и воплощения идеи в готовом изделии.</p></div>' +
-      '<div class="showcase-media is-carousel is-3d-deck zp-merch"><div class="showcase-track">' +
-      Array.from({length:4}, (_,i) => {
-        const path = 'assets/projects/gold/merch/merch-' + String(i+1).padStart(2,'0') + (i < 2 ? '.jpg' : '.png');
-        return '<div class="showcase-slide"><img src="' + imagePath(path) + '" alt="Мерч благотворительного марафона, фото ' + (i+1) + '" loading="lazy"></div>';
-      }).join('') + '</div></div></article>'
-    : '';
   main.innerHTML = '<div class="wrap case"><h1>Проект не найден</h1>' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в каталог</a></div>';
 } else {
@@ -76,6 +68,14 @@ if (!project) {
       '<div class="zp-presentation-right"><div class="zp-presentation-slides">' +
       Array.from({length:10}, (_,i) => '<img src="' + imagePath('assets/projects/gold/slide-' + String(i+1).padStart(2,'0') + '.jpg') + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">').join('') +
       '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 10</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></article>'
+    : '';
+  const merchHtml = project.id === 'gold'
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">03 / 03</span><h2>Мерч для благотворительного марафона</h2><p>Разработка футболок для благотворительного марафона: от визуальной концепции и графики до подготовки макетов к производству и воплощения идеи в готовом изделии.</p></div>' +
+      '<div class="showcase-media is-carousel is-3d-deck zp-merch"><div class="showcase-track">' +
+      Array.from({length:4}, (_,i) => {
+        const path = 'assets/projects/gold/merch/merch-' + String(i+1).padStart(2,'0') + (i < 2 ? '.jpg' : '.png');
+        return '<div class="showcase-slide"><img src="' + imagePath(path) + '" alt="Мерч благотворительного марафона, фото ' + (i+1) + '" loading="lazy"></div>';
+      }).join('') + '</div></div></article>'
     : '';
   main.innerHTML =
     '<div class="wrap case">' +
