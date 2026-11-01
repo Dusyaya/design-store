@@ -11,7 +11,7 @@
 .book-spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;visibility:hidden}
 .book-spread.is-visible{visibility:visible}
 .book-spread.is-first .book-page.left,.book-spread[data-index="0"] .book-page.left{visibility:hidden!important;background:transparent!important;box-shadow:none!important}
-.book-spread.is-last .book-page.right,.book-spread[data-index="10"] .book-page.right{visibility:hidden!important;background:transparent!important;box-shadow:none!important}
+.book-spread.is-last .book-page.right.is-empty{visibility:hidden!important;background:transparent!important;box-shadow:none!important}
 .book-page{position:relative;min-width:0;overflow:hidden}
 .book-page img{display:block;width:100%;height:100%;object-fit:fill}
 .book-page.is-empty{background:transparent!important;box-shadow:none!important}
@@ -48,14 +48,14 @@
 <div class="case-intro"><p>Дизайн книги в твёрдом переплёте: обложка, форзацы и внутренние страницы. Листайте книгу как настоящее печатное издание.</p></div>
 <div class="case-stage" id="book-case-stage"></div>
 <div class="case-rows">
-<div class="case-row"><h2>01 / Задача</h2><p>Показать привычный аксессуар с неожиданной стороны через редакционный дизайн.</p></div>
-<div class="case-row"><h2>02 / Контекст и подход</h2><p>Визуальная концепция строится на сочетании архивных изображений, модной фотографии, выразительной типографики и коллажа.</p></div>
-<div class="case-row"><h2>03 / Моя работа</h2><p>Создала оформление обложки и разворотов журнала, типографические композиции и коллажи.</p></div>
-<div class="case-row"><h2>04 / Результат</h2><p>Разработан авторский журнал с единой графической системой.</p></div>
-<div class="case-row"><h2>05 / Вывод</h2><p>Коллаж и типографика позволяют соединить ностальгию и актуальную визуальную культуру.</p></div>
+<div class="case-row"><h2>01 / Задача</h2><p>Создать целостное оформление печатной книги в твёрдом переплёте.</p></div>
+<div class="case-row"><h2>02 / Контекст и подход</h2><p>Продумать композицию обложки, форзацев и последовательность внутренних разворотов.</p></div>
+<div class="case-row"><h2>03 / Моя работа</h2><p>Разработала оформление обложки, форзацев и внутренних страниц книги.</p></div>
+<div class="case-row"><h2>04 / Результат</h2><p>Подготовлен дизайн книжного издания с последовательной визуальной системой.</p></div>
+<div class="case-row"><h2>05 / Вывод</h2><p>Важны не только отдельные страницы, но и цельный ритм книги при перелистывании.</p></div>
 </div>
-<section class="book-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>ТВЁРДЫЙ ПЕРЕПЛЁТ</span></div>
-<div class="book-reader"><div class="book-book" aria-label="Интерактивный журнал КНИГА"></div>
+<section class="book-section"><div class="section-head"><span>ПЕРЕЛИСТЫВАНИЕ КНИГИ</span><span>ТВЁРДЫЙ ПЕРЕПЛЁТ</span></div>
+<div class="book-reader"><div class="book-book" aria-label="Интерактивная книга"></div>
 <div class="book-controls"><button type="button" class="book-prev" aria-label="Листать назад" disabled>←</button><span class="book-count">01 / 11</span><button type="button" class="book-next" aria-label="Листать вперед">→</button></div></div>
 </section><nav class="project-navigation" id="book-project-navigation" aria-label="Навигация по проектам"></nav></div>
 </main>
@@ -100,7 +100,7 @@
     // Opening: cover on right. Then each facing spread, ending with a single left page.
     const states=[[null,available[0]]];
     for(let i=1;i<available.length;i+=2)states.push([available[i],available[i+1]||null]);
-    if(states[states.length-1][1]!==null)states.push([null,null]);
+
     book.innerHTML=states.map((pair,i)=>'<div class="book-spread '+(i===0?'is-visible is-first':i===states.length-1?'is-last':'')+'" data-index="'+i+'">'+page(pair[0],'left')+page(pair[1],'right')+'</div>').join('')+
       '<div class="book-sheet" aria-hidden="true"><div class="book-sheet-face book-sheet-front"></div><div class="book-sheet-face book-sheet-back"></div></div>';
     const spreads=[...book.querySelectorAll('.book-spread')],sheet=book.querySelector('.book-sheet');
