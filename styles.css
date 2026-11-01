@@ -201,3 +201,36 @@ button,.contact{font-size:15px;line-height:1.4}
     justify-content:center;
   }
 }
+
+/* Финальная двухколоночная композиция: текст слева, вся карусель справа. */
+@media(min-width:761px){
+  .case-showcase .showcase-item:has(.is-3d-deck){
+    grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+    gap:clamp(24px,4vw,72px);
+  }
+  .case-showcase .showcase-item:has(.is-3d-deck) .showcase-copy{
+    order:0;
+    grid-column:1;
+  }
+  .case-showcase .showcase-item:has(.is-3d-deck) .showcase-media{
+    order:1;
+    grid-column:2;
+    transform:none!important;
+    width:100%;
+    margin:0;
+  }
+  .is-3d-deck .showcase-slide{left:16%}
+  .is-3d-deck .showcase-controls{
+    left:16%;
+    right:auto;
+    width:68%;
+    transform:none;
+    justify-content:center;
+  }
+}
+@media(max-width:760px){
+  .case-showcase .showcase-item:has(.is-3d-deck) .showcase-copy,
+  .case-showcase .showcase-item:has(.is-3d-deck) .showcase-media{order:initial}
+  .case-showcase .showcase-item:has(.is-3d-deck) .showcase-media{transform:none!important}
+  .is-3d-deck .showcase-controls{left:5%;right:auto;width:90%}
+}
