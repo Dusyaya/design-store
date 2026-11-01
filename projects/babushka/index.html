@@ -46,6 +46,14 @@
 <div class="eyebrow">РЕДАКЦИОННЫЙ ДИЗАЙН / ЖУРНАЛ / 2026</div>
 <h1>ZIN BABUSHKA</h1>
 <div class="case-intro"><p>Авторский зин о бабушкином платке как современном модном аксессуаре, выполненный в коллажной технике.</p></div>
+<div class="case-stage" id="zin-case-stage"></div>
+<div class="case-rows">
+<div class="case-row"><h2>01 / Задача</h2><p>Показать привычный аксессуар с неожиданной стороны через редакционный дизайн.</p></div>
+<div class="case-row"><h2>02 / Контекст и подход</h2><p>Визуальная концепция строится на сочетании архивных изображений, модной фотографии, выразительной типографики и коллажа.</p></div>
+<div class="case-row"><h2>03 / Моя работа</h2><p>Создала оформление обложки и разворотов журнала, типографические композиции и коллажи.</p></div>
+<div class="case-row"><h2>04 / Результат</h2><p>Разработан авторский журнал с единой графической системой.</p></div>
+<div class="case-row"><h2>05 / Вывод</h2><p>Коллаж и типографика позволяют соединить ностальгию и актуальную визуальную культуру.</p></div>
+</div>
 <section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 11 СОСТОЯНИЙ</span></div>
 <div class="zin-reader"><div class="zin-book" aria-label="Интерактивный журнал BABUSHKA"></div>
 <div class="zin-controls"><button type="button" class="zin-prev" aria-label="Листать назад" disabled>←</button><span class="zin-count">01 / 11</span><button type="button" class="zin-next" aria-label="Листать вперед">→</button></div></div>
@@ -58,6 +66,11 @@
 <script>
 (function(){
   try { if(typeof renderLayout==='function') renderLayout(); }catch(e){console.warn('Header layout',e);}
+  const stage=document.getElementById('zin-case-stage');
+  if(stage && typeof productArtwork==='function' && typeof PROJECTS!=='undefined'){
+    const project=PROJECTS.find(p=>p.id==='babushka');
+    if(project) stage.innerHTML=productArtwork(project);
+  }
   const book=document.querySelector('.zin-book');
   const states=[[null,1],...Array.from({length:9},(_,i)=>[2+i*2,3+i*2]),[20,null]];
   const url=n=>'../../assets/projects/babushka/Babushka'+n+'.jpg';
