@@ -31,6 +31,15 @@ window.PORTFOLIO_PROJECTS = [
         "image": "assets/projects/laser/social.webp"
       },
       {
+        "title": "Мерч",
+        "description": "Дизайн брендированных носителей и рекламной продукции: визуальные решения для фирменных аксессуаров и печатных материалов с акцентом на детали и узнаваемость бренда.",
+        "images": [
+          "assets/projects/laser/merch-1.png",
+          "assets/projects/laser/merch-2.png",
+          "assets/projects/laser/merch-3.jpg"
+        ]
+      },
+      {
         "title": "Полиграфия",
         "description": "Оформление печатных материалов для рекламных предложений. Адаптация визуальных решений под физические носители с учётом читаемости и требований к макетам.",
         "image": "assets/projects/laser/print.webp"
