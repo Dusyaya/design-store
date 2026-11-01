@@ -85,6 +85,25 @@ if (!project) {
       ['print-01.jpg','print-02.jpg'].map((name,i) => '<img src="' + imagePath('assets/projects/gold/print/' + name) + '" alt="Полиграфия Золотое Правило, работа ' + (i+1) + '" loading="lazy">').join('') +
       '</div><div class="zp-print-controls"><button type="button" class="zp-print-prev" aria-label="Предыдущее изображение">←</button><span class="zp-print-count">01 / 02</span><button type="button" class="zp-print-next" aria-label="Следующее изображение">→</button></div></div></article>'
     : '';
+  const danceImage = (path,alt) => '<div class="dance-image"><img src="' + imagePath(path) + '" alt="' + alt + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="dance-image-placeholder" hidden>Загрузите изображение<br><small>' + escapeHtml(path.split('/').pop()) + '</small></div></div>';
+  const danceCarousel = (paths,kind) => '<div class="dance-carousel dance-carousel-' + kind + '"><div class="dance-carousel-slides">' +
+    paths.map((path,i)=>'<div class="dance-carousel-slide"' + (i?' hidden':'') + '>' + danceImage(path,kind+' — '+(i+1)) + '</div>').join('') +
+    '</div><div class="dance-carousel-controls"><button type="button" class="dance-carousel-prev" aria-label="Предыдущее изображение">←</button><span class="dance-carousel-count">01 / ' + String(paths.length).padStart(2,'0') + '</span><button type="button" class="dance-carousel-next" aria-label="Следующее изображение">→</button></div></div>';
+  const danceHtml = project.id === 'dance'
+    ? '<section class="case-showcase dance-cases"><div class="section-head"><span>КЕЙСЫ</span><span>DANCE SOUL</span></div>' +
+      '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">01 / 02</span><h2>Брендинг</h2><p>Разработка первоначального логотипа танцевальной студии Dance Soul. Через год — ребрендинг с адаптацией названия и логотипа на русский язык в связи с новыми требованиями к оформлению вывесок.</p></div><div class="dance-branding-media"><div class="dance-logos"><figure><figcaption>ДО / ПЕРВЫЙ ЛОГОТИП</figcaption>' +
+      danceImage('assets/projects/dance/branding/logo-before.jpg','Первый логотип Dance Soul') +
+      '</figure><figure><figcaption>ПОСЛЕ / РЕБРЕНДИНГ</figcaption>' +
+      danceImage('assets/projects/dance/branding/logo-after.jpg','Новый логотип Dance Soul') +
+      '</figure></div><div class="dance-poster"><p>Афиша для расклейки</p>' +
+      danceImage('assets/projects/dance/branding/poster.jpg','Афиша Dance Soul для расклейки') +
+      '</div></div></article>' +
+      '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">02 / 02</span><h2>Мерч</h2><p>Небольшое исследование и подбор визуальных направлений для будущего мерча студии: идеи, референсы и предложения по оформлению.</p></div><div class="dance-merch-media"><h3>Исследование и предложения</h3>' +
+      danceCarousel(Array.from({length:7},(_,i)=>'assets/projects/dance/research/Slide 16_9 - '+i+'.jpg'),'research') +
+      '<h3>Результат</h3><p>Реализация мерча: серия из 11 фотографий готовых изделий.</p>' +
+      danceCarousel(Array.from({length:11},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
+      '</div></article></section>'
+    : '';
   const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
   const zinHtml = project.id === 'babushka'
     ? '<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div>' +
@@ -110,10 +129,19 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    showcaseHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
-    (showcase.length || project.id === 'babushka' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    showcaseHtml + danceHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
+    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
   bindImages(main);
+  main.querySelectorAll('.dance-carousel').forEach(carousel=>{
+    const slides=[...carousel.querySelectorAll('.dance-carousel-slide')];
+    const count=carousel.querySelector('.dance-carousel-count');
+    let current=0;
+    function show(index){current=(index+slides.length)%slides.length;slides.forEach((slide,i)=>{slide.hidden=i!==current;});count.textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');}
+    carousel.querySelector('.dance-carousel-prev').addEventListener('click',()=>show(current-1));
+    carousel.querySelector('.dance-carousel-next').addEventListener('click',()=>show(current+1));
+    show(0);
+  });
   const zinBook = main.querySelector('.zin-book');
   if (zinBook) {
     const spreads = [...zinBook.querySelectorAll('.zin-spread')];
