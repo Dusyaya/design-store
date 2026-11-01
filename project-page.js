@@ -62,9 +62,10 @@ if (!project) {
       bannerImages.map((name, i) => '<img src="' + imagePath('assets/projects/gold/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" loading="lazy">').join('') +
       '</div></article>'
     : '';
-  const presentationHtml = (project.id === 'gold' || project.id === 'gold-ufa')
-    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">02 / 03</span><h2>Презентации</h2><p>Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.</p></div>' +
-      '<div class="showcase-media zp-presentation-layout"><figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold/photo.PNG') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
+  const presentationHtml = project.id === 'gold'
+    ? '<article class="showcase-item zp-case zp-presentation-case"><div class="showcase-copy"><span class="eyebrow">02 / 03</span><h2>Презентации</h2><p>Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.</p></div>' +
+      '<div class="showcase-media zp-presentation-layout">' +
+      '<figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold/photo.PNG') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
       '<div class="zp-presentation-right"><div class="zp-presentation-slides">' +
       Array.from({length:9}, (_,i) => '<img src="' + imagePath('assets/projects/gold/slide-' + String(i+1).padStart(2,'0') + '.jpg') + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">').join('') +
       '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 09</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></article>'
@@ -101,12 +102,13 @@ if (!project) {
     let active = 0;
     const showZpSlide = () => {
       zpSlides.forEach((img, i) => {
-        const delta = (i - active + zpSlides.length) % zpSlides.length;
-        const offset = delta > zpSlides.length / 2 ? delta - zpSlides.length : delta;
+        const forward = (i - active + zpSlides.length) % zpSlides.length;
+        const offset = forward > zpSlides.length / 2 ? forward - zpSlides.length : forward;
         img.hidden = Math.abs(offset) > 1;
-        img.style.transform = offset === 0 ? 'translateX(0) scale(1)' : 'translateX(' + (offset * 60) + '%) scale(.77) rotateY(' + (offset * -32) + 'deg)';
-        img.style.opacity = offset === 0 ? '1' : '.45';
+        img.classList.toggle('is-active', offset === 0);
+        img.style.setProperty('--slide-offset', String(offset));
         img.style.zIndex = String(3 - Math.abs(offset));
+        img.setAttribute('aria-hidden', String(offset !== 0));
       });
       main.querySelector('.zp-count').textContent = String(active + 1).padStart(2, '0') + ' / ' + zpSlides.length;
     };
