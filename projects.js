@@ -29,38 +29,38 @@ window.PORTFOLIO_PROJECTS = [
         "title": "Сторис",
         "description": "Дизайн сторис для социальных сетей: оформление акций, специальных предложений и информационных материалов с акцентом на визуальную привлекательность, читаемость и вовлечение аудитории.",
         "images": [
-          "assets/projects/laser/stories-01.jpg",
-          "assets/projects/laser/stories-02.jpg",
-          "assets/projects/laser/stories-03.jpg",
-          "assets/projects/laser/stories-04.jpg",
-          "assets/projects/laser/stories-05.jpg",
-          "assets/projects/laser/stories-06.jpg",
-          "assets/projects/laser/stories-07.jpg",
-          "assets/projects/laser/stories-08.jpg",
-          "assets/projects/laser/stories-09.jpg"
+          "assets/stories-01.jpg",
+          "assets/stories-02.jpg",
+          "assets/stories-03.jpg",
+          "assets/stories-04.jpg",
+          "assets/stories-05.jpg",
+          "assets/stories-06.jpg",
+          "assets/stories-07.jpg",
+          "assets/stories-08.jpg",
+          "assets/stories-09.jpg"
         ]
       },
       {
         "title": "Email-рассылки",
         "description": "Дизайн графических материалов для маркетинговых писем: оформление акций, персональных предложений и информационных сообщений с ясной иерархией и акцентом на ключевой информации.",
         "images": [
-          "assets/projects/laser/mailing-01.jpg",
-          "assets/projects/laser/mailing-02.png"
+          "assets/mailing-01.jpg",
+          "assets/mailing-02.png"
         ]
       },
       {
         "title": "Обложки",
         "description": "Дизайн обложек для актуальных историй и социальных сетей: создание единой визуальной системы, которая помогает структурировать информацию и поддерживать узнаваемость бренда.",
         "images": [
-          "assets/projects/laser/covers-01.jpg",
-          "assets/projects/laser/covers-02.jpg",
-          "assets/projects/laser/covers-03.jpg",
-          "assets/projects/laser/covers-04.jpg",
-          "assets/projects/laser/covers-05.jpg",
-          "assets/projects/laser/covers-06.jpg",
-          "assets/projects/laser/covers-07.jpg",
-          "assets/projects/laser/covers-08.jpg",
-          "assets/projects/laser/covers-09.jpg"
+          "assets/covers-01.jpg",
+          "assets/covers-02.jpg",
+          "assets/covers-03.jpg",
+          "assets/covers-04.jpg",
+          "assets/covers-05.jpg",
+          "assets/covers-06.jpg",
+          "assets/covers-07.jpg",
+          "assets/covers-08.jpg",
+          "assets/covers-09.jpg"
         ]
       },
       {
