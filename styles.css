@@ -165,3 +165,12 @@ button,.contact{font-size:15px;line-height:1.4}
 .is-3d-deck .showcase-slide{width:auto;height:82%;aspect-ratio:9/16;left:15%;top:5%;padding:0}
 .is-3d-deck .showcase-slide img{width:100%;height:100%;object-fit:cover}
 @media(max-width:760px){.is-3d-deck .showcase-slide{height:78%;left:8%;top:7%}}
+
+/* Убираем чёрную подложку; оставляем свободно парящие вертикальные карточки. */
+.showcase-media.is-3d-deck{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;isolation:isolate}
+.is-3d-deck .showcase-track{background:transparent!important;overflow:visible}
+.is-3d-deck .showcase-slide{background:transparent!important;border:0!important;box-shadow:0 15px 38px #0005;overflow:hidden}
+.is-3d-deck .showcase-slide:hover{box-shadow:0 25px 55px #0008}
+.is-3d-deck .showcase-controls{bottom:-8px}
+.is-3d-deck .showcase-controls button{display:flex;align-items:center;justify-content:center;padding:0;line-height:0}
+.is-3d-deck .showcase-controls button svg{display:block;width:22px;height:22px;flex:none}
