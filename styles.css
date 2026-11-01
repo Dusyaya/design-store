@@ -518,3 +518,17 @@ button,.contact{font-size:15px;line-height:1.4}
 .baker-controls{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:24px}
 .baker-controls button{width:46px;height:46px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:transparent;color:inherit;font-size:20px;cursor:pointer}
 .baker-count{font-size:13px;letter-spacing:.12em}
+
+/* Extra portfolio: independent illustration, 3D and retouch carousels */
+.extra-cases{margin:75px 0 90px}
+.extra-case{display:grid;grid-template-columns:minmax(0,36%) minmax(0,64%);gap:28px;padding:52px 0;border-bottom:1px solid rgba(255,255,255,.14);align-items:start}
+.extra-case-copy h2{font-size:clamp(28px,3vw,44px);margin:18px 0}
+.extra-case-copy p{max-width:330px;color:#a7a7b2;line-height:1.65}
+.extra-carousel{min-width:0}
+.extra-slides{display:flex;justify-content:center;align-items:center;min-height:240px}
+.extra-slides img{display:block;max-width:100%;width:auto;height:auto;max-height:680px;object-fit:contain;box-shadow:none;border-radius:0}
+.extra-slides img[hidden]{display:none!important}
+.extra-controls{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:22px}
+.extra-controls button{width:44px;height:44px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:transparent;color:inherit;font-size:20px;cursor:pointer}
+.extra-count{font-size:13px;letter-spacing:.12em}
+@media(max-width:760px){.extra-case{grid-template-columns:1fr;gap:22px;padding:38px 0}.extra-case-copy p{max-width:none}}
