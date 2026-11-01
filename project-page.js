@@ -12,7 +12,7 @@ if (!project) {
     ? '<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div>' +
       '<div class="zin-reader"><div class="zin-book" aria-label="Интерактивный журнал BABUSHKA">' +
       zinPairs.map((pair,i) => '<div class="zin-spread' + (i===0?' is-visible':'') + '" data-spread="' + i + '">' +
-        pair.map((n,j) => '<div class="zin-page zin-page-' + (j===0?'left':'right') + '"><img src="' + imagePath('assets/projects/babushka/Babushka'+n+'.jpg') + '" alt="Зин BABUSHKA, страница '+n+'" loading="'+(i<2?'eager':'lazy')+'"></div>').join('') +
+        pair.map((n,j) => '<div class="zin-page zin-page-' + (j===0?'left':'right') + '"><span class="zin-page-fallback">BABUSHKA <strong>'+String(n).padStart(2,'0')+'</strong><small>Страница ожидает загрузки</small></span><img src="' + imagePath('assets/projects/babushka/Babushka'+n+'.jpg') + '" alt="Зин BABUSHKA, страница '+n+'" loading="'+(i<2?'eager':'lazy')+'" onerror="this.style.display=\'none\'" onload="this.style.display=\'block\'"></div>').join('') +
       '</div>').join('') +
       '<div class="zin-turn-sheet" aria-hidden="true"><div class="zin-turn-front"></div><div class="zin-turn-back"></div></div>' +
       '</div><div class="zin-controls"><button type="button" class="zin-prev" aria-label="Предыдущий разворот">←</button><span class="zin-count">01 / 10</span><button type="button" class="zin-next" aria-label="Следующий разворот">→</button></div></div></section>'
