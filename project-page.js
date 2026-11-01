@@ -7,6 +7,14 @@ const project = PROJECTS.find(item => item.id === projectId);
 const main = document.querySelector("main");
 
 if (!project) {
+  const merchHtml = project.id === 'gold'
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">03 / 03</span><h2>Мерч для благотворительного марафона</h2><p>Разработка футболок для благотворительного марафона: от визуальной концепции и графики до подготовки макетов к производству и воплощения идеи в готовом изделии.</p></div>' +
+      '<div class="showcase-media is-carousel is-3d-deck zp-merch"><div class="showcase-track">' +
+      Array.from({length:4}, (_,i) => {
+        const path = 'assets/projects/gold/merch/merch-' + String(i+1).padStart(2,'0') + '.jpg';
+        return '<div class="showcase-slide"><img src="' + imagePath(path) + '" alt="Мерч благотворительного марафона, фото ' + (i+1) + '" loading="lazy"></div>';
+      }).join('') + '</div></div></article>'
+    : '';
   main.innerHTML = '<div class="wrap case"><h1>Проект не найден</h1>' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в каталог</a></div>';
 } else {
@@ -58,12 +66,12 @@ if (!project) {
 
   const bannerImages = ['banner-01.jpg', 'banner-02.jpg', 'banner-03.jpg'];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
-    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 02</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе. Разработка баннеров для «ПроДокторов» с акцентом на узнаваемость бренда и ясную подачу информации.</p></div><div class="showcase-media zp-banner-stack">' +
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 03</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе. Разработка баннеров для «ПроДокторов» с акцентом на узнаваемость бренда и ясную подачу информации.</p></div><div class="showcase-media zp-banner-stack">' +
       bannerImages.map((name, i) => '<img src="' + imagePath('assets/projects/gold-ufa/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" loading="lazy">').join('') +
       '</div></article>'
     : '';
   const presentationHtml = (project.id === 'gold' || project.id === 'gold-ufa')
-    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">02 / 02</span><h2>Презентации</h2><p>Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.</p></div>' +
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">02 / 03</span><h2>Презентации</h2><p>Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.</p></div>' +
       '<div class="showcase-media zp-presentation-layout"><figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold-ufa/photo.PNG') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
       '<div class="zp-presentation-right"><div class="zp-presentation-slides">' +
       Array.from({length:10}, (_,i) => '<img src="' + imagePath('assets/projects/gold-ufa/slide-' + String(i+1).padStart(2,'0') + '.jpg') + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">').join('') +
@@ -84,10 +92,15 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    showcaseHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + '</section>' : '') +
+    showcaseHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + '</section>' : '') +
     (showcase.length || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
+  const zpPresentation = main.querySelector('.zp-presentation-slides');
+  if (zpPresentation) {
+    zpPresentation.classList.add('is-3d-deck');
+    zpPresentation.querySelectorAll('img').forEach(img => img.classList.add('zp-perspective-slide'));
+  }
   const zpSlides = [...main.querySelectorAll('.zp-presentation-slides img')];
   if (zpSlides.length) {
     let active = 0;
