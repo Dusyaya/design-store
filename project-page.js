@@ -33,19 +33,28 @@ if (!project) {
 
   // Дополнительные секции кейса настраиваются в projects.js.
   const showcase = Array.isArray(project.showcase) ? project.showcase : [];
+  // Одно изображение — обычная карточка, несколько — горизонтальная карусель.
   const showcaseHtml = showcase.length
     ? '<section class="case-showcase"><div class="section-head"><span>НАПРАВЛЕНИЯ РАБОТЫ</span><span>ПРИМЕРЫ ДИЗАЙНА</span></div>' +
-      showcase.map((item, index) =>
-        '<article class="showcase-item"><div class="showcase-copy"><span class="eyebrow">' +
-        String(index + 1).padStart(2, "0") + ' / ' + String(showcase.length).padStart(2, "0") +
-        '</span><h2>' + typography(item.title) + '</h2><p>' +
-        typography(item.description) + '</p></div>' +
-        '<div class="project-image-slot"><img data-file="' + escapeHtml(item.image) +
-        '" src="' + imagePath(item.image) + '" alt="' + escapeHtml(item.title) + '">' +
-        '<div class="placeholder" style="display:none"><span>＋</span><strong>' +
-        typography(item.title) + '</strong><small>' + escapeHtml(item.image) +
-        '</small></div></div></article>'
-      ).join("") + '</section>'
+      showcase.map((item, index) => {
+        const images = Array.isArray(item.images) && item.images.length ? item.images : [item.image];
+        const slides = images.map((path, slideIndex) =>
+          '<div class="showcase-slide"><img data-file="' + escapeHtml(path) +
+          '" src="' + imagePath(path) + '" alt="' + escapeHtml(item.title) + ', работа ' +
+          (slideIndex + 1) + '" loading="lazy"><div class="placeholder" style="display:none"><span>＋</span><strong>' +
+          typography(item.title) + '</strong><small>' + escapeHtml(path) + '</small></div></div>'
+        ).join("");
+        const carousel = images.length > 1;
+        return '<article class="showcase-item"><div class="showcase-copy"><span class="eyebrow">' +
+          String(index + 1).padStart(2, "0") + ' / ' + String(showcase.length).padStart(2, "0") +
+          '</span><h2>' + typography(item.title) + '</h2><p>' +
+          typography(item.description) + '</p></div>' +
+          '<div class="showcase-media' + (carousel ? ' is-carousel' : '') + '">' +
+          '<div class="showcase-track">' + slides + '</div>' +
+          (carousel ? '<div class="showcase-controls"><button type="button" class="showcase-prev" aria-label="Предыдущая работа">←</button><span class="showcase-counter">01 / ' +
+          String(images.length).padStart(2, "0") + '</span><button type="button" class="showcase-next" aria-label="Следующая работа">→</button></div>' : '') +
+          '</div></article>';
+      }).join("") + '</section>'
     : "";
 
   main.innerHTML =
@@ -67,4 +76,17 @@ if (!project) {
     (showcase.length ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
+  main.querySelectorAll(".showcase-media.is-carousel").forEach(carousel => {
+    const track = carousel.querySelector(".showcase-track");
+    const slides = [...track.children];
+    const counter = carousel.querySelector(".showcase-counter");
+    let current = 0;
+    const show = index => {
+      current = (index + slides.length) % slides.length;
+      track.style.transform = "translateX(-" + (current * 100) + "%)";
+      counter.textContent = String(current + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
+    };
+    carousel.querySelector(".showcase-prev").addEventListener("click", () => show(current - 1));
+    carousel.querySelector(".showcase-next").addEventListener("click", () => show(current + 1));
+  });
 }
