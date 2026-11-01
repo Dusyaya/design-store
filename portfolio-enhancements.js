@@ -14,7 +14,8 @@
   overlay.addEventListener('click',e=>{if(e.target===overlay||e.target.closest('.portfolio-lightbox-close'))close();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('is-open'))close();});
   root.querySelectorAll('img').forEach(img=>{
-    if(img.closest('.sevstar-tv')||img.closest('.zin-book')||img.closest('.book-book'))return;
+    if(img.closest('.sevstar-tv'))return;
+    if(img.closest('.zin-book')||img.closest('.book-book')){img.addEventListener('dblclick',e=>{e.stopPropagation();open(img);});return;}
     img.classList.add('portfolio-zoomable');
     img.setAttribute('tabindex','0');img.setAttribute('role','button');img.setAttribute('aria-label',(img.alt||'Изображение')+' — увеличить');
     img.addEventListener('click',e=>{e.stopImmediatePropagation();e.preventDefault();open(img);},true);
