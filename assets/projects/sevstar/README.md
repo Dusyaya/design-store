@@ -1,0 +1,1 @@
+Upload tv.png and screenshots named Рисунок1.png through Рисунок9.png here.
