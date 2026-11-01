@@ -50,7 +50,8 @@ window.SITE_CONTENT = {
     "telegram": "https://t.me/atrokhina_darya",
     "instagram": "https://www.instagram.com/atrokhina_darya/",
     "whatsapp": "https://wa.me/79789560085",
-    "email": "d.atrokhina@gmail.com"
+    "email": "d.atrokhina@gmail.com",
+    "message": "Здравствуйте! Ознакомилась с вашим портфолио и хотела бы обсудить разработку дизайн-проекта. Подскажите, пожалуйста, как можно начать сотрудничество?"
   },
   "footer": "© 2026 ДАРЬЯ АТРОХИНА"
 };
