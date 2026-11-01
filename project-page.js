@@ -56,26 +56,19 @@ if (!project) {
       }).join("") + '</section>'
     : "";
 
-  const ufaGallery = project.id === "gold-ufa"
-    ? '<section class="ufa-gallery"><div class="section-head"><span>РЕКЛАМНАЯ КАМПАНИЯ В УФЕ</span><span>БАННЕРЫ</span></div>' +
-      ['banner-01.jpg','banner-02.jpg','banner-03.jpg'].map((name, index) => {
-        const path = 'assets/projects/gold-ufa/' + name;
-        return '<figure class="ufa-banner"><img data-file="' + path + '" src="' + imagePath(path) +
-          '" alt="Рекламный баннер Золотое Правило ' + (index + 1) + '" loading="lazy">' +
-          '<div class="placeholder" style="display:none"><strong>Баннер ' + (index + 1) +
-          '</strong><small>' + path + '</small></div></figure>';
-      }).join('') + '</section>'
-    : "";
-  const presentationHtml = project.id === "gold"
-    ? '<section class="zp-presentations"><div class="section-head"><span>ПРЕЗЕНТАЦИИ</span><span>ВИЗУАЛЬНЫЕ МАТЕРИАЛЫ</span></div>' +
-      '<div class="zp-presentation-layout">' +
-      '<figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold/presentations/photo.png') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
+  const bannerImages = ['banner-01.jpg', 'banner-02.jpg', 'banner-03.jpg'];
+  const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
+    ? '<section class="zp-direction"><div class="zp-direction-copy"><span class="eyebrow">01 / 02</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе. Разработка баннеров для «ПроДокторов» с акцентом на узнаваемость бренда и ясную подачу информации.</p></div><div class="zp-banner-stack">' +
+      bannerImages.map((name, i) => '<img src="' + imagePath('assets/projects/gold-ufa/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" loading="lazy">').join('') +
+      '</div></section>'
+    : '';
+  const presentationHtml = (project.id === 'gold' || project.id === 'gold-ufa')
+    ? '<section class="zp-direction"><div class="zp-direction-copy"><span class="eyebrow">02 / 02</span><h2>Презентации</h2><p>Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.</p></div>' +
+      '<div class="zp-presentation-layout"><figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold-ufa/photo.PNG') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
       '<div class="zp-presentation-right"><div class="zp-presentation-slides">' +
-      Array.from({length:10}, (_,i) => {
-        const path = 'assets/projects/gold/presentations/slide-' + String(i+1).padStart(2,'0') + '.jpg';
-        return '<img src="' + imagePath(path) + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">';
-      }).join('') + '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 10</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></section>'
-    : "";
+      Array.from({length:10}, (_,i) => '<img src="' + imagePath('assets/projects/gold-ufa/slide-' + String(i+1).padStart(2,'0') + '.jpg') + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">').join('') +
+      '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 10</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></section>'
+    : '';
   main.innerHTML =
     '<div class="wrap case">' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в магазин</a>' +
@@ -91,8 +84,8 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    showcaseHtml + presentationHtml + ufaGallery +
-    (showcase.length || project.id === 'gold-ufa' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    showcaseHtml + bannerSection + presentationHtml +
+    (showcase.length || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
   const zpSlides = [...main.querySelectorAll('.zp-presentation-slides img')];
