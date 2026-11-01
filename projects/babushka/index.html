@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080a0e">
 <title>ZIN BABUSHKA — Портфолио</title>
-<link rel="stylesheet" href="../../styles.css?v=20261101-zin-reader7">
+<link rel="stylesheet" href="../../styles.css?v=20261101-project-navigation">
 <style>
 .zin-reader{max-width:1100px;margin:32px auto 0}
 .zin-book{position:relative;width:100%;aspect-ratio:1.48;perspective:2200px;isolation:isolate;filter:drop-shadow(0 18px 20px #0004)}
@@ -54,10 +54,10 @@
 <div class="case-row"><h2>04 / Результат</h2><p>Разработан авторский журнал с единой графической системой.</p></div>
 <div class="case-row"><h2>05 / Вывод</h2><p>Коллаж и типографика позволяют соединить ностальгию и актуальную визуальную культуру.</p></div>
 </div>
-<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 11 СОСТОЯНИЙ</span></div>
+<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ</span></div>
 <div class="zin-reader"><div class="zin-book" aria-label="Интерактивный журнал BABUSHKA"></div>
 <div class="zin-controls"><button type="button" class="zin-prev" aria-label="Листать назад" disabled>←</button><span class="zin-count">01 / 11</span><button type="button" class="zin-next" aria-label="Листать вперед">→</button></div></div>
-</section></div>
+</section><nav class="project-navigation" id="zin-project-navigation" aria-label="Навигация по проектам"></nav></div>
 </main>
 <footer></footer>
 <script src="../../content.js?v=20261101-message1"></script>
@@ -66,6 +66,15 @@
 <script>
 (function(){
   try { if(typeof renderLayout==='function') renderLayout(); }catch(e){console.warn('Header layout',e);}
+  const nav=document.getElementById('zin-project-navigation');
+  if(nav && typeof PROJECTS!=='undefined'){
+    const i=PROJECTS.findIndex(p=>p.id==='babushka');
+    if(i>=0){
+      const prev=PROJECTS[(i-1+PROJECTS.length)%PROJECTS.length];
+      const next=PROJECTS[(i+1)%PROJECTS.length];
+      nav.innerHTML='<a href="../../projects/'+prev.id+'/">← Предыдущий проект</a><a href="../../projects/'+next.id+'/">Следующий проект →</a>';
+    }
+  }
   const stage=document.getElementById('zin-case-stage');
   if(stage && typeof productArtwork==='function' && typeof PROJECTS!=='undefined'){
     const project=PROJECTS.find(p=>p.id==='babushka');
