@@ -26,27 +26,46 @@ window.PORTFOLIO_PROJECTS = [
     "conclusion": "Ключевая часть моей работы — превращать маркетинговую задачу в самостоятельную визуальную концепцию и последовательно адаптировать её для разных каналов.",
     "showcase": [
       {
-        "title": "Социальные сети",
-        "description": "Дизайн постов, историй и рекламных публикаций. Выстраивала композицию, типографику и визуальные акценты, чтобы предложения бренда были узнаваемыми и легко считывались в ленте.",
-        "image": "assets/projects/laser/social.webp"
-      },
-      {
-        "title": "Мерч",
-        "description": "Дизайн брендированных носителей и рекламной продукции: визуальные решения для фирменных аксессуаров и печатных материалов с акцентом на детали и узнаваемость бренда.",
+        "title": "Сторис",
+        "description": "Дизайн сторис для социальных сетей: оформление акций, специальных предложений и информационных материалов с акцентом на визуальную привлекательность, читаемость и вовлечение аудитории.",
         "images": [
-          "assets/projects/laser/merch-1.png",
-          "assets/projects/laser/merch-2.png",
-          "assets/projects/laser/merch-3.jpg"
+          "assets/projects/laser/stories-01.jpg",
+          "assets/projects/laser/stories-02.jpg",
+          "assets/projects/laser/stories-03.jpg",
+          "assets/projects/laser/stories-04.jpg",
+          "assets/projects/laser/stories-05.jpg",
+          "assets/projects/laser/stories-06.jpg",
+          "assets/projects/laser/stories-07.jpg",
+          "assets/projects/laser/stories-08.jpg",
+          "assets/projects/laser/stories-09.jpg"
         ]
       },
       {
-        "title": "Полиграфия",
-        "description": "Оформление печатных материалов для рекламных предложений. Адаптация визуальных решений под физические носители с учётом читаемости и требований к макетам.",
-        "image": "assets/projects/laser/print.webp"
+        "title": "Email-рассылки",
+        "description": "Дизайн графических материалов для маркетинговых писем: оформление акций, персональных предложений и информационных сообщений с ясной иерархией и акцентом на ключевой информации.",
+        "images": [
+          "assets/projects/laser/mailing-01.jpg",
+          "assets/projects/laser/mailing-02.png"
+        ]
       },
       {
-        "title": "AI-визуалы",
-        "description": "Разработка рекламных сюжетов с применением генеративных инструментов: создание изображений, отбор решений, графическая доработка и интеграция в материалы бренда.",
+        "title": "Обложки",
+        "description": "Дизайн обложек для актуальных историй и социальных сетей: создание единой визуальной системы, которая помогает структурировать информацию и поддерживать узнаваемость бренда.",
+        "images": [
+          "assets/projects/laser/covers-01.jpg",
+          "assets/projects/laser/covers-02.jpg",
+          "assets/projects/laser/covers-03.jpg",
+          "assets/projects/laser/covers-04.jpg",
+          "assets/projects/laser/covers-05.jpg",
+          "assets/projects/laser/covers-06.jpg",
+          "assets/projects/laser/covers-07.jpg",
+          "assets/projects/laser/covers-08.jpg",
+          "assets/projects/laser/covers-09.jpg"
+        ]
+      },
+      {
+        "title": "ИИ-визуалы",
+        "description": "Создание рекламных изображений с применением искусственного интеллекта: разработка визуальных концепций, генерация и доработка изображений под задачи бренда и рекламных кампаний.",
         "images": [
           "assets/projects/laser/ai-1.jpg",
           "assets/projects/laser/ai-2.jpg",
@@ -54,9 +73,13 @@ window.PORTFOLIO_PROJECTS = [
         ]
       },
       {
-        "title": "Email-рассылки",
-        "description": "Дизайн графических материалов для маркетинговых писем: оформление акций, предложений и информационных сообщений с ясной иерархией и акцентом на ключевой информации.",
-        "image": "assets/projects/laser/email.webp"
+        "title": "Мерч",
+        "description": "Разработка дизайна брендированной продукции: адаптация фирменного стиля к различным носителям, создание графики и визуализаций, отражающих характер и айдентику бренда.",
+        "images": [
+          "assets/projects/laser/merch-1.png",
+          "assets/projects/laser/merch-2.png",
+          "assets/projects/laser/merch-3.jpg"
+        ]
       }
     ]
   },
