@@ -7,6 +7,16 @@ const project = PROJECTS.find(item => item.id === projectId);
 const main = document.querySelector("main");
 
 if (!project) {
+  const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
+  const zinHtml = project.id === 'babushka'
+    ? '<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div>' +
+      '<div class="zin-reader"><div class="zin-book" aria-label="Интерактивный журнал BABUSHKA">' +
+      zinPairs.map((pair,i) => '<div class="zin-spread' + (i===0?' is-visible':'') + '" data-spread="' + i + '">' +
+        pair.map((n,j) => '<div class="zin-page zin-page-' + (j===0?'left':'right') + '"><img src="' + imagePath('assets/projects/babushka/Babushka'+n+'.jpg') + '" alt="Зин BABUSHKA, страница '+n+'" loading="'+(i<2?'eager':'lazy')+'"></div>').join('') +
+      '</div>').join('') +
+      '<div class="zin-turn-sheet" aria-hidden="true"><div class="zin-turn-front"></div><div class="zin-turn-back"></div></div>' +
+      '</div><div class="zin-controls"><button type="button" class="zin-prev" aria-label="Предыдущий разворот">←</button><span class="zin-count">01 / 10</span><button type="button" class="zin-next" aria-label="Следующий разворот">→</button></div></div></section>'
+    : '';
   main.innerHTML = '<div class="wrap case"><h1>Проект не найден</h1>' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в каталог</a></div>';
 } else {
@@ -99,10 +109,52 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    showcaseHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
-    (showcase.length || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    showcaseHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
+    (showcase.length || project.id === 'babushka' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<a class="next" href="' + projectUrl(next) + '">Следующий проект →</a></div>';
   bindImages(main);
+  const zinBook = main.querySelector('.zin-book');
+  if (zinBook) {
+    const spreads = [...zinBook.querySelectorAll('.zin-spread')];
+    const sheet = zinBook.querySelector('.zin-turn-sheet');
+    const front = sheet.querySelector('.zin-turn-front');
+    const back = sheet.querySelector('.zin-turn-back');
+    const prev = main.querySelector('.zin-prev');
+    const nextBtn = main.querySelector('.zin-next');
+    const count = main.querySelector('.zin-count');
+    let current = 0, turning = false;
+    const go = direction => {
+      const target = current + direction;
+      if (turning || target < 0 || target >= spreads.length) return;
+      turning = true;
+      const oldSpread = spreads[current], newSpread = spreads[target];
+      const oldPages = oldSpread.querySelectorAll('.zin-page img');
+      const newPages = newSpread.querySelectorAll('.zin-page img');
+      front.style.backgroundImage = 'url("' + (direction>0?oldPages[1]:oldPages[0]).src + '")';
+      back.style.backgroundImage = 'url("' + (direction>0?newPages[0]:newPages[1]).src + '")';
+      sheet.classList.toggle('is-reverse',direction<0);
+      sheet.classList.remove('is-turning');
+      sheet.style.display='block';
+      newSpread.classList.add('is-visible');
+      newSpread.style.zIndex='1';
+      oldSpread.style.zIndex='2';
+      void sheet.offsetWidth;
+      sheet.classList.add('is-turning');
+      setTimeout(() => {
+        oldSpread.classList.remove('is-visible');
+        oldSpread.style.zIndex='';
+        newSpread.style.zIndex='';
+        sheet.classList.remove('is-turning');
+        sheet.style.display='none';
+        current=target; turning=false;
+        count.textContent=String(current+1).padStart(2,'0')+' / '+String(spreads.length).padStart(2,'0');
+        prev.disabled=current===0;nextBtn.disabled=current===spreads.length-1;
+      },850);
+    };
+    prev.addEventListener('click',()=>go(-1));
+    nextBtn.addEventListener('click',()=>go(1));
+    prev.disabled=true;
+  }
   const printSlides = [...main.querySelectorAll('.zp-print-slides img')];
   if (printSlides.length) {
     let printIndex = 0;
