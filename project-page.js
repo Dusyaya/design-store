@@ -49,7 +49,7 @@ if (!project) {
           String(index + 1).padStart(2, "0") + ' / ' + String(showcase.length).padStart(2, "0") +
           '</span><h2>' + typography(item.title) + '</h2><p>' +
           typography(item.description) + '</p></div>' +
-          '<div class="showcase-media' + (carousel ? ' is-carousel is-3d-deck' : '') + '">' +
+          '<div class="showcase-media' + (carousel ? ' is-carousel is-3d-deck' : '') + (item.title === 'Email-рассылки' ? ' is-email' : '') + '">' +
           '<div class="showcase-track">' + slides + '</div>' +
           (carousel ? '' : '') +
           '</div></article>';
