@@ -562,3 +562,37 @@ body.lightbox-open{overflow:hidden}
 .sevstar-screen .sevstar-slide img{width:102%!important;max-width:none!important;margin-left:-1%!important}
 .sevstar-screen.is-scrollable{overflow-y:auto!important;overflow-x:hidden!important}
 @media(max-width:650px){.portfolio-perspective .dance-carousel-slides,.portfolio-perspective .extra-slides,.portfolio-perspective .baker-slides,.portfolio-perspective .showcase-track{height:330px!important}.portfolio-perspective .dance-carousel-slide,.portfolio-perspective .extra-slides>img,.portfolio-perspective .baker-slides>img,.portfolio-perspective .showcase-slide{width:78%!important;max-width:78%!important;transform:translate(calc(-50% + var(--perspective-offset)*36%),-50%) rotateY(calc(var(--perspective-offset)*-15deg)) scale(calc(1 - var(--perspective-offset)*var(--perspective-offset)*.15))!important}}
+
+/* Portfolio slider stabilization: prevent overflow, cumulative dark stacking, and competing legacy transformations. */
+.portfolio-perspective .showcase-track,
+.portfolio-perspective .dance-carousel-slides,
+.portfolio-perspective .extra-slides,
+.portfolio-perspective .baker-slides {isolation:isolate!important;overflow:hidden!important;border-radius:14px}
+.portfolio-perspective .showcase-slide,
+.portfolio-perspective .dance-carousel-slide,
+.portfolio-perspective .extra-slides>img,
+.portfolio-perspective .baker-slides>img {filter:none!important;opacity:1!important;box-shadow:none!important}
+.portfolio-perspective .portfolio-offstage {visibility:hidden!important;opacity:0!important}
+.portfolio-perspective .showcase-slide.portfolio-active,
+.portfolio-perspective .dance-carousel-slide.portfolio-active,
+.portfolio-perspective .extra-slides>img.portfolio-active,
+.portfolio-perspective .baker-slides>img.portfolio-active {filter:none!important;opacity:1!important;z-index:50!important}
+.portfolio-perspective .showcase-slide:not(.portfolio-active),
+.portfolio-perspective .dance-carousel-slide:not(.portfolio-active),
+.portfolio-perspective .extra-slides>img:not(.portfolio-active),
+.portfolio-perspective .baker-slides>img:not(.portfolio-active) {filter:brightness(.78)!important}
+.portfolio-showcase-deck {overflow:visible!important;min-height:0!important;display:block!important}
+.portfolio-showcase-deck .showcase-track {width:100%!important;max-width:100%!important;transform:none!important;min-height:0!important}
+.portfolio-showcase-deck .showcase-slide {overflow:hidden!important;border-radius:14px!important}
+.portfolio-showcase-deck .showcase-slide img {width:100%!important;height:100%!important;object-fit:contain!important;max-width:100%!important;max-height:100%!important}
+.portfolio-showcase-deck .showcase-slide::before,
+.portfolio-showcase-deck .showcase-slide::after {display:none!important}
+.portfolio-showcase-deck .portfolio-perspective-controls {position:relative!important;z-index:60!important}
+.zp-cases .zp-print-carousel {overflow:visible!important}
+.zp-cases .zp-print-carousel .zp-print-slides {position:relative!important;min-height:360px!important;perspective:1000px!important;display:flex!important;justify-content:center!important;align-items:center!important}
+.zp-cases .zp-print-carousel .zp-print-slides img {transition:transform .45s ease,opacity .45s ease!important;transform:rotateY(-5deg)!important;border-radius:14px}
+.zp-cases .zp-print-carousel .zp-print-slides img[hidden] {display:none!important}
+.zp-cases .zp-print-carousel .zp-print-controls {margin-top:18px!important}
+.sevstar-screen {cursor:pointer}
+.sevstar-screen.is-scrollable {cursor:ns-resize}
+.owl-visual img {display:block!important;opacity:1!important;visibility:visible!important}
