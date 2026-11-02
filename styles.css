@@ -596,3 +596,14 @@ body.lightbox-open{overflow:hidden}
 .sevstar-screen {cursor:pointer}
 .sevstar-screen.is-scrollable {cursor:ns-resize}
 .owl-visual img {display:block!important;opacity:1!important;visibility:visible!important}
+
+/* Television clickable screen zones; remain inside the outer frame. */
+.sevstar-hotspots{position:absolute;inset:10.3% 9.4% 20.2% 10.3%;z-index:5;display:flex;justify-content:space-between;pointer-events:none}
+.sevstar-hotspots button{pointer-events:auto;align-self:stretch;width:13%;min-width:32px;border:0;background:transparent;color:transparent;cursor:pointer;font-size:32px}
+.sevstar-hotspots button:focus-visible,.sevstar-hotspots button:hover{background:rgba(255,255,255,.13);color:#fff}
+.dance-website-preview{margin:72px 0 96px}
+.dance-website-preview p{max-width:740px;color:#b0b2bd;line-height:1.65;margin:24px 0}
+.dance-site-preview{width:100%;height:clamp(360px,55vw,660px);border:1px solid rgba(255,255,255,.18);border-radius:14px;overflow:hidden;background:#fff}
+.dance-site-preview iframe{display:block;width:100%;height:100%;border:0}
+.dance-site-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}
+.dance-site-links a{padding:12px 18px;border:1px solid rgba(255,255,255,.3);border-radius:999px}
