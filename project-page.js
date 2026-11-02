@@ -112,7 +112,7 @@ if (!project) {
         ['Даша Писанец','1AEzXygxCtfXALEI-1ApAh7HPu_xlycbU'],
         ['Пантера','1WBnQYzneaQXn41YwjPaWE1cMOHVLkgEF'],
         ['Сакура','1_Cftp0Lsazdp2bUXCtYpb_p106ngwKBj']
-      ].map(([name,id])=>'<figure><figcaption>'+name+'</figcaption><iframe loading="lazy" title="Видеоафиша '+name+'" src="https://drive.google.com/file/d/'+id+'/preview" allow="autoplay; fullscreen" allowfullscreen></iframe><a href="https://drive.google.com/file/d/'+id+'/view" target="_blank" rel="noopener noreferrer">Открыть видео ↗</a></figure>').join('') +
+      ].map(([name,id])=>'<figure><figcaption>'+name+'</figcaption><iframe loading="lazy" title="Видеоафиша '+name+'" src="https://drive.google.com/file/d/'+id+'/preview" allow="autoplay; fullscreen" allowfullscreen></iframe></figure>').join('') +
       '</div></section>'
     : '';
   const danceWebsiteHtml = project.id === 'dance-website'
@@ -134,7 +134,7 @@ if (!project) {
     {title:'3D',folder:'3d',count:4,description:'Преобразование технических планов БТИ в понятные трёхмерные модели помещений: поэтажные планы, стены, перегородки и геометрия без фотореалистичных рендеров. Отдельный учебный 3D-проект посвящён правилам дорожного движения: моделирование дорожной сцены для визуального объяснения ситуаций на дороге.'}
   ];
   const extraHtml = project.id === 'extra'
-    ? '<section class="extra-cases"><div class="section-head"><span>ГАЛЕРЕИ РАБОТ</span><span>ИЛЛЮСТРАЦИИ / 3D / РЕТУШЬ</span></div>' +
+    ? '<section class="extra-cases"><div class="section-head"><span>ГАЛЕРЕИ РАБОТ</span><span>ИЛЛЮСТРАЦИИ / 3D</span></div>' +
       extraGroups.map((group,i)=>'<article class="extra-case"><div class="extra-case-copy"><span class="eyebrow">0'+(i+1)+' / 03</span><h2>'+group.title+'</h2><p>'+group.description+'</p></div>' +
       '<div class="extra-carousel"><div class="extra-slides">' +
       Array.from({length:group.count},(_,j)=>'<img src="'+imagePath('assets/projects/extra/'+group.folder+'/'+String(j+1).padStart(2,'0')+'.jpg')+'" alt="'+group.title+', работа '+(j+1)+'" loading="lazy"'+(j?' hidden':'')+'>').join('') +
