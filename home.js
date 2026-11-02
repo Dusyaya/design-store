@@ -8,7 +8,7 @@ document.querySelector(".hero-heading-meta").innerHTML =
 document.querySelector(".intro-panel .panel-kicker").textContent = hero.role;
 document.querySelector(".intro-panel h2").textContent = hero.greeting;
 document.querySelector(".intro-panel p").innerHTML = typography(hero.description);
-document.querySelector(".intro-panel a").textContent = hero.button;
+document.querySelector(".intro-panel a").innerHTML = escapeHtml(hero.button.replace(/ ↗/g,"")) + " " + iconArrowUpRight();
 document.querySelector(".skills-panel").innerHTML =
   '<span class="panel-kicker">' + typography(hero.skillsTitle) + '</span>' +
   hero.skills.map(skill => "<div>✳ " + typography(skill) + "</div>").join("");
@@ -25,7 +25,7 @@ document.querySelector("#about .section-head").textContent = SITE.about.heading;
 document.querySelector("#about h2").textContent = SITE.about.title;
 document.querySelector("#about .about-text").innerHTML =
   SITE.about.paragraphs.map(text => "<p>" + typography(text) + "</p>").join("");
-document.querySelector("#about .next").textContent = SITE.about.button;
+document.querySelector("#about .next").innerHTML = escapeHtml(SITE.about.button.replace(/ ↗/g,"")) + " " + iconArrowUpRight();
 document.querySelector("#about .next").href = telegramContactUrl();
 document.querySelector("#about .contact-links").innerHTML = socialLinks();
 
@@ -43,7 +43,7 @@ function renderCatalog() {
       '<div class="display" style="--glow:' + (COLORS[project.tone] || COLORS.silver) + '77">' +
       '<span class="sku">№ ' + String(index).padStart(2, "0") + '</span>' +
       productArtwork(project) + '</div>' +
-      '<div class="product-info"><h3>' + typography(project.name) + ' ↗</h3>' +
+      '<div class="product-info"><h3>' + typography(project.name) + ' ' + iconArrowUpRight() + '</h3>' +
       '<p>' + typography(project.short) + '</p>' +
       '<div class="tags">' + project.tags.map(tag =>
         '<span class="tag">' + escapeHtml(tag) + '</span>').join("") +
