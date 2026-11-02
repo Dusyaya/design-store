@@ -83,21 +83,11 @@
   }
   const book=document.querySelector('.book-book');
   const folder='../../assets/projects/book/';
-  const fileNames=['обложка1.jpg','01Forzac1.jpg'];
-  const exists=src=>new Promise(resolve=>{const img=new Image();img.onload=()=>resolve(true);img.onerror=()=>resolve(false);img.src=src;});
-  // Detect sequential numbered pages without requiring a fixed page count.
-  (async()=>{
-    for(let n=2;n<=150;n++){
-      const name=String(n).padStart(3,'0')+'.jpg';
-      if(!(await exists(folder+encodeURIComponent(name))))break;
-      fileNames.push(name);
-    }
-    fileNames.push('Forzac_posledniy.jpg','обложка_последняя.jpg');
-    const available=[];
-    for(const name of fileNames)if(await exists(folder+encodeURIComponent(name)))available.push(name);
+  // All 44 pages are present in the repository. Avoid 40+ sequential HEAD/image probes.
+  const available=['обложка1.jpg','01Forzac1.jpg',...Array.from({length:40},(_,i)=>String(i+2).padStart(3,'0')+'.jpg'),'Forzac_posledniy.jpg','обложка_последняя.jpg'];
+  {
     const info=document.querySelector('.book-count');
     const page=(name,side)=>'<div class="book-page '+side+(name?'':' is-empty')+'">'+(name?'<img src="'+folder+encodeURIComponent(name)+'" alt="'+name+'" loading="lazy">':'')+'</div>';
-    if(!available.length){book.innerHTML='<p class="book-await">Загрузите страницы книги в папку assets/projects/book/ — здесь появится интерактивное перелистывание.</p>';document.querySelector('.book-prev').disabled=true;document.querySelector('.book-next').disabled=true;info.textContent='00 / 00';return;}
     // Opening: cover on right. Then each facing spread, ending with a single left page.
     const states=[[null,available[0]]];
     for(let i=1;i<available.length;i+=2)states.push([available[i],available[i+1]||null]);
@@ -136,7 +126,7 @@
     prev.addEventListener('click',()=>turn(-1));next.addEventListener('click',()=>turn(1));
     book.addEventListener('click',e=>{if(busy)return;const rect=book.getBoundingClientRect();turn(e.clientX-rect.left>rect.width/2?1:-1);});
     update();
-  })();
+  }
 })();
 </script>
 <script src="../../portfolio-enhancements.js?v=20261102-repair7"></script>
