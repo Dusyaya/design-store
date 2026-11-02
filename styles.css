@@ -752,3 +752,6 @@ body.lightbox-open{overflow:hidden}
   .product:hover .display .laser-packaging-artwork{transform:translateY(-13px) rotate(0deg) scale(1.05)!important}
 }
 
+
+/* Readable two-line labels on the original shelf artifacts. */
+.product .display .artifact:not(.laser-packaging-artwork) strong{white-space:pre-line;overflow-wrap:normal;word-break:normal;font-size:clamp(18px,2.2vw,32px);line-height:1.08;letter-spacing:-.055em}
