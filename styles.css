@@ -738,7 +738,7 @@ body.lightbox-open{overflow:hidden}
   line-height:1.1!important;text-shadow:none!important;
 }
 .product .display .laser-packaging-name{
-  position:absolute!important;top:73%!important;left:17%!important;
+  position:absolute!important;top:64%!important;left:17%!important;
   width:76%!important;max-width:76%!important;margin:0!important;
   display:flex!important;flex-direction:column!important;align-items:flex-start!important;
   color:#fff!important;font-size:clamp(20px,10cqw,56px)!important;
