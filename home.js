@@ -11,7 +11,7 @@ document.querySelector(".intro-panel p").innerHTML = typography(hero.description
 document.querySelector(".intro-panel a").innerHTML = escapeHtml(hero.button.replace(/ ↗/g,"")) + " " + iconArrowUpRight();
 document.querySelector(".skills-panel").innerHTML =
   '<span class="panel-kicker">' + typography(hero.skillsTitle) + '</span>' +
-  hero.skills.map(skill => "<div>✳ " + typography(skill) + "</div>").join("");
+  hero.skills.map(skill => '<div><svg class="skill-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/></svg><span>' + typography(skill) + '</span></div>').join("");
 document.querySelector(".hero-note").textContent = hero.hint;
 
 const catalog = SITE.catalog;
