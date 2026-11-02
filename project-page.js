@@ -112,7 +112,7 @@ if (!project) {
         ['Даша Писанец','1AEzXygxCtfXALEI-1ApAh7HPu_xlycbU'],
         ['Пантера','1WBnQYzneaQXn41YwjPaWE1cMOHVLkgEF'],
         ['Сакура','1_Cftp0Lsazdp2bUXCtYpb_p106ngwKBj']
-      ].map(([name,id])=>'<figure><figcaption>'+name+'</figcaption><div class="dance-poster-player" data-drive-id="'+id+'"><button type="button" class="dance-poster-play" aria-label="Воспроизвести видеоафишу '+name+'"><img class="dance-poster-thumbnail" src="https://drive.google.com/thumbnail?id='+id+'&sz=w1000" alt="Превью видеоафиши '+name+'" loading="eager" onerror="this.style.display=\'none\'"><span class="dance-poster-overlay"><span class="dance-poster-play-icon" aria-hidden="true">▶</span><span>Смотреть «'+name+'»</span></span></button></div></figure>').join('') +
+      ].map(([name,id])=>'<figure><figcaption>'+name+'</figcaption><div class="dance-poster-player" data-drive-id="'+id+'"><button type="button" class="dance-poster-play" aria-label="Воспроизвести видеоафишу '+name+'"><img class="dance-poster-thumbnail" src="https://drive.google.com/thumbnail?id='+id+'&sz=w1000" alt="Превью видеоафиши '+name+'" loading="eager" onerror="this.style.display=\'none\'"><span class="dance-poster-overlay"><span class="dance-poster-play-icon" aria-hidden="true">▶</span></span></button></div></figure>').join('') +
       '</div></section>'
     : '';
   const danceWebsiteHtml = project.id === 'dance-website'
