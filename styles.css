@@ -767,3 +767,7 @@ body.lightbox-open{overflow:hidden}
 .project-navigation a{display:inline-flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
 .project-navigation a .ui-arrow{width:21px;height:21px}
 @media(max-width:620px){.project-navigation{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.project-navigation a{width:100%!important;min-width:0!important;padding:12px 8px!important;gap:7px!important;font-size:clamp(11px,3vw,13px)!important;line-height:1.2!important}.project-navigation a span{min-width:0}.project-navigation a .ui-arrow{width:17px;height:17px}}
+
+/* Identical SVG external-link arrows on all devices; never use emoji glyphs. */
+.product-info h3 .ui-arrow{width:.8em;height:.8em;vertical-align:baseline;margin-left:.15em;display:inline-block;stroke:currentColor;flex-shrink:0}
+.topbar .ui-arrow,.next .ui-arrow,.explore .ui-arrow,.dance-site-links .ui-arrow{width:1em;height:1em;vertical-align:middle;margin-left:.2em}
