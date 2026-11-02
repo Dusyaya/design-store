@@ -117,9 +117,9 @@ if (!project) {
     : '';
   const danceWebsiteHtml = project.id === 'dance-website'
     ? '<section class="dance-website-preview"><div class="section-head"><span>САЙТ ТАНЦЕВАЛЬНОЙ ШКОЛЫ</span><span>ВЕБ-ПРОЕКТ</span></div>' +
-      '<p>Многостраничный сайт школы танцев с расписанием, абонементами и личным кабинетом. Разработан в репозитории Site2.</p>' +
-      '<div class="dance-site-preview"><iframe title="Предпросмотр сайта танцевальной школы" loading="lazy" src="https://dusyaya.github.io/Site2/"></iframe></div>' +
-      '<div class="dance-site-links"><a href="https://dusyaya.github.io/Site2/" target="_blank" rel="noopener noreferrer">Открыть сайт ↗</a><a href="https://github.com/Dusyaya/Site2" target="_blank" rel="noopener noreferrer">Посмотреть код на GitHub ↗</a></div></section>'
+      '<p>Многостраничный сайт школы танцев с расписанием, абонементами и личным кабинетом. Разработан для танцевальной школы Алисы Шарко.</p>' +
+      '<div class="dance-site-preview"><img src="' + imagePath('assets/projects/dance-website/preview.jpg') + '" alt="Главная страница сайта танцевальной школы Алисы Шарко" loading="eager"></div>' +
+      '<div class="dance-site-links"><a href="https://dusyaya.github.io/dance_school_sharko/" target="_blank" rel="noopener noreferrer">Открыть сайт ↗</a><a href="https://github.com/Dusyaya/dance_school_sharko" target="_blank" rel="noopener noreferrer">Посмотреть код на GitHub ↗</a></div></section>'
     : '';
   const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + imagePath('projects/owl/Сова и Лисенок.png') + '" alt="Дизайн лендинга Сова и Лисёнок" loading="eager"></section>' : '';
   const bakerHtml = project.id === 'baker'
