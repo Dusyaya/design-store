@@ -747,4 +747,8 @@ body.lightbox-open{overflow:hidden}
   text-shadow:none!important;transform:none!important;
 }
 .product .display .laser-packaging-name span{display:block!important;white-space:nowrap!important;max-width:100%}
-.product:hover .display .laser-packaging-artwork{transform:none!important}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .product .display .laser-packaging-artwork{transition:transform .45s cubic-bezier(.2,.8,.2,1)!important;transform:rotate(-6deg)!important;transform-origin:center center!important}
+  .product:hover .display .laser-packaging-artwork{transform:translateY(-13px) rotate(0deg) scale(1.05)!important}
+}
+
