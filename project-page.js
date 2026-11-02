@@ -1,5 +1,6 @@
 // Универсальный шаблон страницы проекта.
 // Сам текст находится в projects.js, а не в HTML.
+const arrowSvg = direction => '<svg class="ui-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="' + (direction === 'left' ? 'M19 12H5m7 7-7-7 7-7' : 'M5 12h14m-7-7 7 7-7 7') + '"/></svg>';
 renderLayout();
 
 const projectId = document.body.dataset.project;
@@ -8,7 +9,7 @@ const main = document.querySelector("main");
 
 if (!project) {
   main.innerHTML = '<div class="wrap case"><h1>Проект не найден</h1>' +
-    '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться в каталог</a></div>';
+    '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться в каталог</a></div>';
 } else {
   document.title = project.name + " — Портфолио";
   const sections = [
@@ -69,7 +70,7 @@ if (!project) {
       '<figure class="zp-presentation-photo"><img src="' + imagePath('assets/projects/gold/photo.PNG') + '" alt="Презентация на мероприятии" loading="lazy"></figure>' +
       '<div class="zp-presentation-right"><div class="zp-presentation-slides">' +
       Array.from({length:9}, (_,i) => '<img src="' + imagePath('assets/projects/gold/slide-' + String(i+1).padStart(2,'0') + '.jpg') + '" alt="Слайд презентации ' + (i+1) + '" loading="lazy">').join('') +
-      '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">←</button><span class="zp-count">01 / 09</span><button type="button" class="zp-next" aria-label="Следующий слайд">→</button></div></div></div></article>'
+      '</div><div class="zp-presentation-controls"><button type="button" class="zp-prev" aria-label="Предыдущий слайд">' + arrowSvg('left') + '</button><span class="zp-count">01 / 09</span><button type="button" class="zp-next" aria-label="Следующий слайд">' + arrowSvg('right') + '</button></div></div></div></article>'
     : '';
   const merchHtml = project.id === 'gold'
     ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">03 / 04</span><h2>Мерч для благотворительного марафона</h2><p>Разработка футболок для благотворительного марафона: от визуальной концепции и графики до подготовки макетов к производству и воплощения идеи в готовом изделии.</p></div>' +
@@ -88,7 +89,7 @@ if (!project) {
   const danceImage = (path,alt) => '<div class="dance-image"><img src="' + imagePath(path) + '" alt="' + alt + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="dance-image-placeholder" hidden>Загрузите изображение<br><small>' + escapeHtml(path.split('/').pop()) + '</small></div></div>';
   const danceCarousel = (paths,kind) => '<div class="dance-carousel dance-carousel-' + kind + '"><div class="dance-carousel-slides">' +
     paths.map((path,i)=>'<div class="dance-carousel-slide"' + (i?' hidden':'') + '>' + danceImage(path,kind+' — '+(i+1)) + '</div>').join('') +
-    '</div><div class="dance-carousel-controls"><button type="button" class="dance-carousel-prev" aria-label="Предыдущее изображение">←</button><span class="dance-carousel-count">01 / ' + String(paths.length).padStart(2,'0') + '</span><button type="button" class="dance-carousel-next" aria-label="Следующее изображение">→</button></div></div>';
+    '</div><div class="dance-carousel-controls"><button type="button" class="dance-carousel-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="dance-carousel-count">01 / ' + String(paths.length).padStart(2,'0') + '</span><button type="button" class="dance-carousel-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div>';
   const danceHtml = project.id === 'dance'
     ? '<section class="case-showcase dance-cases"><div class="section-head"><span>КЕЙСЫ</span><span>DANCE SOUL</span></div>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">01 / 02</span><h2>Брендинг</h2><p>Разработка первоначального логотипа танцевальной студии Dance Soul. Через год — ребрендинг с адаптацией названия и логотипа на русский язык в связи с новыми требованиями к оформлению вывесок.</p></div><div class="dance-branding-media"><div class="dance-logos"><figure><figcaption>ДО / ПЕРВЫЙ ЛОГОТИП</figcaption>' +
@@ -127,7 +128,7 @@ if (!project) {
       '<p class="baker-description">Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.</p>' +
       '<div class="baker-carousel"><div class="baker-slides">' +
       Array.from({length:5},(_,i)=>'<img src="' + imagePath('assets/projects/baker/screen-'+String(i+1).padStart(2,'0')+'.png') + '" alt="Весёлый Пекарь — экран '+(i+1)+'" loading="lazy"'+(i?' hidden':'')+'>').join('') +
-      '</div><div class="baker-controls"><button type="button" class="baker-prev" aria-label="Предыдущий экран">←</button><span class="baker-count">01 / 05</span><button type="button" class="baker-next" aria-label="Следующий экран">→</button></div></div></section>'
+      '</div><div class="baker-controls"><button type="button" class="baker-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="baker-count">01 / 05</span><button type="button" class="baker-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div></div></section>'
     : '';
   const extraGroups = [
     {title:'Иллюстрации',folder:'illustrations',count:4,description:'Авторские цифровые иллюстрации.'},
@@ -138,14 +139,14 @@ if (!project) {
       extraGroups.map((group,i)=>'<article class="extra-case"><div class="extra-case-copy"><span class="eyebrow">0'+(i+1)+' / 03</span><h2>'+group.title+'</h2><p>'+group.description+'</p></div>' +
       '<div class="extra-carousel"><div class="extra-slides">' +
       Array.from({length:group.count},(_,j)=>'<img src="'+imagePath('assets/projects/extra/'+group.folder+'/'+String(j+1).padStart(2,'0')+'.jpg')+'" alt="'+group.title+', работа '+(j+1)+'" loading="lazy"'+(j?' hidden':'')+'>').join('') +
-      '</div><div class="extra-controls"><button type="button" class="extra-prev" aria-label="Предыдущее изображение">←</button><span class="extra-count">01 / '+String(group.count).padStart(2,'0')+'</span><button type="button" class="extra-next" aria-label="Следующее изображение">→</button></div></div></article>').join('')+'</section>'
+      '</div><div class="extra-controls"><button type="button" class="extra-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="extra-count">01 / '+String(group.count).padStart(2,'0')+'</span><button type="button" class="extra-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div></article>').join('')+'</section>'
     : '';
   const sevstarHtml = project.id === 'sevstar'
     ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
       '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0" aria-label="Экран телевизора. Первый макет прокручивается вертикально.">' +
       Array.from({length:9},(_,i)=>'<div class="sevstar-slide"' +(i?' hidden':'')+ '><img src="' + imagePath('assets/projects/sevstar/Рисунок'+(i+1)+'.png') + '" alt="Севстар Кулинария, экран '+(i+1)+'" loading="'+(i?'lazy':'eager')+'"></div>').join('') +
       '</div><img class="sevstar-tv-frame" src="' + imagePath('assets/projects/sevstar/tv.png') + '" alt="" aria-hidden="true">' +
-      '</div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">←</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">→</button></div><p class="sevstar-hint">Первый экран можно прокручивать вверх и вниз внутри телевизора.</p></section>'
+      '</div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint">Первый экран можно прокручивать вверх и вниз внутри телевизора.</p></section>'
     : '';
   const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
   const zinHtml = project.id === 'babushka'
@@ -155,11 +156,11 @@ if (!project) {
         pair.map((n,j) => '<div class="zin-page zin-page-' + (j===0?'left':'right') + '"><span class="zin-page-fallback">BABUSHKA <strong>'+String(n).padStart(2,'0')+'</strong><small>Страница ожидает загрузки</small></span><img src="' + imagePath('assets/projects/babushka/Babushka'+n+'.jpg') + '" alt="Зин BABUSHKA, страница '+n+'" loading="'+(i<2?'eager':'lazy')+'" onerror="this.style.display=\'none\'" onload="this.style.display=\'block\'"></div>').join('') +
       '</div>').join('') +
       '<div class="zin-turn-sheet" aria-hidden="true"><div class="zin-turn-front"></div><div class="zin-turn-back"></div></div>' +
-      '</div><div class="zin-controls"><button type="button" class="zin-prev" aria-label="Предыдущий разворот">←</button><span class="zin-count">01 / 10</span><button type="button" class="zin-next" aria-label="Следующий разворот">→</button></div></div></section>'
+      '</div><div class="zin-controls"><button type="button" class="zin-prev" aria-label="Предыдущий разворот">' + arrowSvg('left') + '</button><span class="zin-count">01 / 10</span><button type="button" class="zin-next" aria-label="Следующий разворот">' + arrowSvg('right') + '</button></div></div></section>'
     : '';
   main.innerHTML =
     '<div class="wrap case">' +
-    '<a class="back" href="' + SITE_ROOT + '#catalog">← Вернуться к коллекции</a>' +
+    '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться к коллекции</a>' +
     '<div class="eyebrow">' + typography(project.category) + ' / ' +
     typography(project.field) + ' / ' + escapeHtml(project.year) + '</div>' +
     '<h1>' + typography(project.name) + '</h1>' +
@@ -174,7 +175,7 @@ if (!project) {
       typography(description) + '</p></div>').join("") + '</div>' +
     dancePostersHtml + danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
     (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'dance-posters' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
-    '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + SITE_ROOT + '#catalog">← Назад к проектам</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
+    '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">' + arrowSvg('left') + '<span>Предыдущий проект</span></a><a href="' + projectUrl(next) + '"><span>Следующий проект</span>' + arrowSvg('right') + '</a></nav></div>';
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
     const slides=[...carousel.querySelectorAll('.dance-carousel-slide')];
@@ -220,7 +221,7 @@ if (!project) {
     let pointerStartX=0,pointerStartY=0;
     sevstarScreen.addEventListener('pointerdown',e=>{pointerStartX=e.clientX;pointerStartY=e.clientY;});
     sevstarScreen.addEventListener('click',e=>{if(Math.abs(e.clientY-pointerStartY)>12||Math.abs(e.clientX-pointerStartX)>12)return;const box=sevstarScreen.getBoundingClientRect();if(e.clientX-box.left<box.width*.32)showSevstar(active-1);else if(e.clientX-box.left>box.width*.68)showSevstar(active+1);});
-    const label=document.createElement('div');label.className='sevstar-hotspots';label.innerHTML='<button type="button" class="sevstar-hotspot-left" aria-label="Предыдущий экран">‹</button><button type="button" class="sevstar-hotspot-right" aria-label="Следующий экран">›</button>';sevstarScreen.parentElement.appendChild(label);
+    const label=document.createElement('div');label.className='sevstar-hotspots';label.innerHTML='<button type="button" class="sevstar-hotspot-left" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><button type="button" class="sevstar-hotspot-right" aria-label="Следующий экран">' + arrowSvg('right') + '</button>';sevstarScreen.parentElement.appendChild(label);
     label.querySelector('.sevstar-hotspot-left').addEventListener('click',()=>showSevstar(active-1));
     label.querySelector('.sevstar-hotspot-right').addEventListener('click',()=>showSevstar(active+1));
   }
