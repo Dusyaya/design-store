@@ -21,6 +21,7 @@
     img.addEventListener('click',e=>{e.stopImmediatePropagation();e.preventDefault();open(img);},true);
     img.addEventListener('keydown',e=>{if(e.key==='Enter'){e.stopImmediatePropagation();e.preventDefault();open(img);}},true);
   });
+  window.PORTFOLIO_DECK_ENHANCED=true;
   const configs=[
     ['.dance-carousel','.dance-carousel-slide','.dance-carousel-prev','.dance-carousel-next','.dance-carousel-count'],
     ['.extra-carousel','.extra-slides img','.extra-prev','.extra-next','.extra-count'],
