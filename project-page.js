@@ -309,36 +309,5 @@ if (!project) {
     if (img.complete) updateRatio();
     img.addEventListener("load", updateRatio);
   });
-  main.querySelectorAll(".showcase-media.is-carousel").forEach(carousel => {
-    if(window.PORTFOLIO_DECK_ENHANCED)return;
-    const track = carousel.querySelector(".showcase-track");
-    const slides = [...track.children];
-    let current = 0;
-    const show = index => {
-      current = (index + slides.length) % slides.length;
-      slides.forEach((slide, i) => {
-        // Ближняя карточка расположена слева, остальные уходят в перспективу вправо.
-        const offset = (i - current + slides.length) % slides.length;
-        slide.style.setProperty("--deck-offset", offset);
-        slide.style.setProperty("--deck-depth", -offset * 105 + "px");
-        slide.style.setProperty("--deck-x", offset * 43 + "%");
-        slide.style.setProperty("--deck-scale", 1 - offset * .13);
-        slide.style.setProperty("--deck-rotate", offset * -10 + "deg");
-        slide.style.zIndex = String(slides.length - offset);
-        slide.classList.toggle("is-front", offset === 0);
-        slide.setAttribute("aria-label", "Показать работу " + (i + 1));
-        slide.tabIndex = 0;
-      });
-    };
-    slides.forEach((slide, i) => {
-      slide.addEventListener("click", () => show(i === current ? current + 1 : i));
-      slide.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          show(i);
-        }
-      });
-    });
-    show(0);
-  });
+
 }
