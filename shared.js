@@ -114,6 +114,7 @@ const COLORS = {
 };
 
 function productArtwork(project) {
+  if (project.id === 'dance-website') return '<div class="artifact dance-website-artwork"><img src="' + imagePath('assets/projects/dance-website/preview.jpg') + '" alt="Главная страница сайта танцевальной школы" loading="lazy"></div>';
   const tone = COLORS[project.tone] || COLORS.silver;
   return '<div class="artifact" style="--tone:' + tone + '">' +
     '<span class="small">' + escapeHtml(project.year) + '</span>' +
