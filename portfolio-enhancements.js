@@ -13,6 +13,12 @@
   function open(img){lastFocus=document.activeElement;preview.src=img.currentSrc||img.src;preview.alt=img.alt||'Увеличенное изображение';overlay.classList.add('is-open');document.body.classList.add('lightbox-open');overlay.querySelector('button').focus();}
   overlay.addEventListener('click',e=>{if(e.target===overlay||e.target.closest('.portfolio-lightbox-close'))close();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('is-open'))close();});
+  root.addEventListener('click',event=>{
+    const img=event.target.closest('.portfolio-zoomable');
+    if(!img||!img.closest('.portfolio-perspective'))return;
+    // Active image opens full screen; side images are selected by the carousel controls.
+    if(!img.closest('.portfolio-active'))return;
+  },true);
   root.querySelectorAll('img').forEach(img=>{
     if(img.closest('.sevstar-tv'))return;
     if(img.closest('.zin-book')||img.closest('.book-book')){img.addEventListener('dblclick',e=>{e.stopPropagation();open(img);});return;}
