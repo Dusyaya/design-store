@@ -104,6 +104,17 @@ if (!project) {
       danceCarousel(Array.from({length:9},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
       '</div></article></section>'
     : '';
+  const dancePostersHtml = project.id === 'dance-posters'
+    ? '<section class="dance-posters-case"><div class="section-head"><span>ВИДЕОАФИШИ</span><span>03 ВИДЕО</span></div>' +
+      '<p>Три видеоафиши для танцевальных классов: «Даша Писанец», «Пантера» и «Сакура».</p>' +
+      '<div class="dance-posters-grid">' +
+      [
+        ['Даша Писанец','1AEzXygxCtfXALEI-1ApAh7HPu_xlycbU'],
+        ['Пантера','1WBnQYzneaQXn41YwjPaWE1cMOHVLkgEF'],
+        ['Сакура','1_Cftp0Lsazdp2bUXCtYpb_p106ngwKBj']
+      ].map(([name,id])=>'<figure><figcaption>'+name+'</figcaption><iframe loading="lazy" title="Видеоафиша '+name+'" src="https://drive.google.com/file/d/'+id+'/preview" allow="autoplay; fullscreen" allowfullscreen></iframe><a href="https://drive.google.com/file/d/'+id+'/view" target="_blank" rel="noopener noreferrer">Открыть видео ↗</a></figure>').join('') +
+      '</div></section>'
+    : '';
   const danceWebsiteHtml = project.id === 'dance-website'
     ? '<section class="dance-website-preview"><div class="section-head"><span>САЙТ ТАНЦЕВАЛЬНОЙ ШКОЛЫ</span><span>ВЕБ-ПРОЕКТ</span></div>' +
       '<p>Многостраничный сайт школы танцев с расписанием, абонементами и личным кабинетом. Разработан в репозитории Site2.</p>' +
@@ -162,8 +173,8 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
-    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
+    dancePostersHtml + danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
+    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'dance-posters' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + SITE_ROOT + '#catalog">← Назад к проектам</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
