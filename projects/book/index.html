@@ -26,7 +26,8 @@
 .book-sheet-back{transform:rotateY(180deg)}
 .book-sheet.forward.turning{animation:zinForward .9s cubic-bezier(.42,.02,.55,.98) forwards}
 .book-sheet.backward{left:0;transform-origin:right center;transform:rotateY(180deg)}
-.book-sheet.backward.turning{animation:zinBackward .9s cubic-bezier(.42,.02,.55,.98) forwards}
+.book-sheet.backward.turning{animation:bookFlipBackward .9s cubic-bezier(.42,.02,.55,.98) forwards}
+@keyframes bookFlipBackward{from{transform:rotateY(180deg)}to{transform:rotateY(0deg)}}
 @keyframes zinForward{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
 @keyframes zinBackward{from{transform:rotateY(-180deg)}to{transform:rotateY(0)}}
 .book-controls{display:flex;align-items:center;justify-content:center;gap:28px;margin-top:26px}
