@@ -733,3 +733,9 @@ body.lightbox-open{overflow:hidden}
 .product .display .laser-packaging-name{top:26%!important;left:13%!important;width:76%!important;font-size:clamp(20px,2.55vw,35px)!important;line-height:.96!important;letter-spacing:-.055em!important;font-weight:750!important;text-shadow:none!important;white-space:nowrap!important}
 @media(max-width:760px){.product .display .laser-packaging-name{font-size:clamp(18px,3.1vw,29px)!important}}
 @media(max-width:420px){.product .display .laser-packaging-name{font-size:clamp(16px,4.1vw,23px)!important}}
+
+/* Laser&Beauty: keep the title wholly within the upper flat pink label,
+   clear of the transparent blister compartment. */
+.product .display .laser-packaging-name{top:25%!important;left:13%!important;width:74%!important;font-size:clamp(17px,2.05vw,29px)!important;line-height:.91!important;letter-spacing:-.055em!important;font-weight:800!important;white-space:normal!important;max-height:15%!important}
+@media(max-width:760px){.product .display .laser-packaging-name{font-size:clamp(16px,2.65vw,24px)!important}}
+@media(max-width:420px){.product .display .laser-packaging-name{font-size:clamp(14px,3.6vw,20px)!important}}
