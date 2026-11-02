@@ -771,3 +771,9 @@ body.lightbox-open{overflow:hidden}
 /* Identical SVG external-link arrows on all devices; never use emoji glyphs. */
 .product-info h3 .ui-arrow{width:.8em;height:.8em;vertical-align:baseline;margin-left:.15em;display:inline-block;stroke:currentColor;flex-shrink:0}
 .topbar .ui-arrow,.next .ui-arrow,.explore .ui-arrow,.dance-site-links .ui-arrow{width:1em;height:1em;vertical-align:middle;margin-left:.2em}
+
+/* Neutral vector icons for the skills panel, consistent across iOS and desktop. */
+.skills-panel>div{display:flex;align-items:center;gap:9px;min-width:0}
+.skills-panel>div .skill-icon{display:block;flex:0 0 18px;width:18px;height:18px;color:inherit}
+.skills-panel>div span{min-width:0;overflow-wrap:break-word}
+@media(max-width:420px){.skills-panel>div{gap:6px}.skills-panel>div .skill-icon{flex-basis:15px;width:15px;height:15px}}
