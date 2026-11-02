@@ -118,7 +118,7 @@ function productArtwork(project) {
     return '<div class="artifact laser-packaging-artwork">' +
       '<img src="' + imagePath('assets/project-covers/lb-packaging.png') + '" alt="Розовая упаковка Laser&Beauty" loading="lazy">' +
       '<span class="laser-packaging-year">' + escapeHtml(project.year) + '</span>' +
-      '<strong class="laser-packaging-name">LASER&amp;BEAUTY</strong>' +
+      '<strong class="laser-packaging-name"><span>LASER</span><span>&amp;BEAUTY</span></strong>' +
       '</div>';
   }
   if (project.id === 'gold') {
