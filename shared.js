@@ -114,6 +114,10 @@ const COLORS = {
 };
 
 function productArtwork(project) {
+  if (project.id === 'laser' || project.id === 'gold') {
+    const file = project.id === 'laser' ? 'lb.png' : 'gold_rule.png';
+    return '<div class="artifact project-cover-artwork"><img src="' + imagePath('assets/project-covers/' + file) + '" alt="Превью проекта ' + escapeHtml(project.name) + '" loading="lazy" onerror="this.style.display=\'none\'"></div>';
+  }
   if (project.id === 'dance-website') return '<div class="artifact dance-website-artwork"><img src="' + imagePath('assets/projects/dance-website/preview.jpg') + '" alt="Главная страница сайта танцевальной школы" loading="lazy"></div>';
   const tone = COLORS[project.tone] || COLORS.silver;
   return '<div class="artifact" style="--tone:' + tone + '">' +
