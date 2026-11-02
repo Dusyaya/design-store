@@ -739,3 +739,8 @@ body.lightbox-open{overflow:hidden}
 .product .display .laser-packaging-name{top:25%!important;left:13%!important;width:74%!important;font-size:clamp(17px,2.05vw,29px)!important;line-height:.91!important;letter-spacing:-.055em!important;font-weight:800!important;white-space:normal!important;max-height:15%!important}
 @media(max-width:760px){.product .display .laser-packaging-name{font-size:clamp(16px,2.65vw,24px)!important}}
 @media(max-width:420px){.product .display .laser-packaging-name{font-size:clamp(14px,3.6vw,20px)!important}}
+
+/* Laser&Beauty title sits ON the lower transparent blister, matching reference. */
+.product .display .laser-packaging-name{top:58%!important;left:19%!important;width:68%!important;font-size:clamp(20px,3.1vw,43px)!important;line-height:.87!important;letter-spacing:-.075em!important;font-weight:900!important;white-space:normal!important;max-height:none!important;text-shadow:none!important}
+@media(max-width:760px){.product .display .laser-packaging-name{font-size:clamp(20px,3.4vw,34px)!important}}
+@media(max-width:420px){.product .display .laser-packaging-name{font-size:clamp(18px,5.4vw,28px)!important}}
