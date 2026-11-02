@@ -702,3 +702,15 @@ body.lightbox-open{overflow:hidden}
 .dance-posters-grid .dance-poster-play:hover .dance-poster-thumbnail{transform:scale(1.035)}
 .dance-posters-grid .dance-poster-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#fff;text-shadow:0 1px 12px #000;background:linear-gradient(0deg,rgba(0,0,0,.5),transparent 55%)}
 .dance-posters-grid .dance-poster-play-icon{display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);font-size:28px;padding-left:4px}
+
+/* Motion posters: preserve the full vertical composition and remove text overlays. */
+.dance-posters-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:26px}
+.dance-posters-grid figure{min-width:0}
+.dance-posters-grid .dance-poster-player{width:100%;height:auto!important;max-height:none!important;aspect-ratio:9/16;overflow:hidden;border:0!important;border-radius:12px;background:transparent!important}
+.dance-posters-grid .dance-poster-play{height:100%!important;width:100%!important;border:0!important;border-radius:12px!important;background:transparent!important;overflow:hidden}
+.dance-posters-grid .dance-poster-thumbnail{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;transform:none!important}
+.dance-posters-grid .dance-poster-play:hover .dance-poster-thumbnail{transform:none!important}
+.dance-posters-grid .dance-poster-overlay{background:transparent!important;text-shadow:none!important;gap:0!important}
+.dance-posters-grid .dance-poster-play-icon{width:66px;height:66px;border-radius:50%;background:rgba(0,0,0,.65);font-size:27px}
+.dance-posters-grid .dance-poster-player iframe{width:100%!important;height:100%!important;aspect-ratio:9/16;max-height:none!important;border:0!important;border-radius:12px!important}
+@media(max-width:850px){.dance-posters-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important;gap:24px}.dance-posters-grid .dance-poster-player{height:auto!important;max-height:none!important}}
