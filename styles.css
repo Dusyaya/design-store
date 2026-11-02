@@ -665,3 +665,13 @@ body.lightbox-open{overflow:hidden}
  .zp-cases .zp-case:has(.zp-merch) > .zp-merch {grid-column:1!important;grid-row:2!important;padding:0!important}
  .zp-cases .zp-merch .showcase-track {height:360px!important}
 }
+
+/* Illustration and 3D: no unnecessary separator rules between galleries. */
+.extra-cases .extra-case{border:0!important;border-bottom:0!important;border-top:0!important}
+.extra-cases .extra-case::before,.extra-cases .extra-case::after{border:0!important;display:none!important}
+.extra-cases .extra-case+.extra-case{border-top:0!important}
+.extra-cases .section-head{border-bottom:0!important}
+/* Motion video frames: no extra cards, background, outlines or Drive links. */
+.dance-posters-grid figure,.dance-posters-grid iframe{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important}
+.dance-posters-grid figure>a{display:none!important}
+.dance-posters-grid iframe{border-radius:0!important}
