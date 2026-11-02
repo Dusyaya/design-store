@@ -1,3 +1,4 @@
+function iconArrowUpRight(){return '<svg class="ui-arrow ui-arrow-up-right" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg>';}
 // Общие функции для всех страниц.
 const SITE_ROOT = document.documentElement.dataset.root || "./";
 const SITE = window.SITE_CONTENT;
@@ -102,7 +103,7 @@ function renderLayout() {
     '<a href="' + SITE_ROOT + '#catalog">' + typography(SITE.header.catalog) + '</a>' +
     '<a href="' + SITE_ROOT + '#about">' + typography(SITE.header.about) + '</a>' +
     '<a class="contact" href="' + escapeHtml(telegramContactUrl()) +
-    '" target="_blank" rel="noopener noreferrer">' + typography(SITE.header.contact) + ' ↗</a>';
+    '" target="_blank" rel="noopener noreferrer">' + typography(SITE.header.contact) + ' ' + iconArrowUpRight() + '</a>';
   const footer = document.querySelector("footer");
   if (footer) footer.innerHTML = '<span>' + typography(SITE.footer) + '</span>';
 }
