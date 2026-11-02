@@ -777,3 +777,11 @@ body.lightbox-open{overflow:hidden}
 .skills-panel>div .skill-icon{display:block;flex:0 0 18px;width:18px;height:18px;color:inherit}
 .skills-panel>div span{min-width:0;overflow-wrap:break-word}
 @media(max-width:420px){.skills-panel>div{gap:6px}.skills-panel>div .skill-icon{flex-basis:15px;width:15px;height:15px}}
+
+/* Mobile hero: remove the oversized blank space between heading and portrait. */
+@media(max-width:850px){
+  .hero-composition{margin-top:0!important;gap:12px!important}
+  .hero-portrait{height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:1.18!important;top:auto!important;align-items:flex-end!important;overflow:hidden!important}
+  .hero-portrait .portrait-photo{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center bottom!important}
+}
+@media(max-width:500px){.hero-composition{margin-top:-8px!important}.hero-portrait{aspect-ratio:1.22!important}.hero-editorial{padding-top:34px!important}}
