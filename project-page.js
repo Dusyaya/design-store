@@ -74,16 +74,16 @@ if (!project) {
   const merchHtml = project.id === 'gold'
     ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">03 / 04</span><h2>Мерч для благотворительного марафона</h2><p>Разработка футболок для благотворительного марафона: от визуальной концепции и графики до подготовки макетов к производству и воплощения идеи в готовом изделии.</p></div>' +
       '<div class="showcase-media is-carousel is-3d-deck zp-merch"><div class="showcase-track">' +
-      Array.from({length:3}, (_,i) => {
+      Array.from({length:4}, (_,i) => {
         const path = 'assets/projects/gold/merch/merch-' + String(i+1).padStart(2,'0') + (i < 2 ? '.jpg' : '.png');
         return '<div class="showcase-slide"><img src="' + imagePath(path) + '" alt="Мерч благотворительного марафона, фото ' + (i+1) + '" loading="lazy"></div>';
       }).join('') + '</div></div></article>'
     : '';
   const printHtml = project.id === 'gold'
     ? '<article class="showcase-item zp-case zp-print-case"><div class="showcase-copy"><span class="eyebrow">04 / 04</span><h2>Полиграфия</h2><p>Дизайн печатных материалов для клиники «Золотое Правило»: адаптация фирменного стиля под физические носители, работа с композицией, типографикой и подготовка макетов к печати.</p></div>' +
-      '<div class="showcase-media zp-print-carousel"><div class="zp-print-slides">' +
-      ['print-01.jpg','print-02.jpg'].map((name,i) => '<img src="' + imagePath('assets/projects/gold/print/' + name) + '" alt="Полиграфия Золотое Правило, работа ' + (i+1) + '" loading="lazy">').join('') +
-      '</div><div class="zp-print-controls"><button type="button" class="zp-print-prev" aria-label="Предыдущее изображение">←</button><span class="zp-print-count">01 / 02</span><button type="button" class="zp-print-next" aria-label="Следующее изображение">→</button></div></div></article>'
+      '<div class="showcase-media is-carousel is-3d-deck zp-print-carousel"><div class="showcase-track">' +
+      ['print-01.jpg','print-02.jpg'].map((name,i) => '<div class="showcase-slide"><img src="' + imagePath('assets/projects/gold/print/' + name) + '" alt="Полиграфия Золотое Правило, работа ' + (i+1) + '" loading="lazy"></div>').join('') +
+      '</div></div></article>'
     : '';
   const danceImage = (path,alt) => '<div class="dance-image"><img src="' + imagePath(path) + '" alt="' + alt + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="dance-image-placeholder" hidden>Загрузите изображение<br><small>' + escapeHtml(path.split('/').pop()) + '</small></div></div>';
   const danceCarousel = (paths,kind) => '<div class="dance-carousel dance-carousel-' + kind + '"><div class="dance-carousel-slides">' +
@@ -267,17 +267,6 @@ if (!project) {
     prev.addEventListener('click',()=>go(-1));
     nextBtn.addEventListener('click',()=>go(1));
     prev.disabled=true;
-  }
-  const printSlides = [...main.querySelectorAll('.zp-print-slides img')];
-  if (printSlides.length) {
-    let printIndex = 0;
-    const showPrint = () => {
-      printSlides.forEach((img,i) => { img.hidden = i !== printIndex; });
-      main.querySelector('.zp-print-count').textContent = String(printIndex + 1).padStart(2,'0') + ' / ' + String(printSlides.length).padStart(2,'0');
-    };
-    main.querySelector('.zp-print-prev').addEventListener('click', () => { printIndex = (printIndex - 1 + printSlides.length) % printSlides.length; showPrint(); });
-    main.querySelector('.zp-print-next').addEventListener('click', () => { printIndex = (printIndex + 1) % printSlides.length; showPrint(); });
-    showPrint();
   }
   const zpSlides = [...main.querySelectorAll('.zp-presentation-slides img')];
   if (zpSlides.length) {
