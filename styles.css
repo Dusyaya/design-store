@@ -718,29 +718,33 @@ body.lightbox-open{overflow:hidden}
 .project-cover-artwork{display:flex!important;align-items:center;justify-content:center;width:100%;height:100%;padding:16px;background:transparent!important;overflow:hidden}
 .project-cover-artwork img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:none}
 
-/* Laser&Beauty retail blister pack. Labels align with the actual uploaded package artwork. */
-.product .display .laser-packaging-artwork{position:relative!important;display:block!important;width:auto!important;height:92%!important;max-width:100%!important;aspect-ratio:1385/1136!important;padding:0!important;margin:0 auto!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important;transform:none!important}
-.product .display .laser-packaging-artwork:after{display:none!important}
-.product .display .laser-packaging-artwork>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
-.product .display .laser-packaging-year{position:absolute;top:18%;left:13%;font-size:clamp(9px,1.05vw,15px);font-weight:700;letter-spacing:-.035em;color:#fff;line-height:1.1;text-shadow:0 1px 3px #c64c7866}
-.product .display .laser-packaging-name{position:absolute;top:32%;left:13%;width:75%;font-size:clamp(23px,3.4vw,47px)!important;line-height:.86!important;font-weight:900!important;letter-spacing:-.085em!important;overflow-wrap:normal!important;color:#fff;text-shadow:0 1px 4px #c64c7866}
+
+/* Laser&Beauty packaging: a single authoritative layout, no conflicting overrides. */
+.product .display .laser-packaging-artwork{
+  position:relative!important;display:block!important;box-sizing:border-box;
+  height:92%!important;width:auto!important;max-width:100%!important;
+  aspect-ratio:1385/1136!important;margin:0 auto!important;padding:0!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  background:transparent!important;overflow:hidden!important;transform:none!important;
+  container-type:inline-size;
+}
+.product .display .laser-packaging-artwork::after{display:none!important}
+.product .display .laser-packaging-artwork>img{
+  position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;
+}
+.product .display .laser-packaging-year{
+  position:absolute;top:18%;left:13%;color:white;font-weight:300!important;
+  font-size:clamp(9px,3.7cqw,16px)!important;letter-spacing:.01em!important;
+  line-height:1.1!important;text-shadow:none!important;
+}
+.product .display .laser-packaging-name{
+  position:absolute!important;top:58%!important;left:18%!important;
+  width:66%!important;max-width:66%!important;margin:0!important;
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+  color:#fff!important;font-size:clamp(18px,9cqw,43px)!important;
+  font-weight:900!important;line-height:.89!important;letter-spacing:-.07em!important;
+  white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important;
+  text-shadow:none!important;transform:none!important;
+}
+.product .display .laser-packaging-name span{display:block!important;white-space:nowrap!important;max-width:100%}
 .product:hover .display .laser-packaging-artwork{transform:none!important}
-@media(max-width:760px){.product .display .laser-packaging-name{font-size:clamp(18px,4vw,32px)!important}.product .display .laser-packaging-year{font-size:clamp(8px,1.6vw,12px)}}
-@media(max-width:420px){.product .display .laser-packaging-name{font-size:clamp(15px,4.4vw,22px)!important}.product .display .laser-packaging-year{font-size:9px}}
-
-/* LB package refinement: title entirely in the pale upper label panel. */
-.product .display .laser-packaging-year{top:18%!important;left:13%!important;font-weight:300!important;letter-spacing:.015em!important;font-size:clamp(9px,1.05vw,15px)!important;text-shadow:none!important}
-.product .display .laser-packaging-name{top:26%!important;left:13%!important;width:76%!important;font-size:clamp(20px,2.55vw,35px)!important;line-height:.96!important;letter-spacing:-.055em!important;font-weight:750!important;text-shadow:none!important;white-space:nowrap!important}
-@media(max-width:760px){.product .display .laser-packaging-name{font-size:clamp(18px,3.1vw,29px)!important}}
-@media(max-width:420px){.product .display .laser-packaging-name{font-size:clamp(16px,4.1vw,23px)!important}}
-
-/* Laser&Beauty: keep the title wholly within the upper flat pink label,
-   clear of the transparent blister compartment. */
-.product .display .laser-packaging-name{top:25%!important;left:13%!important;width:74%!important;font-size:clamp(17px,2.05vw,29px)!important;line-height:.91!important;letter-spacing:-.055em!important;font-weight:800!important;white-space:normal!important;max-height:15%!important}
-@media(max-width:760px){.product .display .laser-packaging-name{font-size:clamp(16px,2.65vw,24px)!important}}
-@media(max-width:420px){.product .display .laser-packaging-name{font-size:clamp(14px,3.6vw,20px)!important}}
-
-/* Laser&Beauty title sits ON the lower transparent blister, matching reference. */
-.product .display .laser-packaging-name{top:58%!important;left:19%!important;width:68%!important;font-size:clamp(20px,3.1vw,43px)!important;line-height:.87!important;letter-spacing:-.075em!important;font-weight:900!important;white-space:normal!important;max-height:none!important;text-shadow:none!important}
-@media(max-width:760px){.product .display .laser-packaging-name{font-size:clamp(20px,3.4vw,34px)!important}}
-@media(max-width:420px){.product .display .laser-packaging-name{font-size:clamp(18px,5.4vw,28px)!important}}
