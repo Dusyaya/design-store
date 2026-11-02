@@ -31,7 +31,9 @@
     root.querySelectorAll(selector).forEach(carousel=>{
       const slides=[...carousel.querySelectorAll(slideSelector)];
       if(slides.length<2)return;
+      const isShowcase=carousel.matches('.showcase-media.is-carousel');
       carousel.classList.add('portfolio-perspective');
+      if(isShowcase)carousel.classList.add('portfolio-showcase-deck');
       let active=0;
       let controls=carousel.querySelector('.portfolio-perspective-controls');
       if(!controls&&!prevSelector){
