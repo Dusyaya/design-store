@@ -114,7 +114,7 @@ if (!project) {
     : '';
   const extraGroups = [
     {title:'Иллюстрации',folder:'illustrations',count:4,description:'Авторские цифровые иллюстрации.'},
-    {title:'3D',folder:'3d',count:4,description:'Трёхмерные модели и визуализации.'},
+    {title:'3D',folder:'3d',count:4,description:'Преобразование технических планов БТИ в понятные трёхмерные модели помещений: поэтажные планы, стены, перегородки и геометрия без фотореалистичных рендеров. Отдельный учебный 3D-проект посвящён правилам дорожного движения: моделирование дорожной сцены для визуального объяснения ситуаций на дороге.'},
     {title:'Ретушь',folder:'retouch',count:1,description:'Обработка фотографий и работа с деталями изображения.'}
   ];
   const extraHtml = project.id === 'extra'
@@ -158,7 +158,7 @@ if (!project) {
       typography(description) + '</p></div>').join("") + '</div>' +
     owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
     (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
-    '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">← Предыдущий проект</a><a href="' + SITE_ROOT + '#catalog">Назад к коллекции →</a></nav></div>';
+    '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + SITE_ROOT + '#catalog">← Назад к проектам</a><a href="' + projectUrl(next) + '">Следующий проект →</a></nav></div>';
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
     const slides=[...carousel.querySelectorAll('.dance-carousel-slide')];
@@ -201,6 +201,12 @@ if (!project) {
     main.querySelector('.sevstar-prev').addEventListener('click',()=>showSevstar(active-1));
     main.querySelector('.sevstar-next').addEventListener('click',()=>showSevstar(active+1));
     showSevstar(0);
+    let pointerStartX=0,pointerStartY=0;
+    sevstarScreen.addEventListener('pointerdown',e=>{pointerStartX=e.clientX;pointerStartY=e.clientY;});
+    sevstarScreen.addEventListener('click',e=>{if(Math.abs(e.clientY-pointerStartY)>12||Math.abs(e.clientX-pointerStartX)>12)return;const box=sevstarScreen.getBoundingClientRect();if(e.clientX-box.left<box.width*.32)showSevstar(active-1);else if(e.clientX-box.left>box.width*.68)showSevstar(active+1);});
+    const label=document.createElement('div');label.className='sevstar-hotspots';label.innerHTML='<button type="button" class="sevstar-hotspot-left" aria-label="Предыдущий экран">‹</button><button type="button" class="sevstar-hotspot-right" aria-label="Следующий экран">›</button>';sevstarScreen.parentElement.appendChild(label);
+    label.querySelector('.sevstar-hotspot-left').addEventListener('click',()=>showSevstar(active-1));
+    label.querySelector('.sevstar-hotspot-right').addEventListener('click',()=>showSevstar(active+1));
   }
   const zinBook = main.querySelector('.zin-book');
   if (zinBook) {
@@ -271,7 +277,7 @@ if (!project) {
         img.style.zIndex = String(3 - Math.abs(offset));
         img.setAttribute('aria-hidden', String(offset !== 0));
       });
-      main.querySelector('.zp-count').textContent = String(active + 1).padStart(2, '0') + ' / ' + zpSlides.length;
+      main.querySelector('.zp-count').textContent = String(active + 1).padStart(2, '0') + ' / ' + String(zpSlides.length).padStart(2, '0');
     };
     main.querySelector('.zp-prev').addEventListener('click', () => { active = (active - 1 + zpSlides.length) % zpSlides.length; showZpSlide(); });
     main.querySelector('.zp-next').addEventListener('click', () => { active = (active + 1) % zpSlides.length; showZpSlide(); });
@@ -287,6 +293,7 @@ if (!project) {
     img.addEventListener("load", updateRatio);
   });
   main.querySelectorAll(".showcase-media.is-carousel").forEach(carousel => {
+    if(window.PORTFOLIO_DECK_ENHANCED)return;
     const track = carousel.querySelector(".showcase-track");
     const slides = [...track.children];
     let current = 0;
