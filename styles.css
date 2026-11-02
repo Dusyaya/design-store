@@ -760,3 +760,10 @@ body.lightbox-open{overflow:hidden}
 .product .display .artifact:not(.laser-packaging-artwork){min-width:0!important;max-width:calc(100% - 24px)!important;box-sizing:border-box!important}
 .product .display .artifact:not(.laser-packaging-artwork) strong{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;hyphens:auto!important;font-size:clamp(13px,2vw,26px)!important;line-height:1.12!important;letter-spacing:-.045em!important}
 @media(max-width:600px){.product .display .artifact:not(.laser-packaging-artwork){padding:12px!important;width:78%!important}.product .display .artifact:not(.laser-packaging-artwork) strong{font-size:clamp(12px,4vw,21px)!important;line-height:1.12!important;letter-spacing:-.045em!important}}
+
+/* Unified SVG arrows across desktop and iOS, including project navigation. */
+.ui-arrow{display:inline-block;flex:0 0 auto;width:20px;height:20px;vertical-align:middle;stroke:currentColor}
+.case > .back{display:inline-flex;align-items:center;gap:9px}
+.project-navigation a{display:inline-flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
+.project-navigation a .ui-arrow{width:21px;height:21px}
+@media(max-width:620px){.project-navigation{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.project-navigation a{width:100%!important;min-width:0!important;padding:12px 8px!important;gap:7px!important;font-size:clamp(11px,3vw,13px)!important;line-height:1.2!important}.project-navigation a span{min-width:0}.project-navigation a .ui-arrow{width:17px;height:17px}}
