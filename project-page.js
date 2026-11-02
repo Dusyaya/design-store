@@ -112,7 +112,7 @@ if (!project) {
         ['Даша Писанец','1AEzXygxCtfXALEI-1ApAh7HPu_xlycbU'],
         ['Пантера','1WBnQYzneaQXn41YwjPaWE1cMOHVLkgEF'],
         ['Сакура','1_Cftp0Lsazdp2bUXCtYpb_p106ngwKBj']
-      ].map(([name,id])=>'<figure><figcaption>'+name+'</figcaption><iframe loading="lazy" title="Видеоафиша '+name+'" src="https://drive.google.com/file/d/'+id+'/preview" allow="autoplay; fullscreen" allowfullscreen></iframe></figure>').join('') +
+      ].map(([name,id])=>'<figure><figcaption>'+name+'</figcaption><div class="dance-poster-player" data-drive-id="'+id+'"><button type="button" class="dance-poster-play" aria-label="Воспроизвести видеоафишу '+name+'"><span aria-hidden="true">▶</span><span>Смотреть «'+name+'»</span></button></div></figure>').join('') +
       '</div></section>'
     : '';
   const danceWebsiteHtml = project.id === 'dance-website'
@@ -268,6 +268,28 @@ if (!project) {
     nextBtn.addEventListener('click',()=>go(1));
     prev.disabled=true;
   }
+  // Only one external video iframe exists at a time: removing it stops playback.
+  const posterPlayers=[...main.querySelectorAll('.dance-poster-player')];
+  posterPlayers.forEach(player=>{
+    player.querySelector('.dance-poster-play')?.addEventListener('click',()=>{
+      posterPlayers.forEach(other=>{
+        const frame=other.querySelector('iframe');
+        if(frame)frame.remove();
+        const btn=other.querySelector('.dance-poster-play');
+        if(btn)btn.hidden=false;
+        other.classList.remove('is-playing');
+      });
+      const frame=document.createElement('iframe');
+      frame.src='https://drive.google.com/file/d/'+encodeURIComponent(player.dataset.driveId)+'/preview';
+      frame.title='Видеоафиша танцевального класса';
+      frame.allow='autoplay; fullscreen';
+      frame.setAttribute('allowfullscreen','');
+      frame.setAttribute('loading','eager');
+      player.appendChild(frame);
+      player.querySelector('.dance-poster-play').hidden=true;
+      player.classList.add('is-playing');
+    });
+  });
   const zpSlides = [...main.querySelectorAll('.zp-presentation-slides img')];
   if (zpSlides.length) {
     let active = 0;
