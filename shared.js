@@ -117,13 +117,12 @@ const COLORS = {
 function productArtwork(project) {
   const index = PROJECTS.findIndex(item => item.id === project.id) + 1;
   const number = String(index).padStart(2, '0');
-  const isBook = index === 4 || index === 11;
   const labels = {
     laser: ['LASER', '&BEAUTY'],
     gold: ['ЗОЛОТОЕ', 'ПРАВИЛО'],
     dance: ['DANCE SOUL'],
     book: ['ПАПА ЗНАЕТ ВСЁ'],
-    'dance-website': ['САЙТ ТАНЦЕВАЛЬНОЙ', 'ШКОЛЫ'],
+    'dance-website': ['САЙТ', 'ТАНЦЕВАЛЬНОЙ', 'ШКОЛЫ'],
     sevstar: ['СЕВСТАР.', 'КУЛИНАРИЯ'],
     'dance-posters': ['ВИДЕОАФИШИ', 'ТАНЦЕВАЛЬНЫХ', 'КЛАССОВ'],
     extra: ['ИЛЛЮСТРАЦИИ', 'И 3D'],
@@ -133,13 +132,10 @@ function productArtwork(project) {
   };
   const lines = labels[project.id] || [project.name.toLocaleUpperCase('ru-RU')];
   const title = lines.map(line => '<span>' + escapeHtml(line) + '</span>').join('');
-  return '<div class="artifact cover-packaging cover-packaging--' + number +
-    (isBook ? ' cover-packaging--book' : '') + '">' +
-    (isBook ? '<strong class="cover-book-title">' + title + '</strong>' : '') +
+  return '<div class="artifact cover-packaging cover-packaging--' + number + '">' +
     '<img class="cover-packaging-image" src="' + imagePath('assets/project-covers/cover-' + number + '.png') +
     '" alt="Обложка проекта ' + escapeHtml(project.name) + '" loading="lazy">' +
-    (isBook ? '<span class="cover-book-year">' + escapeHtml(project.year) + '</span>' :
-      '<span class="cover-packaging-year">' + escapeHtml(project.year) + '</span>' +
-      '<strong class="cover-packaging-title">' + title + '</strong>') +
+    '<span class="cover-packaging-year">' + escapeHtml(project.year) + '</span>' +
+    '<strong class="cover-packaging-title">' + title + '</strong>' +
     '</div>';
 }
