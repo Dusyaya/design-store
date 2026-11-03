@@ -785,3 +785,72 @@ body.lightbox-open{overflow:hidden}
   .hero-portrait .portrait-photo{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center bottom!important}
 }
 @media(max-width:500px){.hero-composition{margin-top:-8px!important}.hero-portrait{aspect-ratio:1.22!important}.hero-editorial{padding-top:34px!important}}
+
+/* Eleven transparent portfolio packages. Text is HTML, not baked into the PNGs. */
+.product .display .cover-packaging,
+.case-stage .cover-packaging{
+  position:relative!important;display:block!important;box-sizing:border-box!important;
+  width:min(100%,480px)!important;height:auto!important;max-width:100%!important;
+  aspect-ratio:1385/1136!important;padding:0!important;margin:0 auto!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;overflow:visible!important;container-type:inline-size;
+  transform:rotate(-5deg)!important;transform-origin:center center!important;
+  transition:transform .42s cubic-bezier(.2,.8,.2,1)!important;
+}
+.product .display .cover-packaging{width:94%!important;max-height:94%!important}
+.product .display .cover-packaging::after,.case-stage .cover-packaging::after{display:none!important}
+.cover-packaging .cover-packaging-image{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  object-fit:contain!important;display:block!important;pointer-events:none;
+}
+.product:hover .display .cover-packaging{transform:translateY(-9px) rotate(0deg) scale(1.035)!important}
+.cover-packaging .cover-packaging-year{
+  position:absolute;top:18%;left:13%;font-family:Manrope,Arial,sans-serif;
+  color:#fff;font-size:clamp(9px,3.7cqw,17px);font-weight:300;line-height:1.1;
+  z-index:2;text-shadow:0 1px 3px #0003;
+}
+.product .display .cover-packaging .cover-packaging-title,
+.case-stage .cover-packaging .cover-packaging-title{
+  position:absolute!important;top:64%!important;left:17%!important;width:76%!important;
+  max-width:76%!important;margin:0!important;padding:0!important;display:flex!important;
+  flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;
+  color:white!important;font-family:Manrope,Arial,sans-serif!important;
+  font-size:clamp(11px,8cqw,42px)!important;font-weight:800!important;
+  line-height:1.02!important;letter-spacing:-.055em!important;
+  white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important;
+  text-transform:uppercase!important;text-shadow:0 1px 3px #0003!important;z-index:2;
+}
+.cover-packaging .cover-packaging-title span,
+.cover-packaging .cover-book-title span{display:block!important;white-space:nowrap!important;word-break:normal!important;overflow-wrap:normal!important;max-width:100%}
+.product .display .cover-packaging--05 .cover-packaging-title,
+.product .display .cover-packaging--07 .cover-packaging-title,
+.case-stage .cover-packaging--05 .cover-packaging-title,
+.case-stage .cover-packaging--07 .cover-packaging-title{font-size:clamp(10px,5.1cqw,29px)!important}
+.product .display .cover-packaging--08 .cover-packaging-title,
+.case-stage .cover-packaging--08 .cover-packaging-title{font-size:clamp(11px,6.5cqw,34px)!important}
+.product .display .cover-packaging--06 .cover-packaging-title,
+.case-stage .cover-packaging--06 .cover-packaging-title{font-size:clamp(11px,6.7cqw,35px)!important}
+/* Book-shaped packages: heading above the object, year below, never on the cover. */
+.product .display .cover-packaging--book,
+.case-stage .cover-packaging--book{aspect-ratio:1385/1500!important;height:92%!important;width:auto!important;max-width:96%!important}
+.cover-packaging--book .cover-packaging-image{top:16%!important;height:68%!important;object-fit:contain!important}
+.product .display .cover-packaging--book .cover-book-title,
+.case-stage .cover-packaging--book .cover-book-title{
+  position:absolute!important;top:0!important;left:0!important;width:100%!important;
+  max-width:100%!important;margin:0!important;padding:0!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  font-family:Manrope,Arial,sans-serif!important;font-size:clamp(12px,6.5cqw,30px)!important;
+  font-weight:800!important;letter-spacing:-.045em!important;line-height:1.08!important;
+  color:#fff!important;text-align:center!important;text-transform:uppercase!important;
+  overflow-wrap:normal!important;word-break:normal!important;
+}
+.cover-packaging--book .cover-book-year{
+  position:absolute;bottom:1%;left:0;width:100%;text-align:center;color:#fff;
+  font-family:Manrope,Arial,sans-serif;font-size:clamp(10px,4.5cqw,20px);
+  font-weight:300;letter-spacing:.02em;
+}
+@media(max-width:600px){
+  .product .display .cover-packaging{width:98%!important;max-width:98%!important}
+  .product .display .cover-packaging--book{width:auto!important;height:95%!important;max-width:96%!important}
+}
+@media(prefers-reduced-motion:reduce){.product .display .cover-packaging{transition:none!important}}
