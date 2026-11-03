@@ -42,7 +42,9 @@ function renderCatalog() {
     return '<a class="product" href="' + projectUrl(project) + '">' +
       '<div class="display" style="--glow:' + (COLORS[project.tone] || COLORS.silver) + '77">' +
       '<span class="sku">№ ' + String(index).padStart(2, "0") + '</span>' +
-      productArtwork(project) + '</div>' +
+      '<span class="shelf-year">' + escapeHtml(project.year) + '</span>' +
+      '<div class="shelf-artwork-region">' + productArtwork(project) + '</div>' +
+      '<strong class="shelf-cover-title">' + escapeHtml(project.object.toLocaleUpperCase('ru-RU')) + '</strong></div>' +
       '<div class="product-info"><h3>' + typography(project.name) + ' ' + iconArrowUpRight() + '</h3>' +
       '<p>' + typography(project.short) + '</p>' +
       '<div class="tags">' + project.tags.map(tag =>
