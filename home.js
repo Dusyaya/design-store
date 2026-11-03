@@ -44,7 +44,7 @@ function renderCatalog() {
       '<span class="sku">№ ' + String(index).padStart(2, "0") + '</span>' +
       '<span class="shelf-year">' + escapeHtml(project.year) + '</span>' +
       '<div class="shelf-artwork-region">' + productArtwork(project) + '</div>' +
-      '<strong class="shelf-cover-title">' + escapeHtml(project.object.toLocaleUpperCase('ru-RU')) + '</strong></div>' +
+      '</div>' +
       '<div class="product-info"><h3>' + typography(project.name) + ' ' + iconArrowUpRight() + '</h3>' +
       '<p>' + typography(project.short) + '</p>' +
       '<div class="tags">' + project.tags.map(tag =>
