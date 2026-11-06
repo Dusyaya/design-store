@@ -13,11 +13,12 @@ document.querySelector(".skills-panel").innerHTML =
   '<span class="panel-kicker">' + typography(hero.skillsTitle) + '</span>' +
   hero.skills.map(skill => '<div><svg class="skill-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/></svg><span>' + typography(skill) + '</span></div>').join("");
 document.querySelector(".hero-note").textContent = hero.hint;
+if (window.PORTFOLIO_LANG === "en") { document.title = "Portfolio — Darya Atrokhina"; document.querySelector('meta[name="description"]')?.setAttribute("content","Graphic and web design portfolio by Darya Atrokhina."); }
 
 const catalog = SITE.catalog;
 document.querySelector("#catalog .section-head span:first-child").textContent = catalog.heading;
 document.querySelector("#catalog .section-head span:last-child").textContent =
-  PROJECTS.length + " ПРОЕКТОВ";
+  PROJECTS.length + (window.PORTFOLIO_LANG === "en" ? " PROJECTS" : " ПРОЕКТОВ");
 document.querySelector(".machine-label").textContent = catalog.machine;
 document.querySelector(".machine-bottom")?.remove();
 
@@ -29,12 +30,12 @@ document.querySelector("#about .next").innerHTML = escapeHtml(SITE.about.button.
 document.querySelector("#about .next").href = telegramContactUrl();
 document.querySelector("#about .contact-links").innerHTML = socialLinks();
 
-let activeFilter = "Все";
+let activeFilter = catalog.filters[0];
 const shelf = document.querySelector("#shelf");
 const filters = document.querySelector("#filters");
 
 function renderCatalog() {
-  const visible = activeFilter === "Все"
+  const visible = activeFilter === catalog.filters[0]
     ? PROJECTS
     : PROJECTS.filter(project => project.category === activeFilter);
   shelf.innerHTML = visible.map(project => {
