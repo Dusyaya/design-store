@@ -880,3 +880,19 @@ body.lightbox-open{overflow:hidden}
   .product .display:has(.shelf-artwork-region){grid-template-rows:29px minmax(0,1fr)!important;padding:0 8px 8px!important}
   .case-stage .cover-packaging{width:94%!important;height:clamp(230px,70vw,420px)!important}
 }
+
+/* Compact bilingual navigation; RU remains the default language. */
+.topbar nav .language-switch{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;white-space:nowrap;font-size:12px;letter-spacing:.035em}
+.topbar nav .language-switch a{display:inline-flex;align-items:center;justify-content:center;padding:5px 2px;color:#8c919d;text-decoration:none;transition:color .2s}
+.topbar nav .language-switch a.is-active{color:#fff;font-weight:800}
+.topbar nav .language-switch a:hover{color:#fff}
+.topbar nav .language-switch span{color:#5b606d}
+@media(max-width:680px){
+  .topbar nav{gap:clamp(7px,2vw,16px)!important;flex-wrap:nowrap!important}
+  .topbar nav .language-switch{font-size:11px;gap:3px}
+  .topbar nav .language-switch a{padding:5px 1px}
+}
+@media(max-width:420px){
+  .topbar nav{gap:7px!important}
+  .topbar nav .language-switch{font-size:10px}
+}
