@@ -12,6 +12,7 @@ if (!project) {
     '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться в каталог</a></div>';
 } else {
   document.title = project.name + (window.PORTFOLIO_LANG === "en" ? " — Portfolio" : " — Портфолио");
+  if (window.PORTFOLIO_LANG === "en") document.querySelector('meta[name="description"]')?.setAttribute("content", project.short);
   const sections = [
     ["01 / Задача", project.goal],
     ["02 / Контекст и подход", project.research],
