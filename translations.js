@@ -164,6 +164,16 @@
     'ГАЛЕРЕЯ ЗИНА':'ZINE GALLERY','20 СТРАНИЦ · 10 РАЗВОРОТОВ':'20 PAGES · 10 SPREADS',
     'Загрузите изображение':'Image unavailable','Страница ожидает загрузки':'Page loading',
     'ПРОЕКТОВ':'PROJECTS','Почта':'Email',
+    'ЗОЛОТОЕ ПРАВИЛО':'ZOLOTOYE PRAVILO','Реклама / Бьюти':'Advertising / Beauty',
+    'Предыдущий слайд':'Previous slide','Следующий слайд':'Next slide',
+    'Предыдущее изображение':'Previous image','Следующее изображение':'Next image',
+    'Предыдущий экран':'Previous screen','Следующий экран':'Next screen',
+    'Предыдущий разворот':'Previous spread','Следующий разворот':'Next spread',
+    'Воспроизвести видеоафишу':'Play motion poster',
+    'Первый логотип Dance Soul':'Original Dance Soul logo','Новый логотип Dance Soul':'New Dance Soul logo',
+    'Презентация на мероприятии':'Presentation at an event',
+    'Сайт танцевальной школы':'Dance school website',
+    'Главная страница сайта танцевальной школы Алисы Шарко':'Alisa Sharko dance school homepage',
     'Три видеоафиши для танцевальных классов: «Даша Писанец», «Пантера» и «Сакура».':'Three animated posters for the Dasha Pisanets, Panther and Sakura dance classes.',
     'Многостраничный сайт школы танцев с расписанием, абонементами и личным кабинетом. Разработан для танцевальной школы Алисы Шарко.':'A multi-page website with class schedules, memberships and student accounts, developed for Alisa Sharko Dance School.',
     'Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.':'I designed the interface and illustrated the characters, environments and game assets for The Happy Baker mobile game.',
@@ -193,4 +203,5 @@
       }
     });
   };
+  document.addEventListener('DOMContentLoaded',()=>window.localizePortfolioPage(document));
 })();
