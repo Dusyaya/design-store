@@ -75,7 +75,7 @@ function whatsappContactUrl() {
 function emailContactUrl() {
   return "https://mail.google.com/mail/?view=cm&fs=1" +
     "&to=" + encodeURIComponent(SITE.contacts.email) +
-    "&su=" + encodeURIComponent("Запрос на дизайн-проект") +
+    "&su=" + encodeURIComponent(window.PORTFOLIO_LANG === "en" ? "Design project inquiry" : "Запрос на дизайн-проект") +
     "&body=" + encodeURIComponent(contactMessage());
 }
 
@@ -92,7 +92,7 @@ function socialLinks() {
       '<span>' + name + '</span></a>'
     ).join("") +
     '<a href="' + escapeHtml(emailContactUrl()) + '" target="_blank" rel="noopener noreferrer">' +
-    '<span class="mail-symbol">✉</span><span>Почта</span></a></div>';
+    '<span class="mail-symbol">✉</span><span>' + (window.PORTFOLIO_LANG === "en" ? "Email" : "Почта") + '</span></a></div>';
 }
 
 function renderLayout() {
@@ -103,7 +103,11 @@ function renderLayout() {
     '<a href="' + SITE_ROOT + '#catalog">' + typography(SITE.header.catalog) + '</a>' +
     '<a href="' + SITE_ROOT + '#about">' + typography(SITE.header.about) + '</a>' +
     '<a class="contact" href="' + escapeHtml(telegramContactUrl()) +
-    '" target="_blank" rel="noopener noreferrer">' + typography(SITE.header.contact) + ' ' + iconArrowUpRight() + '</a>';
+    '" target="_blank" rel="noopener noreferrer">' + typography(SITE.header.contact) + ' ' + iconArrowUpRight() + '</a>' +
+    '<div class="language-switch" role="group" aria-label="Language / Язык">' +
+    '<a href="?lang=ru" lang="ru" class="' + (window.PORTFOLIO_LANG === 'ru' ? 'is-active' : '') + '" aria-label="Русский язык">RU</a>' +
+    '<span aria-hidden="true">/</span>' +
+    '<a href="?lang=en" lang="en" class="' + (window.PORTFOLIO_LANG === 'en' ? 'is-active' : '') + '" aria-label="English language">EN</a></div>';
   const footer = document.querySelector("footer");
   if (footer) footer.innerHTML = '<span>' + typography(SITE.footer) + '</span>';
 }
