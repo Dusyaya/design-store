@@ -11,7 +11,7 @@ if (!project) {
   main.innerHTML = '<div class="wrap case"><h1>Проект не найден</h1>' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться в каталог</a></div>';
 } else {
-  document.title = project.name + " — Портфолио";
+  document.title = project.name + (window.PORTFOLIO_LANG === "en" ? " — Portfolio" : " — Портфолио");
   const sections = [
     ["01 / Задача", project.goal],
     ["02 / Контекст и подход", project.research],
@@ -321,4 +321,5 @@ if (!project) {
     img.addEventListener("load", updateRatio);
   });
 
+  if (typeof window.localizePortfolioPage === 'function') window.localizePortfolioPage(main);
 }
