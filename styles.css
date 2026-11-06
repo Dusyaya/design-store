@@ -896,3 +896,7 @@ body.lightbox-open{overflow:hidden}
   .topbar nav{gap:7px!important}
   .topbar nav .language-switch{font-size:10px}
 }
+
+/* Keep the language selector compact even when mobile link sizes increase. */
+.topbar nav .language-switch a{font-size:inherit!important;line-height:1.2!important}
+@media(max-width:500px){.topbar .brand{font-size:clamp(15px,4.5vw,20px)!important}.topbar nav>a{font-size:clamp(11px,3.2vw,15px)!important}.topbar nav .language-switch{font-size:11px!important}}
