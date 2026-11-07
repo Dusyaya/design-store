@@ -940,3 +940,7 @@ body.lightbox-open{overflow:hidden}
 /* Видеоафиши: локальные MP4, одинаковые вертикальные плееры */
 .dance-posters-grid .dance-poster-player video{display:block;width:100%!important;height:100%!important;aspect-ratio:9/16;object-fit:contain;background:#0b0c10;border-radius:12px}
 .dance-posters-grid .dance-poster-player{background:#0b0c10!important}
+
+/* Видеоафиши: две карточки в ряд, включая планшеты и телефоны */
+.dance-posters-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px!important}
+@media(max-width:600px){.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}.dance-posters-grid figure figcaption{font-size:13px!important;overflow-wrap:anywhere}}
