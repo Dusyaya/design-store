@@ -956,3 +956,11 @@ body.lightbox-open{overflow:hidden}
 .cover-packaging--animated.is-animated .cover-packaging-motion{opacity:1!important}
 .cover-packaging--animated.is-animated .cover-packaging-still{opacity:0!important}
 @media(prefers-reduced-motion:reduce){.cover-packaging--animated .cover-packaging-motion{display:none!important}.cover-packaging--animated .cover-packaging-still{opacity:1!important}}
+
+/* Видеоафиши: компактные вертикальные ролики, целиком помещаются в экран */
+.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px!important;max-width:860px;margin-left:auto;margin-right:auto}
+.dance-posters-grid figure{width:100%;min-width:0;max-width:340px;justify-self:center}
+.dance-posters-grid .dance-poster-player{width:100%!important;height:min(62vh,540px)!important;max-height:540px!important;aspect-ratio:9/16!important;margin-inline:auto;overflow:hidden}
+.dance-posters-grid .dance-poster-player video{width:100%!important;height:100%!important;object-fit:contain!important;max-height:100%!important}
+@media(max-width:700px){.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}.dance-posters-grid figure{max-width:100%}.dance-posters-grid .dance-poster-player{height:min(55vh,440px)!important}}
+@media(max-width:440px){.dance-posters-grid{grid-template-columns:1fr!important;max-width:330px}.dance-posters-grid .dance-poster-player{height:min(62vh,480px)!important}}
