@@ -154,7 +154,7 @@ if (!project) {
       const base = 'assets/projects/supertyazh/';
       const image = (name, alt, className = '') => '<img class="' + className + '" src="' + imagePath(base + name) + '" alt="' + escapeHtml(alt) + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="supertyazh-missing" hidden>Загрузите файл ' + escapeHtml(name) + '</span>';
       const slides = Array.from({length:11}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<div class="supertyazh-slide" data-index="' + i + '"' + (i?' hidden':'') + '>' + image('slide-'+n+'.jpg','СУПЕРТЯЖ — слайд презентации '+(i+1)) + '</div>';}).join('');
-      const results = Array.from({length:3}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('result-'+n+'.jpg','СУПЕРТЯЖ — вариант рекламного макета '+(i+1)) + '<figcaption>Вариант '+n+'</figcaption></figure>';}).join('');
+      const results = Array.from({length:3}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('result-'+n+'.png','СУПЕРТЯЖ — вариант рекламного макета '+(i+1)) + '<figcaption>Вариант '+n+'</figcaption></figure>';}).join('');
       const mockups = Array.from({length:2}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('mockup-'+n+'.jpg','СУПЕРТЯЖ — мокап '+(i+1)) + '</figure>';}).join('');
       return '<section class="supertyazh-story">' +
         '<div class="section-head"><span>ПРЕЗЕНТАЦИЯ ПРОЕКТА</span><span>11 СЛАЙДОВ</span></div>' +
