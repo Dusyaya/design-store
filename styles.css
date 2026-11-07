@@ -949,3 +949,10 @@ body.lightbox-open{overflow:hidden}
 .dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px!important}
 @media(max-width:850px){.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}}
 @media(max-width:540px){.dance-posters-grid{grid-template-columns:1fr!important;gap:24px!important}}
+
+/* Анимированная обложка видеоафиш: покой — PNG, наведение — GIF */
+.cover-packaging--animated .cover-packaging-still{opacity:1!important;transition:opacity .12s ease}
+.cover-packaging--animated .cover-packaging-motion{opacity:0!important;transition:opacity .12s ease;pointer-events:none}
+.cover-packaging--animated.is-animated .cover-packaging-motion{opacity:1!important}
+.cover-packaging--animated.is-animated .cover-packaging-still{opacity:0!important}
+@media(prefers-reduced-motion:reduce){.cover-packaging--animated .cover-packaging-motion{display:none!important}.cover-packaging--animated .cover-packaging-still{opacity:1!important}}
