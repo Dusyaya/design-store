@@ -57,23 +57,7 @@ function renderCatalog() {
         '<span class="tag">' + escapeHtml(tag) + '</span>').join("") +
       '</div></div></a>';
   }).join("");
-  shelf.querySelectorAll('.cover-packaging--animated').forEach(art => {
-    const motion = art.querySelector('.cover-packaging-motion');
-    if (!motion) return;
-    const start = () => {
-      motion.src = motion.dataset.motionSrc + '?play=' + Date.now();
-      art.classList.add('is-animated');
-    };
-    const stop = () => {
-      art.classList.remove('is-animated');
-      motion.removeAttribute('src');
-    };
-    const card = art.closest('.product') || art;
-    card.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse' || event.pointerType === 'pen') start(); });
-    card.addEventListener('pointerleave', stop);
-    card.addEventListener('focusin', start);
-    card.addEventListener('focusout', event => { if (!card.contains(event.relatedTarget)) stop(); });
-  });
+
 }
 
 filters.innerHTML = catalog.filters.map(name =>
