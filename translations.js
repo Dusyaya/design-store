@@ -28,6 +28,7 @@
   site.contacts.message="Hello! I've seen your portfolio and would love to discuss a design project. Could you let me know how we might work together?";
   site.footer='© 2026 DARYA ATROKHINA';
   const translations={
+    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',short:'Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.',goal:'Create an eye-catching signature combo campaign that feels on-brand and communicates the name, price and offer clearly.',research:'Analyzed SUPERTYAZH’s visual identity alongside campaigns from Vkusno i Tochka, Rostic’s, Starbucks and Burger King, focusing on vivid color, bold typography, food textures and consistent price tags.',process:'Cut out source images, built a draft composition, refined the food imagery using ChatGPT and Flux Inpaint, chose Climate Crisis typography and brand colors, and tested multiple layouts for legibility.',result:'Developed three final creative variations featuring lemonade, a burger and fries at 399 RUB, with placement mockups for print and social media.',conclusion:'The creative idea, “Too good not to share,” comes alive through a hand reaching for a fry, giving the food shot a playful narrative.'},
     laser:{
       category:'Branding',field:'Advertising / Beauty',
       short:'Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.',
@@ -143,6 +144,7 @@
     });
   });
   window.PORTFOLIO_EN_TEXT={
+    'РАЗРАБОТКА КОНЦЕПЦИИ':'CONCEPT DEVELOPMENT','ТЕСТОВОЕ ЗАДАНИЕ / 2026':'DESIGN CHALLENGE / 2026','01 / ИССЛЕДОВАНИЕ':'01 / RESEARCH','02 / КОНЦЕПЦИЯ':'02 / CONCEPT','03 / РЕЗУЛЬТАТ':'03 / OUTCOME','Фирменный язык и конкуренты':'Brand language & competitors','Невозможно не поделиться':'Too good not to share','Три варианта. Одна идея.':'Three versions. One idea.','КОМБО СУПЕРТЯЖ':'SUPERTYAZH COMBO',
     'Проект не найден':'Project not found','Вернуться в каталог':'Back to projects',
     'Вернуться к коллекции':'Back to collection','Предыдущий проект':'Previous project','Следующий проект':'Next project',
     '01 / Задача':'01 / Brief','02 / Контекст и подход':'02 / Context & approach','03 / Моя работа':'03 / My contribution','04 / Результат':'04 / Outcome','05 / Вывод':'05 / Takeaway',
