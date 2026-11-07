@@ -37,7 +37,12 @@ const filters = document.querySelector("#filters");
 function renderCatalog() {
   const visible = activeFilter === catalog.filters[0]
     ? PROJECTS
-    : PROJECTS.filter(project => project.category === activeFilter);
+    : PROJECTS.filter(project => {
+        const category = project.category;
+        if (activeFilter === 'Интерфейсы' || activeFilter === 'Interfaces') return category === 'Интерфейсы' || category === 'Interfaces' || project.id === 'dance-website';
+        if (activeFilter === 'Моушн' || activeFilter === 'Motion') return category === 'Моушн-дизайн' || category === 'Motion design';
+        return category === activeFilter;
+      });
   shelf.innerHTML = visible.map(project => {
     const index = PROJECTS.indexOf(project) + 1;
     return '<a class="product" href="' + projectUrl(project) + '">' +
