@@ -920,3 +920,9 @@ body.lightbox-open{overflow:hidden}
 .supertyazh-mockups .supertyazh-work{display:flex;min-width:0;align-items:stretch;overflow:hidden;border-radius:14px;background:#17191d}
 .supertyazh-mockups .supertyazh-work img{display:block;width:100%!important;height:100%!important;aspect-ratio:4/3;object-fit:cover!important;border-radius:14px}
 @media(max-width:700px){.supertyazh-deck.portfolio-perspective .supertyazh-slides{height:clamp(250px,76vw,420px)!important}.supertyazh-deck.portfolio-perspective .supertyazh-slide{width:78%!important;transform:translate(calc(-50% + var(--perspective-offset)*36%),-50%) rotateY(calc(var(--perspective-offset)*-15deg)) scale(calc(1 - var(--perspective-offset)*var(--perspective-offset)*.15))!important}.supertyazh-mockups .supertyazh-work img{aspect-ratio:4/3}}
+
+/* Мокапы СУПЕРТЯЖ: одинаковая высота без обрезки исходников */
+.supertyazh-mockups{align-items:stretch!important}
+.supertyazh-mockups .supertyazh-work{height:clamp(300px,37vw,570px)!important;align-items:center!important;justify-content:center!important;background:#121316!important}
+.supertyazh-mockups .supertyazh-work img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;border-radius:0!important}
+@media(max-width:700px){.supertyazh-mockups .supertyazh-work{height:auto!important;min-height:0!important;aspect-ratio:auto!important}.supertyazh-mockups .supertyazh-work img{height:auto!important;max-height:none!important}}
