@@ -150,10 +150,22 @@ if (!project) {
       '</div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint">Первый экран можно прокручивать вверх и вниз внутри телевизора.</p></section>'
     : '';
   const supertyazhHtml = project.id === 'supertyazh'
-    ? '<section class="supertyazh-story"><div class="section-head"><span>РАЗРАБОТКА КОНЦЕПЦИИ</span><span>ТЕСТОВОЕ ЗАДАНИЕ / 2026</span></div>' +
-      '<div class="supertyazh-feature"><div class="supertyazh-feature-copy"><span class="eyebrow">01 / ИССЛЕДОВАНИЕ</span><h2>Фирменный язык и конкуренты</h2><p>Изучила визуальный стиль СУПЕРТЯЖ, а также рекламные решения Вкусно — и точка, Rostic’s, Starbucks и Burger King. Основные ориентиры — яркие цвета, объёмные заголовки, сочные текстуры и выразительная подача цены.</p></div><div class="supertyazh-palette"><span style="background:#ffd31a"></span><span style="background:#ef6800"></span><span style="background:#006b3b"></span></div></div>' +
-      '<div class="supertyazh-feature"><div class="supertyazh-feature-copy"><span class="eyebrow">02 / КОНЦЕПЦИЯ</span><h2>Невозможно не поделиться</h2><p>В центре композиции — лимонад, бургер и картофель фри. Рука, тянущаяся за картошкой, превращает продуктовый кадр в небольшой сюжет. Для фуд-визуала использованы обтравка исходников, ChatGPT и Flux Inpaint.</p></div><div class="supertyazh-visual"><img src="' + imagePath('assets/projects/supertyazh/cover.svg') + '" alt="Стилизованная обложка кейса СУПЕРТЯЖ"></div></div>' +
-      '<div class="supertyazh-feature"><div class="supertyazh-feature-copy"><span class="eyebrow">03 / РЕЗУЛЬТАТ</span><h2>Три варианта. Одна идея.</h2><p>Подготовлены три версии рекламного макета с ценой 399 ₽. Композиция проверена на читаемость и адаптирована для печати и социальных сетей. В презентации также показаны мокапы наружного размещения.</p></div><div class="supertyazh-price">399 <small>₽</small><span>КОМБО СУПЕРТЯЖ</span></div></div></section>'
+    ? (() => {
+      const base = 'assets/projects/supertyazh/';
+      const image = (name, alt, className = '') => '<img class="' + className + '" src="' + imagePath(base + name) + '" alt="' + escapeHtml(alt) + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="supertyazh-missing" hidden>Загрузите файл ' + escapeHtml(name) + '</span>';
+      const slides = Array.from({length:11}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<div class="supertyazh-slide" data-index="' + i + '"' + (i?' hidden':'') + '>' + image('slide-'+n+'.jpg','СУПЕРТЯЖ — слайд презентации '+(i+1)) + '</div>';}).join('');
+      const results = Array.from({length:3}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('result-'+n+'.jpg','СУПЕРТЯЖ — вариант рекламного макета '+(i+1)) + '<figcaption>Вариант '+n+'</figcaption></figure>';}).join('');
+      const mockups = Array.from({length:2}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('mockup-'+n+'.jpg','СУПЕРТЯЖ — мокап '+(i+1)) + '</figure>';}).join('');
+      return '<section class="supertyazh-story">' +
+        '<div class="section-head"><span>ПРЕЗЕНТАЦИЯ ПРОЕКТА</span><span>11 СЛАЙДОВ</span></div>' +
+        '<div class="supertyazh-deck" aria-label="Презентация СУПЕРТЯЖ">' +
+        '<div class="supertyazh-slides">' + slides + '</div>' +
+        '<div class="supertyazh-controls"><button type="button" class="supertyazh-prev" aria-label="Предыдущий слайд">' + arrowSvg('left') + '</button><span class="supertyazh-counter">01 / 11</span><button type="button" class="supertyazh-next" aria-label="Следующий слайд">' + arrowSvg('right') + '</button></div></div>' +
+        '<div class="section-head supertyazh-section-head"><span>ФИНАЛЬНЫЕ МАКЕТЫ</span><span>03 ВАРИАНТА</span></div>' +
+        '<div class="supertyazh-results">' + results + '</div>' +
+        '<div class="section-head supertyazh-section-head"><span>МОКАПЫ</span><span>02 ИЗОБРАЖЕНИЯ</span></div>' +
+        '<div class="supertyazh-mockups">' + mockups + '</div></section>';
+    })()
     : '';
   const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
   const zinHtml = project.id === 'babushka'
@@ -183,6 +195,18 @@ if (!project) {
     dancePostersHtml + danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + supertyazhHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
     (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'dance-posters' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' || project.id === 'supertyazh' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">' + arrowSvg('left') + '<span>Предыдущий проект</span></a><a href="' + projectUrl(next) + '"><span>Следующий проект</span>' + arrowSvg('right') + '</a></nav></div>';
+  if (project.id === 'supertyazh') {
+    const slides = [...main.querySelectorAll('.supertyazh-slide')];
+    const counter = main.querySelector('.supertyazh-counter');
+    let active = 0;
+    const show = index => {
+      active = (index + slides.length) % slides.length;
+      slides.forEach((slide,i) => { slide.hidden = i !== active; });
+      counter.textContent = String(active+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+    };
+    main.querySelector('.supertyazh-prev').addEventListener('click', () => show(active-1));
+    main.querySelector('.supertyazh-next').addEventListener('click', () => show(active+1));
+  }
   bindImages(main);
   main.querySelectorAll('.dance-carousel').forEach(carousel=>{
     const slides=[...carousel.querySelectorAll('.dance-carousel-slide')];
