@@ -144,6 +144,7 @@
     });
   });
   window.PORTFOLIO_EN_TEXT={
+    'ПРЕЗЕНТАЦИЯ ПРОЕКТА':'PROJECT PRESENTATION','11 СЛАЙДОВ':'11 SLIDES','ФИНАЛЬНЫЕ МАКЕТЫ':'FINAL DESIGNS','03 ВАРИАНТА':'03 VERSIONS','МОКАПЫ':'MOCKUPS','02 ИЗОБРАЖЕНИЯ':'02 IMAGES','Предыдущий слайд':'Previous slide','Следующий слайд':'Next slide','Вариант 01':'Version 01','Вариант 02':'Version 02','Вариант 03':'Version 03',
     'РАЗРАБОТКА КОНЦЕПЦИИ':'CONCEPT DEVELOPMENT','ТЕСТОВОЕ ЗАДАНИЕ / 2026':'DESIGN CHALLENGE / 2026','01 / ИССЛЕДОВАНИЕ':'01 / RESEARCH','02 / КОНЦЕПЦИЯ':'02 / CONCEPT','03 / РЕЗУЛЬТАТ':'03 / OUTCOME','Фирменный язык и конкуренты':'Brand language & competitors','Невозможно не поделиться':'Too good not to share','Три варианта. Одна идея.':'Three versions. One idea.','КОМБО СУПЕРТЯЖ':'SUPERTYAZH COMBO',
     'Проект не найден':'Project not found','Вернуться в каталог':'Back to projects',
     'Вернуться к коллекции':'Back to collection','Предыдущий проект':'Previous project','Следующий проект':'Next project',
