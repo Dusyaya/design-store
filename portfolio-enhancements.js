@@ -30,6 +30,7 @@
   window.PORTFOLIO_DECK_ENHANCED=true;
   const configs=[
     ['.dance-carousel','.dance-carousel-slide','.dance-carousel-prev','.dance-carousel-next','.dance-carousel-count'],
+    ['.supertyazh-deck','.supertyazh-slide','.supertyazh-prev','.supertyazh-next','.supertyazh-counter'],
     ['.extra-carousel','.extra-slides img','.extra-prev','.extra-next','.extra-count'],
     ['.baker-carousel','.baker-slides img','.baker-prev','.baker-next','.baker-count'],
     ['.showcase-media.is-carousel','.showcase-slide',null,null,null]
