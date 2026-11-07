@@ -122,6 +122,13 @@ function productArtwork(project) {
   if (project.id === 'supertyazh') return '<div class="artifact cover-packaging"><img class="cover-packaging-image" src="' + imagePath('assets/project-covers/cover-12.png') + '" alt="СУПЕРТЯЖ — обложка кейса" loading="lazy"></div>';
   const index = PROJECTS.filter(item => item.id !== 'supertyazh').findIndex(item => item.id === project.id) + 1;
   const number = String(index).padStart(2, '0');
+  if (project.id === 'dance-posters') {
+    const base = imagePath('assets/project-covers/cover-07');
+    return '<div class="artifact cover-packaging cover-packaging--' + number + ' cover-packaging--animated">' +
+      '<img class="cover-packaging-image cover-packaging-still" src="' + base + '.png" alt="Обложка проекта ' + escapeHtml(project.name) + '" loading="lazy">' +
+      '<img class="cover-packaging-image cover-packaging-motion" data-motion-src="' + base + '.gif" alt="" aria-hidden="true" loading="lazy">' +
+      '</div>';
+  }
   return '<div class="artifact cover-packaging cover-packaging--' + number + '">' +
     '<img class="cover-packaging-image" src="' + imagePath('assets/project-covers/cover-' + number + '.png') +
     '" alt="Обложка проекта ' + escapeHtml(project.name) + '" loading="lazy">' +
