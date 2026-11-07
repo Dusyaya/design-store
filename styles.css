@@ -944,3 +944,8 @@ body.lightbox-open{overflow:hidden}
 /* Видеоафиши: две карточки в ряд, включая планшеты и телефоны */
 .dance-posters-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px!important}
 @media(max-width:600px){.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}.dance-posters-grid figure figcaption{font-size:13px!important;overflow-wrap:anywhere}}
+
+/* Видеоафиши: две карточки в строке на широких экранах */
+.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px!important}
+@media(max-width:850px){.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}}
+@media(max-width:540px){.dance-posters-grid{grid-template-columns:1fr!important;gap:24px!important}}
