@@ -119,7 +119,8 @@ const COLORS = {
 };
 
 function productArtwork(project) {
-  const index = PROJECTS.findIndex(item => item.id === project.id) + 1;
+  if (project.id === 'supertyazh') return '<div class="artifact cover-packaging"><img class="cover-packaging-image" src="' + imagePath('assets/projects/supertyazh/cover.svg') + '" alt="СУПЕРТЯЖ — обложка кейса" loading="lazy"></div>';
+  const index = PROJECTS.filter(item => item.id !== 'supertyazh').findIndex(item => item.id === project.id) + 1;
   const number = String(index).padStart(2, '0');
   return '<div class="artifact cover-packaging cover-packaging--' + number + '">' +
     '<img class="cover-packaging-image" src="' + imagePath('assets/project-covers/cover-' + number + '.png') +
