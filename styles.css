@@ -926,3 +926,7 @@ body.lightbox-open{overflow:hidden}
 .supertyazh-mockups .supertyazh-work{height:clamp(300px,37vw,570px)!important;align-items:center!important;justify-content:center!important;background:#121316!important}
 .supertyazh-mockups .supertyazh-work img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;border-radius:0!important}
 @media(max-width:700px){.supertyazh-mockups .supertyazh-work{height:auto!important;min-height:0!important;aspect-ratio:auto!important}.supertyazh-mockups .supertyazh-work img{height:auto!important;max-height:none!important}}
+
+/* Уменьшенная обложка СУПЕРТЯЖ на витрине */
+.product:has(.cover-packaging-image[src*="cover-12.png"]) .display .cover-packaging-image{inset:10% 12%!important;width:76%!important;height:80%!important;object-fit:contain!important}
+@media(max-width:600px){.product:has(.cover-packaging-image[src*="cover-12.png"]) .display .cover-packaging-image{inset:12% 13%!important;width:74%!important;height:76%!important}}
