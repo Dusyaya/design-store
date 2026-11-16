@@ -1,4 +1,4 @@
-/* Portfolio-wide lightbox and consistent, accessible perspective galleries. */
+/* Общий просмотр изображений и перспективные карусели. */
 (function(){
   const root=document.querySelector('main');
   if(!root)return;
@@ -13,12 +13,6 @@
   function open(img){lastFocus=document.activeElement;preview.src=img.currentSrc||img.src;preview.alt=img.alt||'Увеличенное изображение';overlay.classList.add('is-open');document.body.classList.add('lightbox-open');overlay.querySelector('button').focus();}
   overlay.addEventListener('click',e=>{if(e.target===overlay||e.target.closest('.portfolio-lightbox-close'))close();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('is-open'))close();});
-  root.addEventListener('click',event=>{
-    const img=event.target.closest('.portfolio-zoomable');
-    if(!img||!img.closest('.portfolio-perspective'))return;
-    // Active image opens full screen; side images are selected by the carousel controls.
-    if(!img.closest('.portfolio-active'))return;
-  },true);
   root.querySelectorAll('img').forEach(img=>{
     if(img.closest('.sevstar-tv'))return;
     if(img.closest('.zin-book')||img.closest('.book-book')){img.addEventListener('dblclick',e=>{e.stopPropagation();open(img);});return;}
@@ -72,4 +66,35 @@
       show(0);
     });
   });
+  function bindSwipe(surface, previous, next){
+    if(!surface||!previous||!next)return;
+    surface.classList.add('portfolio-swipe');
+    let start=null,suppressClickUntil=0;
+    surface.addEventListener('touchstart',event=>{
+      start=event.touches.length===1 ? {x:event.touches[0].clientX,y:event.touches[0].clientY} : null;
+    },{passive:true});
+    surface.addEventListener('touchend',event=>{
+      if(!start||event.touches.length)return;
+      const touch=event.changedTouches[0];
+      const dx=touch.clientX-start.x,dy=touch.clientY-start.y;
+      start=null;
+      if(Math.abs(dx)<45||Math.abs(dx)<Math.abs(dy)*1.4)return;
+      suppressClickUntil=Date.now()+500;
+      (dx<0?next:previous).click();
+    },{passive:true});
+    surface.addEventListener('touchcancel',()=>{start=null;},{passive:true});
+    surface.addEventListener('click',event=>{
+      if(event.isTrusted&&Date.now()<suppressClickUntil){event.preventDefault();event.stopImmediatePropagation();}
+    },true);
+  }
+  const swipeConfigs=[
+    ['.portfolio-perspective','.dance-carousel-prev,.supertyazh-prev,.extra-prev,.baker-prev,.portfolio-perspective-prev','.dance-carousel-next,.supertyazh-next,.extra-next,.baker-next,.portfolio-perspective-next'],
+    ['.zp-presentation-right','.zp-prev','.zp-next'],
+    ['.sevstar-case','.sevstar-prev','.sevstar-next'],
+    ['.book-reader','.book-prev','.book-next'],
+    ['.zin-reader','.zin-prev','.zin-next']
+  ];
+  swipeConfigs.forEach(([selector,prev,next])=>root.querySelectorAll(selector).forEach(carousel=>{
+    bindSwipe(carousel,carousel.querySelector(prev),carousel.querySelector(next));
+  }));
 })();

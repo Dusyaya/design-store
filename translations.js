@@ -92,11 +92,11 @@
     },
     'dance-posters':{
       name:'Animated Dance Posters',category:'Motion design',field:'Animated posters / Dance',
-      short:'Three animated posters for dance classes: Dasha Pisanets, Panther and Sakura.',
+      short:'Four animated posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.',
       goal:'Create expressive animated posters to promote dance classes.',
       research:'Dynamic compositions, music, typography and movement help communicate the personality of each class.',
-      process:'Created three motion posters for different dance classes.',
-      result:'A set of three video posters for social media.',
+      process:'Created four motion posters for different dance classes.',
+      result:'A set of four video posters for social media.',
       conclusion:'Motion graphics can communicate the atmosphere of a dance class before it even begins.'
     },
     extra:{
@@ -144,6 +144,11 @@
     });
   });
   window.PORTFOLIO_EN_TEXT={
+    'РЕДАКЦИОННЫЙ ДИЗАЙН / ПОДАРОЧНАЯ КНИГА / 2025':'EDITORIAL DESIGN / GIFT BOOK / 2025',
+    'РЕДАКЦИОННЫЙ ДИЗАЙН / ЖУРНАЛ / 2026':'EDITORIAL DESIGN / MAGAZINE / 2026',
+    'ТВЁРДЫЙ ПЕРЕПЛЁТ':'HARDCOVER','20 СТРАНИЦ':'20 PAGES','Назад к коллекции':'Back to collection',
+    'Четыре видеоафиши для танцевальных классов: «Даша Писанец», «Пантера», «Сакура» и Trap Dance.':'Four video posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.',
+    'ВИДЕОАФИШИ':'VIDEO POSTERS','04 ВИДЕО':'04 VIDEOS','Даша Писанец':'Dasha Pisanets','Пантера':'Pantera','Сакура':'Sakura',
     'ПРЕЗЕНТАЦИЯ ПРОЕКТА':'PROJECT PRESENTATION','11 СЛАЙДОВ':'11 SLIDES','ФИНАЛЬНЫЕ МАКЕТЫ':'FINAL DESIGNS','03 ВАРИАНТА':'03 VERSIONS','МОКАПЫ':'MOCKUPS','02 ИЗОБРАЖЕНИЯ':'02 IMAGES','Предыдущий слайд':'Previous slide','Следующий слайд':'Next slide','Вариант 01':'Version 01','Вариант 02':'Version 02','Вариант 03':'Version 03',
     'РАЗРАБОТКА КОНЦЕПЦИИ':'CONCEPT DEVELOPMENT','ТЕСТОВОЕ ЗАДАНИЕ / 2026':'DESIGN CHALLENGE / 2026','01 / ИССЛЕДОВАНИЕ':'01 / RESEARCH','02 / КОНЦЕПЦИЯ':'02 / CONCEPT','03 / РЕЗУЛЬТАТ':'03 / OUTCOME','Фирменный язык и конкуренты':'Brand language & competitors','Невозможно не поделиться':'Too good not to share','Три варианта. Одна идея.':'Three versions. One idea.','КОМБО СУПЕРТЯЖ':'SUPERTYAZH COMBO',
     'Проект не найден':'Project not found','Вернуться в каталог':'Back to projects',
@@ -201,7 +206,8 @@
       if(node.parentElement?.closest('script,style,svg'))return;
       const original=node.nodeValue;
       const trimmed=original.trim();
-      if(dict[trimmed])node.nodeValue=original.replace(trimmed,dict[trimmed]);
+      const normalized=trimmed.replace(/\u00a0/g,' ');
+      if(dict[normalized])node.nodeValue=original.replace(trimmed,dict[normalized]);
     });
     root.querySelectorAll('[aria-label],[alt],[title]').forEach(el=>{
       for(const key of ['aria-label','alt','title']){
@@ -209,5 +215,15 @@
       }
     });
   };
-  document.addEventListener('DOMContentLoaded',()=>window.localizePortfolioPage(document));
+  document.addEventListener('DOMContentLoaded',()=>{
+    const id=document.querySelector('.book-reader')?'book':document.querySelector('.zin-reader')?'babushka':null;
+    const project=window.PORTFOLIO_PROJECTS.find(item=>item.id===id);
+    if(project){
+      document.querySelector('main h1').textContent=project.name;
+      document.querySelector('.case-intro p').textContent=project.short;
+      document.querySelectorAll('.case-row p').forEach((node,i)=>{node.textContent=project[['goal','research','process','result','conclusion'][i]];});
+      document.title=project.name+' — Portfolio';
+    }
+    window.localizePortfolioPage(document);
+  });
 })();
