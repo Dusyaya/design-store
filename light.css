@@ -440,12 +440,13 @@ footer {
 }
 .case-intro p { margin-block: 0; }
 .case .case-rows {
-  max-width: calc(24ch + var(--grid-gap) + var(--reading-width));
+  --case-column-gap: calc(var(--grid-gap) + 16px);
+  max-width: calc(24ch + var(--case-column-gap) + var(--reading-width));
   margin-inline: auto;
 }
 .case-row {
   grid-template-columns: minmax(0, 24ch) minmax(0, 1fr);
-  gap: var(--grid-gap);
+  gap: var(--case-column-gap);
   padding-block: clamp(16px, 2vw, 28px);
 }
 .case .case-row h2 {
