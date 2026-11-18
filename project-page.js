@@ -62,7 +62,7 @@ if (!project) {
     ['banner-03-blue-preview.webp', 'banner-03.jpg', 1680, 250]
   ];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
-    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.</p></div><div class="showcase-media zp-banner-stack">' +
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптировала фирменный стиль «Золотого Правила» для кампании в Уфе. Разработала макет наружной рекламы и баннеры для «ПроДокторов», чтобы клинику было легко узнать, а предложение — быстро прочитать.</p></div><div class="showcase-media zp-banner-stack">' +
       bannerImages.map(([name, original, width, height], i) => '<img src="' + SITE_ROOT + 'assets/projects/gold/' + name +
         '" data-original="' + SITE_ROOT + 'assets/projects/gold/' + original + '" alt="Рекламный баннер ' + (i+1) +
         '" width="' + width + '" height="' + height + '" loading="lazy">').join('') +
@@ -112,13 +112,12 @@ if (!project) {
       '</figure></div></article>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">02 / 02</span><h2>Мерч</h2><p>Небольшое исследование и подбор визуальных направлений для будущего мерча студии: идеи, референсы и предложения по оформлению.</p></div><div class="dance-merch-media"><h3>Исследование и предложения</h3>' +
       danceCarousel(Array.from({length:7},(_,i)=>'assets/projects/dance/research/Slide 16_9 - '+i+'.jpg'),'research') +
-      '<h3>Результат</h3><p>В результате созданы футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена с ковровым орнаментом. Контраст лаконичной чёрной основы и насыщенных узоров объединяет эстетику уличной одежды с характером танцевальной студии.</p>' +
+      '<h3>Результат</h3><p>В коллекцию вошли футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена. Ковровый орнамент выделяется на чёрной ткани и связывает оба предмета.</p>' +
       danceCarousel(Array.from({length:9},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
       '</div></article></section>'
     : '';
   const dancePostersHtml = project.id === 'dance-posters'
     ? '<section class="dance-posters-case"><div class="section-head"><span>ВИДЕОАФИШИ</span><span>04 ВИДЕО</span></div>' +
-      '<p>' + typography(project.short) + '</p>' +
       '<div class="dance-posters-grid">' +
       [
         ['Даша Писанец','dasha.mp4'],
@@ -146,7 +145,7 @@ if (!project) {
     '" sizes="(max-width: 1250px) 88vw, 1100px" width="1920" height="9458" data-original="' +
     owlPath + 'Сова и Лисенок.png" alt="Дизайн лендинга Сова и Лисёнок" loading="lazy" decoding="async"></section>' : '';
   const bakerHtml = project.id === 'baker'
-    ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>05 ЗАГРУЖЕННЫХ ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
+    ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>5 ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
       '<p class="baker-description">Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.</p>' +
       '<div class="baker-carousel"><div class="baker-slides">' +
       Array.from({length:5},(_,i)=>'<img src="' + imagePath('assets/projects/baker/screen-'+String(i+1).padStart(2,'0')+'.png') + '" alt="Весёлый Пекарь — экран '+(i+1)+'" loading="lazy"'+(i?' hidden':'')+'>').join('') +
@@ -158,7 +157,7 @@ if (!project) {
   ];
   const extraHtml = project.id === 'extra'
     ? '<section class="extra-cases"><div class="section-head"><span>ГАЛЕРЕИ РАБОТ</span><span>ИЛЛЮСТРАЦИИ / 3D</span></div>' +
-      extraGroups.map((group,i)=>'<article class="extra-case"><div class="extra-case-copy"><span class="eyebrow">0'+(i+1)+' / 03</span><h2>'+group.title+'</h2><p>'+group.description+'</p></div>' +
+      extraGroups.map((group,i)=>'<article class="extra-case"><div class="extra-case-copy"><span class="eyebrow">0'+(i+1)+' / '+String(extraGroups.length).padStart(2,'0')+'</span><h2>'+group.title+'</h2><p>'+group.description+'</p></div>' +
       '<div class="extra-carousel"><div class="extra-slides">' +
       Array.from({length:group.count},(_,j)=>'<img src="'+imagePath('assets/projects/extra/'+group.folder+'/'+String(j+1).padStart(2,'0')+'.jpg')+'" alt="'+group.title+', работа '+(j+1)+'" loading="lazy"'+(j?' hidden':'')+'>').join('') +
       '</div><div class="extra-controls"><button type="button" class="extra-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="extra-count">01 / '+String(group.count).padStart(2,'0')+'</span><button type="button" class="extra-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div></article>').join('')+'</section>'

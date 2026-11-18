@@ -22,15 +22,16 @@
   Object.assign(site.catalog,{heading:'Selected work',filters:['All','Branding','Web and interfaces','Motion','Editorial design'],machine:'PROJECT SHOWCASE'});
   Object.assign(site.about,{heading:'ABOUT THE DESIGNER',title:['Ideas', 'taking shape'],
     paragraphs:[
-      "I'm a graphic designer creating visual concepts, advertising, print materials, merchandise and digital assets for commercial projects.",
-      'My background is in software engineering, so I understand not only visual design and composition but also how digital products work.'
+      "I’m a graphic designer. I develop visual concepts and bring them to life in advertising, print, merchandise and digital projects.",
+      'My background is in software engineering. I’m interested in how digital products look and how people use them.'
     ],button:'Discuss a project ↗'});
   site.contacts.message="Hello! I've seen your portfolio and would love to discuss a design project. Could you let me know how we might work together?";
   site.footer='© 2026 DARYA ATROKHINA';
   const translations={
-    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',short:'Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.',goal:'Create an eye-catching signature combo campaign that feels on-brand and communicates the name, price and offer clearly.',research:'Analyzed SUPERTYAZH’s visual identity alongside campaigns from Vkusno i Tochka, Rostic’s, Starbucks and Burger King, focusing on vivid color, bold typography, food textures and consistent price tags.',process:'Cut out source images, built a draft composition, refined the food imagery using ChatGPT and Flux Inpaint, chose Climate Crisis typography and brand colors, and tested multiple layouts for legibility.',result:'Developed three final creative variations featuring lemonade, a burger and fries at 399 RUB, with placement mockups for print and social media.',conclusion:'The creative idea, “Too good not to share,” comes alive through a hand reaching for a fry, giving the food shot a playful narrative.'},
+    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',preview:"A signature combo campaign, from competitor research to three designs and placement mockups.", short:'Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.',goal:'Create an eye-catching signature combo campaign that feels on-brand and communicates the name, price and offer clearly.',research:'Analyzed SUPERTYAZH’s visual identity alongside campaigns from Vkusno i Tochka, Rostic’s, Starbucks and Burger King, focusing on vivid color, bold typography, food textures and consistent price tags.',process:'Cut out source images, built a draft composition, refined the food imagery using ChatGPT and Flux Inpaint, chose Climate Crisis typography and brand colors, and tested multiple layouts for legibility.',result:'Developed three final creative variations featuring lemonade, a burger and fries at 399 RUB, with placement mockups for print and social media.',conclusion:'The creative idea, “Too good not to share,” comes alive through a hand reaching for a fry, giving the food shot a playful narrative.'},
     laser:{
       category:'Branding',field:'Advertising / Beauty',
+      preview:"Social media, print, email and AI visuals for a laser hair removal studio chain.",
       short:'Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.',
       goal:'Create visual communications promoting services, seasonal offers and advertising campaigns for a laser hair removal studio chain.',
       research:'I collaborated with a marketer who supplied copy and briefs. I independently developed visual concepts, art direction, compositions and format adaptations, often without ready-made references.',
@@ -47,6 +48,7 @@
     },
     gold:{
       name:'Zolotoye Pravilo',category:'Branding',field:'Healthcare / Visual communications',
+      preview:"Outdoor ads, banners, presentations, print and merchandise for a healthcare network.",
       short:'Design for a private healthcare network: outdoor advertising, banners, print, social media and presentations.',
       goal:'Communicate the clinics’ services and offers clearly across digital and printed media.',
       research:'Working from marketing briefs and occasional references, I developed compositions, color accents and visual imagery aligned with the brand identity.',
@@ -56,6 +58,7 @@
     },
     dance:{
       category:'Branding',field:'Dance / Identity & merchandise',
+      preview:"Logos, a poster and merchandise for Dance Soul studio.",
       short:'Logos, printed materials and apparel graphics for Dance Soul dance studio.',
       goal:'Develop distinctive branded graphics for the studio and its merchandise.',
       research:'The visual direction draws on expressive typography, a contrasting palette and contemporary dance culture.',
@@ -65,6 +68,7 @@
     },
     book:{
       name:'Dad Knows Everything',category:'Editorial design',field:'Gift book / Hardcover / Prepress',
+      preview:"A gift book for my dad’s 50th birthday, with stories from family and friends.",
       short:'A hardcover book for my father’s 50th birthday, bringing together stories and memories from family and friends. Original layout and full prepress production.',
       goal:'Preserve the memories of loved ones in a personal, story-filled gift for my father’s 50th birthday.',
       research:'The book brings together stories and memories from family, friends and other people close to him.',
@@ -74,6 +78,7 @@
     },
     'dance-website':{
       name:'Dance School Website',category:'Web design',field:'Web development / Dance',
+      preview:"A dance school website with class schedules, memberships, sign-up and a member area.",
       short:'A multi-page dance school website with a home page, class schedule, memberships, registration and personal account.',
       goal:'Build a website where students can learn about classes and interact with the dance school.',
       research:'The structure covers both public information and user journeys: discovering classes, viewing the schedule, choosing a membership and managing an account.',
@@ -83,6 +88,7 @@
     },
     sevstar:{
       name:'Sevstar.Culinary',category:'Interfaces',field:'Smart TV application / UI',
+      preview:"A recipe browser for a TV set-top box, designed during a hackathon.",
       short:'A cooking app interface for a smart TV set-top box, designed during a 2023 hackathon.',
       goal:'Design a recipe catalog and step-by-step cooking interface for a TV set-top box.',
       research:'Created for a major internet provider in Sevastopol, the concept included integration with an existing grocery delivery service.',
@@ -92,6 +98,7 @@
     },
     'dance-posters':{
       name:'Animated Dance Posters',category:'Motion design',field:'Animated posters / Dance',
+      preview:"Three video posters for choreographers and one for Trap Dance studio’s birthday.",
       short:'Three video posters for choreographers Dasha Pisanets, Pantera and Sakura, plus one for the Trap Dance studio’s birthday.',
       goal:'Create video posters for three choreographers and the Trap Dance studio’s birthday.',
       research:'Dynamic compositions, music, typography and movement help communicate the personality of each class.',
@@ -101,6 +108,7 @@
     },
     extra:{
       name:'Illustration & 3D',category:'Experiments',field:'Illustration / 3D',
+      preview:"Original illustrations, 3D models based on floor plans and a road-safety training scene.",
       short:'Original digital illustrations, 3D models based on architectural floor plans, and an educational road-safety scene.',
       goal:'Explore how 3D can make technical information and educational scenarios easier to understand.',
       research:'For architectural models I used floor plans to reconstruct walls, doors, windows and room geometry. For the educational scene I studied road layouts and traffic rules.',
@@ -110,6 +118,7 @@
     },
     baker:{
       name:'The Happy Baker',category:'Interfaces',field:'Mobile game / UI',
+      preview:"Mobile game UI with hand-drawn backgrounds and illustrations for win and loss screens.",
       short:'Mobile game UI with original hand-drawn backgrounds, game screens, and win and lose illustrations.',
       goal:'Create a visual world and interface for a mobile game, including its key gameplay states.',
       research:'The visual direction uses warm colors, bakery-inspired imagery and bright action buttons.',
@@ -119,6 +128,7 @@
     },
     owl:{
       name:'Owl & Little Fox',category:'Interfaces',field:'Children’s website / Landing page',
+      preview:"A kindergarten landing page with information for parents and a form to book a tour.",
       short:'A landing page for a children’s project with pastel colors, class information and an inquiry form.',
       goal:'Design a website where parents can request a tour of a kindergarten.',
       research:'Used a soft pastel palette requested by the client and considered implementation on Tilda.',
@@ -128,6 +138,7 @@
     },
     babushka:{
       name:'BABUSHKA Zine',category:'Editorial design',field:'Magazine / Collage',
+      preview:"A collage zine about the traditional headscarf in contemporary fashion.",
       short:'An original collage-style zine reimagining the traditional grandmother’s headscarf as a contemporary fashion accessory.',
       goal:'Show a familiar accessory from an unexpected perspective through editorial design.',
       research:'The concept combines archival imagery, fashion photography, expressive typography and collage.',
@@ -138,7 +149,7 @@
   };
   window.PORTFOLIO_PROJECTS.forEach(project=>{
     const tr=translations[project.id]; if(!tr)return;
-    for(const key of ['name','category','field','short','goal','research','process','result','conclusion']) if(tr[key])project[key]=tr[key];
+    for(const key of ['name','category','field','short','preview','goal','research','process','result','conclusion']) if(tr[key])project[key]=tr[key];
     if(tr.showcase && project.showcase) project.showcase.forEach((item,i)=>{
       if(tr.showcase[i]){item.title=tr.showcase[i][0];item.description=tr.showcase[i][1];}
     });
@@ -162,16 +173,16 @@
     'Брендинг':'Branding','Мерч':'Merchandise','Исследование и предложения':'Research & concepts','Результат':'Outcome',
     'ДО / ПЕРВЫЙ ЛОГОТИП':'BEFORE / ORIGINAL LOGO','ПОСЛЕ / РЕБРЕНДИНГ':'AFTER / REBRANDING',
     'Афиша для расклейки':'Printed event poster',
-    'ВИДЕОАФИШИ':'MOTION POSTERS','03 ВИДЕО':'03 VIDEOS',
+    '03 ВИДЕО':'03 VIDEOS',
     'САЙТ ТАНЦЕВАЛЬНОЙ ШКОЛЫ':'DANCE SCHOOL WEBSITE','ВЕБ-ПРОЕКТ':'WEB PROJECT',
     'Открыть сайт':'Visit website','Посмотреть код на GitHub':'View code on GitHub',
-    'ЭКРАНЫ ИГРЫ':'GAME SCREENS','05 ЗАГРУЖЕННЫХ ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ':'05 SCREENS · ORIGINAL ILLUSTRATIONS',
+    'ЭКРАНЫ ИГРЫ':'GAME SCREENS','5 ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ':'5 SCREENS · ORIGINAL ILLUSTRATIONS',
     'ЭКРАНЫ ПРИЛОЖЕНИЯ':'APP SCREENS','SMART TV · 09 ЭКРАНОВ':'SMART TV · 09 SCREENS',
     'Первый экран можно прокручивать вверх и вниз внутри телевизора.':'Scroll vertically inside the TV to explore the first screen.',
     'ГАЛЕРЕЯ ЗИНА':'ZINE GALLERY','20 СТРАНИЦ · 10 РАЗВОРОТОВ':'20 PAGES · 10 SPREADS',
     'Загрузите изображение':'Image unavailable','Страница ожидает загрузки':'Page loading',
     'ПРОЕКТОВ':'PROJECTS','Почта':'Email','Нейросети':'AI tools',
-    'Даша Писанец':'Dasha Pisanets','Пантера':'Panther','Сакура':'Sakura',
+    'Даша Писанец':'Dasha Pisanets','Пантера':'Pantera','Сакура':'Sakura',
     'Экран телевизора. Первый макет прокручивается вертикально.':'TV screen. The first layout can be scrolled vertically.',
     'Интерактивный журнал BABUSHKA':'Interactive BABUSHKA zine',
     'ЗОЛОТОЕ ПРАВИЛО':'ZOLOTOYE PRAVILO','Реклама / Бьюти':'Advertising / Beauty',
@@ -187,14 +198,13 @@
     'Презентация на мероприятии':'Presentation at an event',
     'Сайт танцевальной школы':'Dance school website',
     'Главная страница сайта танцевальной школы Алисы Шарко':'Alisa Sharko dance school homepage',
-    'Три видеоафиши для танцевальных классов: «Даша Писанец», «Пантера» и «Сакура».':'Three animated posters for the Dasha Pisanets, Panther and Sakura dance classes.',
     'Многостраничный сайт школы танцев с расписанием, абонементами и личным кабинетом. Разработан для танцевальной школы Алисы Шарко.':'A multi-page website with class schedules, memberships and student accounts, developed for Alisa Sharko Dance School.',
     'Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.':'I designed the interface and illustrated the characters, environments and game assets for The Happy Baker mobile game.',
     'Преобразование технических планов БТИ в понятные трёхмерные модели помещений: поэтажные планы, стены, перегородки и геометрия без фотореалистичных рендеров. Отдельный учебный 3D-проект посвящён правилам дорожного движения: моделирование дорожной сцены для визуального объяснения ситуаций на дороге.':'Turning architectural floor plans into understandable 3D room models, without photorealistic rendering. A separate educational project illustrates traffic rules through a modeled road scene.',
     'Разработка первоначального логотипа танцевальной студии Dance Soul. Через год — ребрендинг с адаптацией названия и логотипа на русский язык в связи с новыми требованиями к оформлению вывесок.':'I designed the original Dance Soul logo and later refreshed the identity, adapting its name and logo to Russian signage requirements.',
     'Небольшое исследование и подбор визуальных направлений для будущего мерча студии: идеи, референсы и предложения по оформлению.':'Explored visual directions, references and concepts for the studio’s future merchandise.',
-    'В результате созданы футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена с ковровым орнаментом. Контраст лаконичной чёрной основы и насыщенных узоров объединяет эстетику уличной одежды с характером танцевальной студии.':'The final pieces include a graphic T-shirt and loose trousers with embroidery and patterned tapestry stripes, blending streetwear with the studio’s identity.',
-    'Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.':'Adapted the clinic’s visual identity for a large advertising campaign in Ufa, including outdoor banners and ads for ProDoktorov, with a focus on brand recognition and clear information hierarchy.',
+    'В коллекцию вошли футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена. Ковровый орнамент выделяется на чёрной ткани и связывает оба предмета.':'The final pieces include a graphic T-shirt and loose trousers with embroidery and patterned tapestry stripes, blending streetwear with the studio’s identity.',
+    'Адаптировала фирменный стиль «Золотого Правила» для кампании в Уфе. Разработала макет наружной рекламы и баннеры для «ПроДокторов», чтобы клинику было легко узнать, а предложение — быстро прочитать.':'Adapted the clinic’s visual identity for a large advertising campaign in Ufa, including outdoor banners and ads for ProDoktorov, with a focus on brand recognition and clear information hierarchy.',
     'Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.':'Designed presentations for medical and educational events, organizing information with clear hierarchy and consistent branding.',
     'Разработка футболок для благотворительного марафона: от визуальной концепции и графики до подготовки макетов к производству и воплощения идеи в готовом изделии.':'Designed T-shirts for a charity marathon, from initial visual concept to production-ready artwork.',
     'Дизайн печатных материалов для клиники «Золотое Правило»: адаптация фирменного стиля под физические носители, работа с композицией, типографикой и подготовка макетов к печати.':'Designed printed materials for Zolotoye Pravilo, adapting its identity to physical formats and preparing artwork for production.'

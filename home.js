@@ -44,7 +44,7 @@ shelf.innerHTML = PROJECTS.map((project, index) => {
     '<div class="catalog-cover-media">' + productArtwork(project) +
     '<span aria-hidden="true" class="catalog-index">' + String(index + 1).padStart(2, "0") + '</span></div></div>' +
     '<div class="catalog-card-copy"><h3>' + projectTitle(project) + ' ' + arrowSvg("right") + '</h3>' +
-    '<p>' + typography(project.short) + '</p>' +
+    '<p>' + typography(project.preview) + '</p>' +
     caseTags(project) + '</div></a>';
 }).join("");
 const cards = new Map([...shelf.children].map(card => [card.dataset.project, card]));
