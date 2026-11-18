@@ -25,7 +25,7 @@ document.querySelector("#catalog-heading").textContent = catalog.heading;
 document.querySelector("#filters").setAttribute("aria-label", isEnglish ? "Filter projects" : "Фильтры проектов");
 
 document.querySelector("#about .section-head").textContent = SITE.about.heading;
-document.querySelector("#about h2").textContent = SITE.about.title;
+document.querySelector("#about h2").innerHTML = SITE.about.title.map(escapeHtml).join("<br>");
 document.querySelector("#about .about-text").innerHTML =
   SITE.about.paragraphs.map(text => "<p>" + typography(text) + "</p>").join("");
 document.querySelector("#about .next").innerHTML = escapeHtml(SITE.about.button.replace(/ ↗/g,"")) + " " + iconArrowUpRight();
@@ -52,7 +52,7 @@ function renderCatalog() {
   document.querySelector(".catalog-count").textContent = count;
   shelf.innerHTML = visible.map(project => {
     const index = PROJECTS.indexOf(project) + 1;
-    return '<a class="catalog-card" href="' + projectUrl(project) + '">' +
+    return '<a class="catalog-card" data-project="' + escapeHtml(project.id) + '" href="' + projectUrl(project) + '">' +
       '<div class="catalog-cover">' + productArtwork(project, true) +
       '<span aria-hidden="true" class="catalog-index">' + String(index).padStart(2, "0") + '</span></div>' +
       '<div class="catalog-card-copy"><h3>' + typography(project.name) + ' ' + iconArrowUpRight() + '</h3>' +
@@ -87,32 +87,17 @@ initSkillBadges();
 function initSkillBadges() {
   const orbit = document.querySelector(".skill-orbit");
   const badges = [...orbit.querySelectorAll(".skill-badge")];
-  const motionButton = orbit.querySelector(".skill-motion");
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const hints = isEnglish ? {
     group: "Tools", keys: "Drag with the pointer or move with the arrow keys. Escape resets the position.",
-    pause: "Pause icon movement", play: "Resume icon movement", neural: "AI tools"
+    neural: "AI tools"
   } : {
     group: "Инструменты", keys: "Перетаскивайте мышкой или перемещайте стрелками. Escape возвращает иконку на место.",
-    pause: "Остановить движение иконок", play: "Возобновить движение иконок", neural: "Нейросети"
+    neural: "Нейросети"
   };
   orbit.setAttribute("aria-label", hints.group);
   orbit.querySelector("#skill-controls-help").textContent = hints.keys;
   orbit.querySelector(".skill-neural-label").textContent = hints.neural;
-  let paused = false;
-
-  function updateMotion() {
-    orbit.classList.toggle("is-paused", paused);
-    motionButton.setAttribute("aria-pressed", String(paused));
-    motionButton.title = paused ? hints.play : hints.pause;
-    motionButton.setAttribute("aria-label", motionButton.title);
-  }
-  motionButton.addEventListener("click", () => {
-    paused = !paused;
-    updateMotion();
-  });
-  updateMotion();
-
   for (const badge of badges) {
     const label = badge.querySelector(".skill-badge-visual > span:last-child").textContent;
     badge.setAttribute("aria-label", label);

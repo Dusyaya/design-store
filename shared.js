@@ -35,7 +35,8 @@ function projectNavigation(project) {
 }
 
 function imagePath(path) {
-  return SITE_ROOT + path;
+  const projectAsset = /^(assets\/projects\/|projects\/owl\/).+\.(jpe?g|png)$/i.test(path);
+  return SITE_ROOT + path + (projectAsset ? ".webp" : "");
 }
 
 function bindImages(root = document) {
@@ -120,17 +121,11 @@ function renderLayout() {
   if (footer) footer.innerHTML = '<span>' + typography(SITE.footer) + '</span>';
 }
 
-const COLORS = {
-  pink: "#ef5c99", blue: "#668695", yellow: "#f1d91c",
-  red: "#e84057", coral: "#f58ba8", purple: "#8c5be5",
-  mint: "#4bc9bd", orange: "#ef903b", silver: "#9ca6b9"
-};
-
 function productArtwork(project, thumbnail = false) {
   const index = PROJECTS.filter(item => item.id !== "supertyazh").findIndex(item => item.id === project.id) + 1;
   const number = project.id === "supertyazh" ? "12" : String(index).padStart(2, "0");
   const base = imagePath("assets/project-covers/cover-" + number);
   if (thumbnail) return '<img src="' + base + '.webp" alt="" loading="lazy" fetchpriority="low" decoding="async" width="720" height="720">';
   return '<div class="artifact cover-packaging cover-packaging--' + number + '">' +
-    '<img class="cover-packaging-image" src="' + base + '.png" alt="' + escapeHtml(project.name) + '" decoding="async" fetchpriority="high"></div>';
+    '<img class="cover-packaging-image" src="' + base + '.webp" alt="' + escapeHtml(project.name) + '" decoding="async" fetchpriority="high"></div>';
 }

@@ -25,7 +25,7 @@ for (let index = 1; index < pages.length; index += 2) {
 function pageMarkup(index, side) {
   if (index === null) return '<div class="print-page ' + side + ' is-empty"></div>';
   const label = (english ? "Page " : "Страница ") + (index + 1);
-  return '<div class="print-page ' + side + '"><img alt="' + label + '" decoding="async"></div>';
+  return '<div class="print-page ' + side + '"><img alt="' + label + '" data-src="' + pageUrl(index) + '" decoding="async"></div>';
 }
 
 book.innerHTML = pairs.map(pair => '<div class="print-spread">' +
@@ -41,16 +41,20 @@ function pageUrl(index) {
   return imagePath("assets/projects/" + printProject.id + "/" + encodeURIComponent(pages[index]));
 }
 
-function loadSpread(index) {
-  const images = spreads[index].querySelectorAll("img");
-  pairs[index].filter(page => page !== null).forEach((page, imageIndex) => {
-    const image = images[imageIndex];
-    if (!image.hasAttribute("src")) {
-      image.loading = index === 0 ? "lazy" : "eager";
-      image.src = pageUrl(page);
-    }
-  });
-  return [...images];
+const prepared = new Map();
+
+function prepareSpread(index) {
+  if (index < 0 || index >= spreads.length || prepared.has(index)) return;
+  const images = [...spreads[index].querySelectorAll("img")];
+  prepared.set(index, Promise.allSettled(images.map(image => {
+    image.src = image.dataset.src;
+    return image.decode();
+  })));
+}
+
+function prefetchAdjacent() {
+  prepareSpread(current - 1);
+  prepareSpread(current + 1);
 }
 
 function showSpread() {
@@ -72,11 +76,8 @@ async function turn(direction) {
   const outgoing = spreads[current];
   const incoming = spreads[target];
   const fromLeft = direction < 0;
-  const targetImages = loadSpread(target);
-  await Promise.allSettled(targetImages.map(image => {
-    image.loading = "eager";
-    return image.decode();
-  }));
+  prepareSpread(target);
+  await prepared.get(target);
 
   if (!motion.matches && typeof sheet.animate === "function") {
     const front = fromLeft ? pairs[current][0] : pairs[current][1];
@@ -90,7 +91,7 @@ async function turn(direction) {
     sheet.classList.add("is-turning");
     const turnAnimation = sheet.animate(
       [{transform: "rotateY(0deg)"}, {transform: "rotateY(" + (fromLeft ? 180 : -180) + "deg)"}],
-      {duration: 800, easing: "cubic-bezier(.42,.02,.55,.98)", fill: "forwards"}
+      {duration: 460, easing: "cubic-bezier(.26,.25,.55,1)", fill: "forwards"}
     );
     await turnAnimation.finished.catch(() => {});
     sheet.classList.remove("is-turning");
@@ -101,6 +102,7 @@ async function turn(direction) {
   const activeControl = document.activeElement;
   current = target;
   showSpread();
+  prefetchAdjacent();
   if (activeControl === previousSpread && previousSpread.disabled) nextSpread.focus({preventScroll: true});
   if (activeControl === nextSpread && nextSpread.disabled) previousSpread.focus({preventScroll: true});
   reader.removeAttribute("aria-busy");
@@ -116,10 +118,16 @@ book.addEventListener("click", event => {
   const bounds = book.getBoundingClientRect();
   const direction = event.clientX - bounds.left > bounds.width / 2 ? 1 : -1;
   if (event.pointerType === "touch") turn(direction);
-  else pageClick = setTimeout(() => turn(direction), 280);
+  else pageClick = setTimeout(() => turn(direction), 180);
 });
 book.addEventListener("dblclick", () => clearTimeout(pageClick));
 
 
-loadSpread(0);
 showSpread();
+const readerObserver = new IntersectionObserver(entries => {
+  if (!entries.some(entry => entry.isIntersecting)) return;
+  prepareSpread(0);
+  prefetchAdjacent();
+  readerObserver.disconnect();
+}, {rootMargin: "900px 0px"});
+readerObserver.observe(reader);

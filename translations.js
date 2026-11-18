@@ -20,7 +20,7 @@
     hint:'SCROLL DOWN TO EXPLORE THE COLLECTION ↓',button:'Explore projects ↗'
   });
   Object.assign(site.catalog,{heading:'Selected work',filters:['All','Branding','Interfaces','Motion','Editorial design'],machine:'PROJECT SHOWCASE'});
-  Object.assign(site.about,{heading:'ABOUT THE DESIGNER',title:'Ideas taking shape.',
+  Object.assign(site.about,{heading:'ABOUT THE DESIGNER',title:['Ideas', 'taking shape.'],
     paragraphs:[
       "I'm a graphic designer creating visual concepts, advertising, print materials, merchandise and digital assets for commercial projects.",
       'My background is in software engineering, so I understand not only visual design and composition but also how digital products work.'

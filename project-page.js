@@ -184,76 +184,14 @@ if (!project) {
     '<div class="case-intro"><p>' + typography(project.short) + '</p>' +
     '<div class="tags">' + project.tags.map(tag =>
       '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div></div>' +
-    (project.id === 'owl' ? '' : '<div class="case-stage" style="--glow:' +
-    (COLORS[project.tone] || COLORS.silver) + '77">' +
-    productArtwork(project) + '</div>') +
+    (project.id === 'owl' ? '' : '<div class="case-stage">' + productArtwork(project) + '</div>') +
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
     dancePostersHtml + danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + supertyazhHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
     (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'dance-posters' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' || project.id === 'supertyazh' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     projectNavigation(project) + '</div>';
-  if (project.id === 'supertyazh') {
-    const slides = [...main.querySelectorAll('.supertyazh-slide')];
-    const counter = main.querySelector('.supertyazh-counter');
-    let active = 0;
-    const show = index => {
-      active = (index + slides.length) % slides.length;
-      slides.forEach((slide,i) => { slide.hidden = i !== active; });
-      counter.textContent = String(active+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
-    };
-    main.querySelector('.supertyazh-prev').addEventListener('click', () => show(active-1));
-    main.querySelector('.supertyazh-next').addEventListener('click', () => show(active+1));
-  }
   bindImages(main);
-  main.querySelectorAll('.dance-carousel').forEach(carousel=>{
-    const slides=[...carousel.querySelectorAll('.dance-carousel-slide')];
-    const count=carousel.querySelector('.dance-carousel-count');
-    let current=0;
-    function show(index){current=(index+slides.length)%slides.length;slides.forEach((slide,i)=>{slide.hidden=i!==current;});count.textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');}
-    carousel.querySelector('.dance-carousel-prev').addEventListener('click',()=>show(current-1));
-    carousel.querySelector('.dance-carousel-next').addEventListener('click',()=>show(current+1));
-    show(0);
-  });
-  main.querySelectorAll('.extra-carousel').forEach(carousel=>{
-    const slides=[...carousel.querySelectorAll('.extra-slides img')];
-    const count=carousel.querySelector('.extra-count');
-    let active=0;
-    const show=()=>{slides.forEach((img,i)=>{img.hidden=i!==active;});count.textContent=String(active+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');};
-    carousel.querySelector('.extra-prev').addEventListener('click',()=>{active=(active-1+slides.length)%slides.length;show();});
-    carousel.querySelector('.extra-next').addEventListener('click',()=>{active=(active+1)%slides.length;show();});
-    show();
-  });
-  const bakerSlides=[...main.querySelectorAll('.baker-slides img')];
-  if(bakerSlides.length){
-    let index=0;
-    const show=()=>{bakerSlides.forEach((img,i)=>{img.hidden=i!==index;});main.querySelector('.baker-count').textContent=String(index+1).padStart(2,'0')+' / 05';};
-    main.querySelector('.baker-prev').addEventListener('click',()=>{index=(index+4)%5;show();});
-    main.querySelector('.baker-next').addEventListener('click',()=>{index=(index+1)%5;show();});
-    show();
-  }
-  const sevstarScreen=main.querySelector('.sevstar-screen');
-  if(sevstarScreen){
-    const slides=[...sevstarScreen.querySelectorAll('.sevstar-slide')];
-    const counter=main.querySelector('.sevstar-counter');
-    let active=0;
-    function showSevstar(n){
-      active=(n+slides.length)%slides.length;
-      slides.forEach((slide,i)=>{slide.hidden=i!==active;});
-      sevstarScreen.scrollTop=0;
-      sevstarScreen.classList.toggle('is-scrollable',active===0);
-      counter.textContent=String(active+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
-    }
-    main.querySelector('.sevstar-prev').addEventListener('click',()=>showSevstar(active-1));
-    main.querySelector('.sevstar-next').addEventListener('click',()=>showSevstar(active+1));
-    showSevstar(0);
-    let pointerStartX=0,pointerStartY=0;
-    sevstarScreen.addEventListener('pointerdown',e=>{pointerStartX=e.clientX;pointerStartY=e.clientY;});
-    sevstarScreen.addEventListener('click',e=>{if(Math.abs(e.clientY-pointerStartY)>12||Math.abs(e.clientX-pointerStartX)>12)return;const box=sevstarScreen.getBoundingClientRect();if(e.clientX-box.left<box.width*.32)showSevstar(active-1);else if(e.clientX-box.left>box.width*.68)showSevstar(active+1);});
-    const label=document.createElement('div');label.className='sevstar-hotspots';label.innerHTML='<button type="button" class="sevstar-hotspot-left" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><button type="button" class="sevstar-hotspot-right" aria-label="Следующий экран">' + arrowSvg('right') + '</button>';sevstarScreen.parentElement.appendChild(label);
-    label.querySelector('.sevstar-hotspot-left').addEventListener('click',()=>showSevstar(active-1));
-    label.querySelector('.sevstar-hotspot-right').addEventListener('click',()=>showSevstar(active+1));
-  }
   const zinBook = main.querySelector('.zin-book');
   if (zinBook) {
     const spreads = [...zinBook.querySelectorAll('.zin-spread')];
@@ -303,28 +241,6 @@ if (!project) {
   posterVideos.forEach(video => video.addEventListener('play', () => {
     posterVideos.forEach(other => { if (other !== video) other.pause(); });
   }));
-  const zpSlides = [...main.querySelectorAll('.zp-presentation-slides img')];
-  if (zpSlides.length) {
-    let active = 0;
-    const showZpSlide = () => {
-      zpSlides.forEach((img, i) => {
-        const forward = (i - active + zpSlides.length) % zpSlides.length;
-        const offset = forward > zpSlides.length / 2 ? forward - zpSlides.length : forward;
-        img.hidden = Math.abs(offset) > 1;
-        img.classList.toggle('is-active', offset === 0);
-        img.style.setProperty('--slide-offset', String(offset));
-        img.style.setProperty('--slide-scale', offset === 0 ? '1' : '.78');
-        img.style.zIndex = String(3 - Math.abs(offset));
-        img.setAttribute('aria-hidden', String(offset !== 0));
-        img.tabIndex = offset === 0 ? 0 : -1;
-      });
-      main.querySelector('.zp-count').textContent = String(active + 1).padStart(2, '0') + ' / ' + String(zpSlides.length).padStart(2, '0');
-    };
-    main.querySelector('.zp-prev').addEventListener('click', () => { active = (active - 1 + zpSlides.length) % zpSlides.length; showZpSlide(); });
-    main.querySelector('.zp-next').addEventListener('click', () => { active = (active + 1) % zpSlides.length; showZpSlide(); });
-    showZpSlide();
-  }
-
   main.querySelectorAll(".showcase-media.is-email .showcase-slide").forEach(slide => {
     const img = slide.querySelector("img");
     const updateRatio = () => {
