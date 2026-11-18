@@ -35,7 +35,7 @@ if (!project) {
   const showcase = Array.isArray(project.showcase) ? project.showcase : [];
   // Одно изображение — обычная карточка, несколько — горизонтальная карусель.
   const showcaseHtml = showcase.length
-    ? '<section class="case-showcase">' +
+    ? '<section class="case-showcase"><div class="section-head"><span>НАПРАВЛЕНИЯ РАБОТЫ</span><span>ПРИМЕРЫ ДИЗАЙНА</span></div>' +
       showcase.map((item, index) => {
         const images = Array.isArray(item.images) && item.images.length ? item.images : [item.image];
         const slides = images.map((path, slideIndex) =>
@@ -101,7 +101,7 @@ if (!project) {
     paths.map((path,i)=>'<div class="dance-carousel-slide"' + (i?' hidden':'') + '>' + danceImage(path,kind+' — '+(i+1)) + '</div>').join('') +
     '</div><div class="dance-carousel-controls"><button type="button" class="dance-carousel-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="dance-carousel-count">01 / ' + String(paths.length).padStart(2,'0') + '</span><button type="button" class="dance-carousel-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div>';
   const danceHtml = project.id === 'dance'
-    ? '<section class="case-showcase dance-cases">' +
+    ? '<section class="case-showcase dance-cases"><div class="section-head"><span>КЕЙСЫ</span><span>DANCE SOUL</span></div>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">01 / 02</span><h2>Брендинг</h2><p>Разработка первоначального логотипа танцевальной студии Dance Soul. Через год — ребрендинг с адаптацией названия и логотипа на русский язык в связи с новыми требованиями к оформлению вывесок.</p></div><div class="dance-branding-media"><div class="dance-logos"><figure><figcaption>ДО / ПЕРВЫЙ ЛОГОТИП</figcaption>' +
       danceLogo('before','Первый логотип Dance Soul') +
       '</figure><figure><figcaption>ПОСЛЕ / РЕБРЕНДИНГ</figcaption>' +
@@ -116,7 +116,7 @@ if (!project) {
       '</div></article></section>'
     : '';
   const dancePostersHtml = project.id === 'dance-posters'
-    ? '<section class="dance-posters-case">' +
+    ? '<section class="dance-posters-case"><div class="section-head"><span>ВИДЕОАФИШИ</span><span>04 ВИДЕО</span></div>' +
       '<p>' + typography(project.short) + '</p>' +
       '<div class="dance-posters-grid">' +
       [
@@ -134,7 +134,7 @@ if (!project) {
       '</div></section>'
     : '';
   const danceWebsiteHtml = project.id === 'dance-website'
-    ? '<section class="dance-website-preview">' +
+    ? '<section class="dance-website-preview"><div class="section-head"><span>САЙТ ТАНЦЕВАЛЬНОЙ ШКОЛЫ</span><span>ВЕБ-ПРОЕКТ</span></div>' +
       '<p>Многостраничный сайт школы танцев с расписанием, абонементами и личным кабинетом. Разработан для танцевальной школы Алисы Шарко.</p>' +
       '<div class="dance-site-preview"><img src="' + imagePath('assets/projects/dance-website/preview.jpg') + '" alt="Главная страница сайта танцевальной школы Алисы Шарко" loading="eager"></div>' +
       '<div class="dance-site-links"><a href="https://dusyaya.github.io/dance_school_sharko/" target="_blank" rel="noopener noreferrer">Открыть сайт ' + arrowSvg('up-right') + '</a><a href="https://github.com/Dusyaya/dance_school_sharko" target="_blank" rel="noopener noreferrer">Посмотреть код на GitHub ' + arrowSvg('up-right') + '</a></div></section>'
@@ -145,7 +145,7 @@ if (!project) {
     '" sizes="(max-width: 1250px) 88vw, 1100px" width="1920" height="9458" data-original="' +
     owlPath + 'Сова и Лисенок.png" alt="Дизайн лендинга Сова и Лисёнок" loading="lazy" decoding="async"></section>' : '';
   const bakerHtml = project.id === 'baker'
-    ? '<section class="baker-case">' +
+    ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>05 ЗАГРУЖЕННЫХ ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
       '<p class="baker-description">Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.</p>' +
       '<div class="baker-carousel"><div class="baker-slides">' +
       Array.from({length:5},(_,i)=>'<img src="' + imagePath('assets/projects/baker/screen-'+String(i+1).padStart(2,'0')+'.png') + '" alt="Весёлый Пекарь — экран '+(i+1)+'" loading="lazy"'+(i?' hidden':'')+'>').join('') +
@@ -156,14 +156,14 @@ if (!project) {
     {title:'3D',folder:'3d',count:4,description:'Преобразование технических планов БТИ в понятные трёхмерные модели помещений: поэтажные планы, стены, перегородки и геометрия без фотореалистичных рендеров. Отдельный учебный 3D-проект посвящён правилам дорожного движения: моделирование дорожной сцены для визуального объяснения ситуаций на дороге.'}
   ];
   const extraHtml = project.id === 'extra'
-    ? '<section class="extra-cases">' +
+    ? '<section class="extra-cases"><div class="section-head"><span>ГАЛЕРЕИ РАБОТ</span><span>ИЛЛЮСТРАЦИИ / 3D</span></div>' +
       extraGroups.map((group,i)=>'<article class="extra-case"><div class="extra-case-copy"><span class="eyebrow">0'+(i+1)+' / 03</span><h2>'+group.title+'</h2><p>'+group.description+'</p></div>' +
       '<div class="extra-carousel"><div class="extra-slides">' +
       Array.from({length:group.count},(_,j)=>'<img src="'+imagePath('assets/projects/extra/'+group.folder+'/'+String(j+1).padStart(2,'0')+'.jpg')+'" alt="'+group.title+', работа '+(j+1)+'" loading="lazy"'+(j?' hidden':'')+'>').join('') +
       '</div><div class="extra-controls"><button type="button" class="extra-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="extra-count">01 / '+String(group.count).padStart(2,'0')+'</span><button type="button" class="extra-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div></article>').join('')+'</section>'
     : '';
   const sevstarHtml = project.id === 'sevstar'
-    ? '<section class="sevstar-case">' +
+    ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
       '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0">' +
       Array.from({length:9},(_,i)=>'<div class="sevstar-slide"' +(i?' hidden':'')+ '><img src="' + imagePath('assets/projects/sevstar/Рисунок'+(i+1)+'.png') + '" alt="Севстар Кулинария, экран '+(i+1)+'" loading="'+(i?'lazy':'eager')+'"></div>').join('') +
       '</div></div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint" id="sevstar-hint">' +
@@ -182,16 +182,19 @@ if (!project) {
           image(filename, 'СУПЕРТЯЖ — мокап ' + (i+1)) + '</figure>';
       }).join('');
       return '<section class="supertyazh-story">' +
+        '<div class="section-head"><span>ПРЕЗЕНТАЦИЯ ПРОЕКТА</span><span>11 СЛАЙДОВ</span></div>' +
         '<div class="supertyazh-deck" aria-label="Презентация СУПЕРТЯЖ">' +
         '<div class="supertyazh-slides">' + slides + '</div>' +
         '<div class="supertyazh-controls"><button type="button" class="supertyazh-prev" aria-label="Предыдущий слайд">' + arrowSvg('left') + '</button><span class="supertyazh-counter">01 / 11</span><button type="button" class="supertyazh-next" aria-label="Следующий слайд">' + arrowSvg('right') + '</button></div></div>' +
+        '<div class="section-head supertyazh-section-head"><span>ФИНАЛЬНЫЕ МАКЕТЫ</span><span>03 ВАРИАНТА</span></div>' +
         '<div class="supertyazh-results">' + results + '</div>' +
+        '<div class="section-head supertyazh-section-head"><span>МОКАПЫ</span><span>02 ИЗОБРАЖЕНИЯ</span></div>' +
         '<div class="supertyazh-mockups">' + mockups + '</div></section>';
     })()
     : '';
   const zinPairs = [[20,1], ...Array.from({length:9},(_,i)=>[2+i*2,3+i*2])];
   const zinHtml = project.id === 'babushka'
-    ? '<section class="zin-section">' +
+    ? '<section class="zin-section"><div class="section-head"><span>ГАЛЕРЕЯ ЗИНА</span><span>20 СТРАНИЦ · 10 РАЗВОРОТОВ</span></div>' +
       '<div class="zin-reader"><div class="zin-book" aria-label="Интерактивный журнал BABUSHKA">' +
       zinPairs.map((pair,i) => '<div class="zin-spread' + (i===0?' is-visible':'') + '" data-spread="' + i + '">' +
         pair.map((n,j) => '<div class="zin-page zin-page-' + (j===0?'left':'right') + '"><span class="zin-page-fallback">BABUSHKA <strong>'+String(n).padStart(2,'0')+'</strong><small>Страница ожидает загрузки</small></span><img src="' + imagePath('assets/projects/babushka/Babushka'+n+'.jpg') + '" alt="Зин BABUSHKA, страница '+n+'" loading="'+(i<2?'eager':'lazy')+'" onerror="this.style.display=\'none\'" onload="this.style.display=\'block\'"></div>').join('') +
@@ -211,8 +214,8 @@ if (!project) {
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
-    dancePostersHtml + danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + supertyazhHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases">' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
-    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'dance-posters' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' || project.id === 'supertyazh' ? '' : '<div class="gallery">' + gallery + '</div>') +
+    dancePostersHtml + danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + supertyazhHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
+    (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'dance-posters' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' || project.id === 'supertyazh' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     projectNavigation(project) + '</div>';
   main.querySelectorAll("img").forEach(image => { image.decoding = "async"; });
   bindImages(main);

@@ -209,12 +209,17 @@
       const counter = carousel.querySelector(countSelector);
       counter.setAttribute("role", "status");
       const track = slides[0].parentElement;
+      const controls = previous.parentElement;
+      if (!screen) controls.classList.add("image-carousel-controls");
       let active = 0;
 
       function alignSlides() {
-        const frontWidth = images[active].offsetWidth;
+        const front = images[active];
+        const frontWidth = front.offsetWidth;
         const trackWidth = track.clientWidth;
-        if (!frontWidth || !trackWidth) return;
+        if (!frontWidth || !trackWidth || !front.offsetHeight) return;
+        const spaceBelowImage = (track.clientHeight - front.offsetHeight) / 2;
+        controls.style.setProperty("--carousel-control-gap", (10 - spaceBelowImage) + "px");
         slides.forEach((slide, index) => {
           if (slide.classList.contains("portfolio-offstage")) return;
           const offset = Number(slide.style.getPropertyValue("--perspective-offset"));
