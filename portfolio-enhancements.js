@@ -61,6 +61,7 @@
     cancelOriginal();
     const image = viewing.images[viewing.index];
     const thumbnail = image.currentSrc || image.getAttribute("src") || image.dataset.src;
+    imageArea.classList.toggle("is-dance-logo", Boolean(image.closest(".dance-logos")));
     preview.src = thumbnail;
     preview.alt = image.alt;
     setPreviewLayout(image);
@@ -304,12 +305,6 @@
     if (carouselImages.has(image) || image.closest(".print-book")) return;
     labelImage(image, labels.zoom);
     bindImage(image, () => openPreview([image], 0));
-    const coverWindow = image.closest(".case-cover");
-    if (coverWindow) {
-      image.setAttribute("aria-description", english
-        ? "Drag the window around the page. Release it to return it to its place. Click or press Enter to enlarge."
-        : "Перетащите окно по странице. Отпустите, чтобы оно вернулось на место. Нажмите, чтобы увеличить изображение.");
-      enableFloatingItem(coverWindow, coverWindow.closest(".case"), {returnToOrigin: true});
-    }
   });
+  root.querySelectorAll(".floating-window").forEach(item => enableFloatingWindow(item, item.closest(".case")));
 })();

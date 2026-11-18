@@ -88,9 +88,12 @@ renderCatalog();
 updateFilters();
 initSkillBadges();
 
+const about = document.querySelector("#about");
+enableFloatingWindow(about.querySelector(".about-portrait"), about, {returnToOrigin: false});
+
 const home = document.querySelector("main");
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-const fixedArtwork = ".portrait-window, .about-portrait, .catalog-cover";
+const fixedArtwork = ".portrait-window, .catalog-cover";
 let pull;
 
 home.addEventListener("pointerdown", event => {
@@ -109,7 +112,7 @@ window.addEventListener("pointermove", event => {
   const shift = amplitude => ({translate: dx / distance * amplitude + "px " + dy / distance * amplitude + "px"});
   pull.artwork.getAnimations().forEach(animation => animation.cancel());
   pull.artwork.animate([shift(0), shift(5), shift(-3), shift(1.5), shift(0)], {
-    duration: 320, easing: "ease-out"
+    duration: 220, easing: "ease-out"
   });
 });
 window.addEventListener("pointerup", event => {

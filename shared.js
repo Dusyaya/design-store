@@ -81,14 +81,15 @@ function emailContactUrl() {
 function socialLinks() {
   const links = [
     ["Telegram", telegramContactUrl(), "telegram"],
-    ["Instagram", SITE.contacts.instagram, "instagram"],
-    ["WhatsApp", whatsappContactUrl(), "whatsapp"],
-    [window.PORTFOLIO_LANG === "en" ? "Email" : "Почта", emailContactUrl(), "mail"]
+    ["Instagram", SITE.contacts.instagram, "instagram-filled"],
+    ["WhatsApp", whatsappContactUrl(), "whatsapp-filled"],
+    [window.PORTFOLIO_LANG === "en" ? "Email" : "Почта", emailContactUrl(), "mail-filled"]
   ];
   return '<div class="social-links">' +
     links.map(([name, url, icon]) =>
       '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' +
-      '<i class="social-icon social-' + icon + '" aria-hidden="true"></i>' +
+      '<img class="social-icon" src="' + SITE_ROOT + 'assets/icons/' + icon +
+      '.svg" alt="" width="22" height="22" loading="lazy">' +
       '<span>' + name + '</span></a>'
     ).join("") + '</div>';
 }
@@ -124,6 +125,10 @@ function renderLayout() {
 
 const WINDOW_LIGHTS = '<span class="window-lights" aria-hidden="true"><i></i><i></i><i></i></span>';
 
+function windowBar(title) {
+  return '<figcaption class="window-bar">' + WINDOW_LIGHTS + '<span>' + escapeHtml(title) + '</span></figcaption>';
+}
+
 function coverBase(project) {
   const index = PROJECTS.filter(item => item.id !== "supertyazh").findIndex(item => item.id === project.id) + 1;
   const number = project.id === "supertyazh" ? "12" : String(index).padStart(2, "0");
@@ -139,13 +144,11 @@ function projectTitle(project) {
 }
 
 function caseCover(project) {
-  const name = escapeHtml(project.name);
   const landscape = ["dance-website", "sevstar", "extra", "baker", "owl"].includes(project.id);
-  return '<figure class="case-cover' + (landscape ? ' is-landscape' : '') + '"><figcaption>' +
-    WINDOW_LIGHTS +
-    '<span class="case-cover-label">' + name + '.webp</span></figcaption>' +
+  return '<figure class="case-cover floating-window' + (landscape ? ' is-landscape' : '') + '">' +
+    windowBar(project.name + ".webp") +
     '<div class="case-cover-media"><img src="' + coverBase(project) +
-    '-hero.webp" alt="' + name + '" decoding="async" fetchpriority="high"></div></figure>';
+    '-hero.webp" alt="' + escapeHtml(project.name) + '" decoding="async" fetchpriority="high"></div></figure>';
 }
 
 function caseTags(project) {
@@ -153,7 +156,20 @@ function caseTags(project) {
     '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div>';
 }
 
-function enableFloatingItem(item, area, {returnToOrigin = false} = {}) {
+function enableFloatingWindow(item, area, {returnToOrigin = true} = {}) {
+  const image = item.querySelector("img.portfolio-zoomable");
+  const control = image || item.querySelector(".window-bar");
+  if (!image) control.tabIndex = 0;
+  const english = window.PORTFOLIO_LANG === "en";
+  const movement = english
+    ? "Drag to move the window or use the arrow keys. Escape returns it to its place."
+    : "Перетащите окно или переместите его стрелками. Escape возвращает окно на место.";
+  const zoom = image ? (english ? " Press Enter to enlarge." : " Нажмите Enter, чтобы увеличить изображение.") : "";
+  control.setAttribute("aria-description", movement + zoom);
+  enableFloatingItem(item, area, {returnToOrigin, followScroll: true});
+}
+
+function enableFloatingItem(item, area, {returnToOrigin = false, followScroll = false} = {}) {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let x = 0;
   let y = 0;
@@ -163,7 +179,7 @@ function enableFloatingItem(item, area, {returnToOrigin = false} = {}) {
   const position = (px, py) => px + "px " + py + "px";
 
   function bounded(nextX, nextY) {
-    const margin = reducedMotion.matches ? 0 : returnToOrigin ? 4 : 16;
+    const margin = reducedMotion.matches ? 0 : 24;
     const horizontalMargin = Math.min(margin, Math.max(0, (area.clientWidth - item.offsetWidth) / 2));
     const verticalMargin = Math.min(margin, Math.max(0, (area.clientHeight - item.offsetHeight) / 2));
     return [
@@ -205,14 +221,14 @@ function enableFloatingItem(item, area, {returnToOrigin = false} = {}) {
     item.style.translate = "";
     if (returnToOrigin && !reducedMotion.matches && from !== "0px 0px" && item.animate) {
       animateRelease([{translate: from}, {translate: "0px 0px"}], {
-        duration: 760, easing: "cubic-bezier(.19,.86,.25,1)"
+        duration: 420, easing: "cubic-bezier(.19,.86,.25,1)"
       });
     }
   }
 
-  const pointerY = event => returnToOrigin ? event.pageY : event.clientY;
+  const pointerY = event => followScroll ? event.pageY : event.clientY;
   item.addEventListener("pointerdown", event => {
-    if (!event.isPrimary || event.button !== 0) return;
+    if (!event.isPrimary || event.button !== 0 || event.target.closest("video")) return;
     stopRelease();
     suppressClick = false;
     drag = {
@@ -238,7 +254,7 @@ function enableFloatingItem(item, area, {returnToOrigin = false} = {}) {
     drag.time = event.timeStamp;
     moveTo(event.clientX - drag.originX, currentY - drag.originY);
   });
-  if (returnToOrigin) window.addEventListener("scroll", () => {
+  if (followScroll) window.addEventListener("scroll", () => {
     if (drag && suppressClick) moveTo(x, drag.viewportY + window.scrollY - drag.originY);
   }, {passive: true});
   item.addEventListener("pointerup", event => {
@@ -249,11 +265,11 @@ function enableFloatingItem(item, area, {returnToOrigin = false} = {}) {
     }
     if (reducedMotion.matches || !item.animate) return;
     const totalX = event.clientX - drag.startX;
-    const totalY = event.clientY - drag.startY;
+    const totalY = pointerY(event) - drag.startY;
     const distance = Math.hypot(totalX, totalY);
     if (distance < 4) return;
     const speed = event.timeStamp - drag.time < 110 ? Math.hypot(drag.vx, drag.vy) : 0;
-    const impulse = Math.min(28, 8 + speed * 27);
+    const impulse = Math.min(34, 12 + speed * 29);
     const directionX = speed > .04 ? drag.vx / speed : totalX / distance;
     const directionY = speed > .04 ? drag.vy / speed : totalY / distance;
     const from = position(x, y);
@@ -262,7 +278,7 @@ function enableFloatingItem(item, area, {returnToOrigin = false} = {}) {
       {translate: from, offset: 0, easing: "cubic-bezier(.14,.72,.25,1)"},
       {translate: position(peakX, peakY), offset: .32, easing: "ease-out"},
       {translate: from, offset: 1}
-    ], {duration: 460});
+    ], {duration: 300});
   });
   item.addEventListener("lostpointercapture", () => {
     if (returnToOrigin && drag && !releaseEffect && suppressClick) resetPosition();
@@ -271,12 +287,13 @@ function enableFloatingItem(item, area, {returnToOrigin = false} = {}) {
   });
   item.addEventListener("dragstart", event => event.preventDefault());
   item.addEventListener("click", event => {
-    if (!suppressClick || event.detail === 0) return;
+    if (!suppressClick || event.detail === 0 || event.target.closest("video")) return;
     suppressClick = false;
     event.preventDefault();
     event.stopImmediatePropagation();
   }, true);
   item.addEventListener("keydown", event => {
+    if (event.target.closest("video")) return;
     const step = event.shiftKey ? 24 : 8;
     const directions = {ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step]};
     if (event.key === "Escape") {

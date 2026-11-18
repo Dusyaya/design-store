@@ -57,9 +57,9 @@ if (!project) {
     : "";
 
   const bannerImages = [
-    ['banner-01-srgb.jpg.webp', 'banner-01-srgb.jpg', 1250, 624],
-    ['banner-02-screen.webp', 'banner-02-srgb.webp', 1680, 682],
-    ['banner-03-screen.webp', 'banner-03-srgb.webp', 1680, 250]
+    ['banner-01-blue-preview.webp', 'banner-01-blue.webp', 1680, 839],
+    ['banner-02-blue-preview.webp', 'banner-02.jpg', 1680, 682],
+    ['banner-03-blue-preview.webp', 'banner-03.jpg', 1680, 250]
   ];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
     ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.</p></div><div class="showcase-media zp-banner-stack">' +
@@ -91,15 +91,21 @@ if (!project) {
       '</div></div></article>'
     : '';
   const danceImage = (path,alt) => '<div class="dance-image"><img src="' + imagePath(path) + '" alt="' + alt + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="dance-image-placeholder" hidden>Загрузите изображение<br><small>' + escapeHtml(path.split('/').pop()) + '</small></div></div>';
+  const danceLogo = (version, alt) => {
+    const base = SITE_ROOT + 'assets/projects/dance/branding/logo-' + version;
+    return '<div class="dance-image"><picture><source media="(prefers-color-scheme: dark)" srcset="' + base +
+      '-dark.webp"><img src="' + base + '-light.webp" alt="' + escapeHtml(alt) + '" loading="lazy" decoding="async"' +
+      ' width="1181" height="' + (version === 'before' ? 754 : 549) + '"></picture></div>';
+  };
   const danceCarousel = (paths,kind) => '<div class="dance-carousel dance-carousel-' + kind + '"><div class="dance-carousel-slides">' +
     paths.map((path,i)=>'<div class="dance-carousel-slide"' + (i?' hidden':'') + '>' + danceImage(path,kind+' — '+(i+1)) + '</div>').join('') +
     '</div><div class="dance-carousel-controls"><button type="button" class="dance-carousel-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="dance-carousel-count">01 / ' + String(paths.length).padStart(2,'0') + '</span><button type="button" class="dance-carousel-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div>';
   const danceHtml = project.id === 'dance'
     ? '<section class="case-showcase dance-cases"><div class="section-head"><span>КЕЙСЫ</span><span>DANCE SOUL</span></div>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">01 / 02</span><h2>Брендинг</h2><p>Разработка первоначального логотипа танцевальной студии Dance Soul. Через год — ребрендинг с адаптацией названия и логотипа на русский язык в связи с новыми требованиями к оформлению вывесок.</p></div><div class="dance-branding-media"><div class="dance-logos"><figure><figcaption>ДО / ПЕРВЫЙ ЛОГОТИП</figcaption>' +
-      danceImage('assets/projects/dance/branding/logo-before.png','Первый логотип Dance Soul') +
+      danceLogo('before','Первый логотип Dance Soul') +
       '</figure><figure><figcaption>ПОСЛЕ / РЕБРЕНДИНГ</figcaption>' +
-      danceImage('assets/projects/dance/branding/logo-after.png','Новый логотип Dance Soul') +
+      danceLogo('after','Новый логотип Dance Soul') +
       '</figure></div><figure class="dance-poster"><figcaption>Афиша для расклейки</figcaption>' +
       danceImage('assets/projects/dance/branding/poster.jpg','Афиша Dance Soul для расклейки') +
       '</figure></div></article>' +
@@ -121,9 +127,10 @@ if (!project) {
       ].map(([name, file, aspect = "9 / 16"]) => {
         const videoPath = imagePath('assets/projects/dance-posters/' + file);
         const posterPath = videoPath.replace(/\.mp4$/, '.webp');
-        return '<figure><figcaption>' + name + '</figcaption><div class="dance-poster-player" style="--poster-aspect: ' + aspect + '">' +
+        return '<figure class="media-window floating-window">' + windowBar(name) +
+          '<div class="video-window-media"><div class="dance-poster-player" style="--poster-aspect: ' + aspect + '">' +
           '<video controls playsinline preload="none" aria-label="Видеоафиша ' + name + '" poster="' +
-          posterPath + '" src="' + videoPath + '"></video></div></figure>';
+          posterPath + '" src="' + videoPath + '"></video></div></div></figure>';
       }).join('') +
       '</div></section>'
     : '';
@@ -170,7 +177,11 @@ if (!project) {
       const image = (name, alt, className = '') => '<img class="' + className + '" src="' + imagePath(base + name) + '" alt="' + escapeHtml(alt) + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="supertyazh-missing" hidden>Загрузите файл ' + escapeHtml(name) + '</span>';
       const slides = Array.from({length:11}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<div class="supertyazh-slide" data-index="' + i + '"' + (i?' hidden':'') + '>' + image('slide-'+n+'.jpg','СУПЕРТЯЖ — слайд презентации '+(i+1)) + '</div>';}).join('');
       const results = Array.from({length:3}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('result-'+n+'.png','СУПЕРТЯЖ — вариант рекламного макета '+(i+1)) + '<figcaption>Вариант '+n+'</figcaption></figure>';}).join('');
-      const mockups = Array.from({length:2}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('mockup-'+n+'.jpg','СУПЕРТЯЖ — мокап '+(i+1)) + '</figure>';}).join('');
+      const mockups = Array.from({length:2}, (_,i) => {
+        const filename = 'mockup-' + String(i+1).padStart(2,'0') + '.jpg';
+        return '<figure class="media-window supertyazh-mockup floating-window">' + windowBar(filename) +
+          image(filename, 'СУПЕРТЯЖ — мокап ' + (i+1)) + '</figure>';
+      }).join('');
       return '<section class="supertyazh-story">' +
         '<div class="section-head"><span>ПРЕЗЕНТАЦИЯ ПРОЕКТА</span><span>11 СЛАЙДОВ</span></div>' +
         '<div class="supertyazh-deck" aria-label="Презентация СУПЕРТЯЖ">' +
@@ -255,9 +266,14 @@ if (!project) {
   }
   // При воспроизведении одной афиши остальные останавливаются.
   const posterVideos = [...main.querySelectorAll('.dance-poster-player video')];
-  posterVideos.forEach(video => video.addEventListener('play', () => {
-    posterVideos.forEach(other => { if (other !== video) other.pause(); });
-  }));
+  posterVideos.forEach(video => {
+    const frame = video.closest('.media-window');
+    video.addEventListener('play', () => {
+      frame.classList.add('is-playing');
+      posterVideos.forEach(other => { if (other !== video) other.pause(); });
+    });
+    video.addEventListener('pause', () => frame.classList.remove('is-playing'));
+  });
   main.querySelectorAll(".showcase-media.is-email .showcase-slide").forEach(slide => {
     const img = slide.querySelector("img");
     const updateRatio = () => {
