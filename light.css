@@ -762,15 +762,11 @@ body.lightbox-open { overflow: hidden; }
 .case .zp-cases .zp-presentation-layout { grid-template-columns: minmax(0, 1fr) !important; gap: 14px !important; }
 .case .zp-presentation-photo { width: min(72%, clamp(160px, 26%, 218px)); justify-self: center; }
 .case .zp-presentation-photo img { width: 100%; max-height: none; box-shadow: none; }
-.case .zp-presentation-slides {
-  height: auto;
-  aspect-ratio: 1.65;
-}
 .case .zp-presentation-slides img {
   left: 50%;
   width: 76%;
   height: auto;
-  max-height: 84%;
+  max-height: 100%;
   transform: translate(calc(-50% + var(--slide-shift, 0px)), -50%)
     scale(calc(1 - var(--perspective-offset) * var(--perspective-offset) * .16));
   filter: none;
@@ -779,7 +775,7 @@ body.lightbox-open { overflow: hidden; }
 }
 .case .zp-presentation-slides img.portfolio-active { opacity: 1; }
 .case .zp-presentation-slides img[hidden] { display: none; }
-.case .zp-presentation-controls { margin-top: 12px; }
+.case .zp-presentation-controls { margin-top: 10px; }
 
 .portfolio-lightbox[open] { padding: 52px clamp(6px, 1.6vw, 26px) 58px; }
 .lightbox-image-area {
@@ -976,11 +972,32 @@ body.lightbox-open { overflow: hidden; }
   .skill-badge-visual > span:last-child { padding-inline: 1px; }
   .topbar nav .contact { position: relative; min-height: 34px; padding-block: 3px; }
   .topbar nav .contact::after { position: absolute; inset: -5px 0; content: ""; }
-  .case .supertyazh-deck.portfolio-perspective .supertyazh-slides {
-    height: auto !important;
-    min-height: 0 !important;
-    aspect-ratio: 1.85;
-  }
-  .case .supertyazh-deck .supertyazh-controls { margin-top: 4px !important; padding-block: 6px; }
 }
 .supertyazh-results, .supertyazh-mockups { margin-top: clamp(36px, 5vw, 76px); }
+
+/* Высота дорожки следует за шириной слайда 16:9. */
+.case .dance-carousel-research { --presentation-width: .68; }
+.case .zp-presentation-right { --presentation-width: .76; }
+.case .supertyazh-deck { --presentation-width: .75; }
+
+.case .dance-carousel-research.portfolio-perspective .dance-carousel-slides,
+.case .supertyazh-deck.portfolio-perspective .supertyazh-slides,
+.case .zp-presentation-right .zp-presentation-slides {
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: calc(16 / 9 / var(--presentation-width));
+}
+.case .dance-carousel-research.portfolio-perspective .dance-carousel-slide,
+.case .supertyazh-deck.portfolio-perspective .supertyazh-slide {
+  height: 100% !important;
+  max-height: 100% !important;
+}
+.case .dance-carousel-research .dance-carousel-controls { margin-top: 10px; }
+.case .supertyazh-deck .supertyazh-controls { margin-top: 10px !important; padding-block: 0; }
+
+@media (max-width: 650px) {
+  .case .dance-carousel-research { --presentation-width: .78; }
+}
+@media (max-width: 700px) {
+  .case .supertyazh-deck { --presentation-width: .78; }
+}
