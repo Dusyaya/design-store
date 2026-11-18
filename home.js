@@ -104,6 +104,7 @@ enableFloatingWindow(heroSection.querySelector(".portrait-window"), heroSection,
 
 function initSkillBadges() {
   const orbit = document.querySelector(".skill-orbit");
+  const mobile = matchMedia("(max-width: 760px)");
   const badges = [...orbit.querySelectorAll(".skill-badge")];
   const hints = isEnglish ? {
     group: "Tools", keys: "Drag with the pointer or move with the arrow keys. Escape resets the position.",
@@ -118,6 +119,6 @@ function initSkillBadges() {
   for (const badge of badges) {
     const label = badge.querySelector(".skill-badge-visual > span:last-child").textContent;
     badge.setAttribute("aria-label", label);
-    enableFloatingItem(badge, orbit);
+    enableFloatingItem(badge, orbit, {returnAt: mobile});
   }
 }

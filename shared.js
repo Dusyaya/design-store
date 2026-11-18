@@ -175,7 +175,7 @@ function caseTags(project) {
     '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div>';
 }
 
-function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 24, overflowRatio = 0} = {}) {
+function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 0, overflowRatio = .2} = {}) {
   const image = item.querySelector("img.portfolio-zoomable");
   const control = image || item.querySelector(".window-bar");
   if (!image) control.tabIndex = 0;
@@ -189,9 +189,10 @@ function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 24, 
 }
 
 function enableFloatingItem(item, area, {
-  returnToOrigin = false, followScroll = false, edgeGap = 24, overflowRatio = 0, activationTarget = item
+  returnToOrigin = false, returnAt, followScroll = false, edgeGap = 0, overflowRatio = .2, activationTarget = item
 } = {}) {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const shouldReturn = () => returnToOrigin || returnAt?.matches;
   let x = 0;
   let y = 0;
   let drag;
@@ -246,7 +247,7 @@ function enableFloatingItem(item, area, {
     const from = position(x, y);
     x = y = 0;
     item.style.translate = "";
-    if (returnToOrigin && !reducedMotion.matches && from !== "0px 0px" && item.animate) {
+    if (shouldReturn() && !reducedMotion.matches && from !== "0px 0px" && item.animate) {
       animateRelease([{translate: from}, {translate: "0px 0px"}], {
         duration: 420, easing: "cubic-bezier(.19,.86,.25,1)"
       });
@@ -286,7 +287,7 @@ function enableFloatingItem(item, area, {
   }, {passive: true});
   item.addEventListener("pointerup", event => {
     if (event.pointerId !== drag?.id || !suppressClick) return;
-    if (returnToOrigin) {
+    if (shouldReturn()) {
       resetPosition();
       return;
     }
@@ -308,7 +309,7 @@ function enableFloatingItem(item, area, {
     ], {duration: 300});
   });
   item.addEventListener("lostpointercapture", () => {
-    if (returnToOrigin && drag && !releaseEffect && suppressClick) resetPosition();
+    if (shouldReturn() && drag && !releaseEffect && suppressClick) resetPosition();
     drag = undefined;
     item.classList.remove("is-grabbed");
   });
@@ -336,12 +337,18 @@ function enableFloatingItem(item, area, {
       moveTo(x + dx, y + dy);
     }
   });
+  returnAt?.addEventListener("change", () => {
+    if (returnAt.matches && !drag) {
+      stopRelease();
+      resetPosition();
+    }
+  });
   reducedMotion.addEventListener("change", () => {
     stopRelease();
-    if (returnToOrigin && !drag) resetPosition();
+    if (shouldReturn() && !drag) resetPosition();
   });
   new ResizeObserver(() => {
-    if (returnToOrigin && releaseEffect) return;
+    if (shouldReturn() && releaseEffect) return;
     stopRelease();
     if (x || y) moveTo(x, y);
   }).observe(area);

@@ -401,7 +401,7 @@ footer {
 }
 .home-page footer { padding-block: clamp(14px, 1.2vw, 23px); }
 
-main:has(.case-hero) { overflow-x: clip; }
+.home-page main, main:has(.case-hero) { overflow-x: clip; }
 .case.wrap { position: relative; padding-bottom: var(--section-space); }
 .case-hero {
   position: relative;
@@ -548,10 +548,10 @@ main:has(.case-hero) { overflow-x: clip; }
   text-transform: uppercase;
 }
 .case .dance-cases .dance-merch-media h3:not(:first-child) { margin-top: 34px; }
-.case .dance-logos .dance-image { justify-content: flex-start; }
+.case .dance-logos .dance-image { justify-content: center; }
 .case .dance-logos picture { display: block; width: min(100%, clamp(220px, 29vw, 430px)); }
 .case .dance-logos .dance-image img { max-height: none !important; }
-.case .dance-poster img { max-height: clamp(580px, 50vw, 940px); object-position: left center; }
+.case .dance-poster img { max-height: clamp(580px, 50vw, 940px); object-position: center; }
 .lightbox-image-area.is-dance-logo img { padding: 12px; background: var(--bg); }
 @media (prefers-color-scheme: dark) {
   .case .dance-logos picture, .lightbox-image-area.is-dance-logo img { background: #171719; }
@@ -586,6 +586,7 @@ main:has(.case-hero) { overflow-x: clip; }
   .extra-controls, .supertyazh-controls, .print-controls) button:hover:not(:disabled) { background: var(--hover); }
 
 .case .project-navigation {
+  padding-inline: clamp(4px, .5vw, 10px);
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   border-top: 0 !important;
@@ -594,7 +595,7 @@ main:has(.case-hero) { overflow-x: clip; }
 .case .project-navigation a {
   width: fit-content !important;
   max-width: min(100%, 29rem);
-  padding: 10px clamp(10px, 1.5vw, 22px) !important;
+  padding: 10px clamp(14px, 1.75vw, 26px) !important;
   gap: clamp(6px, 1vw, 14px) !important;
   justify-content: flex-start !important;
   min-height: 44px;
@@ -706,7 +707,6 @@ main:has(.case-hero) { overflow-x: clip; }
 }
 @media (max-width: 660px) {
   .portfolio-heading h1 { font-size: clamp(30px, 9.1vw, 58px); }
-  .skill-orbit { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .catalog-card .tags { gap: 4px; }
   .catalog-card .tag { padding: 3px 6px; }
@@ -958,37 +958,29 @@ body.lightbox-open { overflow: hidden; }
   min-width: 0;
   margin: 0 auto;
 }
-.video-window-media { padding: clamp(7px, .8vw, 12px); background: #fbfaf8; }
-.dance-poster-player {
-  --phone-corner: clamp(24px, 2.5vw, 40px);
-  --phone-rim: clamp(5px, .55vw, 8px);
-  position: relative;
-  padding: calc(var(--phone-rim) + 5px) var(--phone-rim) var(--phone-rim);
-  border: 1px solid #898989;
-  border-radius: var(--phone-corner);
-  background: linear-gradient(142deg, #f8f8f8, #a9acb2 26%, #eff0ef 56%, #95979c);
-  box-shadow: 0 1px 2px #0004, 0 10px 24px #0002;
-}
-.dance-poster-player::before {
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  translate: -50%;
-  width: 12%;
-  height: 4px;
-  border-radius: 4px;
-  background: #34363b;
-  content: "";
-}
-.case .dance-poster-player video {
+.case .dance-posters-grid video.dance-poster-player {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: var(--poster-aspect);
-  border-radius: calc(var(--phone-corner) - var(--phone-rim)) !important;
-  background: transparent;
-  box-shadow: 0 0 0 1px #26272b;
+  border-radius: 0 !important;
 }
 @media (max-width: 580px) {
   .dance-posters-grid { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 760px) {
+  .skill-orbit { --badge-size: clamp(27px, 8.5vw, 44px); }
+  .skill-badge { animation: none; }
+  .skill-badge-visual { font-size: clamp(7px, 2.15vw, 11px); }
+  .skill-badge-visual > span:last-child { padding-inline: 1px; }
+  .topbar nav .contact { position: relative; min-height: 34px; padding-block: 3px; }
+  .topbar nav .contact::after { position: absolute; inset: -5px 0; content: ""; }
+  .case .supertyazh-deck.portfolio-perspective .supertyazh-slides {
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1.85;
+  }
+  .case .supertyazh-deck .supertyazh-controls { margin-top: 4px !important; padding-block: 6px; }
+}
+.supertyazh-results, .supertyazh-mockups { margin-top: clamp(36px, 5vw, 76px); }
