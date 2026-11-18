@@ -109,6 +109,10 @@ function renderLayout() {
     '<a href="?lang=en" lang="en" class="' + (window.PORTFOLIO_LANG === 'en' ? 'is-active' : '') + '" aria-label="English language">EN</a></div>';
   const footer = document.querySelector("footer");
   if (nav) {
+    const topbar = nav.closest(".topbar");
+    new ResizeObserver(() => {
+      document.documentElement.style.setProperty("--sticky-offset", (topbar.offsetHeight + 12) + "px");
+    }).observe(topbar);
     nav.setAttribute("aria-label", window.PORTFOLIO_LANG === "en" ? "Main navigation" : "Основная навигация");
     const currentLanguage = nav.querySelector(".language-switch .is-active");
     currentLanguage.setAttribute("aria-current", "true");
@@ -156,7 +160,7 @@ function caseTags(project) {
     '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div>';
 }
 
-function enableFloatingWindow(item, area, {returnToOrigin = true} = {}) {
+function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 24} = {}) {
   const image = item.querySelector("img.portfolio-zoomable");
   const control = image || item.querySelector(".window-bar");
   if (!image) control.tabIndex = 0;
@@ -166,10 +170,12 @@ function enableFloatingWindow(item, area, {returnToOrigin = true} = {}) {
     : "Перетащите окно или переместите его стрелками. Escape возвращает окно на место.";
   const zoom = image ? (english ? " Press Enter to enlarge." : " Нажмите Enter, чтобы увеличить изображение.") : "";
   control.setAttribute("aria-description", movement + zoom);
-  enableFloatingItem(item, area, {returnToOrigin, followScroll: true});
+  enableFloatingItem(item, area, {returnToOrigin, followScroll: true, edgeGap});
 }
 
-function enableFloatingItem(item, area, {returnToOrigin = false, followScroll = false} = {}) {
+function enableFloatingItem(item, area, {
+  returnToOrigin = false, followScroll = false, edgeGap = 24, activationTarget = item
+} = {}) {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let x = 0;
   let y = 0;
@@ -179,14 +185,20 @@ function enableFloatingItem(item, area, {returnToOrigin = false, followScroll = 
   const position = (px, py) => px + "px " + py + "px";
 
   function bounded(nextX, nextY) {
-    const margin = reducedMotion.matches ? 0 : 24;
+    const margin = reducedMotion.matches ? 0 : edgeGap;
     const horizontalMargin = Math.min(margin, Math.max(0, (area.clientWidth - item.offsetWidth) / 2));
     const verticalMargin = Math.min(margin, Math.max(0, (area.clientHeight - item.offsetHeight) / 2));
+    let left = item.offsetLeft;
+    let top = item.offsetTop;
+    for (let parent = item.offsetParent; parent && parent !== area; parent = parent.offsetParent) {
+      left += parent.offsetLeft;
+      top += parent.offsetTop;
+    }
     return [
-      Math.max(horizontalMargin - item.offsetLeft, Math.min(nextX,
-        area.clientWidth - item.offsetLeft - item.offsetWidth - horizontalMargin)),
-      Math.max(verticalMargin - item.offsetTop, Math.min(nextY,
-        area.clientHeight - item.offsetTop - item.offsetHeight - verticalMargin))
+      Math.max(horizontalMargin - left, Math.min(nextX,
+        area.clientWidth - left - item.offsetWidth - horizontalMargin)),
+      Math.max(verticalMargin - top, Math.min(nextY,
+        area.clientHeight - top - item.offsetHeight - verticalMargin))
     ];
   }
 
@@ -285,8 +297,11 @@ function enableFloatingItem(item, area, {returnToOrigin = false, followScroll = 
     drag = undefined;
     item.classList.remove("is-grabbed");
   });
-  item.addEventListener("dragstart", event => event.preventDefault());
-  item.addEventListener("click", event => {
+  if (activationTarget !== item) activationTarget.addEventListener("pointerdown", event => {
+    if (!item.contains(event.target)) suppressClick = false;
+  });
+  activationTarget.addEventListener("dragstart", event => event.preventDefault());
+  activationTarget.addEventListener("click", event => {
     if (!suppressClick || event.detail === 0 || event.target.closest("video")) return;
     suppressClick = false;
     event.preventDefault();

@@ -37,6 +37,25 @@ document.querySelector("#about .contact-links").innerHTML = socialLinks();
 let activeFilter = catalog.filters[0];
 const shelf = document.querySelector("#shelf");
 const filters = document.querySelector("#filters");
+const home = document.querySelector("main");
+shelf.innerHTML = PROJECTS.map((project, index) => {
+  return '<a class="catalog-card" data-project="' + escapeHtml(project.id) + '" href="' + projectUrl(project) + '">' +
+    '<div class="catalog-cover"><div class="catalog-cover-bar">' + WINDOW_LIGHTS + '</div>' +
+    '<div class="catalog-cover-media">' + productArtwork(project) +
+    '<span aria-hidden="true" class="catalog-index">' + String(index + 1).padStart(2, "0") + '</span></div></div>' +
+    '<div class="catalog-card-copy"><h3>' + projectTitle(project) + ' ' + arrowSvg("right") + '</h3>' +
+    '<p>' + typography(project.short) + '</p>' +
+    '<div class="tags">' + project.tags.map(tag =>
+      '<span class="tag">' + escapeHtml(tag) + '</span>').join("") +
+    '</div></div></a>';
+}).join("");
+const cards = new Map([...shelf.children].map(card => [card.dataset.project, card]));
+cards.forEach(card => enableFloatingItem(card.querySelector(".catalog-cover"), home, {
+  returnToOrigin: true,
+  followScroll: true,
+  edgeGap: 0,
+  activationTarget: card
+}));
 
 function renderCatalog() {
   const visible = activeFilter === catalog.filters[0]
@@ -52,18 +71,7 @@ function renderCatalog() {
     ? visible.length + (visible.length === 1 ? " project" : " projects")
     : visible.length + " " + russianCount[new Intl.PluralRules("ru").select(visible.length)];
   document.querySelector(".catalog-count").textContent = count;
-  shelf.innerHTML = visible.map(project => {
-    const index = PROJECTS.indexOf(project) + 1;
-    return '<a class="catalog-card" data-project="' + escapeHtml(project.id) + '" href="' + projectUrl(project) + '">' +
-      '<div class="catalog-cover"><div class="catalog-cover-bar">' + WINDOW_LIGHTS + '</div>' +
-      '<div class="catalog-cover-media">' + productArtwork(project) +
-      '<span aria-hidden="true" class="catalog-index">' + String(index).padStart(2, "0") + '</span></div></div>' +
-      '<div class="catalog-card-copy"><h3>' + projectTitle(project) + ' ' + arrowSvg("right") + '</h3>' +
-      '<p>' + typography(project.short) + '</p>' +
-      '<div class="tags">' + project.tags.map(tag =>
-        '<span class="tag">' + escapeHtml(tag) + '</span>').join("") +
-      '</div></div></a>';
-  }).join("");
+  shelf.replaceChildren(...visible.map(project => cards.get(project.id)));
 }
 
 const filterRows = [catalog.filters.slice(0, 3), catalog.filters.slice(3)];
@@ -91,47 +99,8 @@ initSkillBadges();
 const about = document.querySelector("#about");
 enableFloatingWindow(about.querySelector(".about-portrait"), about, {returnToOrigin: false});
 
-const home = document.querySelector("main");
-const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-const fixedArtwork = ".portrait-window, .catalog-cover";
-let pull;
-
-home.addEventListener("pointerdown", event => {
-  if (!event.isPrimary || event.button !== 0) return;
-  const artwork = event.target.closest(fixedArtwork);
-  pull = artwork ? {artwork, id: event.pointerId, x: event.clientX, y: event.clientY} : undefined;
-});
-window.addEventListener("pointermove", event => {
-  if (event.pointerId !== pull?.id || pull.started) return;
-  const dx = event.clientX - pull.x;
-  const dy = event.clientY - pull.y;
-  const distance = Math.hypot(dx, dy);
-  if (distance < 5) return;
-  pull.started = true;
-  if (reducedMotion.matches) return;
-  const shift = amplitude => ({translate: dx / distance * amplitude + "px " + dy / distance * amplitude + "px"});
-  pull.artwork.getAnimations().forEach(animation => animation.cancel());
-  pull.artwork.animate([shift(0), shift(5), shift(-3), shift(1.5), shift(0)], {
-    duration: 220, easing: "ease-out"
-  });
-});
-window.addEventListener("pointerup", event => {
-  if (event.pointerId !== pull?.id) return;
-  if (pull.started) pull.id = null;
-  else pull = undefined;
-});
-window.addEventListener("pointercancel", event => {
-  if (event.pointerId === pull?.id) pull = undefined;
-});
-home.addEventListener("dragstart", event => {
-  if (event.target.closest(fixedArtwork) || pull?.artwork.closest(".catalog-card") === event.target) event.preventDefault();
-});
-home.addEventListener("click", event => {
-  if (!pull?.started || !event.detail) return;
-  if (pull.artwork.closest(".catalog-card") !== event.target.closest(".catalog-card")) return;
-  event.preventDefault();
-  pull = undefined;
-}, true);
+const heroSection = document.querySelector(".portfolio-hero");
+enableFloatingWindow(heroSection.querySelector(".portrait-window"), heroSection, {edgeGap: 0});
 
 function initSkillBadges() {
   const orbit = document.querySelector(".skill-orbit");
