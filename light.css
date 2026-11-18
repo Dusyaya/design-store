@@ -399,7 +399,7 @@ footer {
 .home-page footer { padding-block: clamp(14px, 1.2vw, 23px); }
 
 .home-page main, main:has(.case-hero) { overflow-x: clip; }
-.case.wrap { position: relative; padding-bottom: var(--section-space); }
+.case.wrap { --case-back-gap: 12px; position: relative; padding-bottom: var(--section-space); }
 .case-hero {
   position: relative;
   isolation: isolate;
@@ -407,7 +407,7 @@ footer {
   grid-template-columns: minmax(0, 1fr) minmax(0, 47%);
   gap: var(--grid-gap);
   align-items: start;
-  margin: clamp(18px, 2.2vw, 40px) 0 var(--section-space);
+  margin: var(--case-back-gap) 0 var(--section-space);
 }
 .case-hero:has(.is-landscape) { grid-template-columns: minmax(0, 1fr) minmax(0, 61%); }
 .case-summary {
@@ -478,7 +478,7 @@ footer {
   z-index: 90;
   gap: 8px;
   min-height: 44px;
-  margin-top: 12px;
+  margin-top: var(--case-back-gap);
   margin-bottom: 0 !important;
   padding: 8px 14px;
   border: 1px solid var(--line);
