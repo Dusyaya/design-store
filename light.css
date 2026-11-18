@@ -244,6 +244,9 @@ main { min-height: 70vh; }
 .catalog-layout { row-gap: var(--grid-gap); }
 .catalog-intro { align-self: start; min-width: 0; }
 @media (min-width: 951px) {
+  .topbar { padding-inline: calc(var(--page-inset) - clamp(16px, 1.4vw, 28px)); }
+  .topbar nav { gap: clamp(14px, 1.55vw, 30px); }
+  .catalog-section { padding-top: clamp(20px, 1.6vw, 32px); }
   .catalog-intro { position: sticky; top: var(--sticky-offset, 64px); }
 }
 .catalog-intro h2 {
