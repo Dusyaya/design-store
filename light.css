@@ -636,13 +636,23 @@ footer {
 .case .project-navigation .ui-arrow { width: 17px; height: 17px; color: var(--muted); }
 
 .book-section, .zin-section { margin: clamp(42px, 5vw, 90px) 0; }
-.print-reader { max-width: 1050px; margin: clamp(16px, 3vw, 30px) auto 0; }
+/* Оставляем место для закреплённой навигации, заголовка секции и стрелок. */
+:is(.book-section, .zin-section) { scroll-margin-top: 56px; }
+.print-reader {
+  --spread-ratio: 1.414;
+  --reader-max-width: 1050px;
+  --reader-top-gap: clamp(16px, 3vw, 30px);
+  --reader-controls-gap: 16px;
+  --reader-space: calc(100svh - var(--sticky-offset, 64px) - 56px - 72px - var(--reader-top-gap) - var(--reader-controls-gap) - var(--icon-button));
+  width: min(100%, var(--reader-max-width), calc(max(1px, var(--reader-space)) * var(--spread-ratio)));
+  margin: var(--reader-top-gap) auto 0;
+}
 .print-page picture { display: block; width: 100%; height: 100%; }
 @media (min-width: 1000px) {
-  .book-section .print-reader { max-width: 1440px; }
-  .zin-section .print-reader { max-width: 1190px; }
+  .book-section .print-reader { --reader-max-width: 1440px; }
+  .zin-section .print-reader { --reader-max-width: 1190px; }
 }
-.print-book { position: relative; width: 100%; aspect-ratio: 1.414; perspective: 1800px; isolation: isolate; }
+.print-book { position: relative; width: 100%; aspect-ratio: var(--spread-ratio); perspective: 1800px; isolation: isolate; }
 .print-spread { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; visibility: hidden; }
 .print-spread.is-visible { visibility: visible; }
 .print-spread.is-outgoing { z-index: 1; }
@@ -681,7 +691,7 @@ footer {
   box-shadow: inset 0 0 16px #0003;
 }
 .print-sheet .print-back { transform: rotateY(180deg); }
-.print-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 22px; }
+.print-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: var(--reader-controls-gap); }
 .print-controls button:disabled { cursor: default; opacity: .42; }
 .print-count { min-width: 70px; color: var(--muted); text-align: center; font-variant-numeric: tabular-nums; }
 
