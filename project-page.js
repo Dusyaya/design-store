@@ -205,8 +205,8 @@ if (!project) {
     : '';
   main.innerHTML =
     '<div class="wrap case">' +
-    '<div class="case-hero"><header class="case-summary">' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться к коллекции</a>' +
+    '<div class="case-hero"><header class="case-summary">' +
     '<div class="eyebrow">' + typography(project.category) + ' / ' +
     typography(project.field) + ' / ' + escapeHtml(project.year) + '</div>' +
     '<h1>' + projectTitle(project) + '</h1>' +
