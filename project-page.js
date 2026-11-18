@@ -202,6 +202,16 @@ if (!project) {
       '<div class="zin-turn-sheet" aria-hidden="true"><div class="zin-turn-front"></div><div class="zin-turn-back"></div></div>' +
       '</div><div class="zin-controls"><button type="button" class="zin-prev" aria-label="Предыдущий разворот">' + arrowSvg('left') + '</button><span class="zin-count">01 / 10</span><button type="button" class="zin-next" aria-label="Следующий разворот">' + arrowSvg('right') + '</button></div></div></section>'
     : '';
+  const cover = caseCover(project);
+  const posterWindow = (name, filename) =>
+    '<figure class="case-cover floating-window poster-side-window">' +
+    windowBar(name) + '<div class="case-cover-media"><img src="' +
+    imagePath('assets/projects/dance-posters/' + filename) + '" alt="' + escapeHtml(name) +
+    '" width="926" height="1699" decoding="async"></div></figure>';
+  const heroMedia = project.id === 'dance-posters'
+    ? '<div class="poster-hero-windows">' + posterWindow('Даша Писанец', 'hero-dasha.webp') +
+      cover + posterWindow('Пантера', 'hero-pantera.webp') + '</div>'
+    : cover;
   main.innerHTML =
     '<div class="wrap case">' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться к коллекции</a>' +
@@ -210,7 +220,7 @@ if (!project) {
     typography(project.field) + ' / ' + escapeHtml(project.year) + '</div>' +
     '<h1>' + projectTitle(project) + '</h1>' +
     '<div class="case-intro"><p>' + typography(project.short) + '</p></div>' +
-    caseTags(project) + '</header>' + caseCover(project) + '</div>' +
+    caseTags(project) + '</header>' + heroMedia + '</div>' +
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
