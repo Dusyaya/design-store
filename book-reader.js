@@ -9,7 +9,8 @@ const pages = printProject.id === "book"
   : Array.from({length: 20}, (_, i) => "Babushka" + (i + 1) + ".jpg");
 
 renderLayout();
-document.querySelector(".case-stage").innerHTML = productArtwork(printProject);
+document.querySelector(".case-summary").insertAdjacentHTML("beforeend", caseTags(printProject));
+document.querySelector(".case-cover-slot").outerHTML = caseCover(printProject);
 document.querySelector(".print-navigation").outerHTML = projectNavigation(printProject);
 
 const book = reader.querySelector(".print-book");

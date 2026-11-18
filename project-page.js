@@ -186,14 +186,13 @@ if (!project) {
     : '';
   main.innerHTML =
     '<div class="wrap case">' +
+    '<div class="case-hero"><header class="case-summary">' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться к коллекции</a>' +
     '<div class="eyebrow">' + typography(project.category) + ' / ' +
     typography(project.field) + ' / ' + escapeHtml(project.year) + '</div>' +
     '<h1>' + typography(project.name) + '</h1>' +
-    '<div class="case-intro"><p>' + typography(project.short) + '</p>' +
-    '<div class="tags">' + project.tags.map(tag =>
-      '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div></div>' +
-    (project.id === 'owl' ? '' : '<div class="case-stage">' + productArtwork(project) + '</div>') +
+    '<div class="case-intro"><p>' + typography(project.short) + '</p></div>' +
+    caseTags(project) + '</header>' + caseCover(project) + '</div>' +
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +

@@ -27,7 +27,7 @@
   function originalImageUrl(thumbnail) {
     return thumbnail
       .replace(/(\.jpe?g|\.png)\.webp$/i, "$1")
-      .replace(/(\/project-covers\/cover-\d+)\.webp$/i, "$1.png");
+      .replace(/(\/project-covers\/cover-\d+)(?:-hero)?\.webp$/i, "$1.png");
   }
 
   function cancelOriginal() {

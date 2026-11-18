@@ -31,7 +31,7 @@
 ## Замена изображений через GitHub
 
 - Портрет: `assets/IMG_4855-clean.jpg`. Для узких экранов используется кадрированный вариант `assets/portrait-clean-mobile.jpg`.
-- Обложки: облегчённые `cover-*.webp` в `assets/project-covers/` для карточек и кейсов.
+- Обложки находятся в `assets/project-covers/`. Каталог использует `cover-XX.webp`, шапка кейса использует `cover-XX-hero.webp`, увеличение открывает `cover-XX.png`.
 - Логотип Blender: `assets/blender_logo.png`.
 - Фото проекта: `assets/projects/ID/1.webp`, `2.webp`, `3.webp`.
 
