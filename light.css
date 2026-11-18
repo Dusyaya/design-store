@@ -937,8 +937,9 @@ body.lightbox-open { overflow: hidden; }
   object-fit: contain;
 }
 .supertyazh-mockup:nth-child(2) img { aspect-ratio: 1167 / 1750; }
-.case .supertyazh-mockup img { border-radius: 0 !important; }
+.case .supertyazh-mockups .supertyazh-mockup img { border-radius: 0 !important; }
 .media-window:nth-child(even) { --duration: 3.4s; --drift-x: 22px; --drift-delay: -1.4s; }
+.supertyazh-mockups .supertyazh-mockup { --duration: 6.2s; }
 @media (max-width: 700px) {
   .case .supertyazh-mockups { grid-template-columns: minmax(0, 1fr); }
   .supertyazh-mockup:nth-child(2) { width: min(80%, 360px); justify-self: center; }
