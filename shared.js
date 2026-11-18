@@ -175,7 +175,7 @@ function caseTags(project) {
     '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div>';
 }
 
-function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 24} = {}) {
+function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 24, overflowRatio = 0} = {}) {
   const image = item.querySelector("img.portfolio-zoomable");
   const control = image || item.querySelector(".window-bar");
   if (!image) control.tabIndex = 0;
@@ -185,11 +185,11 @@ function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 24} 
     : "Перетащите окно или переместите его стрелками. Escape возвращает окно на место.";
   const zoom = image ? (english ? " Press Enter to enlarge." : " Нажмите Enter, чтобы увеличить изображение.") : "";
   control.setAttribute("aria-description", movement + zoom);
-  enableFloatingItem(item, area, {returnToOrigin, followScroll: true, edgeGap});
+  enableFloatingItem(item, area, {returnToOrigin, followScroll: true, edgeGap, overflowRatio});
 }
 
 function enableFloatingItem(item, area, {
-  returnToOrigin = false, followScroll = false, edgeGap = 24, activationTarget = item
+  returnToOrigin = false, followScroll = false, edgeGap = 24, overflowRatio = 0, activationTarget = item
 } = {}) {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let x = 0;
@@ -201,8 +201,8 @@ function enableFloatingItem(item, area, {
 
   function bounded(nextX, nextY) {
     const margin = reducedMotion.matches ? 0 : edgeGap;
-    const horizontalMargin = Math.min(margin, Math.max(0, (area.clientWidth - item.offsetWidth) / 2));
-    const verticalMargin = Math.min(margin, Math.max(0, (area.clientHeight - item.offsetHeight) / 2));
+    const horizontalMargin = Math.min(margin, Math.max(0, (area.clientWidth - item.offsetWidth) / 2)) - item.offsetWidth * overflowRatio;
+    const verticalMargin = Math.min(margin, Math.max(0, (area.clientHeight - item.offsetHeight) / 2)) - item.offsetHeight * overflowRatio;
     let left = item.offsetLeft;
     let top = item.offsetTop;
     for (let parent = item.offsetParent; parent && parent !== area; parent = parent.offsetParent) {

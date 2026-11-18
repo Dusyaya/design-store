@@ -308,6 +308,8 @@
   });
   root.querySelectorAll(".floating-window").forEach(item => {
     const hero = item.closest(".case-hero");
-    enableFloatingWindow(item, hero || item.closest(".case"), {returnToOrigin: !hero});
+    enableFloatingWindow(item, hero || item.closest(".case"), hero
+      ? {returnToOrigin: false, edgeGap: 0, overflowRatio: .2}
+      : undefined);
   });
 })();
