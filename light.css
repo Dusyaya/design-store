@@ -538,6 +538,7 @@ footer {
   .case-row { grid-template-columns: minmax(0, 1fr); gap: 6px; }
 }
 .case :is(.showcase-item, .dance-case, .extra-case, .supertyazh-feature) { align-items: start !important; }
+.case .extra-case { padding-block: clamp(14px, 1vw, 20px); }
 .case :is(.showcase-copy, .dance-case-copy, .extra-case-copy, .supertyazh-feature-copy) { align-self: start; }
 .case .dance-branding-media { width: min(100%, calc(var(--lead-media-height) * 1.7)); margin-inline: auto; }
 .case .dance-branding-media figure { width: 100% !important; max-width: none !important; margin-inline: 0 !important; }
