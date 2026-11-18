@@ -487,12 +487,17 @@ footer {
   --cover-max-height: clamp(300px, 24vw, 460px);
   --cover-max-width: 660px;
   min-width: 0;
-  width: min(100%, var(--cover-max-width), calc(var(--cover-max-height) * var(--cover-ratio) + 2 * var(--cover-padding)));
+  width: min(100%, var(--cover-max-width), calc(max(var(--cover-max-height), var(--lead-media-height) - 2 * var(--cover-padding)) * var(--cover-ratio) + 2 * var(--cover-padding)));
   justify-self: end;
   margin-top: clamp(24px, 3vw, 48px);
   background: #fff;
 }
-.case-cover-media { padding: var(--cover-padding); }
+.case-cover-media {
+  display: grid;
+  align-items: center;
+  min-height: var(--lead-media-height);
+  padding: var(--cover-padding);
+}
 .case-cover-artwork {
   position: relative;
   aspect-ratio: var(--cover-ratio);
