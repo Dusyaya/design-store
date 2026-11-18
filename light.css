@@ -339,7 +339,7 @@ body:has(.portfolio-hero) > footer {
 .case > .back:hover { color: var(--text) !important; text-decoration: underline !important; }
 .case :is(.case-intro p, .case-row p, .showcase-copy p, .dance-case-copy p, .extra-case-copy p,
   .dance-posters-case > p, .supertyazh-feature-copy p, .supertyazh-work figcaption,
-  .supertyazh-missing, .showcase-counter, .dance-merch-media > p, .dance-site-case > p, .sevstar-hint, .baker-description, figcaption) { color: var(--muted); }
+  .supertyazh-missing, .showcase-counter, .dance-merch-media > p, .dance-website-preview > p, .sevstar-hint, .baker-description, figcaption) { color: var(--muted); }
 .case .case-stage {
   min-height: clamp(215px, 39vw, 590px);
   padding: clamp(14px, 2vw, 32px);

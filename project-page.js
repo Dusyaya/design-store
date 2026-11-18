@@ -316,6 +316,7 @@ if (!project) {
         img.style.setProperty('--slide-scale', offset === 0 ? '1' : '.78');
         img.style.zIndex = String(3 - Math.abs(offset));
         img.setAttribute('aria-hidden', String(offset !== 0));
+        img.tabIndex = offset === 0 ? 0 : -1;
       });
       main.querySelector('.zp-count').textContent = String(active + 1).padStart(2, '0') + ' / ' + String(zpSlides.length).padStart(2, '0');
     };

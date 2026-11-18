@@ -30,7 +30,7 @@
   root.querySelectorAll("img").forEach(image => {
     if (image.closest(".sevstar-tv")) return;
     const printPage = image.closest(".print-book");
-    image.setAttribute("tabindex", "0");
+    image.tabIndex = image.getAttribute("aria-hidden") === "true" ? -1 : 0;
     image.setAttribute("role", "button");
     const zoom = english ? "Zoom image" : "Увеличить изображение";
     image.setAttribute("aria-label", (image.alt ? image.alt + " · " : "") + zoom);
