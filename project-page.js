@@ -56,10 +56,14 @@ if (!project) {
       }).join("") + '</section>'
     : "";
 
-  const bannerImages = ['banner-01.jpg', 'banner-02.jpg', 'banner-03.jpg'];
+  const bannerImages = [
+    ['banner-01-srgb.jpg', 1250, 624],
+    ['banner-02.jpg', 1500, 609],
+    ['banner-03.jpg', 1500, 223]
+  ];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
     ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.</p></div><div class="showcase-media zp-banner-stack">' +
-      bannerImages.map((name, i) => '<img src="' + imagePath('assets/projects/gold/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" loading="lazy">').join('') +
+      bannerImages.map(([name, width, height], i) => '<img src="' + imagePath('assets/projects/gold/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" width="' + width + '" height="' + height + '" loading="lazy">').join('') +
       '</div></article>'
     : '';
   const presentationHtml = project.id === 'gold'
@@ -112,7 +116,13 @@ if (!project) {
         ['Пантера','pantera.mp4'],
         ['Сакура','sakura.mp4'],
         ['Trap Dance','Афиша_Соня.mp4']
-      ].map(([name,file])=>'<figure><figcaption>'+name+'</figcaption><div class="dance-poster-player"><video controls playsinline preload="metadata" aria-label="Видеоафиша '+name+'" src="'+imagePath('assets/projects/dance-posters/'+file)+'"></video></div></figure>').join('') +
+      ].map(([name, file]) => {
+        const videoPath = imagePath('assets/projects/dance-posters/' + file);
+        const posterPath = videoPath.replace(/\.mp4$/, '.webp');
+        return '<figure><figcaption>' + name + '</figcaption><div class="dance-poster-player">' +
+          '<video controls playsinline preload="none" aria-label="Видеоафиша ' + name + '" poster="' +
+          posterPath + '" src="' + videoPath + '"></video></div></figure>';
+      }).join('') +
       '</div></section>'
     : '';
   const danceWebsiteHtml = project.id === 'dance-website'
@@ -191,6 +201,7 @@ if (!project) {
     dancePostersHtml + danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + supertyazhHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
     (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'dance-posters' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' || project.id === 'supertyazh' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
     projectNavigation(project) + '</div>';
+  main.querySelectorAll("img").forEach(image => { image.decoding = "async"; });
   bindImages(main);
   const zinBook = main.querySelector('.zin-book');
   if (zinBook) {

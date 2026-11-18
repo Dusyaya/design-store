@@ -125,7 +125,7 @@ function productArtwork(project, thumbnail = false) {
   const index = PROJECTS.filter(item => item.id !== "supertyazh").findIndex(item => item.id === project.id) + 1;
   const number = project.id === "supertyazh" ? "12" : String(index).padStart(2, "0");
   const base = imagePath("assets/project-covers/cover-" + number);
-  if (thumbnail) return '<img src="' + base + '.webp" alt="" loading="lazy" fetchpriority="low" decoding="async" width="720" height="720">';
+  if (thumbnail) return '<img src="' + base + '.webp" alt="" loading="lazy" decoding="async" width="720" height="720">';
   return '<div class="artifact cover-packaging cover-packaging--' + number + '">' +
     '<img class="cover-packaging-image" src="' + base + '.webp" alt="' + escapeHtml(project.name) + '" decoding="async" fetchpriority="high"></div>';
 }

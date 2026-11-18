@@ -17,18 +17,52 @@
     '<div class="lightbox-controls" hidden>' + navButton("left", labels.previous, "lightbox-prev") +
     '<span role="status"></span>' + navButton("right", labels.next, "lightbox-next") + '</div>';
   document.body.appendChild(overlay);
-  const preview = overlay.querySelector("img");
+  let preview = overlay.querySelector("img");
   const controls = overlay.querySelector(".lightbox-controls");
   const previousPreview = controls.querySelector(".lightbox-prev");
   const nextPreview = controls.querySelector(".lightbox-next");
   let viewing;
+  let pendingOriginal;
+
+  function originalImageUrl(thumbnail) {
+    return thumbnail
+      .replace(/(\.jpe?g|\.png)\.webp$/i, "$1")
+      .replace(/(\/project-covers\/cover-\d+)\.webp$/i, "$1.png");
+  }
+
+  function cancelOriginal() {
+    pendingOriginal?.removeAttribute("src");
+    pendingOriginal = undefined;
+    preview.removeAttribute("aria-busy");
+  }
 
   function updatePreview() {
+    cancelOriginal();
     const image = viewing.images[viewing.index];
-    preview.src = image.currentSrc || image.getAttribute("src") || image.dataset.src;
+    const thumbnail = image.currentSrc || image.getAttribute("src") || image.dataset.src;
+    preview.src = thumbnail;
     preview.alt = image.alt;
     controls.hidden = viewing.images.length < 2;
     controls.querySelector("[role=status]").textContent = formatCount(viewing.index, viewing.images.length);
+
+    const originalUrl = originalImageUrl(thumbnail);
+    if (originalUrl === thumbnail) return;
+    const original = new Image();
+    pendingOriginal = original;
+    preview.setAttribute("aria-busy", "true");
+    original.alt = image.alt;
+    original.fetchPriority = "high";
+    original.src = originalUrl;
+    original.decode().then(() => {
+      if (pendingOriginal !== original) return;
+      pendingOriginal = undefined;
+      preview.replaceWith(original);
+      preview = original;
+    }).catch(() => {
+      // Пока оригинал недоступен, миниатюра остаётся открытой.
+    }).finally(() => {
+      if (pendingOriginal === original) cancelOriginal();
+    });
   }
 
   function openPreview(images, index, select) {
@@ -59,6 +93,7 @@
   });
   overlay.addEventListener("close", () => {
     document.body.classList.remove("lightbox-open");
+    cancelOriginal();
     preview.removeAttribute("src");
     const focusTarget = viewing.select ? viewing.images[viewing.index] : viewing.returnTo;
     focusTarget?.focus({preventScroll: true});

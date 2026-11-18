@@ -63,9 +63,10 @@ function renderCatalog() {
   }).join("");
 }
 
-filters.innerHTML = catalog.filters.map(name =>
-  '<button type="button" data-filter="' + escapeHtml(name) + '">' +
-  escapeHtml(name) + '</button>').join("");
+const filterRows = [catalog.filters.slice(0, 3), catalog.filters.slice(3)];
+filters.innerHTML = filterRows.map(row => '<div class="filter-row">' +
+  row.map(name => '<button type="button" data-filter="' + escapeHtml(name) + '">' +
+    escapeHtml(name) + '</button>').join("") + '</div>').join("");
 filters.addEventListener("click", event => {
   const button = event.target.closest("button[data-filter]");
   if (!button) return;
