@@ -241,5 +241,12 @@
     if (carouselImages.has(image) || image.closest(".print-book")) return;
     labelImage(image, labels.zoom);
     bindImage(image, () => openPreview([image], 0));
+    const floatingArea = image.closest(".case-cover-media.is-floating");
+    if (floatingArea) {
+      image.setAttribute("aria-description", english
+        ? "Drag or use the arrow keys to move. Click or press Enter to enlarge."
+        : "Перетащите или используйте клавиши со стрелками. Нажмите, чтобы увеличить.");
+      enableFloatingItem(image, floatingArea);
+    }
   });
 })();

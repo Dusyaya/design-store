@@ -135,14 +135,134 @@ function productArtwork(project) {
 
 function caseCover(project) {
   const name = escapeHtml(project.name);
+  const floating = ["laser", "gold", "dance-posters"].includes(project.id);
   return '<figure class="case-cover"><figcaption>' +
     '<span class="window-lights" aria-hidden="true"><i></i><i></i><i></i></span>' +
     '<span class="case-cover-label">' + name + '.webp</span></figcaption>' +
-    '<div class="case-cover-media"><img src="' + coverBase(project) +
+    '<div class="case-cover-media' + (floating ? ' is-floating' : '') + '"><img src="' + coverBase(project) +
     '-hero.webp" alt="' + name + '" decoding="async" fetchpriority="high"></div></figure>';
 }
 
 function caseTags(project) {
   return '<div class="tags">' + project.tags.map(tag =>
     '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div>';
+}
+
+function enableFloatingItem(item, area) {
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  let x = 0;
+  let y = 0;
+  let drag;
+  let releaseEffect;
+  let suppressClick = false;
+  const position = (px, py) => px + "px " + py + "px";
+
+  function bounded(nextX, nextY) {
+    const margin = reducedMotion.matches ? 0 : 16;
+    return [
+      Math.max(margin - item.offsetLeft, Math.min(nextX,
+        area.clientWidth - item.offsetLeft - item.offsetWidth - margin)),
+      Math.max(margin - item.offsetTop, Math.min(nextY,
+        area.clientHeight - item.offsetTop - item.offsetHeight - margin))
+    ];
+  }
+
+  function moveTo(nextX, nextY) {
+    [x, y] = bounded(nextX, nextY);
+    item.style.translate = position(x, y);
+  }
+
+  function stopRelease() {
+    if (!releaseEffect) return;
+    const [currentX, currentY = 0] = getComputedStyle(item).translate.split(" ").map(parseFloat);
+    releaseEffect.cancel();
+    releaseEffect = undefined;
+    item.classList.remove("is-releasing");
+    if (Number.isFinite(currentX)) moveTo(currentX, currentY);
+  }
+
+  item.addEventListener("pointerdown", event => {
+    if (!event.isPrimary || event.button !== 0) return;
+    stopRelease();
+    suppressClick = false;
+    drag = {
+      id: event.pointerId, originX: event.clientX - x, originY: event.clientY - y,
+      startX: event.clientX, startY: event.clientY, lastX: event.clientX, lastY: event.clientY,
+      time: event.timeStamp, vx: 0, vy: 0
+    };
+    item.setPointerCapture(event.pointerId);
+    item.classList.add("is-grabbed");
+  });
+  item.addEventListener("pointermove", event => {
+    if (event.pointerId !== drag?.id) return;
+    if (!suppressClick && Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) < 4) return;
+    suppressClick = true;
+    const elapsed = Math.max(8, event.timeStamp - drag.time);
+    drag.vx = drag.vx * .35 + (event.clientX - drag.lastX) / elapsed * .65;
+    drag.vy = drag.vy * .35 + (event.clientY - drag.lastY) / elapsed * .65;
+    drag.lastX = event.clientX;
+    drag.lastY = event.clientY;
+    drag.time = event.timeStamp;
+    moveTo(event.clientX - drag.originX, event.clientY - drag.originY);
+  });
+  item.addEventListener("pointerup", event => {
+    if (event.pointerId !== drag?.id || !suppressClick || reducedMotion.matches || !item.animate) return;
+    const totalX = event.clientX - drag.startX;
+    const totalY = event.clientY - drag.startY;
+    const distance = Math.hypot(totalX, totalY);
+    if (distance < 4) return;
+    const speed = event.timeStamp - drag.time < 110 ? Math.hypot(drag.vx, drag.vy) : 0;
+    const impulse = Math.min(28, 8 + speed * 27);
+    const directionX = speed > .04 ? drag.vx / speed : totalX / distance;
+    const directionY = speed > .04 ? drag.vy / speed : totalY / distance;
+    const from = position(x, y);
+    const [peakX, peakY] = bounded(x + directionX * impulse, y + directionY * impulse);
+    const dx = peakX - x;
+    const dy = peakY - y;
+    const recoil = position(x + dx * .46, y + dy * .46);
+    moveTo(x + dx * .62, y + dy * .62);
+    item.classList.add("is-releasing");
+    const effect = item.animate([
+      {translate: from, offset: 0, easing: "cubic-bezier(.14,.72,.25,1)"},
+      {translate: position(peakX, peakY), offset: .32, easing: "ease-in-out"},
+      {translate: recoil, offset: .7, easing: "ease-out"},
+      {translate: position(x, y), offset: 1}
+    ], {duration: 460});
+    releaseEffect = effect;
+    effect.onfinish = () => {
+      if (releaseEffect !== effect) return;
+      releaseEffect = undefined;
+      item.classList.remove("is-releasing");
+    };
+  });
+  item.addEventListener("lostpointercapture", () => {
+    drag = undefined;
+    item.classList.remove("is-grabbed");
+  });
+  item.addEventListener("dragstart", event => event.preventDefault());
+  item.addEventListener("click", event => {
+    if (!suppressClick || event.detail === 0) return;
+    suppressClick = false;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+  item.addEventListener("keydown", event => {
+    const step = event.shiftKey ? 24 : 8;
+    const directions = {ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step]};
+    if (event.key === "Escape") {
+      stopRelease();
+      x = y = 0;
+      item.style.translate = "";
+    } else if (directions[event.key]) {
+      event.preventDefault();
+      stopRelease();
+      const [dx, dy] = directions[event.key];
+      moveTo(x + dx, y + dy);
+    }
+  });
+  reducedMotion.addEventListener("change", stopRelease);
+  new ResizeObserver(() => {
+    stopRelease();
+    if (x || y) moveTo(x, y);
+  }).observe(area);
 }
