@@ -1,5 +1,6 @@
 function iconArrowUpRight(){return '<svg class="ui-arrow ui-arrow-up-right" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg>';}
 // Общие функции для всех страниц.
+const arrowSvg = direction => '<svg class="ui-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="' + (direction === 'left' ? 'M19 12H5m7 7-7-7 7-7' : direction === 'up-right' ? 'M7 17 17 7M8 7h9v9' : 'M5 12h14m-7-7 7 7-7 7') + '"/></svg>';
 const SITE_ROOT = document.documentElement.dataset.root || "./";
 const SITE = window.SITE_CONTENT;
 const PROJECTS = window.PORTFOLIO_PROJECTS;
@@ -10,40 +11,53 @@ function escapeHtml(value) {
   })[char]);
 }
 
-function typography(value) {
-  return escapeHtml(value)
-    .replace(/(^|[\s(«„])((?:в|во|на|к|ко|с|со|у|о|об|от|до|по|за|из|и|а|но|не|для|при|над|под|без|про|как|что))\s+/giu,
-      (_, before, word) => before + word + "&nbsp;")
-    .replace(/\s+—\s+/g, "&nbsp;—&nbsp;");
+function bindWords(value) {
+  return value
+    .replace(/(?<=[\p{L}\p{N}])[-‐](?=[\p{L}\p{N}])/gu, "‑")
+    .replace(/(?<![\p{L}\p{N}‑])(?:в|во|на|к|ко|с|со|у|о|об|обо|от|ото|до|по|за|из|изо|из‑за|из‑под|и|а|но|не|ни|для|при|над|под|без|про|через|между|перед|как|что)[ \t]+(?=[\p{L}\p{N}«„“"(])/giu,
+      match => match.trimEnd() + "\u00a0");
 }
+
+function typography(value) {
+  return escapeHtml(bindWords(String(value ?? ""))).replace(/\s+—\s+/g, "&nbsp;—&nbsp;");
+}
+
+// Применяем правила к статическому тексту и к переводу после его подстановки.
+document.addEventListener("DOMContentLoaded", () => {
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (!node.parentElement.closest("script, style, svg, pre, code")) {
+      const formatted = bindWords(node.data);
+      if (formatted !== node.data) node.data = formatted;
+    }
+  }
+});
 
 function projectUrl(project) {
   return SITE_ROOT + "projects/" + encodeURIComponent(project.id) + "/";
 }
 
-function imagePath(path) {
-  return SITE_ROOT + path;
+function projectNavigation(project) {
+  const index = PROJECTS.indexOf(project);
+  const previous = PROJECTS[(index - 1 + PROJECTS.length) % PROJECTS.length];
+  const next = PROJECTS[(index + 1) % PROJECTS.length];
+  const english = window.PORTFOLIO_LANG === "en";
+  const label = (item, direction) => '<span><small>' + direction + '</small><strong>' +
+    projectTitle(item) + '</strong></span>';
+  return '<nav class="project-navigation" aria-label="' + (english ? "Project navigation" : "Навигация по проектам") + '">' +
+    '<a href="' + projectUrl(previous) + '" rel="prev">' + arrowSvg("left") +
+    label(previous, english ? "Previous project" : "Предыдущий проект") + '</a>' +
+    '<a href="' + projectUrl(next) + '" rel="next">' +
+    label(next, english ? "Next project" : "Следующий проект") + arrowSvg("right") + '</a></nav>';
 }
 
-// Проверяем версию файла в GitHub, чтобы после замены фото не оставалось старого кэша.
-async function refreshImage(image, path) {
-  try {
-    const url = "https://api.github.com/repos/Dusyaya/design-store/contents/" + path;
-    const response = await fetch(url, { cache: "no-store" });
-    if (!response.ok) return;
-    const file = await response.json();
-    if (!file.sha) return;
-    const next = "https://raw.githubusercontent.com/Dusyaya/design-store/main/" +
-      path + "?v=" + encodeURIComponent(file.sha);
-    if (image.src !== next) image.src = next;
-  } catch (_) {
-    // При отсутствии сети остаётся обычный адрес файла.
-  }
+function imagePath(path) {
+  const projectAsset = /^(assets\/projects\/|projects\/owl\/).+\.(jpe?g|png)$/i.test(path);
+  return SITE_ROOT + path + (projectAsset ? ".webp" : "");
 }
 
 function bindImages(root = document) {
   root.querySelectorAll("img[data-file]").forEach(image => {
-    const path = image.dataset.file;
     image.addEventListener("load", () => {
       image.style.display = "block";
       const placeholder = image.nextElementSibling;
@@ -54,7 +68,7 @@ function bindImages(root = document) {
       const placeholder = image.nextElementSibling;
       if (placeholder?.classList.contains("placeholder")) placeholder.style.display = "flex";
     });
-    refreshImage(image, path);
+
   });
 }
 
@@ -81,18 +95,18 @@ function emailContactUrl() {
 
 function socialLinks() {
   const links = [
-    ["Telegram", telegramContactUrl(), "telegram", "26A5E4"],
-    ["Instagram", SITE.contacts.instagram, "instagram", "E4405F"],
-    ["WhatsApp", whatsappContactUrl(), "whatsapp", "25D366"]
+    ["Telegram", telegramContactUrl(), "telegram"],
+    ["Instagram", SITE.contacts.instagram, "instagram-filled"],
+    ["WhatsApp", whatsappContactUrl(), "whatsapp-filled"],
+    [window.PORTFOLIO_LANG === "en" ? "Email" : "Почта", emailContactUrl(), "mail-filled"]
   ];
-  return '<div class="social-links" aria-label="Мои контакты">' +
-    links.map(([name, url, icon, color]) =>
+  return '<div class="social-links">' +
+    links.map(([name, url, icon]) =>
       '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' +
-      '<img src="https://cdn.simpleicons.org/' + icon + '/' + color + '" alt="" loading="lazy">' +
+      '<img class="social-icon" src="' + SITE_ROOT + 'assets/icons/' + icon +
+      '.svg" alt="" width="22" height="22" loading="lazy">' +
       '<span>' + name + '</span></a>'
-    ).join("") +
-    '<a href="' + escapeHtml(emailContactUrl()) + '" target="_blank" rel="noopener noreferrer">' +
-    '<svg class="mail-symbol" viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/></svg><span>' + (window.PORTFOLIO_LANG === "en" ? "Email" : "Почта") + '</span></a></div>';
+    ).join("") + '</div>';
 }
 
 function renderLayout() {
@@ -109,21 +123,346 @@ function renderLayout() {
     '<span aria-hidden="true">/</span>' +
     '<a href="?lang=en" lang="en" class="' + (window.PORTFOLIO_LANG === 'en' ? 'is-active' : '') + '" aria-label="English language">EN</a></div>';
   const footer = document.querySelector("footer");
+  if (nav) {
+    const topbar = nav.closest(".topbar");
+    new ResizeObserver(() => {
+      document.documentElement.style.setProperty("--sticky-offset", (topbar.offsetHeight + 12) + "px");
+    }).observe(topbar);
+    nav.setAttribute("aria-label", window.PORTFOLIO_LANG === "en" ? "Main navigation" : "Основная навигация");
+    const currentLanguage = nav.querySelector(".language-switch .is-active");
+    currentLanguage.setAttribute("aria-current", "true");
+    nav.querySelectorAll(".language-switch a").forEach(link => {
+      link.href += location.hash;
+      const formLanguage = link.getAttribute("lang");
+      link.addEventListener("click", () => {
+        link.href = "?lang=" + formLanguage + location.hash;
+      });
+    });
+  }
   if (footer) footer.innerHTML = '<span>' + typography(SITE.footer) + '</span>';
 }
 
-const COLORS = {
-  pink: "#ef5c99", blue: "#668695", yellow: "#f1d91c",
-  red: "#e84057", coral: "#f58ba8", purple: "#8c5be5",
-  mint: "#4bc9bd", orange: "#ef903b", silver: "#9ca6b9"
-};
+const WINDOW_LIGHTS = '<span class="window-lights" aria-hidden="true"><i></i><i></i><i></i></span>';
+
+function windowBar(title) {
+  return '<figcaption class="window-bar">' + WINDOW_LIGHTS + '<span>' + escapeHtml(title) + '</span></figcaption>';
+}
+
+function coverNumber(project) {
+  const index = PROJECTS.filter(item => item.id !== "supertyazh").findIndex(item => item.id === project.id) + 1;
+  return project.id === "supertyazh" ? 12 : index;
+}
+
+function coverBase(project) {
+  return imagePath("assets/project-covers/cover-" + String(coverNumber(project)).padStart(2, "0"));
+}
 
 function productArtwork(project) {
-  if (project.id === 'supertyazh') return '<div class="artifact cover-packaging"><img class="cover-packaging-image" src="' + imagePath('assets/project-covers/cover-12.png') + '" alt="СУПЕРТЯЖ — обложка кейса" loading="lazy"></div>';
-  const index = PROJECTS.filter(item => item.id !== 'supertyazh').findIndex(item => item.id === project.id) + 1;
-  const number = String(index).padStart(2, '0');
-  return '<div class="artifact cover-packaging cover-packaging--' + number + '">' +
-    '<img class="cover-packaging-image" src="' + imagePath('assets/project-covers/cover-' + number + '.png') +
-    '" alt="Обложка проекта ' + escapeHtml(project.name) + '" loading="lazy">' +
-    '</div>';
+  return '<img src="' + coverBase(project) + '.webp" alt="" loading="lazy" decoding="async" width="720" height="720">';
+}
+
+function projectTitle(project) {
+  return escapeHtml(project.name).replace(/\s+—\s+/g, "&nbsp;— ");
+}
+
+// Размер PNG и границы непрозрачной части: ширина, высота, слева, сверху, справа, снизу.
+const COVER_BOUNDS = [
+  [2048, 2048, 517, 50, 1598, 2026],
+  [2048, 2048, 517, 50, 1598, 2026],
+  [1385, 1136, 160, 71, 1225, 1065],
+  [1312, 1199, 177, 9, 1212, 1199],
+  [1385, 1136, 16, 179, 1311, 958],
+  [1385, 1136, 47, 150, 1338, 997],
+  [2048, 2048, 525, 46, 1606, 2024],
+  [1385, 1136, 16, 179, 1311, 958],
+  [1385, 1136, 0, 142, 1385, 998],
+  [1385, 1136, 16, 179, 1311, 958],
+  [1122, 1402, 107, 0, 1082, 1380],
+  [2951, 3643, 0, 0, 2950, 3643]
+];
+
+const CASE_HERO_IMAGES = {
+  laser: [
+    ["laser/stories-01.jpg", "Сторис", "Story"],
+    ["laser/mailing-01.jpg", "Рассылка", "Email campaign"]
+  ],
+  gold: [
+    ["gold/banner-01-blue-preview.webp", "Наружная реклама", "Outdoor advertising", "assets/projects/gold/banner-01-blue.jpg"],
+    ["gold/banner-03-blue-preview.webp", "Баннер для ПроДокторов", "ProDoktorov banner", "assets/projects/gold/banner-03.jpg"]
+  ],
+  dance: [
+    ["dance/branding/poster.jpg", "Афиша", "Poster"],
+    ["dance/merch/merch-02.jpg", "Мерч", "Merchandise"]
+  ],
+  book: [
+    ["book/006.jpg", "Страница книги", "Book page"],
+    ["book/014.jpg", "Страница книги", "Book page"]
+  ],
+  supertyazh: [
+    ["supertyazh/mockup-01.jpg", "Уличный мокап", "Outdoor mockup"],
+    ["supertyazh/mockup-02.jpg", "Мокап в помещении", "Indoor mockup"]
+  ],
+  "dance-website": [["dance-website/preview.jpg", "Дизайн сайта", "Website design"]],
+  sevstar: [
+    ["sevstar/Рисунок2.png", "Экран приложения", "App screen"],
+    ["sevstar/Рисунок5.png", "Экран приложения", "App screen"]
+  ],
+  "dance-posters": [
+    ["dance-posters/hero-dasha.webp", "Даша Писанец", "Dasha Pisanets"],
+    ["dance-posters/hero-pantera.webp", "Пантера", "Pantera"]
+  ],
+  extra: [
+    ["extra/illustrations/02.jpg", "Иллюстрация", "Illustration"],
+    ["extra/3d/01.jpg", "3D-модель", "3D model"]
+  ],
+  baker: [
+    ["baker/screen-02.png", "Игровой экран", "Game screen"],
+    ["baker/screen-04.png", "Игровой экран", "Game screen"]
+  ],
+  owl: [["projects/owl/owl-hero-detail.webp", "Первый экран сайта", "Landing page", "projects/owl/Сова и Лисенок.png"]],
+  babushka: [
+    ["babushka/Babushka4.jpg", "Страница зина", "Zine page"],
+    ["babushka/Babushka11.jpg", "Страница зина", "Zine page"]
+  ]
+};
+
+function caseCover(project) {
+  const landscape = ["dance-website", "sevstar", "extra", "baker", "owl"].includes(project.id);
+  const [width, height, left, top, right, bottom] = COVER_BOUNDS[coverNumber(project) - 1];
+  const artWidth = right - left;
+  const artHeight = bottom - top;
+  const cover = '<figure class="case-cover floating-window case-cover-front' + (landscape ? ' is-landscape' : '') +
+    '" style="--cover-ratio:' + artWidth / artHeight + '">' +
+    windowBar(project.name + ".png") +
+    '<div class="case-cover-media"><div class="case-cover-artwork"><img src="' + coverBase(project) +
+    '.png" alt="' + escapeHtml(project.name) + '" width="' + width + '" height="' + height +
+    '" style="--image-width:' + width / artWidth * 100 + '%;--image-left:' + -left / artWidth * 100 +
+    '%;--image-top:' + -top / artHeight * 100 + '%" decoding="async" fetchpriority="high"></div></div></figure>';
+  const images = CASE_HERO_IMAGES[project.id];
+  if (!images) return cover;
+  const renderSide = ([file, ru, en, original], side) => {
+    const name = window.PORTFOLIO_LANG === "en" ? en : ru;
+    const path = file.startsWith("projects/") ? file : "assets/projects/" + file;
+    return '<figure class="case-cover floating-window case-side-window is-' + side + '">' +
+      windowBar(name) + '<div class="case-cover-media"><img src="' + escapeHtml(imagePath(path)) +
+      '" alt="' + escapeHtml(name) + '"' +
+      (original ? ' data-original="' + escapeHtml(SITE_ROOT + original) + '"' : '') +
+      ' decoding="async"></div></figure>';
+  };
+  const posters = project.id === "dance-posters" ? " poster-hero-windows" : "";
+  return '<div class="case-hero-windows' + posters + (images.length === 1 ? " has-one-side" : "") + '">' +
+    renderSide(images[0], "left") + cover + (images[1] ? renderSide(images[1], "right") : "") + '</div>';
+}
+
+const RUSSIAN_TAGS = {
+  "AI visuals": "Иллюстрации с ИИ",
+  Print: "Полиграфия",
+  Digital: "Цифровой дизайн",
+  Prepress: "Допечатная подготовка",
+  Identity: "Айдентика",
+  Merch: "Мерч",
+  "Editorial Design": "Редакционный дизайн",
+  "Book Design": "Книжный дизайн",
+  Advertising: "Реклама",
+  "Art Direction": "Арт-дирекшн",
+  "AI-assisted visuals": "Графика с ИИ",
+  UI: "Интерфейсы",
+  "Motion Design": "Моушн-дизайн",
+  "Video Posters": "Видеоафиши",
+  Dance: "Танцы",
+  "Digital Art": "Цифровое искусство",
+  "Game UI": "Игровые интерфейсы",
+  Illustration: "Иллюстрация",
+  Screens: "Экраны",
+  "Web Design": "Веб-дизайн",
+  Landing: "Лендинг",
+  Editorial: "Редакционный дизайн",
+  Collage: "Коллаж",
+  Typography: "Типографика"
+};
+
+function caseTags(project) {
+  const tags = window.PORTFOLIO_LANG === "en" ? project.tags :
+    project.tags.map(tag => RUSSIAN_TAGS[tag] ?? tag);
+  return '<div class="tags">' + tags.map(tag =>
+    '<span class="tag">' + typography(tag) + '</span>').join("") + '</div>';
+}
+
+function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 0, overflowRatio = .2} = {}) {
+  const image = item.querySelector("img.portfolio-zoomable");
+  const control = image || item.querySelector(".window-bar");
+  if (!image) control.tabIndex = 0;
+  const english = window.PORTFOLIO_LANG === "en";
+  const movement = english
+    ? "Drag to move the window or use the arrow keys. Escape returns it to its place."
+    : "Перетащите окно или переместите его стрелками. Escape возвращает окно на место.";
+  const zoom = image ? (english ? " Press Enter to enlarge." : " Нажмите Enter, чтобы увеличить изображение.") : "";
+  control.setAttribute("aria-description", movement + zoom);
+  enableFloatingItem(item, area, {returnToOrigin, followScroll: true, edgeGap, overflowRatio});
+}
+
+function enableFloatingItem(item, area, {
+  returnToOrigin = false, returnAt, followScroll = false, edgeGap = 0, overflowRatio = .2, activationTarget = item
+} = {}) {
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const shouldReturn = () => returnToOrigin || returnAt?.matches;
+  let x = 0;
+  let y = 0;
+  let drag;
+  let releaseEffect;
+  let suppressClick = false;
+  const position = (px, py) => px + "px " + py + "px";
+
+  function bounded(nextX, nextY) {
+    const margin = reducedMotion.matches ? 0 : edgeGap;
+    const horizontalMargin = Math.min(margin, Math.max(0, (area.clientWidth - item.offsetWidth) / 2)) - item.offsetWidth * overflowRatio;
+    const verticalMargin = Math.min(margin, Math.max(0, (area.clientHeight - item.offsetHeight) / 2)) - item.offsetHeight * overflowRatio;
+    let left = item.offsetLeft;
+    let top = item.offsetTop;
+    for (let parent = item.offsetParent; parent && parent !== area; parent = parent.offsetParent) {
+      left += parent.offsetLeft;
+      top += parent.offsetTop;
+    }
+    return [
+      Math.max(horizontalMargin - left, Math.min(nextX,
+        area.clientWidth - left - item.offsetWidth - horizontalMargin)),
+      Math.max(verticalMargin - top, Math.min(nextY,
+        area.clientHeight - top - item.offsetHeight - verticalMargin))
+    ];
+  }
+
+  function moveTo(nextX, nextY) {
+    [x, y] = bounded(nextX, nextY);
+    item.style.translate = position(x, y);
+  }
+
+  function stopRelease() {
+    if (!releaseEffect) return;
+    const [currentX, currentY = 0] = getComputedStyle(item).translate.split(" ").map(parseFloat);
+    releaseEffect.cancel();
+    releaseEffect = undefined;
+    item.classList.remove("is-releasing");
+    if (Number.isFinite(currentX)) moveTo(currentX, currentY);
+  }
+
+  function animateRelease(keyframes, timing) {
+    item.classList.add("is-releasing");
+    const effect = item.animate(keyframes, timing);
+    releaseEffect = effect;
+    effect.onfinish = () => {
+      if (releaseEffect !== effect) return;
+      releaseEffect = undefined;
+      item.classList.remove("is-releasing");
+    };
+  }
+
+  function resetPosition() {
+    const from = position(x, y);
+    x = y = 0;
+    item.style.translate = "";
+    if (shouldReturn() && !reducedMotion.matches && from !== "0px 0px" && item.animate) {
+      animateRelease([{translate: from}, {translate: "0px 0px"}], {
+        duration: 420, easing: "cubic-bezier(.19,.86,.25,1)"
+      });
+    }
+  }
+
+  const pointerY = event => followScroll ? event.pageY : event.clientY;
+  item.addEventListener("pointerdown", event => {
+    if (!event.isPrimary || event.button !== 0 || event.target.closest("video")) return;
+    stopRelease();
+    suppressClick = false;
+    drag = {
+      id: event.pointerId, originX: event.clientX - x, originY: pointerY(event) - y,
+      startX: event.clientX, startY: pointerY(event), lastX: event.clientX, lastY: pointerY(event),
+      time: event.timeStamp, vx: 0, vy: 0
+    };
+    // Захват на исходном элементе сохраняет клик по изображению внутри окна.
+    event.target.setPointerCapture(event.pointerId);
+    item.classList.add("is-grabbed");
+  });
+  item.addEventListener("pointermove", event => {
+    if (event.pointerId !== drag?.id) return;
+    const currentY = pointerY(event);
+    if (!suppressClick && Math.hypot(event.clientX - drag.startX, currentY - drag.startY) < 4) return;
+    suppressClick = true;
+    const elapsed = Math.max(8, event.timeStamp - drag.time);
+    drag.vx = drag.vx * .35 + (event.clientX - drag.lastX) / elapsed * .65;
+    drag.vy = drag.vy * .35 + (currentY - drag.lastY) / elapsed * .65;
+    drag.lastX = event.clientX;
+    drag.lastY = currentY;
+    drag.viewportY = event.clientY;
+    drag.time = event.timeStamp;
+    moveTo(event.clientX - drag.originX, currentY - drag.originY);
+  });
+  if (followScroll) window.addEventListener("scroll", () => {
+    if (drag && suppressClick) moveTo(x, drag.viewportY + window.scrollY - drag.originY);
+  }, {passive: true});
+  item.addEventListener("pointerup", event => {
+    if (event.pointerId !== drag?.id || !suppressClick) return;
+    if (shouldReturn()) {
+      resetPosition();
+      return;
+    }
+    if (reducedMotion.matches || !item.animate) return;
+    const totalX = event.clientX - drag.startX;
+    const totalY = pointerY(event) - drag.startY;
+    const distance = Math.hypot(totalX, totalY);
+    if (distance < 4) return;
+    const speed = event.timeStamp - drag.time < 110 ? Math.hypot(drag.vx, drag.vy) : 0;
+    const impulse = Math.min(34, 12 + speed * 29);
+    const directionX = speed > .04 ? drag.vx / speed : totalX / distance;
+    const directionY = speed > .04 ? drag.vy / speed : totalY / distance;
+    const from = position(x, y);
+    const [peakX, peakY] = bounded(x + directionX * impulse, y + directionY * impulse);
+    animateRelease([
+      {translate: from, offset: 0, easing: "cubic-bezier(.14,.72,.25,1)"},
+      {translate: position(peakX, peakY), offset: .32, easing: "ease-out"},
+      {translate: from, offset: 1}
+    ], {duration: 300});
+  });
+  item.addEventListener("lostpointercapture", () => {
+    if (shouldReturn() && drag && !releaseEffect && suppressClick) resetPosition();
+    drag = undefined;
+    item.classList.remove("is-grabbed");
+  });
+  if (activationTarget !== item) activationTarget.addEventListener("pointerdown", event => {
+    if (!item.contains(event.target)) suppressClick = false;
+  });
+  activationTarget.addEventListener("dragstart", event => event.preventDefault());
+  activationTarget.addEventListener("click", event => {
+    if (!suppressClick || event.detail === 0 || event.target.closest("video")) return;
+    suppressClick = false;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+  item.addEventListener("keydown", event => {
+    if (event.target.closest("video")) return;
+    const step = event.shiftKey ? 24 : 8;
+    const directions = {ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step]};
+    if (event.key === "Escape") {
+      stopRelease();
+      resetPosition();
+    } else if (directions[event.key]) {
+      event.preventDefault();
+      stopRelease();
+      const [dx, dy] = directions[event.key];
+      moveTo(x + dx, y + dy);
+    }
+  });
+  returnAt?.addEventListener("change", () => {
+    if (returnAt.matches && !drag) {
+      stopRelease();
+      resetPosition();
+    }
+  });
+  reducedMotion.addEventListener("change", () => {
+    stopRelease();
+    if (shouldReturn() && !drag) resetPosition();
+  });
+  new ResizeObserver(() => {
+    if (shouldReturn() && releaseEffect) return;
+    stopRelease();
+    if (x || y) moveTo(x, y);
+  }).observe(area);
 }
