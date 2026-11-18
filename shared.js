@@ -170,9 +170,38 @@ function caseCover(project) {
     '.png" alt="' + escapeHtml(project.name) + '" decoding="async" fetchpriority="high"></div></figure>';
 }
 
+const RUSSIAN_TAGS = {
+  "AI visuals": "Иллюстрации с ИИ",
+  Print: "Полиграфия",
+  Digital: "Цифровой дизайн",
+  Prepress: "Допечатная подготовка",
+  Identity: "Айдентика",
+  Merch: "Мерч",
+  "Editorial Design": "Редакционный дизайн",
+  "Book Design": "Книжный дизайн",
+  Advertising: "Реклама",
+  "Art Direction": "Арт-дирекшн",
+  "AI-assisted visuals": "Графика с ИИ",
+  UI: "Интерфейсы",
+  "Motion Design": "Моушн-дизайн",
+  "Video Posters": "Видеоафиши",
+  Dance: "Танцы",
+  "Digital Art": "Цифровое искусство",
+  "Game UI": "Игровые интерфейсы",
+  Illustration: "Иллюстрация",
+  Screens: "Экраны",
+  "Web Design": "Веб-дизайн",
+  Landing: "Лендинг",
+  Editorial: "Редакционный дизайн",
+  Collage: "Коллаж",
+  Typography: "Типографика"
+};
+
 function caseTags(project) {
-  return '<div class="tags">' + project.tags.map(tag =>
-    '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div>';
+  const tags = window.PORTFOLIO_LANG === "en" ? project.tags :
+    project.tags.map(tag => RUSSIAN_TAGS[tag] ?? tag);
+  return '<div class="tags">' + tags.map(tag =>
+    '<span class="tag">' + typography(tag) + '</span>').join("") + '</div>';
 }
 
 function enableFloatingWindow(item, area, {returnToOrigin = true, edgeGap = 0, overflowRatio = .2} = {}) {

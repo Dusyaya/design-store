@@ -45,9 +45,7 @@ shelf.innerHTML = PROJECTS.map((project, index) => {
     '<span aria-hidden="true" class="catalog-index">' + String(index + 1).padStart(2, "0") + '</span></div></div>' +
     '<div class="catalog-card-copy"><h3>' + projectTitle(project) + ' ' + arrowSvg("right") + '</h3>' +
     '<p>' + typography(project.short) + '</p>' +
-    '<div class="tags">' + project.tags.map(tag =>
-      '<span class="tag">' + escapeHtml(tag) + '</span>').join("") +
-    '</div></div></a>';
+    caseTags(project) + '</div></a>';
 }).join("");
 const cards = new Map([...shelf.children].map(card => [card.dataset.project, card]));
 cards.forEach(card => enableFloatingItem(card.querySelector(".catalog-cover"), home, {
