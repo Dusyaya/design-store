@@ -238,7 +238,7 @@
   }
 
   root.querySelectorAll("img").forEach(image => {
-    if (carouselImages.has(image) || image.closest(".print-book") || image.classList.contains("sevstar-tv-frame")) return;
+    if (carouselImages.has(image) || image.closest(".print-book")) return;
     labelImage(image, labels.zoom);
     bindImage(image, () => openPreview([image], 0));
   });

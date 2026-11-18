@@ -114,12 +114,12 @@ if (!project) {
       [
         ['Даша Писанец','dasha.mp4'],
         ['Пантера','pantera.mp4'],
-        ['Сакура','sakura.mp4'],
+        ['Сакура','sakura.mp4','720 / 1316'],
         ['Trap Dance','Афиша_Соня.mp4']
-      ].map(([name, file]) => {
+      ].map(([name, file, aspect = "9 / 16"]) => {
         const videoPath = imagePath('assets/projects/dance-posters/' + file);
         const posterPath = videoPath.replace(/\.mp4$/, '.webp');
-        return '<figure><figcaption>' + name + '</figcaption><div class="dance-poster-player">' +
+        return '<figure><figcaption>' + name + '</figcaption><div class="dance-poster-player" style="--poster-aspect: ' + aspect + '">' +
           '<video controls playsinline preload="none" aria-label="Видеоафиша ' + name + '" poster="' +
           posterPath + '" src="' + videoPath + '"></video></div></figure>';
       }).join('') +
@@ -154,8 +154,7 @@ if (!project) {
     ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
       '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0" aria-label="Экран телевизора. Первый макет прокручивается вертикально.">' +
       Array.from({length:9},(_,i)=>'<div class="sevstar-slide"' +(i?' hidden':'')+ '><img src="' + imagePath('assets/projects/sevstar/Рисунок'+(i+1)+'.png') + '" alt="Севстар Кулинария, экран '+(i+1)+'" loading="'+(i?'lazy':'eager')+'"></div>').join('') +
-      '</div><img class="sevstar-tv-frame" src="' + imagePath('assets/projects/sevstar/tv.png') + '" alt="" aria-hidden="true">' +
-      '</div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint">Первый экран можно прокручивать вверх и вниз внутри телевизора.</p></section>'
+      '</div></div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint">Первый экран можно прокручивать вверх и вниз внутри телевизора.</p></section>'
     : '';
   const supertyazhHtml = project.id === 'supertyazh'
     ? (() => {

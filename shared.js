@@ -27,11 +27,13 @@ function projectNavigation(project) {
   const previous = PROJECTS[(index - 1 + PROJECTS.length) % PROJECTS.length];
   const next = PROJECTS[(index + 1) % PROJECTS.length];
   const english = window.PORTFOLIO_LANG === "en";
+  const label = (item, direction) => '<span><strong>' + typography(item.name) +
+    '</strong><small>' + direction + '</small></span>';
   return '<nav class="project-navigation" aria-label="' + (english ? "Project navigation" : "Навигация по проектам") + '">' +
-    '<a href="' + projectUrl(previous) + '" rel="prev">' + arrowSvg("left") + '<span><small>' +
-    (english ? "Previous project" : "Предыдущий проект") + '</small><strong>' + typography(previous.name) + '</strong></span></a>' +
-    '<a href="' + projectUrl(next) + '" rel="next"><span><small>' +
-    (english ? "Next project" : "Следующий проект") + '</small><strong>' + typography(next.name) + '</strong></span>' + arrowSvg("right") + '</a></nav>';
+    '<a href="' + projectUrl(previous) + '" rel="prev">' + arrowSvg("left") +
+    label(previous, english ? "Previous project" : "Предыдущий проект") + '</a>' +
+    '<a href="' + projectUrl(next) + '" rel="next">' +
+    label(next, english ? "Next project" : "Следующий проект") + arrowSvg("right") + '</a></nav>';
 }
 
 function imagePath(path) {

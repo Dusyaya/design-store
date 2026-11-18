@@ -491,10 +491,6 @@ button,.contact{font-size:15px;line-height:1.4}
 
 /* Sevstar: UI screenshots displayed inside a TV frame. */
 .sevstar-case{margin:76px auto 90px;max-width:1120px}
-.sevstar-tv{position:relative;width:100%;aspect-ratio:740/493}
-.sevstar-tv-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:2}
-.sevstar-screen{position:absolute;left:10.5%;top:10.6%;width:79%;height:68.5%;background:#080808;overflow:hidden;z-index:1;overscroll-behavior:contain;scrollbar-width:thin}
-.sevstar-screen.is-scrollable{overflow-y:auto;overflow-x:hidden}
 .sevstar-slide[hidden]{display:none!important}
 .sevstar-slide{width:100%;min-height:100%}
 .sevstar-slide img{display:block;width:100%;height:auto;object-fit:contain}
@@ -557,9 +553,6 @@ body.lightbox-open{overflow:hidden}
 .dance-cases .dance-case{border-bottom:0!important}
 .dance-cases .dance-case + .dance-case{border-top:0!important}
 .zp-cases .zp-merch .showcase-slide img{border-radius:18px!important}
-.sevstar-screen{left:10.3%!important;top:10.3%!important;width:80.3%!important;height:69.5%!important;overflow:hidden}
-.sevstar-screen .sevstar-slide img{width:102%!important;max-width:none!important;margin-left:-1%!important}
-.sevstar-screen.is-scrollable{overflow-y:auto!important;overflow-x:hidden!important}
 @media(max-width:650px){.portfolio-perspective .dance-carousel-slides,.portfolio-perspective .extra-slides,.portfolio-perspective .baker-slides,.portfolio-perspective .showcase-track{height:330px!important}.portfolio-perspective .dance-carousel-slide,.portfolio-perspective .extra-slides>img,.portfolio-perspective .baker-slides>img,.portfolio-perspective .showcase-slide{width:78%!important;max-width:78%!important;transform:translate(calc(-50% + var(--perspective-offset)*36%),-50%) rotateY(calc(var(--perspective-offset)*-15deg)) scale(calc(1 - var(--perspective-offset)*var(--perspective-offset)*.15))!important}}
 
 /* Portfolio slider stabilization: prevent overflow, cumulative dark stacking, and competing legacy transformations. */
@@ -592,14 +585,8 @@ body.lightbox-open{overflow:hidden}
 .zp-cases .zp-print-carousel .zp-print-slides img {transition:transform .45s ease,opacity .45s ease!important;transform:rotateY(-5deg)!important;border-radius:14px}
 .zp-cases .zp-print-carousel .zp-print-slides img[hidden] {display:none!important}
 .zp-cases .zp-print-carousel .zp-print-controls {margin-top:18px!important}
-.sevstar-screen {cursor:pointer}
-.sevstar-screen.is-scrollable {cursor:ns-resize}
 .owl-visual img {display:block!important;opacity:1!important;visibility:visible!important}
 
-/* Television clickable screen zones; remain inside the outer frame. */
-.sevstar-hotspots{position:absolute;inset:10.3% 9.4% 20.2% 10.3%;z-index:5;display:flex;justify-content:space-between;pointer-events:none}
-.sevstar-hotspots button{pointer-events:auto;align-self:stretch;width:13%;min-width:32px;border:0;background:transparent;color:transparent;cursor:pointer;font-size:32px}
-.sevstar-hotspots button:focus-visible,.sevstar-hotspots button:hover{background:rgba(255,255,255,.13);color:#fff}
 .dance-website-preview{margin:72px 0 96px}
 .dance-website-preview p{max-width:740px;color:#b0b2bd;line-height:1.65;margin:24px 0}
 .dance-site-preview{width:100%;height:clamp(360px,55vw,660px);border:1px solid rgba(255,255,255,.18);border-radius:14px;overflow:hidden;background:#fff}
@@ -607,15 +594,6 @@ body.lightbox-open{overflow:hidden}
 .dance-site-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}
 .dance-site-links a{padding:12px 18px;border:1px solid rgba(255,255,255,.3);border-radius:999px}
 
-/* Three animated dance posters linked to the original Drive videos. */
-.dance-posters-case{margin:72px 0 100px}
-.dance-posters-case>p{color:#b3b5bf;line-height:1.7}
-.dance-posters-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:30px}
-.dance-posters-grid figure{margin:0;min-width:0}
-.dance-posters-grid figcaption{font-size:16px;font-weight:600;margin-bottom:12px}
-.dance-posters-grid iframe{display:block;width:100%;height:490px;max-height:70vh;border:1px solid rgba(255,255,255,.17);border-radius:12px;background:#16171c}
-.dance-posters-grid figure>a{display:inline-flex;margin-top:14px;padding:10px 15px;border:1px solid rgba(255,255,255,.3);border-radius:999px}
-@media(max-width:850px){.dance-posters-grid{grid-template-columns:1fr}.dance-posters-grid iframe{height:70vh}}
 
 /* ZP merch: keep the complete carousel in the right-hand column, vertically aligned with its copy. */
 .zp-cases .zp-case:has(.zp-merch) {
@@ -670,10 +648,6 @@ body.lightbox-open{overflow:hidden}
 .extra-cases .extra-case::before,.extra-cases .extra-case::after{border:0!important;display:none!important}
 .extra-cases .extra-case+.extra-case{border-top:0!important}
 .extra-cases .section-head{border-bottom:0!important}
-/* Motion video frames: no extra cards, background, outlines or Drive links. */
-.dance-posters-grid figure,.dance-posters-grid iframe{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important}
-.dance-posters-grid figure>a{display:none!important}
-.dance-posters-grid iframe{border-radius:0!important}
 
 /* Actual dance school screenshot in project and storefront. */
 .dance-site-preview{height:auto!important;max-height:none!important;background:transparent!important;border:0!important;overflow:visible!important}
@@ -685,34 +659,10 @@ body.lightbox-open{overflow:hidden}
 .zp-cases .zp-print-carousel.portfolio-showcase-deck{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:center!important;width:100%!important;min-height:0!important;overflow:visible!important;padding:0!important}
 .zp-cases .zp-print-carousel.portfolio-showcase-deck .showcase-track{position:relative!important;inset:auto!important;width:100%!important;height:clamp(330px,38vw,540px)!important;overflow:hidden!important;perspective:1100px!important;min-height:0!important}
 .zp-cases .zp-print-carousel.portfolio-showcase-deck .showcase-slide{position:absolute!important;top:50%!important;left:50%!important;width:72%!important;height:86%!important;max-height:86%!important;transform-origin:center!important;transition:transform .48s ease,opacity .48s ease!important}
-.zp-cases .zp-print-carousel.portfolio-showcase-deck .showcase-slide img{width:100%!important;height:100%!important;object-fit:contain!important;border-radius:14px!important}
+.zp-cases .zp-print-carousel.portfolio-showcase-deck .showcase-slide img{width:auto!important;height:auto!important;object-fit:contain!important;border-radius:14px!important}
 .zp-cases .zp-print-carousel.portfolio-showcase-deck .portfolio-perspective-controls{position:relative!important;margin:16px auto 0!important;z-index:65!important}
-.dance-posters-grid .dance-poster-player{width:100%;height:490px;max-height:70vh;position:relative;background:transparent;border:0;box-shadow:none}
-.dance-posters-grid .dance-poster-player iframe{width:100%;height:100%;border:0;display:block;background:transparent}
-.dance-poster-play{width:100%;height:100%;border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:14px;flex-direction:column;font:inherit}
-.dance-poster-play span:first-child{font-size:32px}
-.dance-poster-play:hover{border-color:rgba(255,255,255,.5)}
-.dance-poster-play[hidden]{display:none!important}
-@media(max-width:850px){.dance-posters-grid .dance-poster-player{height:70vh}}
 
-/* Video posters show their real Google Drive thumbnails before playback. */
-.dance-posters-grid .dance-poster-play{position:relative;display:block;width:100%;height:100%;overflow:hidden;padding:0;border:0!important;border-radius:10px;background:#17131f!important}
-.dance-posters-grid .dance-poster-thumbnail{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform .35s ease}
-.dance-posters-grid .dance-poster-play:hover .dance-poster-thumbnail{transform:scale(1.035)}
-.dance-posters-grid .dance-poster-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#fff;text-shadow:0 1px 12px #000;background:linear-gradient(0deg,rgba(0,0,0,.5),transparent 55%)}
-.dance-posters-grid .dance-poster-play-icon{display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);font-size:28px;padding-left:4px}
 
-/* Motion posters: preserve the full vertical composition and remove text overlays. */
-.dance-posters-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:26px}
-.dance-posters-grid figure{min-width:0}
-.dance-posters-grid .dance-poster-player{width:100%;height:auto!important;max-height:none!important;aspect-ratio:9/16;overflow:hidden;border:0!important;border-radius:12px;background:transparent!important}
-.dance-posters-grid .dance-poster-play{height:100%!important;width:100%!important;border:0!important;border-radius:12px!important;background:transparent!important;overflow:hidden}
-.dance-posters-grid .dance-poster-thumbnail{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;transform:none!important}
-.dance-posters-grid .dance-poster-play:hover .dance-poster-thumbnail{transform:none!important}
-.dance-posters-grid .dance-poster-overlay{background:transparent!important;text-shadow:none!important;gap:0!important}
-.dance-posters-grid .dance-poster-play-icon{width:66px;height:66px;border-radius:50%;background:rgba(0,0,0,.65);font-size:27px}
-.dance-posters-grid .dance-poster-player iframe{width:100%!important;height:100%!important;aspect-ratio:9/16;max-height:none!important;border:0!important;border-radius:12px!important}
-@media(max-width:850px){.dance-posters-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important;gap:24px}.dance-posters-grid .dance-poster-player{height:auto!important;max-height:none!important}}
 
 .project-cover-artwork{display:flex!important;align-items:center;justify-content:center;width:100%;height:100%;padding:16px;background:transparent!important;overflow:hidden}
 .project-cover-artwork img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:none}
@@ -936,26 +886,9 @@ body.lightbox-open{overflow:hidden}
 .shelf .product-info h3 .ui-arrow{display:inline-block!important;white-space:nowrap!important;vertical-align:baseline!important}
 @media(max-width:760px){.shelf .product-info h3{font-size:clamp(13px,3.5vw,18px)!important;letter-spacing:-.035em!important}.shelf .product-info{overflow-wrap:anywhere!important}}
 
-/* Видеоафиши: локальные MP4, одинаковые вертикальные плееры */
-.dance-posters-grid .dance-poster-player video{display:block;width:100%!important;height:100%!important;aspect-ratio:9/16;object-fit:contain;background:#0b0c10;border-radius:12px}
-.dance-posters-grid .dance-poster-player{background:#0b0c10!important}
 
-/* Видеоафиши: две карточки в ряд, включая планшеты и телефоны */
-.dance-posters-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px!important}
-@media(max-width:600px){.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}.dance-posters-grid figure figcaption{font-size:13px!important;overflow-wrap:anywhere}}
 
-/* Видеоафиши: две карточки в строке на широких экранах */
-.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px!important}
-@media(max-width:850px){.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}}
-@media(max-width:540px){.dance-posters-grid{grid-template-columns:1fr!important;gap:24px!important}}
 
-/* Видеоафиши: компактные вертикальные ролики, целиком помещаются в экран */
-.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px!important;max-width:860px;margin-left:auto;margin-right:auto}
-.dance-posters-grid figure{width:100%;min-width:0;max-width:340px;justify-self:center}
-.dance-posters-grid .dance-poster-player{width:100%!important;height:min(62vh,540px)!important;max-height:540px!important;aspect-ratio:9/16!important;margin-inline:auto;overflow:hidden}
-.dance-posters-grid .dance-poster-player video{width:100%!important;height:100%!important;object-fit:contain!important;max-height:100%!important}
-@media(max-width:700px){.dance-posters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}.dance-posters-grid figure{max-width:100%}.dance-posters-grid .dance-poster-player{height:min(55vh,440px)!important}}
-@media(max-width:440px){.dance-posters-grid{grid-template-columns:1fr!important;max-width:330px}.dance-posters-grid .dance-poster-player{height:min(62vh,480px)!important}}
 
 /* Убираем отмеченные декоративные полосы, сохраняя рамку витрины. */
 .about>.section-head,footer{border-top:0}
