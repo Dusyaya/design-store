@@ -207,7 +207,31 @@
       const next = carousel.querySelector("." + prefix + "-next");
       const counter = carousel.querySelector(countSelector);
       counter.setAttribute("role", "status");
+      const track = slides[0].parentElement;
       let active = 0;
+
+      function alignSlides() {
+        const frontWidth = images[active].offsetWidth;
+        const trackWidth = track.clientWidth;
+        if (!frontWidth || !trackWidth) return;
+        slides.forEach((slide, index) => {
+          if (slide.classList.contains("portfolio-offstage")) return;
+          const offset = Number(slide.style.getPropertyValue("--perspective-offset"));
+          const sideWidth = images[index].offsetWidth * .82;
+          const overlap = Math.min(48, Math.min(frontWidth, sideWidth) * .18);
+          const shift = Math.max(0, Math.min(
+            (frontWidth + sideWidth) / 2 - overlap,
+            (trackWidth - sideWidth) / 2 - 5
+          ));
+          slide.style.setProperty("--slide-shift", offset * shift + "px");
+        });
+      }
+
+      if (!screen) {
+        const observer = new ResizeObserver(alignSlides);
+        observer.observe(track);
+        images.forEach(image => observer.observe(image));
+      }
 
       function show(index) {
         active = wrapIndex(index, slides.length);
@@ -231,6 +255,8 @@
         if (screen) {
           screen.scrollTop = 0;
           screen.classList.toggle("is-scrollable", active === 0);
+        } else {
+          alignSlides();
         }
       }
 
@@ -266,12 +292,12 @@
     if (carouselImages.has(image) || image.closest(".print-book")) return;
     labelImage(image, labels.zoom);
     bindImage(image, () => openPreview([image], 0));
-    const floatingArea = image.closest(".case-cover-media.is-floating");
-    if (floatingArea) {
+    const coverWindow = image.closest(".case-cover");
+    if (coverWindow) {
       image.setAttribute("aria-description", english
-        ? "Drag or use the arrow keys to move. Click or press Enter to enlarge."
-        : "Перетащите или используйте клавиши со стрелками. Нажмите, чтобы увеличить.");
-      enableFloatingItem(image, floatingArea);
+        ? "Drag the window or use the arrow keys to move it. Click or press Enter to enlarge."
+        : "Перетащите окно или переместите его стрелками. Нажмите, чтобы увеличить изображение.");
+      enableFloatingItem(coverWindow, coverWindow.closest(".case-hero"));
     }
   });
 })();

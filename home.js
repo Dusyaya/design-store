@@ -53,8 +53,9 @@ function renderCatalog() {
   shelf.innerHTML = visible.map(project => {
     const index = PROJECTS.indexOf(project) + 1;
     return '<a class="catalog-card" data-project="' + escapeHtml(project.id) + '" href="' + projectUrl(project) + '">' +
-      '<div class="catalog-cover">' + productArtwork(project) +
-      '<span aria-hidden="true" class="catalog-index">' + String(index).padStart(2, "0") + '</span></div>' +
+      '<div class="catalog-cover"><div class="catalog-cover-bar">' + WINDOW_LIGHTS + '</div>' +
+      '<div class="catalog-cover-media">' + productArtwork(project) +
+      '<span aria-hidden="true" class="catalog-index">' + String(index).padStart(2, "0") + '</span></div></div>' +
       '<div class="catalog-card-copy"><h3>' + projectTitle(project) + ' ' + arrowSvg("right") + '</h3>' +
       '<p>' + typography(project.short) + '</p>' +
       '<div class="tags">' + project.tags.map(tag =>

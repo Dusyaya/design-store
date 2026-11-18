@@ -123,6 +123,8 @@ function renderLayout() {
   if (footer) footer.innerHTML = '<span>' + typography(SITE.footer) + '</span>';
 }
 
+const WINDOW_LIGHTS = '<span class="window-lights" aria-hidden="true"><i></i><i></i><i></i></span>';
+
 function coverBase(project) {
   const index = PROJECTS.filter(item => item.id !== "supertyazh").findIndex(item => item.id === project.id) + 1;
   const number = project.id === "supertyazh" ? "12" : String(index).padStart(2, "0");
@@ -139,12 +141,11 @@ function projectTitle(project) {
 
 function caseCover(project) {
   const name = escapeHtml(project.name);
-  const floating = ["laser", "gold", "dance-posters"].includes(project.id);
   const landscape = ["dance-website", "sevstar", "extra", "baker", "owl"].includes(project.id);
   return '<figure class="case-cover' + (landscape ? ' is-landscape' : '') + '"><figcaption>' +
-    '<span class="window-lights" aria-hidden="true"><i></i><i></i><i></i></span>' +
+    WINDOW_LIGHTS +
     '<span class="case-cover-label">' + name + '.webp</span></figcaption>' +
-    '<div class="case-cover-media' + (floating ? ' is-floating' : '') + '"><img src="' + coverBase(project) +
+    '<div class="case-cover-media"><img src="' + coverBase(project) +
     '-hero.webp" alt="' + name + '" decoding="async" fetchpriority="high"></div></figure>';
 }
 
@@ -195,7 +196,8 @@ function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
       startX: event.clientX, startY: event.clientY, lastX: event.clientX, lastY: event.clientY,
       time: event.timeStamp, vx: 0, vy: 0
     };
-    item.setPointerCapture(event.pointerId);
+    // Захват на исходном элементе сохраняет клик по изображению внутри окна.
+    event.target.setPointerCapture(event.pointerId);
     item.classList.add("is-grabbed");
   });
   item.addEventListener("pointermove", event => {

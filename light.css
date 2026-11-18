@@ -37,6 +37,7 @@ body {
   font: 400 var(--body-size)/1.58 Manrope, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
 }
+.home-page { overflow-x: clip; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; }
 main { min-height: 70vh; }
@@ -94,13 +95,14 @@ main { min-height: 70vh; }
   font-size: clamp(16px, 2.15vw, 42px);
   line-height: 1.1;
 }
-.portfolio-composition {
-  position: relative;
+.portfolio-composition, .catalog-layout {
   display: grid;
   grid-template-columns: minmax(0, 36.6fr) minmax(0, 55fr);
-  justify-content: space-between;
   column-gap: 6%;
   padding-right: 2.3%;
+}
+.portfolio-composition {
+  position: relative;
   padding-bottom: clamp(78px, 7.2vw, 140px);
   margin-top: clamp(-28px, -1.8vw, -12px);
 }
@@ -177,7 +179,7 @@ main { min-height: 70vh; }
   touch-action: none;
   user-select: none;
 }
-.skill-badge, .case-cover-media.is-floating img {
+.skill-badge, .case-cover {
   animation: icon-drift var(--duration, 7s) ease-in-out infinite alternate both;
 }
 .skill-badge.is-grabbed { cursor: grabbing; }
@@ -192,7 +194,7 @@ main { min-height: 70vh; }
   line-height: 1.2;
 }
 .skill-badge-visual > span:last-child { padding: 2px 4px; border-radius: 4px; background: var(--bg); }
-:is(.skill-badge, .case-cover-media.is-floating img):is(.is-grabbed, .is-releasing, :focus-visible) { animation-play-state: paused; }
+:is(.skill-badge, .case-cover):is(.is-grabbed, .is-releasing, :focus-visible) { animation-play-state: paused; }
 @keyframes icon-drift {
   from { transform: translate(0, 0); }
   to { transform: translate(var(--drift-x, 14px), var(--drift-y, -13px)); }
@@ -221,16 +223,15 @@ main { min-height: 70vh; }
 .skill-neural { --x: 79%; --y: 75%; --tile-bg: #131e30; --tile-text: #8ce8cc; --duration: 8.2s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .skill-badge, .case-cover-media.is-floating img { animation: none; }
+  .skill-badge, .case-cover { animation: none; }
 }
 
 .catalog-section { padding-bottom: clamp(42px, 6vw, 115px); }
-.catalog-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 47.5fr) minmax(0, 52.5fr);
-  gap: var(--grid-gap);
-}
+.catalog-layout { row-gap: var(--grid-gap); }
 .catalog-intro { align-self: start; min-width: 0; }
+@media (min-width: 951px) {
+  .catalog-intro { position: sticky; top: 24px; }
+}
 .catalog-intro h2 {
   margin: 0;
   max-width: 11ch;
@@ -258,13 +259,27 @@ main { min-height: 70vh; }
 .catalog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 2.1vw, 40px) clamp(12px, 1vw, 20px); }
 .catalog-card { display: block; min-width: 0; border-radius: 4px; }
 .catalog-cover {
-  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--image-radius);
+  background: var(--surface);
+  box-shadow: 0 2px 4px #1c18131a;
+}
+.catalog-cover-bar {
+  display: flex;
+  align-items: center;
+  padding-inline: 9px;
+  height: clamp(17px, 1.2vw, 23px);
+  background: #ebeae6;
+  border-bottom: 1px solid var(--line);
+}
+.catalog-cover-bar .window-lights { gap: 3px; }
+.catalog-cover-bar .window-lights i { width: 5px; }
+.catalog-cover-media {
   display: grid;
   place-items: center;
-  overflow: hidden;
+  position: relative;
   aspect-ratio: 1;
-  background: var(--surface);
-  border-radius: var(--image-radius);
 }
 .catalog-cover img { border-radius: var(--image-radius); width: 90%; height: 84%; object-fit: contain; transition: transform .3s ease; }
 .catalog-index {
@@ -311,10 +326,17 @@ main { min-height: 70vh; }
 .about .section-head { padding: 0; margin: 0 0 clamp(28px, 4vw, 72px); color: var(--muted); font-size: 14px; }
 .about h2 { margin: 0 0 .3em; font-weight: var(--heading-weight); line-height: 1.05; max-width: min(100%, 1050px); letter-spacing: var(--heading-tracking); font-size: clamp(32px, 6.4vw, 92px); }
 .about p { max-width: var(--reading-width); color: var(--muted); line-height: 1.65; }
-.about .contact-links { margin-top: 34px; }
+.about-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(5px, .85vw, 13px);
+  margin-top: 28px;
+}
+.about .contact-links { flex: none; }
 .about .social-links { display: flex; flex-wrap: nowrap; gap: clamp(6px, 1.1vw, 12px); }
+.about-actions :is(img, svg) { flex-shrink: 0; }
 .about .social-links :is(img, svg) { width: 22px; height: 22px; }
-.about .next { margin-top: 18px; font-weight: 700; }
+.about .next { flex: 0 1 auto; font-weight: 700; }
 .about .contact-links .social-links a, .about .next {
   display: inline-flex;
   align-items: center;
@@ -351,6 +373,7 @@ footer {
 
 .case.wrap { padding-bottom: var(--section-space); }
 .case-hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) clamp(220px, 21vw, 380px);
   gap: var(--grid-gap);
@@ -456,18 +479,18 @@ footer {
   min-width: 0;
   object-fit: contain;
 }
-.case-cover-media.is-floating { position: relative; }
-.case-cover-media.is-floating img {
-  --duration: 6.5s;
-  --drift-x: 12px;
+.case-cover {
+  --duration: 7.5s;
+  --drift-x: -12px;
   --drift-y: -10px;
-  width: auto;
-  max-width: 100%;
-  cursor: grab;
   touch-action: pan-y pinch-zoom;
   user-select: none;
+  cursor: grab;
 }
-.case-cover-media.is-floating img.is-grabbed { cursor: grabbing; }
+.case-cover .portfolio-zoomable { cursor: inherit; }
+.case-cover:is(.is-grabbed, .is-releasing) { z-index: 3; }
+.case-cover.is-grabbed { cursor: grabbing; }
+.case-cover:focus-within:has(:focus-visible) { animation-play-state: paused; }
 @media (max-width: 760px) {
   .case-hero { grid-template-columns: minmax(0, 1fr); gap: 25px; }
   .case-summary .tags { margin-top: 18px; }
@@ -585,10 +608,6 @@ footer {
 .print-controls button:disabled { cursor: default; opacity: .42; }
 .print-count { min-width: 70px; color: var(--muted); text-align: center; font-variant-numeric: tabular-nums; }
 
-@media (max-width: 1100px) {
-  .catalog-layout { grid-template-columns: 1fr; gap: 22px; }
-  .catalog-intro h2 { max-width: none; }
-}
 @media (max-width: 420px) {
   .home-page .catalog-grid { grid-template-columns: 1fr; }
 }
@@ -613,6 +632,8 @@ footer {
   }
   .skill-badge { position: relative; inset: auto; width: 100%; }
   .catalog-section { padding-top: 28px; }
+  .catalog-layout { grid-template-columns: minmax(0, 1fr); padding-right: 0; row-gap: 22px; }
+  .catalog-intro h2 { max-width: none; }
 }
 @media (max-width: 660px) {
   .topbar { flex-wrap: wrap; padding-block: 9px; }
@@ -640,18 +661,36 @@ footer {
 .portfolio-lightbox::backdrop { background: #080808; }
 body.lightbox-open { overflow: hidden; }
 
-@media (max-width: 560px) {
+@media (max-width: 820px) {
+  .about .social-links { gap: 5px; }
   .about .contact-links .social-links a {
-    flex: 0 1 auto;
-    flex-direction: column;
     justify-content: center;
-    gap: 3px;
-    min-width: 56px;
-    padding: 6px 7px;
-    font-size: 10px;
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
   }
+  .about .social-links a span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .about .next {
+    min-height: 44px;
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+  .about .next svg { width: 14px; height: 14px; }
 }
-
+@media (max-width: 380px) {
+  .about .social-links { gap: 3px; }
+  .about .next { gap: 4px; padding-inline: 6px; font-size: 11px; }
+  .about .next svg { width: 12px; height: 12px; }
+}
 .case .zp-presentation-slides {
   height: auto;
   aspect-ratio: 1.65;
@@ -661,10 +700,10 @@ body.lightbox-open { overflow: hidden; }
   width: 76%;
   height: auto;
   max-height: 84%;
-  transform: translate(calc(-50% + var(--perspective-offset) * 38%), -50%)
+  transform: translate(calc(-50% + var(--slide-shift, 0px)), -50%)
     scale(calc(1 - var(--perspective-offset) * var(--perspective-offset) * .16));
   filter: none;
-  opacity: .55;
+  opacity: .78;
   transition: transform .32s ease, opacity .32s ease;
 }
 .case .zp-presentation-slides img.portfolio-active { opacity: 1; }
@@ -755,7 +794,7 @@ body.lightbox-open { overflow: hidden; }
   aspect-ratio: auto !important;
   width: 65% !important;
   height: 68% !important;
-  transform: translate(calc(-50% + var(--perspective-offset) * 36%), -50%)
+  transform: translate(calc(-50% + var(--slide-shift, 0px)), -50%)
     rotateY(calc(var(--perspective-offset) * -15deg))
     scale(calc(1 - var(--perspective-offset) * var(--perspective-offset) * .15)) !important;
   max-width: none !important;
