@@ -117,7 +117,7 @@ if (!project) {
       '</div></article></section>'
     : '';
   const dancePostersHtml = project.id === 'dance-posters'
-    ? '<section class="dance-posters-case"><div class="section-head"><span>ВИДЕОАФИШИ</span><span>04 ВИДЕО</span></div>' +
+    ? '<section class="dance-posters-case"><div class="section-head"><span>ВИДЕОАФИШИ</span><span>4 ВИДЕО</span></div>' +
       '<div class="dance-posters-grid">' +
       [
         ['Даша Писанец','dasha.mp4'],
@@ -163,7 +163,7 @@ if (!project) {
       '</div><div class="extra-controls"><button type="button" class="extra-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="extra-count">01 / '+String(group.count).padStart(2,'0')+'</span><button type="button" class="extra-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div></article>').join('')+'</section>'
     : '';
   const sevstarHtml = project.id === 'sevstar'
-    ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
+    ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 9 ЭКРАНОВ</span></div>' +
       '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0">' +
       Array.from({length:9},(_,i)=>'<div class="sevstar-slide"' +(i?' hidden':'')+ '><img src="' + imagePath('assets/projects/sevstar/Рисунок'+(i+1)+'.png') + '" alt="Севстар Кулинария, экран '+(i+1)+'" loading="'+(i?'lazy':'eager')+'"></div>').join('') +
       '</div></div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint" id="sevstar-hint">' +
@@ -175,7 +175,7 @@ if (!project) {
       const base = 'assets/projects/supertyazh/';
       const image = (name, alt, className = '') => '<img class="' + className + '" src="' + imagePath(base + name) + '" alt="' + escapeHtml(alt) + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="supertyazh-missing" hidden>Загрузите файл ' + escapeHtml(name) + '</span>';
       const slides = Array.from({length:11}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<div class="supertyazh-slide" data-index="' + i + '"' + (i?' hidden':'') + '>' + image('slide-'+n+'.jpg','СУПЕРТЯЖ — слайд презентации '+(i+1)) + '</div>';}).join('');
-      const results = Array.from({length:3}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('result-'+n+'.png','СУПЕРТЯЖ — вариант рекламного макета '+(i+1)) + '<figcaption>Вариант '+n+'</figcaption></figure>';}).join('');
+      const results = Array.from({length:3}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('result-'+n+'.png','СУПЕРТЯЖ — вариант рекламного макета '+(i+1)) + '<figcaption>Вариант '+(i+1)+'</figcaption></figure>';}).join('');
       const mockups = Array.from({length:2}, (_,i) => {
         const filename = 'mockup-' + String(i+1).padStart(2,'0') + '.jpg';
         return '<figure class="media-window supertyazh-mockup floating-window">' + windowBar(filename) +
@@ -186,9 +186,9 @@ if (!project) {
         '<div class="supertyazh-deck" aria-label="Презентация СУПЕРТЯЖ">' +
         '<div class="supertyazh-slides">' + slides + '</div>' +
         '<div class="supertyazh-controls"><button type="button" class="supertyazh-prev" aria-label="Предыдущий слайд">' + arrowSvg('left') + '</button><span class="supertyazh-counter">01 / 11</span><button type="button" class="supertyazh-next" aria-label="Следующий слайд">' + arrowSvg('right') + '</button></div></div>' +
-        '<div class="section-head supertyazh-section-head"><span>ФИНАЛЬНЫЕ МАКЕТЫ</span><span>03 ВАРИАНТА</span></div>' +
+        '<div class="section-head supertyazh-section-head"><span>ФИНАЛЬНЫЕ МАКЕТЫ</span><span>3 ВАРИАНТА</span></div>' +
         '<div class="supertyazh-results">' + results + '</div>' +
-        '<div class="section-head supertyazh-section-head"><span>МОКАПЫ</span><span>02 ИЗОБРАЖЕНИЯ</span></div>' +
+        '<div class="section-head supertyazh-section-head"><span>МОКАПЫ</span><span>2 ИЗОБРАЖЕНИЯ</span></div>' +
         '<div class="supertyazh-mockups">' + mockups + '</div></section>';
     })()
     : '';
