@@ -92,10 +92,10 @@
     },
     'dance-posters':{
       name:'Animated Dance Posters',category:'Motion design',field:'Animated posters / Dance',
-      short:'Four animated posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.',
-      goal:'Create expressive animated posters to promote dance classes.',
+      short:'Three video posters for choreographers Dasha Pisanets, Pantera and Sakura, plus one for the Trap Dance studio’s birthday.',
+      goal:'Create video posters for three choreographers and the Trap Dance studio’s birthday.',
       research:'Dynamic compositions, music, typography and movement help communicate the personality of each class.',
-      process:'Created four motion posters for different dance classes.',
+      process:'Created one poster for each of the three choreographers and one for the studio’s birthday.',
       result:'A set of four video posters for social media.',
       conclusion:'Motion graphics can communicate the atmosphere of a dance class before it even begins.'
     },
@@ -147,7 +147,6 @@
     'РЕДАКЦИОННЫЙ ДИЗАЙН / ПОДАРОЧНАЯ КНИГА / 2025':'EDITORIAL DESIGN / GIFT BOOK / 2025',
     'РЕДАКЦИОННЫЙ ДИЗАЙН / ЖУРНАЛ / 2026':'EDITORIAL DESIGN / MAGAZINE / 2026',
     'ТВЁРДЫЙ ПЕРЕПЛЁТ':'HARDCOVER','20 СТРАНИЦ':'20 PAGES','Назад к коллекции':'Back to collection',
-    'Четыре видеоафиши для танцевальных классов: «Даша Писанец», «Пантера», «Сакура» и Trap Dance.':'Four video posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.',
     'ВИДЕОАФИШИ':'VIDEO POSTERS','04 ВИДЕО':'04 VIDEOS','Даша Писанец':'Dasha Pisanets','Пантера':'Pantera','Сакура':'Sakura',
     'ПРЕЗЕНТАЦИЯ ПРОЕКТА':'PROJECT PRESENTATION','11 СЛАЙДОВ':'11 SLIDES','ФИНАЛЬНЫЕ МАКЕТЫ':'FINAL DESIGNS','03 ВАРИАНТА':'03 VERSIONS','МОКАПЫ':'MOCKUPS','02 ИЗОБРАЖЕНИЯ':'02 IMAGES','Предыдущий слайд':'Previous slide','Следующий слайд':'Next slide','Вариант 01':'Version 01','Вариант 02':'Version 02','Вариант 03':'Version 03',
     'РАЗРАБОТКА КОНЦЕПЦИИ':'CONCEPT DEVELOPMENT','ТЕСТОВОЕ ЗАДАНИЕ / 2026':'DESIGN CHALLENGE / 2026','01 / ИССЛЕДОВАНИЕ':'01 / RESEARCH','02 / КОНЦЕПЦИЯ':'02 / CONCEPT','03 / РЕЗУЛЬТАТ':'03 / OUTCOME','Фирменный язык и конкуренты':'Brand language & competitors','Невозможно не поделиться':'Too good not to share','Три варианта. Одна идея.':'Three versions. One idea.','КОМБО СУПЕРТЯЖ':'SUPERTYAZH COMBO',
@@ -209,7 +208,7 @@
       if(node.parentElement?.closest('script,style,svg'))return;
       const original=node.nodeValue;
       const trimmed=original.trim();
-      const normalized=trimmed.replace(/\u00a0/g,' ');
+      const normalized=trimmed.replace(/\u00a0/g,' ').replace(/‑/g,'-');
       if(dict[normalized])node.nodeValue=original.replace(trimmed,dict[normalized]);
     });
     root.querySelectorAll('[aria-label],[alt],[title]').forEach(el=>{

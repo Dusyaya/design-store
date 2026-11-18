@@ -117,7 +117,7 @@ if (!project) {
     : '';
   const dancePostersHtml = project.id === 'dance-posters'
     ? '<section class="dance-posters-case"><div class="section-head"><span>ВИДЕОАФИШИ</span><span>04 ВИДЕО</span></div>' +
-      '<p>Четыре видеоафиши для танцевальных классов: «Даша Писанец», «Пантера», «Сакура» и Trap Dance.</p>' +
+      '<p>' + typography(project.short) + '</p>' +
       '<div class="dance-posters-grid">' +
       [
         ['Даша Писанец','dasha.mp4'],

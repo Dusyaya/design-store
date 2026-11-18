@@ -11,12 +11,27 @@ function escapeHtml(value) {
   })[char]);
 }
 
-function typography(value) {
-  return escapeHtml(value)
-    .replace(/(^|[\s(«„])((?:в|во|на|к|ко|с|со|у|о|об|от|до|по|за|из|и|а|но|не|для|при|над|под|без|про|как|что))\s+/giu,
-      (_, before, word) => before + word + "&nbsp;")
-    .replace(/\s+—\s+/g, "&nbsp;—&nbsp;");
+function bindWords(value) {
+  return value
+    .replace(/(?<=[\p{L}\p{N}])[-‐](?=[\p{L}\p{N}])/gu, "‑")
+    .replace(/(?<![\p{L}\p{N}‑])(?:в|во|на|к|ко|с|со|у|о|об|обо|от|ото|до|по|за|из|изо|из‑за|из‑под|и|а|но|не|ни|для|при|над|под|без|про|через|между|перед|как|что)[ \t]+(?=[\p{L}\p{N}«„“"(])/giu,
+      match => match.trimEnd() + "\u00a0");
 }
+
+function typography(value) {
+  return escapeHtml(bindWords(String(value ?? ""))).replace(/\s+—\s+/g, "&nbsp;—&nbsp;");
+}
+
+// Применяем правила к статическому тексту и к переводу после его подстановки.
+document.addEventListener("DOMContentLoaded", () => {
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (!node.parentElement.closest("script, style, svg, pre, code")) {
+      const formatted = bindWords(node.data);
+      if (formatted !== node.data) node.data = formatted;
+    }
+  }
+});
 
 function projectUrl(project) {
   return SITE_ROOT + "projects/" + encodeURIComponent(project.id) + "/";

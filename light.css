@@ -403,6 +403,9 @@ footer {
 
 .case.wrap { position: relative; padding-bottom: var(--section-space); }
 .case-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 47%);
   gap: var(--grid-gap);
@@ -483,6 +486,7 @@ footer {
 .case :is(.case-intro p, .case-row p, .showcase-copy p, .dance-case-copy p, .extra-case-copy p,
   .dance-posters-case > p, .supertyazh-feature-copy p, .supertyazh-work figcaption,
   .supertyazh-missing, .showcase-counter, .dance-merch-media > p, .dance-website-preview > p, .sevstar-hint, .baker-description, figcaption) { color: var(--muted); }
+.case-hero .case-cover { --drift-y: -12px; }
 .case-cover {
   --cover-padding: clamp(8px, 1.3vw, 24px);
   min-width: 0;
@@ -522,6 +526,7 @@ footer {
   .case-summary .tags { margin-top: 18px; }
   .case-cover:not(.is-landscape) { width: min(calc(100% - 16px), calc(var(--lead-media-height) * .9 + 2 * var(--cover-padding))); }
   .case-cover.is-landscape { width: calc(100% - 16px); }
+  .case-hero .case-cover { --drift-x: -8px; }
   .case-cover { margin-top: 0; justify-self: center; }
 }
 @media (max-width: 760px) {

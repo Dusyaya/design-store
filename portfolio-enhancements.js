@@ -307,6 +307,7 @@
     bindImage(image, () => openPreview([image], 0));
   });
   root.querySelectorAll(".floating-window").forEach(item => {
-    enableFloatingWindow(item, item.closest(".case"), {returnToOrigin: !item.classList.contains("case-cover")});
+    const hero = item.closest(".case-hero");
+    enableFloatingWindow(item, hero || item.closest(".case"), {returnToOrigin: !hero});
   });
 })();
