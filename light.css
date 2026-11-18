@@ -607,7 +607,6 @@ footer {
 .case .project-navigation a:hover { background: var(--hover) !important; }
 .project-navigation a span { min-width: 0; overflow-wrap: anywhere; }
 .project-navigation small, .project-navigation strong { display: block; }
-.project-navigation strong { display: block; }
 .project-navigation strong {
   font-size: clamp(14px, 1.22vw, 19px);
   font-weight: var(--heading-weight);
