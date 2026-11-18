@@ -62,7 +62,7 @@ if (!project) {
     ['banner-03-blue-preview.webp', 'banner-03.jpg', 1680, 250]
   ];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
-    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптировала фирменный стиль «Золотого Правила» для кампании в Уфе. Разработала макет наружной рекламы и баннеры для «ПроДокторов», чтобы клинику было легко узнать, а предложение — быстро прочитать.</p></div><div class="showcase-media zp-banner-stack">' +
+    ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.</p></div><div class="showcase-media zp-banner-stack">' +
       bannerImages.map(([name, original, width, height], i) => '<img src="' + SITE_ROOT + 'assets/projects/gold/' + name +
         '" data-original="' + SITE_ROOT + 'assets/projects/gold/' + original + '" alt="Рекламный баннер ' + (i+1) +
         '" width="' + width + '" height="' + height + '" loading="lazy">').join('') +
@@ -112,7 +112,7 @@ if (!project) {
       '</figure></div></article>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">02 / 02</span><h2>Мерч</h2><p>Небольшое исследование и подбор визуальных направлений для будущего мерча студии: идеи, референсы и предложения по оформлению.</p></div><div class="dance-merch-media"><h3>Исследование и предложения</h3>' +
       danceCarousel(Array.from({length:7},(_,i)=>'assets/projects/dance/research/Slide 16_9 - '+i+'.jpg'),'research') +
-      '<h3>Результат</h3><p>В коллекцию вошли футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена. Ковровый орнамент выделяется на чёрной ткани и связывает оба предмета.</p>' +
+      '<h3>Результат</h3><p>В результате созданы футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена с ковровым орнаментом. Контраст лаконичной чёрной основы и насыщенных узоров объединяет эстетику уличной одежды с характером танцевальной студии.</p>' +
       danceCarousel(Array.from({length:9},(_,i)=>'assets/projects/dance/merch/merch-'+String(i+1).padStart(2,'0')+'.jpg'),'photos') +
       '</div></article></section>'
     : '';

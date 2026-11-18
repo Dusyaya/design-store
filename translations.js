@@ -22,22 +22,22 @@
   Object.assign(site.catalog,{heading:'Selected work',filters:['All','Branding','Web and interfaces','Motion','Editorial design'],machine:'PROJECT SHOWCASE'});
   Object.assign(site.about,{heading:'ABOUT THE DESIGNER',title:['Ideas', 'taking shape'],
     paragraphs:[
-      "I’m a graphic designer. I develop visual concepts and bring them to life in advertising, print, merchandise and digital projects.",
-      'My background is in software engineering. I’m interested in how digital products look and how people use them.'
+      "I'm a graphic designer creating visual concepts, advertising, print materials, merchandise and digital assets for commercial projects.",
+      "My background is in software engineering, so I understand not only visual design and composition but also how digital products work."
     ],button:'Discuss a project ↗'});
   site.contacts.message="Hello! I've seen your portfolio and would love to discuss a design project. Could you let me know how we might work together?";
   site.footer='© 2026 DARYA ATROKHINA';
   const translations={
-    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',preview:"Three ads for a burger, fries and lemonade combo. I also showed how they look outdoors and indoors.", short:'Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.',goal:"I wanted people to recognize SUPERTYAZH at a glance and see what comes in the combo and how much it costs.",research:"I started with SUPERTYAZH’s own ads: bright colors, dimensional headlines and photography paired with flat graphics. Vkusno i Tochka showed how a simple background draws attention to the food, while Rostic’s used a consistent price badge that was easy to spot. Starbucks drew my eye to textures and details, and Burger King made a quick bite feel like time with friends. Those observations informed the prominent price badge, close-up food imagery and the idea of sharing fries.",process:"I built a draft from the source photos and refined the food imagery with ChatGPT and Flux Inpaint. I chose Climate Crisis for the headline and used the brand’s existing colors. I compared six versions in grayscale to see where the name, price and food stood out best.",result:"Three designs made the final cut, all with the same offer: lemonade, a burger and fries for 399 RUB. Two mockups show how the ad looks outdoors and indoors.",conclusion:"I turned “Too good not to share” into a familiar gesture: a hand reaches into the frame for a fry. It’s that moment when one friend orders fries and everyone at the table has a taste."},
+    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',preview:"Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.", short:"Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.",goal:"Create an eye-catching signature combo campaign that feels on-brand and communicates the name, price and offer clearly.",research:"Analyzed SUPERTYAZH’s visual identity alongside campaigns from Vkusno i Tochka, Rostic’s, Starbucks and Burger King, focusing on vivid color, bold typography, food textures and consistent price tags.",process:"Cut out source images, built a draft composition, refined the food imagery using ChatGPT and Flux Inpaint, chose Climate Crisis typography and brand colors, and tested multiple layouts for legibility.",result:"Developed three final creative variations featuring lemonade, a burger and fries at 399 RUB, with placement mockups for print and social media.",conclusion:"The creative idea, “Too good not to share,” comes alive through a hand reaching for a fry, giving the food shot a playful narrative."},
     laser:{
       category:'Branding',field:'Advertising / Beauty',
-      preview:"Posts, stories, emails and print ads for laser hair removal studios. I used AI to create images for some of the campaigns.",
-      short:'Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.',
-      goal:"Laser&Beauty always has something to share, from new services to seasonal offers and campaigns. My job was to give each of those moments a look of its own.",
-      research:"The marketer brought the brief and copy, and I developed the visual idea. For some assignments, I started with just a written brief and found the direction myself.",
-      process:"I designed posts, stories, emails and print ads. For some campaigns I created imagery with AI, then built a layout for each format.",
-      result:"The resulting work served studios in Russia and Kazakhstan, from everyday social posts to seasonal campaigns.",
-      conclusion:"My favorite part is finding an idea you can recognize in a quick story, an email or a printed ad.",
+      preview:"Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.",
+      short:"Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.",
+      goal:"Create visual communications promoting services, seasonal offers and advertising campaigns for a laser hair removal studio chain.",
+      research:"I collaborated with a marketer who supplied copy and briefs. I independently developed visual concepts, art direction, compositions and format adaptations, often without ready-made references.",
+      process:"Designed social media posts and stories, printed advertising, AI-assisted visuals and email campaigns, adapting each piece to its medium and communication goals.",
+      result:"Delivered a collection of digital and print assets for ongoing brand communication, campaigns and special offers across Russia and Kazakhstan.",
+      conclusion:"My key contribution was turning marketing briefs into original visual concepts and adapting them consistently across channels.",
       showcase:[
         ['Stories','Social media story designs for promotions, special offers and informative posts, balancing visual appeal, readability and engagement.'],
         ['Email campaigns','Visual assets for marketing emails, including promotions, tailored offers and informational messages with clear hierarchy.'],
@@ -48,103 +48,103 @@
     },
     gold:{
       name:'Zolotoye Pravilo',category:'Branding',field:'Healthcare / Visual communications',
-      preview:"Signs, ads, brochures and presentations for a clinic network, plus T-shirts I designed for a charity marathon.",
-      short:'Design for a private healthcare network: outdoor advertising, banners, print, social media and presentations.',
-      goal:"A clinic sign has to be recognizable at a glance. A brochure gives people time to understand a service. I designed for both situations.",
-      research:"The marketer supplied the copy and sometimes references. I chose the layouts, imagery and color accents within the clinic’s identity.",
-      process:"I worked on signage, outdoor ads, ProDoktorov banners, brochures and social posts. I also designed presentations and merchandise for a charity marathon.",
-      result:"The case brings together work at several scales, from a large outdoor ad in Ufa to slides for medical events and marathon T-shirts.",
-      conclusion:"With healthcare materials, my first check is whether people can find the offer and see where to read more."
+      preview:"Design for a private healthcare network: outdoor advertising, banners, print, social media and presentations.",
+      short:"Design for a private healthcare network: outdoor advertising, banners, print, social media and presentations.",
+      goal:"Communicate the clinics’ services and offers clearly across digital and printed media.",
+      research:"Working from marketing briefs and occasional references, I developed compositions, color accents and visual imagery aligned with the brand identity.",
+      process:"Created signage, outdoor advertising, digital banners, brochures, social media posts and presentation designs.",
+      result:"Produced a range of promotional and informational materials for different clinic communication channels.",
+      conclusion:"Healthcare design calls for clear information hierarchy and careful typography."
     },
     dance:{
       category:'Branding',field:'Dance / Identity & merchandise',
-      preview:"Logos, a poster and clothing for Dance Soul studio. I designed a T-shirt print and graphics for the trousers.",
-      short:'Logos, printed materials and apparel graphics for Dance Soul dance studio.',
-      goal:"I started with a logo for a dance studio, then carried its personality into posters and clothing.",
-      research:"A year later the studio needed a Russian-language sign. I kept the oversized lettering and strong contrast that gave the original logo its character.",
-      process:"I worked on both logos, designed a printed poster and developed graphics for clothing. For the merchandise I gathered references and explored a few directions.",
-      result:"The finished pieces included a graphic T-shirt and loose trousers with embroidery and tapestry stripes.",
-      conclusion:"The most interesting part was seeing the graphics leave the screen and become something people could wear."
+      preview:"Logos, printed materials and apparel graphics for Dance Soul dance studio.",
+      short:"Logos, printed materials and apparel graphics for Dance Soul dance studio.",
+      goal:"Develop distinctive branded graphics for the studio and its merchandise.",
+      research:"The visual direction draws on expressive typography, a contrasting palette and contemporary dance culture.",
+      process:"Designed logos, print materials, T-shirt graphics and other merchandise, including print-ready artwork.",
+      result:"Created branded assets and apparel designs for the studio.",
+      conclusion:"A strong graphic identity should work equally well on screen and on fabric."
     },
     book:{
       name:'Dad Knows Everything',category:'Editorial design',field:'Gift book / Hardcover / Prepress',
-      preview:"A book for my dad’s 50th birthday. I collected stories from family and friends, designed the cover and laid out the pages.",
-      short:'A hardcover book for my father’s 50th birthday, bringing together stories and memories from family and friends. Original layout and full prepress production.',
-      goal:"For Dad’s 50th birthday, I wanted to give him a book only our family could have made. It brings together stories from relatives and friends.",
-      research:"Everyone told their story in their own voice. I wanted to keep that feeling while making the collection flow as a book.",
-      process:"I designed the cover and endpapers, laid out the spreads and prepared the files for the printer.",
-      result:"I sent the book to print in 2025 and chose a hardcover for the gift edition.",
-      conclusion:"Now those stories have a place to live. You can open the book anywhere and hear a familiar voice again."
+      preview:"A hardcover book for my father’s 50th birthday, bringing together stories and memories from family and friends. Original layout and full prepress production.",
+      short:"A hardcover book for my father’s 50th birthday, bringing together stories and memories from family and friends. Original layout and full prepress production.",
+      goal:"Preserve the memories of loved ones in a personal, story-filled gift for my father’s 50th birthday.",
+      research:"The book brings together stories and memories from family, friends and other people close to him.",
+      process:"Designed the cover, endpapers and interior layout, and completed prepress preparation for the printer.",
+      result:"The finished hardcover book was printed in 2025 as a 50th birthday gift.",
+      conclusion:"Thoughtful editorial design turned personal memories and family stories into a lasting physical keepsake."
     },
     'dance-website':{
       name:'Dance School Website',category:'Web design',field:'Web development / Dance',
-      preview:"A dance school website where students can check the schedule, choose a membership and sign up.",
-      short:'A multi-page dance school website with a home page, class schedule, memberships, registration and personal account.',
-      goal:"I wanted a site where you could choose a class and see what to do next, whether that meant checking the schedule, picking a membership or signing up.",
-      research:"I organized the pages around those actions. New visitors can get to know the studio, and students have a member area.",
-      process:"I built the pages and client-side interface with HTML, CSS and JavaScript. The project uses Node.js on the server.",
-      result:"The result is a multi-page prototype with schedules, memberships, contact details, registration and a member area.",
-      conclusion:"What I enjoy about this kind of project is turning a design into an interface and following the journey a student would take."
+      preview:"A multi-page dance school website with a home page, class schedule, memberships, registration and personal account.",
+      short:"A multi-page dance school website with a home page, class schedule, memberships, registration and personal account.",
+      goal:"Build a website where students can learn about classes and interact with the dance school.",
+      research:"The structure covers both public information and user journeys: discovering classes, viewing the schedule, choosing a membership and managing an account.",
+      process:"Designed and developed client-side pages using HTML, CSS and JavaScript. The repository also includes a Node.js backend.",
+      result:"A multi-page website prototype with a schedule, memberships, contacts and personal accounts.",
+      conclusion:"The project combines visual design with practical user flows for a dance school."
     },
     sevstar:{
       name:'Sevstar.Culinary',category:'Interfaces',field:'Smart TV application / UI',
-      preview:"A cooking app for a TV set-top box. I designed the recipe catalog, cooking instructions and grocery cart.",
-      short:'A cooking app interface for a smart TV set-top box, designed during a 2023 hackathon.',
-      goal:"At a hackathon we took on a cooking app for a TV set-top box. I worked out how to pick a dish on the big screen and follow it one step at a time.",
-      research:"The project was for Sevstar, an internet provider in Sevastopol. The concept included Yamigom grocery delivery so viewers could go from a recipe to its ingredients.",
-      process:"I designed the categories, recipe catalog and recipe details, then the cooking instructions and shopping cart.",
-      result:"The gallery shows how the screens fit together, from choosing a dish to finding the ingredients and following the recipe.",
-      conclusion:"People watch TV from across the room. Even small decisions change when labels and buttons have to be readable from the sofa."
+      preview:"A cooking app interface for a smart TV set-top box, designed during a 2023 hackathon.",
+      short:"A cooking app interface for a smart TV set-top box, designed during a 2023 hackathon.",
+      goal:"Design a recipe catalog and step-by-step cooking interface for a TV set-top box.",
+      research:"Created for a major internet provider in Sevastopol, the concept included integration with an existing grocery delivery service.",
+      process:"Designed category screens, recipe listings, recipe details, step-by-step instructions and a shopping cart.",
+      result:"Produced a visual interface concept as part of a hackathon.",
+      conclusion:"TV interfaces require especially clear navigation and large, legible elements."
     },
     'dance-posters':{
       name:'Animated Dance Posters',category:'Motion design',field:'Animated posters / Dance',
-      preview:"Four animated posters: three for dance classes and one for Trap Dance studio’s birthday.",
-      short:'Three video posters for choreographers Dasha Pisanets, Pantera and Sakura, plus one for the Trap Dance studio’s birthday.',
-      goal:"I wanted each poster to give you a sense of the class before you heard the music in the studio.",
-      research:"Dasha Pisanets, Pantera and Sakura each called for a different look, and Trap Dance’s birthday had its own mood. I found a separate direction for each video.",
-      process:"I built each composition around the person on screen, choosing type, music and pacing that gave the poster movement and left time to read.",
-      result:"I made three videos for the choreographers and one for the studio’s birthday. All four are below.",
-      conclusion:"An animated poster can set a mood in a couple of seconds. I like it when you can feel that rhythm in the lettering too."
+      preview:"Four animated posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.",
+      short:"Four animated posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.",
+      goal:"Create expressive animated posters to promote dance classes.",
+      research:"Dynamic compositions, music, typography and movement help communicate the personality of each class.",
+      process:"Created four motion posters for different dance classes.",
+      result:"A set of four video posters for social media.",
+      conclusion:"Motion graphics can communicate the atmosphere of a dance class before it even begins."
     },
     extra:{
       name:'Illustration & 3D',category:'Experiments',field:'Illustration / 3D',
-      preview:"Digital illustrations, 3D room models built from floor plans and a scene for learning traffic rules.",
-      short:'Original digital illustrations, 3D models based on architectural floor plans, and an educational road-safety scene.',
-      goal:"This case brings together experiments in digital illustration and 3D. Some pieces are about building an image, while others depend on getting the source details right.",
-      research:"I used technical floor plans to locate walls, windows and doorways. For the road scene, I worked from traffic rules.",
-      process:"I turned the plans into spatial models and checked the proportions. I also modeled a road-safety scene and made a series of digital illustrations.",
-      result:"The galleries show the technical models, road scene and illustrations.",
-      conclusion:"I enjoy switching between the two modes. I can take more liberties with an illustration, but every opening in a floor-plan model has a specific place."
+      preview:"Original digital illustrations, 3D models based on architectural floor plans, and an educational road-safety scene.",
+      short:"Original digital illustrations, 3D models based on architectural floor plans, and an educational road-safety scene.",
+      goal:"Explore how 3D can make technical information and educational scenarios easier to understand.",
+      research:"For architectural models I used floor plans to reconstruct walls, doors, windows and room geometry. For the educational scene I studied road layouts and traffic rules.",
+      process:"Built spatial models from technical plans while preserving proportions. I also created a road-safety 3D scene and original digital illustrations; the architectural models were not photorealistic renders.",
+      result:"Created 3D floor-plan models, an educational traffic scene and a series of digital illustrations.",
+      conclusion:"Exploring different techniques expands the possibilities of graphic design."
     },
     baker:{
       name:'The Happy Baker',category:'Interfaces',field:'Mobile game / UI',
-      preview:"The interface for The Happy Baker mobile game, with illustrations for backgrounds, levels, and win and loss screens.",
-      short:'Mobile game UI with original hand-drawn backgrounds, game screens, and win and lose illustrations.',
-      goal:"I wanted The Happy Baker to feel like a baking game from the first screen and make it clear where to tap.",
-      research:"Warm colors and bakery details set the mood. Bright buttons make the next action easy to spot against a busy background.",
-      process:"I drew the backgrounds and game art, designed the interface and made separate illustrations for winning and losing.",
-      result:"The gallery shows five game screens and how the mood changes from the start to the outcome.",
-      conclusion:"I enjoyed balancing details you want to look at with buttons you need to spot immediately."
+      preview:"Mobile game UI with original hand-drawn backgrounds, game screens, and win and lose illustrations.",
+      short:"Mobile game UI with original hand-drawn backgrounds, game screens, and win and lose illustrations.",
+      goal:"Create a visual world and interface for a mobile game, including its key gameplay states.",
+      research:"The visual direction uses warm colors, bakery-inspired imagery and bright action buttons.",
+      process:"Illustrated the backgrounds and game graphics, designed screen compositions and created win and lose states.",
+      result:"A series of game screens featuring original backgrounds and illustrations.",
+      conclusion:"Expressive game visuals should always support intuitive navigation."
     },
     owl:{
       name:'Owl & Little Fox',category:'Interfaces',field:'Children’s website / Landing page',
-      preview:"A kindergarten website where parents can learn about classes, read reviews and request a visit.",
-      short:'A landing page for a children’s project with pastel colors, class information and an inquiry form.',
-      goal:"Parents need to get a quick sense of the kindergarten and decide whether to visit. I built the page around that decision.",
-      research:"The client wanted a pastel palette. I used it as the starting point and kept in mind that the page might be built on Tilda.",
-      process:"I organized the class information, reviews and pricing and designed a form for requesting a tour.",
-      result:"The resulting landing page lets parents get to know the kindergarten and request a visit in one place.",
-      conclusion:"I wanted the page to feel like the kindergarten and still make the practical information easy for parents to find."
+      preview:"A landing page for a children’s project with pastel colors, class information and an inquiry form.",
+      short:"A landing page for a children’s project with pastel colors, class information and an inquiry form.",
+      goal:"Design a website where parents can request a tour of a kindergarten.",
+      research:"Used a soft pastel palette requested by the client and considered implementation on Tilda.",
+      process:"Designed a landing page with informational sections, reviews, pricing and an inquiry form.",
+      result:"Delivered a landing page design for a children’s education project.",
+      conclusion:"Even playful, child-friendly design needs to be clear and useful for parents."
     },
     babushka:{
       name:'BABUSHKA Zine',category:'Editorial design',field:'Magazine / Collage',
-      preview:"A zine about the grandmother’s headscarf in contemporary fashion, made with archival pictures, fashion photography and collage.",
-      short:'An original collage-style zine reimagining the traditional grandmother’s headscarf as a contemporary fashion accessory.',
-      goal:"I wondered what a familiar grandmother’s headscarf would look like in contemporary fashion. That question turned into a zine.",
-      research:"I put archival images next to fashion photography. Collage gave me a way to bring them onto the same spread and see what they had in common.",
-      process:"I designed the cover and spreads, made the collages and used type to tie together images with different moods.",
-      result:"The result is an original zine you can flip through below, from cover to the last page.",
-      conclusion:"My favorite part is that the scarf remains recognizable even when the whole look around it changes."
+      preview:"An original collage-style zine reimagining the traditional grandmother’s headscarf as a contemporary fashion accessory.",
+      short:"An original collage-style zine reimagining the traditional grandmother’s headscarf as a contemporary fashion accessory.",
+      goal:"Show a familiar accessory from an unexpected perspective through editorial design.",
+      research:"The concept combines archival imagery, fashion photography, expressive typography and collage.",
+      process:"Designed the cover, spreads, typographic compositions and collages.",
+      result:"Created an original magazine with a cohesive visual system.",
+      conclusion:"Collage and typography can bring nostalgia and contemporary visual culture together."
     }
   };
   window.PORTFOLIO_PROJECTS.forEach(project=>{
@@ -203,8 +203,8 @@
     'Преобразование технических планов БТИ в понятные трёхмерные модели помещений: поэтажные планы, стены, перегородки и геометрия без фотореалистичных рендеров. Отдельный учебный 3D-проект посвящён правилам дорожного движения: моделирование дорожной сцены для визуального объяснения ситуаций на дороге.':'Turning architectural floor plans into understandable 3D room models, without photorealistic rendering. A separate educational project illustrates traffic rules through a modeled road scene.',
     'Разработка первоначального логотипа танцевальной студии Dance Soul. Через год — ребрендинг с адаптацией названия и логотипа на русский язык в связи с новыми требованиями к оформлению вывесок.':'I designed the original Dance Soul logo and later refreshed the identity, adapting its name and logo to Russian signage requirements.',
     'Небольшое исследование и подбор визуальных направлений для будущего мерча студии: идеи, референсы и предложения по оформлению.':'Explored visual directions, references and concepts for the studio’s future merchandise.',
-    'В коллекцию вошли футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена. Ковровый орнамент выделяется на чёрной ткани и связывает оба предмета.':'The final pieces include a graphic T-shirt and loose trousers with embroidery and patterned tapestry stripes, blending streetwear with the studio’s identity.',
-    'Адаптировала фирменный стиль «Золотого Правила» для кампании в Уфе. Разработала макет наружной рекламы и баннеры для «ПроДокторов», чтобы клинику было легко узнать, а предложение — быстро прочитать.':'Adapted the clinic’s visual identity for a large advertising campaign in Ufa, including outdoor banners and ads for ProDoktorov, with a focus on brand recognition and clear information hierarchy.',
+    'В результате созданы футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена с ковровым орнаментом. Контраст лаконичной чёрной основы и насыщенных узоров объединяет эстетику уличной одежды с характером танцевальной студии.':'The final pieces include a graphic T-shirt and loose trousers with embroidery and patterned tapestry stripes, blending streetwear with the studio’s identity.',
+    'Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.':'Adapted the clinic’s visual identity for a large advertising campaign in Ufa, including outdoor banners and ads for ProDoktorov, with a focus on brand recognition and clear information hierarchy.',
     'Разработка презентационных материалов для медицинских и просветительских мероприятий: структурирование информации, визуальная иерархия и оформление слайдов в фирменной стилистике.':'Designed presentations for medical and educational events, organizing information with clear hierarchy and consistent branding.',
     'Разработка футболок для благотворительного марафона: от визуальной концепции и графики до подготовки макетов к производству и воплощения идеи в готовом изделии.':'Designed T-shirts for a charity marathon, from initial visual concept to production-ready artwork.',
     'Дизайн печатных материалов для клиники «Золотое Правило»: адаптация фирменного стиля под физические носители, работа с композицией, типографикой и подготовка макетов к печати.':'Designed printed materials for Zolotoye Pravilo, adapting its identity to physical formats and preparing artwork for production.'
