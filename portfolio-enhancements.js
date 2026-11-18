@@ -68,8 +68,12 @@
     controls.hidden = viewing.images.length < 2;
     controls.querySelector("[role=status]").textContent = formatCount(viewing.index, viewing.images.length);
 
-    const originalUrl = image.dataset.original || originalImageUrl(thumbnail);
-    if (originalUrl === thumbnail) return;
+    const thumbnailUrl = new URL(thumbnail, document.baseURI).href;
+    const source = [...(image.closest("picture")?.querySelectorAll("source[data-original]") ?? [])]
+      .find(candidate => new URL(candidate.srcset, document.baseURI).href === thumbnailUrl);
+    const originalUrl = new URL(source?.dataset.original || image.dataset.original ||
+      originalImageUrl(thumbnailUrl), document.baseURI).href;
+    if (originalUrl === thumbnailUrl) return;
     const original = new Image();
     pendingOriginal = original;
     preview.setAttribute("aria-busy", "true");

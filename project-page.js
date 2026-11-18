@@ -57,7 +57,7 @@ if (!project) {
     : "";
 
   const bannerImages = [
-    ['banner-01-blue-preview.webp', 'banner-01-blue.webp', 1680, 839],
+    ['banner-01-blue-preview.webp', 'banner-01-blue.jpg', 1680, 839],
     ['banner-02-blue-preview.webp', 'banner-02.jpg', 1680, 682],
     ['banner-03-blue-preview.webp', 'banner-03.jpg', 1680, 250]
   ];
@@ -94,7 +94,8 @@ if (!project) {
   const danceLogo = (version, alt) => {
     const base = SITE_ROOT + 'assets/projects/dance/branding/logo-' + version;
     return '<div class="dance-image"><picture><source media="(prefers-color-scheme: dark)" srcset="' + base +
-      '-dark.webp"><img src="' + base + '-light.webp" alt="' + escapeHtml(alt) + '" loading="lazy" decoding="async"' +
+      '-dark.webp" data-original="' + base + '-dark.png"><img src="' + base +
+      '-light.webp" data-original="' + base + '-light.png" alt="' + escapeHtml(alt) + '" loading="lazy" decoding="async"' +
       ' width="1181" height="' + (version === 'before' ? 754 : 549) + '"></picture></div>';
   };
   const danceCarousel = (paths,kind) => '<div class="dance-carousel dance-carousel-' + kind + '"><div class="dance-carousel-slides">' +
