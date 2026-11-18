@@ -164,7 +164,7 @@ main { min-height: 70vh; }
 :is(.portrait-window, .about-portrait, .catalog-cover) { user-select: none; touch-action: pan-y pinch-zoom; }
 :is(.portrait-window, .catalog-cover) { cursor: grab; }
 :is(.portrait-window, .catalog-cover).is-grabbed { cursor: grabbing; }
-:is(.portrait-window, .catalog-cover):is(.is-grabbed, .is-releasing) { z-index: 80; }
+.catalog-cover:is(.is-grabbed, .is-releasing) { z-index: 80; }
 :is(.portrait-window .window-bar, .catalog-cover-bar) { touch-action: none; }
 
 .skill-orbit {
