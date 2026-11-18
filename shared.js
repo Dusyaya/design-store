@@ -27,7 +27,7 @@ function projectNavigation(project) {
   const previous = PROJECTS[(index - 1 + PROJECTS.length) % PROJECTS.length];
   const next = PROJECTS[(index + 1) % PROJECTS.length];
   const english = window.PORTFOLIO_LANG === "en";
-  const label = (item, direction) => '<span><strong>' + typography(item.name) +
+  const label = (item, direction) => '<span><strong>' + projectTitle(item) +
     '</strong><small>' + direction + '</small></span>';
   return '<nav class="project-navigation" aria-label="' + (english ? "Project navigation" : "Навигация по проектам") + '">' +
     '<a href="' + projectUrl(previous) + '" rel="prev">' + arrowSvg("left") +
@@ -133,10 +133,15 @@ function productArtwork(project) {
   return '<img src="' + coverBase(project) + '.webp" alt="" loading="lazy" decoding="async" width="720" height="720">';
 }
 
+function projectTitle(project) {
+  return escapeHtml(project.name).replace(/\s+—\s+/g, "&nbsp;— ");
+}
+
 function caseCover(project) {
   const name = escapeHtml(project.name);
   const floating = ["laser", "gold", "dance-posters"].includes(project.id);
-  return '<figure class="case-cover"><figcaption>' +
+  const landscape = ["dance-website", "sevstar", "extra", "baker", "owl"].includes(project.id);
+  return '<figure class="case-cover' + (landscape ? ' is-landscape' : '') + '"><figcaption>' +
     '<span class="window-lights" aria-hidden="true"><i></i><i></i><i></i></span>' +
     '<span class="case-cover-label">' + name + '.webp</span></figcaption>' +
     '<div class="case-cover-media' + (floating ? ' is-floating' : '') + '"><img src="' + coverBase(project) +
@@ -148,7 +153,7 @@ function caseTags(project) {
     '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div>';
 }
 
-function enableFloatingItem(item, area) {
+function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let x = 0;
   let y = 0;
@@ -220,12 +225,12 @@ function enableFloatingItem(item, area) {
     const dx = peakX - x;
     const dy = peakY - y;
     const recoil = position(x + dx * .46, y + dy * .46);
-    moveTo(x + dx * .62, y + dy * .62);
+    if (!returnToDropPoint) moveTo(x + dx * .62, y + dy * .62);
     item.classList.add("is-releasing");
     const effect = item.animate([
       {translate: from, offset: 0, easing: "cubic-bezier(.14,.72,.25,1)"},
-      {translate: position(peakX, peakY), offset: .32, easing: "ease-in-out"},
-      {translate: recoil, offset: .7, easing: "ease-out"},
+      {translate: position(peakX, peakY), offset: .32, easing: returnToDropPoint ? "ease-out" : "ease-in-out"},
+      ...(returnToDropPoint ? [] : [{translate: recoil, offset: .7, easing: "ease-out"}]),
       {translate: position(x, y), offset: 1}
     ], {duration: 460});
     releaseEffect = effect;

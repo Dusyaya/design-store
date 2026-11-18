@@ -55,7 +55,7 @@ function renderCatalog() {
     return '<a class="catalog-card" data-project="' + escapeHtml(project.id) + '" href="' + projectUrl(project) + '">' +
       '<div class="catalog-cover">' + productArtwork(project) +
       '<span aria-hidden="true" class="catalog-index">' + String(index).padStart(2, "0") + '</span></div>' +
-      '<div class="catalog-card-copy"><h3>' + typography(project.name) + ' ' + iconArrowUpRight() + '</h3>' +
+      '<div class="catalog-card-copy"><h3>' + projectTitle(project) + ' ' + arrowSvg("right") + '</h3>' +
       '<p>' + typography(project.short) + '</p>' +
       '<div class="tags">' + project.tags.map(tag =>
         '<span class="tag">' + escapeHtml(tag) + '</span>').join("") +
@@ -101,6 +101,6 @@ function initSkillBadges() {
   for (const badge of badges) {
     const label = badge.querySelector(".skill-badge-visual > span:last-child").textContent;
     badge.setAttribute("aria-label", label);
-    enableFloatingItem(badge, orbit);
+    enableFloatingItem(badge, orbit, {returnToDropPoint: true});
   }
 }

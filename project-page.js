@@ -190,7 +190,7 @@ if (!project) {
     '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться к коллекции</a>' +
     '<div class="eyebrow">' + typography(project.category) + ' / ' +
     typography(project.field) + ' / ' + escapeHtml(project.year) + '</div>' +
-    '<h1>' + typography(project.name) + '</h1>' +
+    '<h1>' + projectTitle(project) + '</h1>' +
     '<div class="case-intro"><p>' + typography(project.short) + '</p></div>' +
     caseTags(project) + '</header>' + caseCover(project) + '</div>' +
     '<div class="case-rows">' + sections.map(([heading, description]) =>

@@ -5,6 +5,9 @@
   const labels = english
     ? {previous: "Previous image", next: "Next image", close: "Close", preview: "Image preview", zoom: "Zoom image", select: "Select slide"}
     : {previous: "Предыдущее изображение", next: "Следующее изображение", close: "Закрыть", preview: "Просмотр изображения", zoom: "Увеличить изображение", select: "Выбрать слайд"};
+  const originalStatus = english
+    ? {loading: "Loading full-size image…", fallback: "Full-size image unavailable. Showing preview."}
+    : {loading: "Загружается оригинал…", fallback: "Оригинал недоступен. Открыто превью."};
   const formatCount = (index, length) => [index + 1, length].map(value => String(value).padStart(2, "0")).join(" / ");
   const wrapIndex = (index, length) => (index + length) % length;
   const navButton = (direction, label, className = "") =>
@@ -13,11 +16,15 @@
   const overlay = document.createElement("dialog");
   overlay.className = "portfolio-lightbox";
   overlay.setAttribute("aria-label", labels.preview);
-  overlay.innerHTML = '<button class="portfolio-lightbox-close" type="button" aria-label="' + labels.close + '">×</button><img alt="">' +
+  overlay.innerHTML = '<button class="portfolio-lightbox-close" type="button" aria-label="' + labels.close + '">×</button>' +
+    '<div class="lightbox-image-area"><img alt=""></div>' +
+    '<span class="lightbox-progress" role="status" hidden></span>' +
     '<div class="lightbox-controls" hidden>' + navButton("left", labels.previous, "lightbox-prev") +
     '<span role="status"></span>' + navButton("right", labels.next, "lightbox-next") + '</div>';
   document.body.appendChild(overlay);
-  let preview = overlay.querySelector("img");
+  const imageArea = overlay.querySelector(".lightbox-image-area");
+  const progress = overlay.querySelector(".lightbox-progress");
+  let preview = imageArea.querySelector("img");
   const controls = overlay.querySelector(".lightbox-controls");
   const previousPreview = controls.querySelector(".lightbox-prev");
   const nextPreview = controls.querySelector(".lightbox-next");
@@ -30,10 +37,24 @@
       .replace(/(\/project-covers\/cover-\d+)(?:-hero)?\.webp$/i, "$1.png");
   }
 
+  function setPreviewLayout(image) {
+    const tall = image.naturalHeight > image.naturalWidth * 2.5;
+    imageArea.classList.toggle("is-tall", tall);
+    imageArea.tabIndex = tall ? 0 : -1;
+    imageArea.scrollTop = 0;
+  }
+
+  function setProgress(message, loading = false) {
+    progress.textContent = message;
+    progress.hidden = !message;
+    progress.classList.toggle("is-loading", loading);
+  }
+
   function cancelOriginal() {
     pendingOriginal?.removeAttribute("src");
     pendingOriginal = undefined;
     preview.removeAttribute("aria-busy");
+    setProgress("");
   }
 
   function updatePreview() {
@@ -42,6 +63,7 @@
     const thumbnail = image.currentSrc || image.getAttribute("src") || image.dataset.src;
     preview.src = thumbnail;
     preview.alt = image.alt;
+    setPreviewLayout(image);
     controls.hidden = viewing.images.length < 2;
     controls.querySelector("[role=status]").textContent = formatCount(viewing.index, viewing.images.length);
 
@@ -50,6 +72,7 @@
     const original = new Image();
     pendingOriginal = original;
     preview.setAttribute("aria-busy", "true");
+    setProgress(originalStatus.loading, true);
     original.alt = image.alt;
     original.fetchPriority = "high";
     original.src = originalUrl;
@@ -58,10 +81,12 @@
       pendingOriginal = undefined;
       preview.replaceWith(original);
       preview = original;
+      setPreviewLayout(original);
+      setProgress("");
     }).catch(() => {
-      // Пока оригинал недоступен, миниатюра остаётся открытой.
-    }).finally(() => {
-      if (pendingOriginal === original) cancelOriginal();
+      if (pendingOriginal !== original) return;
+      cancelOriginal();
+      setProgress(originalStatus.fallback);
     });
   }
 
@@ -89,7 +114,7 @@
     stepPreview(event.key === "ArrowLeft" ? -1 : 1);
   });
   overlay.addEventListener("click", event => {
-    if (event.target === overlay || event.target.closest(".portfolio-lightbox-close")) overlay.close();
+    if (event.target === overlay || event.target === imageArea || event.target.closest(".portfolio-lightbox-close")) overlay.close();
   });
   overlay.addEventListener("close", () => {
     document.body.classList.remove("lightbox-open");
