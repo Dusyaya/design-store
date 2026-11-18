@@ -28,10 +28,10 @@
   site.contacts.message="Hello! I've seen your portfolio and would love to discuss a design project. Could you let me know how we might work together?";
   site.footer='© 2026 DARYA ATROKHINA';
   const translations={
-    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',preview:"A signature combo campaign, from competitor research to three designs and placement mockups.", short:'Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.',goal:"I wanted people to recognize SUPERTYAZH at a glance and see what comes in the combo and how much it costs.",research:"I started with SUPERTYAZH’s own ads: bright colors, dimensional headlines and photography paired with flat graphics. Vkusno i Tochka showed how a simple background draws attention to the food, while Rostic’s used a consistent price badge that was easy to spot. Starbucks drew my eye to textures and details, and Burger King made a quick bite feel like time with friends. Those observations informed the prominent price badge, close-up food imagery and the idea of sharing fries.",process:"I built a draft from the source photos and refined the food imagery with ChatGPT and Flux Inpaint. I chose Climate Crisis for the headline and used the brand’s existing colors. I compared six versions in grayscale to see where the name, price and food stood out best.",result:"Three designs made the final cut, all with the same offer: lemonade, a burger and fries for 399 RUB. Two mockups show how the ad looks outdoors and indoors.",conclusion:"I turned “Too good not to share” into a familiar gesture: a hand reaches into the frame for a fry. It’s that moment when one friend orders fries and everyone at the table has a taste."},
+    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',preview:"Three ads for a burger, fries and lemonade combo. I also showed how they look outdoors and indoors.", short:'Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.',goal:"I wanted people to recognize SUPERTYAZH at a glance and see what comes in the combo and how much it costs.",research:"I started with SUPERTYAZH’s own ads: bright colors, dimensional headlines and photography paired with flat graphics. Vkusno i Tochka showed how a simple background draws attention to the food, while Rostic’s used a consistent price badge that was easy to spot. Starbucks drew my eye to textures and details, and Burger King made a quick bite feel like time with friends. Those observations informed the prominent price badge, close-up food imagery and the idea of sharing fries.",process:"I built a draft from the source photos and refined the food imagery with ChatGPT and Flux Inpaint. I chose Climate Crisis for the headline and used the brand’s existing colors. I compared six versions in grayscale to see where the name, price and food stood out best.",result:"Three designs made the final cut, all with the same offer: lemonade, a burger and fries for 399 RUB. Two mockups show how the ad looks outdoors and indoors.",conclusion:"I turned “Too good not to share” into a familiar gesture: a hand reaches into the frame for a fry. It’s that moment when one friend orders fries and everyone at the table has a taste."},
     laser:{
       category:'Branding',field:'Advertising / Beauty',
-      preview:"Social media, print, email and AI visuals for a laser hair removal studio chain.",
+      preview:"Posts, stories, emails and print ads for laser hair removal studios. I used AI to create images for some of the campaigns.",
       short:'Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.',
       goal:"Laser&Beauty always has something to share, from new services to seasonal offers and campaigns. My job was to give each of those moments a look of its own.",
       research:"The marketer brought the brief and copy, and I developed the visual idea. For some assignments, I started with just a written brief and found the direction myself.",
@@ -48,7 +48,7 @@
     },
     gold:{
       name:'Zolotoye Pravilo',category:'Branding',field:'Healthcare / Visual communications',
-      preview:"Outdoor ads, banners, presentations, print and merchandise for a healthcare network.",
+      preview:"Signs, ads, brochures and presentations for a clinic network, plus T-shirts I designed for a charity marathon.",
       short:'Design for a private healthcare network: outdoor advertising, banners, print, social media and presentations.',
       goal:"A clinic sign has to be recognizable at a glance. A brochure gives people time to understand a service. I designed for both situations.",
       research:"The marketer supplied the copy and sometimes references. I chose the layouts, imagery and color accents within the clinic’s identity.",
@@ -58,7 +58,7 @@
     },
     dance:{
       category:'Branding',field:'Dance / Identity & merchandise',
-      preview:"Logos, a poster and merchandise for Dance Soul studio.",
+      preview:"Logos, a poster and clothing for Dance Soul studio. I designed a T-shirt print and graphics for the trousers.",
       short:'Logos, printed materials and apparel graphics for Dance Soul dance studio.',
       goal:"I started with a logo for a dance studio, then carried its personality into posters and clothing.",
       research:"A year later the studio needed a Russian-language sign. I kept the oversized lettering and strong contrast that gave the original logo its character.",
@@ -68,7 +68,7 @@
     },
     book:{
       name:'Dad Knows Everything',category:'Editorial design',field:'Gift book / Hardcover / Prepress',
-      preview:"A gift book for my dad’s 50th birthday, with stories from family and friends.",
+      preview:"A book for my dad’s 50th birthday. I collected stories from family and friends, designed the cover and laid out the pages.",
       short:'A hardcover book for my father’s 50th birthday, bringing together stories and memories from family and friends. Original layout and full prepress production.',
       goal:"For Dad’s 50th birthday, I wanted to give him a book only our family could have made. It brings together stories from relatives and friends.",
       research:"Everyone told their story in their own voice. I wanted to keep that feeling while making the collection flow as a book.",
@@ -78,7 +78,7 @@
     },
     'dance-website':{
       name:'Dance School Website',category:'Web design',field:'Web development / Dance',
-      preview:"A dance school website with class schedules, memberships, sign-up and a member area.",
+      preview:"A dance school website where students can check the schedule, choose a membership and sign up.",
       short:'A multi-page dance school website with a home page, class schedule, memberships, registration and personal account.',
       goal:"I wanted a site where you could choose a class and see what to do next, whether that meant checking the schedule, picking a membership or signing up.",
       research:"I organized the pages around those actions. New visitors can get to know the studio, and students have a member area.",
@@ -88,7 +88,7 @@
     },
     sevstar:{
       name:'Sevstar.Culinary',category:'Interfaces',field:'Smart TV application / UI',
-      preview:"A recipe browser for a TV set-top box, designed during a hackathon.",
+      preview:"A cooking app for a TV set-top box. I designed the recipe catalog, cooking instructions and grocery cart.",
       short:'A cooking app interface for a smart TV set-top box, designed during a 2023 hackathon.',
       goal:"At a hackathon we took on a cooking app for a TV set-top box. I worked out how to pick a dish on the big screen and follow it one step at a time.",
       research:"The project was for Sevstar, an internet provider in Sevastopol. The concept included Yamigom grocery delivery so viewers could go from a recipe to its ingredients.",
@@ -98,7 +98,7 @@
     },
     'dance-posters':{
       name:'Animated Dance Posters',category:'Motion design',field:'Animated posters / Dance',
-      preview:"Three video posters for choreographers and one for Trap Dance studio’s birthday.",
+      preview:"Four animated posters: three for dance classes and one for Trap Dance studio’s birthday.",
       short:'Three video posters for choreographers Dasha Pisanets, Pantera and Sakura, plus one for the Trap Dance studio’s birthday.',
       goal:"I wanted each poster to give you a sense of the class before you heard the music in the studio.",
       research:"Dasha Pisanets, Pantera and Sakura each called for a different look, and Trap Dance’s birthday had its own mood. I found a separate direction for each video.",
@@ -108,7 +108,7 @@
     },
     extra:{
       name:'Illustration & 3D',category:'Experiments',field:'Illustration / 3D',
-      preview:"Original illustrations, 3D models based on floor plans and a road-safety training scene.",
+      preview:"Digital illustrations, 3D room models built from floor plans and a scene for learning traffic rules.",
       short:'Original digital illustrations, 3D models based on architectural floor plans, and an educational road-safety scene.',
       goal:"This case brings together experiments in digital illustration and 3D. Some pieces are about building an image, while others depend on getting the source details right.",
       research:"I used technical floor plans to locate walls, windows and doorways. For the road scene, I worked from traffic rules.",
@@ -118,7 +118,7 @@
     },
     baker:{
       name:'The Happy Baker',category:'Interfaces',field:'Mobile game / UI',
-      preview:"Mobile game UI with hand-drawn backgrounds and illustrations for win and loss screens.",
+      preview:"The interface for The Happy Baker mobile game, with illustrations for backgrounds, levels, and win and loss screens.",
       short:'Mobile game UI with original hand-drawn backgrounds, game screens, and win and lose illustrations.',
       goal:"I wanted The Happy Baker to feel like a baking game from the first screen and make it clear where to tap.",
       research:"Warm colors and bakery details set the mood. Bright buttons make the next action easy to spot against a busy background.",
@@ -128,7 +128,7 @@
     },
     owl:{
       name:'Owl & Little Fox',category:'Interfaces',field:'Children’s website / Landing page',
-      preview:"A kindergarten landing page with information for parents and a form to book a tour.",
+      preview:"A kindergarten website where parents can learn about classes, read reviews and request a visit.",
       short:'A landing page for a children’s project with pastel colors, class information and an inquiry form.',
       goal:"Parents need to get a quick sense of the kindergarten and decide whether to visit. I built the page around that decision.",
       research:"The client wanted a pastel palette. I used it as the starting point and kept in mind that the page might be built on Tilda.",
@@ -138,7 +138,7 @@
     },
     babushka:{
       name:'BABUSHKA Zine',category:'Editorial design',field:'Magazine / Collage',
-      preview:"A collage zine about the traditional headscarf in contemporary fashion.",
+      preview:"A zine about the grandmother’s headscarf in contemporary fashion, made with archival pictures, fashion photography and collage.",
       short:'An original collage-style zine reimagining the traditional grandmother’s headscarf as a contemporary fashion accessory.',
       goal:"I wondered what a familiar grandmother’s headscarf would look like in contemporary fashion. That question turned into a zine.",
       research:"I put archival images next to fashion photography. Collage gave me a way to bring them onto the same spread and see what they had in common.",

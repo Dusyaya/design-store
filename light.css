@@ -125,6 +125,7 @@ main { min-height: 70vh; }
   font-size: var(--body-size);
   line-height: 1.47;
 }
+.portfolio-intro p { color: var(--muted); }
 .portfolio-intro .portfolio-skills-heading { margin-top: clamp(22px, 2.7vw, 52px); }
 .portfolio-skills { display: grid; gap: 2px; list-style: none; padding: 0; }
 .portfolio-skills li { display: flex; align-items: baseline; gap: .5em; }
