@@ -6,7 +6,7 @@ const hero = SITE.hero;
 document.querySelector(".portfolio-heading h1").textContent = hero.title;
 document.querySelector(".portfolio-year").textContent = hero.year;
 document.querySelector(".portfolio-intro h2").textContent = hero.greeting;
-document.querySelector(".portfolio-intro p").innerHTML = typography(hero.description);
+document.querySelector(".portfolio-intro p").innerHTML = hero.description.split("\n").map(typography).join("<br>");
 document.querySelector(".portfolio-skills-heading").textContent = hero.skillsTitle;
 document.querySelector(".portfolio-skills").innerHTML = hero.skills.map(skill =>
   '<li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/></svg><span>' +
