@@ -1,2 +1,0 @@
-- `figma.svg` — Devicon v2.17.0, MIT. See [Devicon license](DEVICON-LICENSE.txt).
-- `telegram.svg`, `instagram.svg`, `whatsapp.svg` — [Simple Icons v15.20.0](https://github.com/simple-icons/simple-icons/tree/15.20.0), CC0. Brand marks belong to their respective owners.

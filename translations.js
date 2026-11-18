@@ -12,32 +12,31 @@
   const site = window.SITE_CONTENT;
   Object.assign(site.header,{catalog:'Projects',about:'About',contact:'Contact'});
   Object.assign(site.hero,{
-    title:'PORTFOLIO',name:'Darya Atrokhina',role:'GRAPHIC & WEB DESIGNER',
+    title:'PORTFOLIO',name:'DARYA ATROKHINA',role:'GRAPHIC & WEB DESIGNER',
     greeting:"Hi, I'm Darya!",
     description:'I create visual concepts for brands, from advertising and print to merchandise and digital interfaces. I love typography and bold compositions.',
-    skillsTitle:'What I do',
+    skillsTitle:'WHAT I DO',
     skills:['Advertising design','Brand identity & merch','Social media design','Print design','Web design & UI','Illustration & 3D'],
     hint:'SCROLL DOWN TO EXPLORE THE COLLECTION ↓',button:'Explore projects ↗'
   });
-  Object.assign(site.catalog,{heading:'Selected work',filters:['All','Branding','Web and interfaces','Motion','Editorial design'],machine:'PROJECT SHOWCASE'});
-  Object.assign(site.about,{heading:'ABOUT THE DESIGNER',title:['Ideas', 'taking shape'],
+  Object.assign(site.catalog,{heading:'SELECTED WORK',filters:['All','Branding','Interfaces','Motion','Editorial design'],machine:'PROJECT SHOWCASE'});
+  Object.assign(site.about,{heading:'ABOUT THE DESIGNER',title:'Ideas taking shape.',
     paragraphs:[
       "I'm a graphic designer creating visual concepts, advertising, print materials, merchandise and digital assets for commercial projects.",
-      "My background is in software engineering, so I understand not only visual design and composition but also how digital products work."
+      'My background is in software engineering, so I understand not only visual design and composition but also how digital products work.'
     ],button:'Discuss a project ↗'});
   site.contacts.message="Hello! I've seen your portfolio and would love to discuss a design project. Could you let me know how we might work together?";
   site.footer='© 2026 DARYA ATROKHINA';
   const translations={
-    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',preview:"Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.", short:"Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.",goal:"Create an eye-catching signature combo campaign that feels on-brand and communicates the name, price and offer clearly.",research:"Analyzed SUPERTYAZH’s visual identity alongside campaigns from Vkusno i Tochka, Rostic’s, Starbucks and Burger King, focusing on vivid color, bold typography, food textures and consistent price tags.",process:"Cut out source images, built a draft composition, refined the food imagery using ChatGPT and Flux Inpaint, chose Climate Crisis typography and brand colors, and tested multiple layouts for legibility.",result:"Developed three final creative variations featuring lemonade, a burger and fries at 399 RUB, with placement mockups for print and social media.",conclusion:"The creative idea, “Too good not to share,” comes alive through a hand reaching for a fry, giving the food shot a playful narrative."},
+    supertyazh:{name:'SUPERTYAZH — Signature Combo',category:'Branding',field:'Advertising design / Design challenge',short:'Design challenge: advertising creative for the SUPERTYAZH signature combo, from visual research and competitor analysis to concepts and mockups.',goal:'Create an eye-catching signature combo campaign that feels on-brand and communicates the name, price and offer clearly.',research:'Analyzed SUPERTYAZH’s visual identity alongside campaigns from Vkusno i Tochka, Rostic’s, Starbucks and Burger King, focusing on vivid color, bold typography, food textures and consistent price tags.',process:'Cut out source images, built a draft composition, refined the food imagery using ChatGPT and Flux Inpaint, chose Climate Crisis typography and brand colors, and tested multiple layouts for legibility.',result:'Developed three final creative variations featuring lemonade, a burger and fries at 399 RUB, with placement mockups for print and social media.',conclusion:'The creative idea, “Too good not to share,” comes alive through a hand reaching for a fry, giving the food shot a playful narrative.'},
     laser:{
       category:'Branding',field:'Advertising / Beauty',
-      preview:"Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.",
-      short:"Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.",
-      goal:"Create visual communications promoting services, seasonal offers and advertising campaigns for a laser hair removal studio chain.",
-      research:"I collaborated with a marketer who supplied copy and briefs. I independently developed visual concepts, art direction, compositions and format adaptations, often without ready-made references.",
-      process:"Designed social media posts and stories, printed advertising, AI-assisted visuals and email campaigns, adapting each piece to its medium and communication goals.",
-      result:"Delivered a collection of digital and print assets for ongoing brand communication, campaigns and special offers across Russia and Kazakhstan.",
-      conclusion:"My key contribution was turning marketing briefs into original visual concepts and adapting them consistently across channels.",
+      short:'Graphic design for a laser hair removal studio chain in Russia and Kazakhstan: social media, print, AI visuals and email campaigns.',
+      goal:'Create visual communications promoting services, seasonal offers and advertising campaigns for a laser hair removal studio chain.',
+      research:'I collaborated with a marketer who supplied copy and briefs. I independently developed visual concepts, art direction, compositions and format adaptations, often without ready-made references.',
+      process:'Designed social media posts and stories, printed advertising, AI-assisted visuals and email campaigns, adapting each piece to its medium and communication goals.',
+      result:'Delivered a collection of digital and print assets for ongoing brand communication, campaigns and special offers across Russia and Kazakhstan.',
+      conclusion:'My key contribution was turning marketing briefs into original visual concepts and adapting them consistently across channels.',
       showcase:[
         ['Stories','Social media story designs for promotions, special offers and informative posts, balancing visual appeal, readability and engagement.'],
         ['Email campaigns','Visual assets for marketing emails, including promotions, tailored offers and informational messages with clear hierarchy.'],
@@ -48,108 +47,98 @@
     },
     gold:{
       name:'Zolotoye Pravilo',category:'Branding',field:'Healthcare / Visual communications',
-      preview:"Design for a private healthcare network: outdoor advertising, banners, print, social media and presentations.",
-      short:"Design for a private healthcare network: outdoor advertising, banners, print, social media and presentations.",
-      goal:"Communicate the clinics’ services and offers clearly across digital and printed media.",
-      research:"Working from marketing briefs and occasional references, I developed compositions, color accents and visual imagery aligned with the brand identity.",
-      process:"Created signage, outdoor advertising, digital banners, brochures, social media posts and presentation designs.",
-      result:"Produced a range of promotional and informational materials for different clinic communication channels.",
-      conclusion:"Healthcare design calls for clear information hierarchy and careful typography."
+      short:'Design for a private healthcare network: outdoor advertising, banners, print, social media and presentations.',
+      goal:'Communicate the clinics’ services and offers clearly across digital and printed media.',
+      research:'Working from marketing briefs and occasional references, I developed compositions, color accents and visual imagery aligned with the brand identity.',
+      process:'Created signage, outdoor advertising, digital banners, brochures, social media posts and presentation designs.',
+      result:'Produced a range of promotional and informational materials for different clinic communication channels.',
+      conclusion:'Healthcare design calls for clear information hierarchy and careful typography.'
     },
     dance:{
       category:'Branding',field:'Dance / Identity & merchandise',
-      preview:"Logos, printed materials and apparel graphics for Dance Soul dance studio.",
-      short:"Logos, printed materials and apparel graphics for Dance Soul dance studio.",
-      goal:"Develop distinctive branded graphics for the studio and its merchandise.",
-      research:"The visual direction draws on expressive typography, a contrasting palette and contemporary dance culture.",
-      process:"Designed logos, print materials, T-shirt graphics and other merchandise, including print-ready artwork.",
-      result:"Created branded assets and apparel designs for the studio.",
-      conclusion:"A strong graphic identity should work equally well on screen and on fabric."
+      short:'Logos, printed materials and apparel graphics for Dance Soul dance studio.',
+      goal:'Develop distinctive branded graphics for the studio and its merchandise.',
+      research:'The visual direction draws on expressive typography, a contrasting palette and contemporary dance culture.',
+      process:'Designed logos, print materials, T-shirt graphics and other merchandise, including print-ready artwork.',
+      result:'Created branded assets and apparel designs for the studio.',
+      conclusion:'A strong graphic identity should work equally well on screen and on fabric.'
     },
     book:{
       name:'Dad Knows Everything',category:'Editorial design',field:'Gift book / Hardcover / Prepress',
-      preview:"A hardcover book for my father’s 50th birthday, bringing together stories and memories from family and friends. Original layout and full prepress production.",
-      short:"A hardcover book for my father’s 50th birthday, bringing together stories and memories from family and friends. Original layout and full prepress production.",
-      goal:"Preserve the memories of loved ones in a personal, story-filled gift for my father’s 50th birthday.",
-      research:"The book brings together stories and memories from family, friends and other people close to him.",
-      process:"Designed the cover, endpapers and interior layout, and completed prepress preparation for the printer.",
-      result:"The finished hardcover book was printed in 2025 as a 50th birthday gift.",
-      conclusion:"Thoughtful editorial design turned personal memories and family stories into a lasting physical keepsake."
+      short:'A hardcover book for my father’s 50th birthday, bringing together stories and memories from family and friends. Original layout and full prepress production.',
+      goal:'Preserve the memories of loved ones in a personal, story-filled gift for my father’s 50th birthday.',
+      research:'The book brings together stories and memories from family, friends and other people close to him.',
+      process:'Designed the cover, endpapers and interior layout, and completed prepress preparation for the printer.',
+      result:'The finished hardcover book was printed in 2025 as a 50th birthday gift.',
+      conclusion:'Thoughtful editorial design turned personal memories and family stories into a lasting physical keepsake.'
     },
     'dance-website':{
       name:'Dance School Website',category:'Web design',field:'Web development / Dance',
-      preview:"A multi-page dance school website with a home page, class schedule, memberships, registration and personal account.",
-      short:"A multi-page dance school website with a home page, class schedule, memberships, registration and personal account.",
-      goal:"Build a website where students can learn about classes and interact with the dance school.",
-      research:"The structure covers both public information and user journeys: discovering classes, viewing the schedule, choosing a membership and managing an account.",
-      process:"Designed and developed client-side pages using HTML, CSS and JavaScript. The repository also includes a Node.js backend.",
-      result:"A multi-page website prototype with a schedule, memberships, contacts and personal accounts.",
-      conclusion:"The project combines visual design with practical user flows for a dance school."
+      short:'A multi-page dance school website with a home page, class schedule, memberships, registration and personal account.',
+      goal:'Build a website where students can learn about classes and interact with the dance school.',
+      research:'The structure covers both public information and user journeys: discovering classes, viewing the schedule, choosing a membership and managing an account.',
+      process:'Designed and developed client-side pages using HTML, CSS and JavaScript. The repository also includes a Node.js backend.',
+      result:'A multi-page website prototype with a schedule, memberships, contacts and personal accounts.',
+      conclusion:'The project combines visual design with practical user flows for a dance school.'
     },
     sevstar:{
       name:'Sevstar.Culinary',category:'Interfaces',field:'Smart TV application / UI',
-      preview:"A cooking app interface for a smart TV set-top box, designed during a 2023 hackathon.",
-      short:"A cooking app interface for a smart TV set-top box, designed during a 2023 hackathon.",
-      goal:"Design a recipe catalog and step-by-step cooking interface for a TV set-top box.",
-      research:"Created for a major internet provider in Sevastopol, the concept included integration with an existing grocery delivery service.",
-      process:"Designed category screens, recipe listings, recipe details, step-by-step instructions and a shopping cart.",
-      result:"Produced a visual interface concept as part of a hackathon.",
-      conclusion:"TV interfaces require especially clear navigation and large, legible elements."
+      short:'A cooking app interface for a smart TV set-top box, designed during a 2023 hackathon.',
+      goal:'Design a recipe catalog and step-by-step cooking interface for a TV set-top box.',
+      research:'Created for a major internet provider in Sevastopol, the concept included integration with an existing grocery delivery service.',
+      process:'Designed category screens, recipe listings, recipe details, step-by-step instructions and a shopping cart.',
+      result:'Produced a visual interface concept as part of a hackathon.',
+      conclusion:'TV interfaces require especially clear navigation and large, legible elements.'
     },
     'dance-posters':{
       name:'Animated Dance Posters',category:'Motion design',field:'Animated posters / Dance',
-      preview:"Four animated posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.",
-      short:"Four animated posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.",
-      goal:"Create expressive animated posters to promote dance classes.",
-      research:"Dynamic compositions, music, typography and movement help communicate the personality of each class.",
-      process:"Created four motion posters for different dance classes.",
-      result:"A set of four video posters for social media.",
-      conclusion:"Motion graphics can communicate the atmosphere of a dance class before it even begins."
+      short:'Four animated posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.',
+      goal:'Create expressive animated posters to promote dance classes.',
+      research:'Dynamic compositions, music, typography and movement help communicate the personality of each class.',
+      process:'Created four motion posters for different dance classes.',
+      result:'A set of four video posters for social media.',
+      conclusion:'Motion graphics can communicate the atmosphere of a dance class before it even begins.'
     },
     extra:{
       name:'Illustration & 3D',category:'Experiments',field:'Illustration / 3D',
-      preview:"Original digital illustrations, 3D models based on architectural floor plans, and an educational road-safety scene.",
-      short:"Original digital illustrations, 3D models based on architectural floor plans, and an educational road-safety scene.",
-      goal:"Explore how 3D can make technical information and educational scenarios easier to understand.",
-      research:"For architectural models I used floor plans to reconstruct walls, doors, windows and room geometry. For the educational scene I studied road layouts and traffic rules.",
-      process:"Built spatial models from technical plans while preserving proportions. I also created a road-safety 3D scene and original digital illustrations; the architectural models were not photorealistic renders.",
-      result:"Created 3D floor-plan models, an educational traffic scene and a series of digital illustrations.",
-      conclusion:"Exploring different techniques expands the possibilities of graphic design."
+      short:'Original digital illustrations, 3D models based on architectural floor plans, and an educational road-safety scene.',
+      goal:'Explore how 3D can make technical information and educational scenarios easier to understand.',
+      research:'For architectural models I used floor plans to reconstruct walls, doors, windows and room geometry. For the educational scene I studied road layouts and traffic rules.',
+      process:'Built spatial models from technical plans while preserving proportions. I also created a road-safety 3D scene and original digital illustrations; the architectural models were not photorealistic renders.',
+      result:'Created 3D floor-plan models, an educational traffic scene and a series of digital illustrations.',
+      conclusion:'Exploring different techniques expands the possibilities of graphic design.'
     },
     baker:{
       name:'The Happy Baker',category:'Interfaces',field:'Mobile game / UI',
-      preview:"Mobile game UI with original hand-drawn backgrounds, game screens, and win and lose illustrations.",
-      short:"Mobile game UI with original hand-drawn backgrounds, game screens, and win and lose illustrations.",
-      goal:"Create a visual world and interface for a mobile game, including its key gameplay states.",
-      research:"The visual direction uses warm colors, bakery-inspired imagery and bright action buttons.",
-      process:"Illustrated the backgrounds and game graphics, designed screen compositions and created win and lose states.",
-      result:"A series of game screens featuring original backgrounds and illustrations.",
-      conclusion:"Expressive game visuals should always support intuitive navigation."
+      short:'Mobile game UI with original hand-drawn backgrounds, game screens, and win and lose illustrations.',
+      goal:'Create a visual world and interface for a mobile game, including its key gameplay states.',
+      research:'The visual direction uses warm colors, bakery-inspired imagery and bright action buttons.',
+      process:'Illustrated the backgrounds and game graphics, designed screen compositions and created win and lose states.',
+      result:'A series of game screens featuring original backgrounds and illustrations.',
+      conclusion:'Expressive game visuals should always support intuitive navigation.'
     },
     owl:{
       name:'Owl & Little Fox',category:'Interfaces',field:'Children’s website / Landing page',
-      preview:"A landing page for a children’s project with pastel colors, class information and an inquiry form.",
-      short:"A landing page for a children’s project with pastel colors, class information and an inquiry form.",
-      goal:"Design a website where parents can request a tour of a kindergarten.",
-      research:"Used a soft pastel palette requested by the client and considered implementation on Tilda.",
-      process:"Designed a landing page with informational sections, reviews, pricing and an inquiry form.",
-      result:"Delivered a landing page design for a children’s education project.",
-      conclusion:"Even playful, child-friendly design needs to be clear and useful for parents."
+      short:'A landing page for a children’s project with pastel colors, class information and an inquiry form.',
+      goal:'Design a website where parents can request a tour of a kindergarten.',
+      research:'Used a soft pastel palette requested by the client and considered implementation on Tilda.',
+      process:'Designed a landing page with informational sections, reviews, pricing and an inquiry form.',
+      result:'Delivered a landing page design for a children’s education project.',
+      conclusion:'Even playful, child-friendly design needs to be clear and useful for parents.'
     },
     babushka:{
       name:'BABUSHKA Zine',category:'Editorial design',field:'Magazine / Collage',
-      preview:"An original collage-style zine reimagining the traditional grandmother’s headscarf as a contemporary fashion accessory.",
-      short:"An original collage-style zine reimagining the traditional grandmother’s headscarf as a contemporary fashion accessory.",
-      goal:"Show a familiar accessory from an unexpected perspective through editorial design.",
-      research:"The concept combines archival imagery, fashion photography, expressive typography and collage.",
-      process:"Designed the cover, spreads, typographic compositions and collages.",
-      result:"Created an original magazine with a cohesive visual system.",
-      conclusion:"Collage and typography can bring nostalgia and contemporary visual culture together."
+      short:'An original collage-style zine reimagining the traditional grandmother’s headscarf as a contemporary fashion accessory.',
+      goal:'Show a familiar accessory from an unexpected perspective through editorial design.',
+      research:'The concept combines archival imagery, fashion photography, expressive typography and collage.',
+      process:'Designed the cover, spreads, typographic compositions and collages.',
+      result:'Created an original magazine with a cohesive visual system.',
+      conclusion:'Collage and typography can bring nostalgia and contemporary visual culture together.'
     }
   };
   window.PORTFOLIO_PROJECTS.forEach(project=>{
     const tr=translations[project.id]; if(!tr)return;
-    for(const key of ['name','category','field','short','preview','goal','research','process','result','conclusion']) if(tr[key])project[key]=tr[key];
+    for(const key of ['name','category','field','short','goal','research','process','result','conclusion']) if(tr[key])project[key]=tr[key];
     if(tr.showcase && project.showcase) project.showcase.forEach((item,i)=>{
       if(tr.showcase[i]){item.title=tr.showcase[i][0];item.description=tr.showcase[i][1];}
     });
@@ -158,8 +147,9 @@
     'РЕДАКЦИОННЫЙ ДИЗАЙН / ПОДАРОЧНАЯ КНИГА / 2025':'EDITORIAL DESIGN / GIFT BOOK / 2025',
     'РЕДАКЦИОННЫЙ ДИЗАЙН / ЖУРНАЛ / 2026':'EDITORIAL DESIGN / MAGAZINE / 2026',
     'ТВЁРДЫЙ ПЕРЕПЛЁТ':'HARDCOVER','20 СТРАНИЦ':'20 PAGES','Назад к коллекции':'Back to collection',
-    'ВИДЕОАФИШИ':'VIDEO POSTERS','4 ВИДЕО':'4 VIDEOS','Даша Писанец':'Dasha Pisanets','Пантера':'Pantera','Сакура':'Sakura',
-    'ПРЕЗЕНТАЦИЯ ПРОЕКТА':'PROJECT PRESENTATION','11 СЛАЙДОВ':'11 SLIDES','ФИНАЛЬНЫЕ МАКЕТЫ':'FINAL DESIGNS','3 ВАРИАНТА':'3 VERSIONS','МОКАПЫ':'MOCKUPS','2 ИЗОБРАЖЕНИЯ':'2 IMAGES','Предыдущий слайд':'Previous slide','Следующий слайд':'Next slide','Вариант 1':'Version 1','Вариант 2':'Version 2','Вариант 3':'Version 3',
+    'Четыре видеоафиши для танцевальных классов: «Даша Писанец», «Пантера», «Сакура» и Trap Dance.':'Four video posters for dance classes: Dasha Pisanets, Pantera, Sakura and Trap Dance.',
+    'ВИДЕОАФИШИ':'VIDEO POSTERS','04 ВИДЕО':'04 VIDEOS','Даша Писанец':'Dasha Pisanets','Пантера':'Pantera','Сакура':'Sakura',
+    'ПРЕЗЕНТАЦИЯ ПРОЕКТА':'PROJECT PRESENTATION','11 СЛАЙДОВ':'11 SLIDES','ФИНАЛЬНЫЕ МАКЕТЫ':'FINAL DESIGNS','03 ВАРИАНТА':'03 VERSIONS','МОКАПЫ':'MOCKUPS','02 ИЗОБРАЖЕНИЯ':'02 IMAGES','Предыдущий слайд':'Previous slide','Следующий слайд':'Next slide','Вариант 01':'Version 01','Вариант 02':'Version 02','Вариант 03':'Version 03',
     'РАЗРАБОТКА КОНЦЕПЦИИ':'CONCEPT DEVELOPMENT','ТЕСТОВОЕ ЗАДАНИЕ / 2026':'DESIGN CHALLENGE / 2026','01 / ИССЛЕДОВАНИЕ':'01 / RESEARCH','02 / КОНЦЕПЦИЯ':'02 / CONCEPT','03 / РЕЗУЛЬТАТ':'03 / OUTCOME','Фирменный язык и конкуренты':'Brand language & competitors','Невозможно не поделиться':'Too good not to share','Три варианта. Одна идея.':'Three versions. One idea.','КОМБО СУПЕРТЯЖ':'SUPERTYAZH COMBO',
     'Проект не найден':'Project not found','Вернуться в каталог':'Back to projects',
     'Вернуться к коллекции':'Back to collection','Предыдущий проект':'Previous project','Следующий проект':'Next project',
@@ -173,31 +163,29 @@
     'Брендинг':'Branding','Мерч':'Merchandise','Исследование и предложения':'Research & concepts','Результат':'Outcome',
     'ДО / ПЕРВЫЙ ЛОГОТИП':'BEFORE / ORIGINAL LOGO','ПОСЛЕ / РЕБРЕНДИНГ':'AFTER / REBRANDING',
     'Афиша для расклейки':'Printed event poster',
-    '03 ВИДЕО':'03 VIDEOS',
+    'ВИДЕОАФИШИ':'MOTION POSTERS','03 ВИДЕО':'03 VIDEOS',
     'САЙТ ТАНЦЕВАЛЬНОЙ ШКОЛЫ':'DANCE SCHOOL WEBSITE','ВЕБ-ПРОЕКТ':'WEB PROJECT',
     'Открыть сайт':'Visit website','Посмотреть код на GitHub':'View code on GitHub',
-    'ЭКРАНЫ ИГРЫ':'GAME SCREENS','5 ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ':'5 SCREENS · ORIGINAL ILLUSTRATIONS',
-    'ЭКРАНЫ ПРИЛОЖЕНИЯ':'APP SCREENS','SMART TV · 9 ЭКРАНОВ':'SMART TV · 9 SCREENS',
+    'ЭКРАНЫ ИГРЫ':'GAME SCREENS','05 ЗАГРУЖЕННЫХ ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ':'05 SCREENS · ORIGINAL ILLUSTRATIONS',
+    'ЭКРАНЫ ПРИЛОЖЕНИЯ':'APP SCREENS','SMART TV · 09 ЭКРАНОВ':'SMART TV · 09 SCREENS',
     'Первый экран можно прокручивать вверх и вниз внутри телевизора.':'Scroll vertically inside the TV to explore the first screen.',
     'ГАЛЕРЕЯ ЗИНА':'ZINE GALLERY','20 СТРАНИЦ · 10 РАЗВОРОТОВ':'20 PAGES · 10 SPREADS',
     'Загрузите изображение':'Image unavailable','Страница ожидает загрузки':'Page loading',
     'ПРОЕКТОВ':'PROJECTS','Почта':'Email','Нейросети':'AI tools',
-    'Даша Писанец':'Dasha Pisanets','Пантера':'Pantera','Сакура':'Sakura',
+    'Даша Писанец':'Dasha Pisanets','Пантера':'Panther','Сакура':'Sakura',
     'Экран телевизора. Первый макет прокручивается вертикально.':'TV screen. The first layout can be scrolled vertically.',
     'Интерактивный журнал BABUSHKA':'Interactive BABUSHKA zine',
     'ЗОЛОТОЕ ПРАВИЛО':'ZOLOTOYE PRAVILO','Реклама / Бьюти':'Advertising / Beauty',
     'Предыдущий слайд':'Previous slide','Следующий слайд':'Next slide',
     'Предыдущее изображение':'Previous image','Следующее изображение':'Next image',
     'Предыдущий экран':'Previous screen','Следующий экран':'Next screen',
-    'ИНТЕРАКТИВНАЯ КНИГА':'INTERACTIVE BOOK','ТВЁРДЫЙ ПЕРЕПЛЁТ':'HARDCOVER',
-    'Листать назад':'Previous spread','Листать вперед':'Next spread',
-    'Интерактивная книга':'Interactive book','Интерактивный журнал BABUSHKA':'Interactive BABUSHKA zine',
     'Предыдущий разворот':'Previous spread','Следующий разворот':'Next spread',
     'Воспроизвести видеоафишу':'Play motion poster',
     'Первый логотип Dance Soul':'Original Dance Soul logo','Новый логотип Dance Soul':'New Dance Soul logo',
     'Презентация на мероприятии':'Presentation at an event',
     'Сайт танцевальной школы':'Dance school website',
     'Главная страница сайта танцевальной школы Алисы Шарко':'Alisa Sharko dance school homepage',
+    'Три видеоафиши для танцевальных классов: «Даша Писанец», «Пантера» и «Сакура».':'Three animated posters for the Dasha Pisanets, Panther and Sakura dance classes.',
     'Многостраничный сайт школы танцев с расписанием, абонементами и личным кабинетом. Разработан для танцевальной школы Алисы Шарко.':'A multi-page website with class schedules, memberships and student accounts, developed for Alisa Sharko Dance School.',
     'Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.':'I designed the interface and illustrated the characters, environments and game assets for The Happy Baker mobile game.',
     'Преобразование технических планов БТИ в понятные трёхмерные модели помещений: поэтажные планы, стены, перегородки и геометрия без фотореалистичных рендеров. Отдельный учебный 3D-проект посвящён правилам дорожного движения: моделирование дорожной сцены для визуального объяснения ситуаций на дороге.':'Turning architectural floor plans into understandable 3D room models, without photorealistic rendering. A separate educational project illustrates traffic rules through a modeled road scene.',
@@ -218,7 +206,7 @@
       if(node.parentElement?.closest('script,style,svg'))return;
       const original=node.nodeValue;
       const trimmed=original.trim();
-      const normalized=trimmed.replace(/\u00a0/g,' ').replace(/‑/g,'-');
+      const normalized=trimmed.replace(/\u00a0/g,' ');
       if(dict[normalized])node.nodeValue=original.replace(trimmed,dict[normalized]);
     });
     root.querySelectorAll('[aria-label],[alt],[title]').forEach(el=>{

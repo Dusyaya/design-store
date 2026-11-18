@@ -1,5 +1,6 @@
 // Универсальный шаблон страницы проекта.
 // Сам текст находится в projects.js, а не в HTML.
+const arrowSvg = direction => '<svg class="ui-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="' + (direction === 'left' ? 'M19 12H5m7 7-7-7 7-7' : direction === 'up-right' ? 'M7 17 17 7M8 7h9v9' : 'M5 12h14m-7-7 7 7-7 7') + '"/></svg>';
 renderLayout();
 
 const projectId = document.body.dataset.project;
@@ -19,6 +20,8 @@ if (!project) {
     ["04 / Результат", project.result],
     ["05 / Вывод", project.conclusion]
   ];
+  const next = PROJECTS[(PROJECTS.indexOf(project) + 1) % PROJECTS.length];
+  const previous = PROJECTS[(PROJECTS.indexOf(project) - 1 + PROJECTS.length) % PROJECTS.length];
 
   const gallery = ["Главный визуал / обложка кейса", "Работы и детали", "Мокапы и применение"]
     .map((label, index) => {
@@ -56,16 +59,10 @@ if (!project) {
       }).join("") + '</section>'
     : "";
 
-  const bannerImages = [
-    ['banner-01-blue-preview.webp', 'banner-01-blue.jpg', 1680, 839],
-    ['banner-02-blue-preview.webp', 'banner-02.jpg', 1680, 682],
-    ['banner-03-blue-preview.webp', 'banner-03.jpg', 1680, 250]
-  ];
+  const bannerImages = ['banner-01.jpg', 'banner-02.jpg', 'banner-03.jpg'];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
     ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.</p></div><div class="showcase-media zp-banner-stack">' +
-      bannerImages.map(([name, original, width, height], i) => '<img src="' + SITE_ROOT + 'assets/projects/gold/' + name +
-        '" data-original="' + SITE_ROOT + 'assets/projects/gold/' + original + '" alt="Рекламный баннер ' + (i+1) +
-        '" width="' + width + '" height="' + height + '" loading="lazy">').join('') +
+      bannerImages.map((name, i) => '<img src="' + imagePath('assets/projects/gold/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" loading="lazy">').join('') +
       '</div></article>'
     : '';
   const presentationHtml = project.id === 'gold'
@@ -91,25 +88,18 @@ if (!project) {
       '</div></div></article>'
     : '';
   const danceImage = (path,alt) => '<div class="dance-image"><img src="' + imagePath(path) + '" alt="' + alt + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="dance-image-placeholder" hidden>Загрузите изображение<br><small>' + escapeHtml(path.split('/').pop()) + '</small></div></div>';
-  const danceLogo = (version, alt) => {
-    const base = SITE_ROOT + 'assets/projects/dance/branding/logo-' + version;
-    return '<div class="dance-image"><picture><source media="(prefers-color-scheme: dark)" srcset="' + base +
-      '-dark.webp" data-original="' + base + '-dark.png"><img src="' + base +
-      '-light.webp" data-original="' + base + '-light.png" alt="' + escapeHtml(alt) + '" loading="lazy" decoding="async"' +
-      ' width="1181" height="' + (version === 'before' ? 754 : 549) + '"></picture></div>';
-  };
   const danceCarousel = (paths,kind) => '<div class="dance-carousel dance-carousel-' + kind + '"><div class="dance-carousel-slides">' +
     paths.map((path,i)=>'<div class="dance-carousel-slide"' + (i?' hidden':'') + '>' + danceImage(path,kind+' — '+(i+1)) + '</div>').join('') +
     '</div><div class="dance-carousel-controls"><button type="button" class="dance-carousel-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="dance-carousel-count">01 / ' + String(paths.length).padStart(2,'0') + '</span><button type="button" class="dance-carousel-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div>';
   const danceHtml = project.id === 'dance'
     ? '<section class="case-showcase dance-cases"><div class="section-head"><span>КЕЙСЫ</span><span>DANCE SOUL</span></div>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">01 / 02</span><h2>Брендинг</h2><p>Разработка первоначального логотипа танцевальной студии Dance Soul. Через год — ребрендинг с адаптацией названия и логотипа на русский язык в связи с новыми требованиями к оформлению вывесок.</p></div><div class="dance-branding-media"><div class="dance-logos"><figure><figcaption>ДО / ПЕРВЫЙ ЛОГОТИП</figcaption>' +
-      danceLogo('before','Первый логотип Dance Soul') +
+      danceImage('assets/projects/dance/branding/logo-before.png','Первый логотип Dance Soul') +
       '</figure><figure><figcaption>ПОСЛЕ / РЕБРЕНДИНГ</figcaption>' +
-      danceLogo('after','Новый логотип Dance Soul') +
-      '</figure></div><figure class="dance-poster"><figcaption>Афиша для расклейки</figcaption>' +
+      danceImage('assets/projects/dance/branding/logo-after.png','Новый логотип Dance Soul') +
+      '</figure></div><div class="dance-poster"><p>Афиша для расклейки</p>' +
       danceImage('assets/projects/dance/branding/poster.jpg','Афиша Dance Soul для расклейки') +
-      '</figure></div></article>' +
+      '</div></div></article>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">02 / 02</span><h2>Мерч</h2><p>Небольшое исследование и подбор визуальных направлений для будущего мерча студии: идеи, референсы и предложения по оформлению.</p></div><div class="dance-merch-media"><h3>Исследование и предложения</h3>' +
       danceCarousel(Array.from({length:7},(_,i)=>'assets/projects/dance/research/Slide 16_9 - '+i+'.jpg'),'research') +
       '<h3>Результат</h3><p>В результате созданы футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена с ковровым орнаментом. Контраст лаконичной чёрной основы и насыщенных узоров объединяет эстетику уличной одежды с характером танцевальной студии.</p>' +
@@ -117,20 +107,15 @@ if (!project) {
       '</div></article></section>'
     : '';
   const dancePostersHtml = project.id === 'dance-posters'
-    ? '<section class="dance-posters-case"><div class="section-head"><span>ВИДЕОАФИШИ</span><span>4 ВИДЕО</span></div>' +
+    ? '<section class="dance-posters-case"><div class="section-head"><span>ВИДЕОАФИШИ</span><span>04 ВИДЕО</span></div>' +
+      '<p>Четыре видеоафиши для танцевальных классов: «Даша Писанец», «Пантера», «Сакура» и Trap Dance.</p>' +
       '<div class="dance-posters-grid">' +
       [
         ['Даша Писанец','dasha.mp4'],
         ['Пантера','pantera.mp4'],
-        ['Сакура','sakura.mp4','720 / 1316'],
+        ['Сакура','sakura.mp4'],
         ['Trap Dance','Афиша_Соня.mp4']
-      ].map(([name, file, aspect = "9 / 16"]) => {
-        const videoPath = imagePath('assets/projects/dance-posters/' + file);
-        const posterPath = videoPath.replace(/\.mp4$/, '.webp');
-        return '<figure class="media-window floating-window">' + windowBar(name) +
-          '<video class="dance-poster-player" style="--poster-aspect: ' + aspect + '" controls playsinline preload="none" aria-label="Видеоафиша ' + name + '" poster="' +
-          posterPath + '" src="' + videoPath + '"></video></figure>';
-      }).join('') +
+      ].map(([name,file])=>'<figure><figcaption>'+name+'</figcaption><div class="dance-poster-player"><video controls playsinline preload="metadata" aria-label="Видеоафиша '+name+'" src="'+imagePath('assets/projects/dance-posters/'+file)+'"></video></div></figure>').join('') +
       '</div></section>'
     : '';
   const danceWebsiteHtml = project.id === 'dance-website'
@@ -139,13 +124,9 @@ if (!project) {
       '<div class="dance-site-preview"><img src="' + imagePath('assets/projects/dance-website/preview.jpg') + '" alt="Главная страница сайта танцевальной школы Алисы Шарко" loading="eager"></div>' +
       '<div class="dance-site-links"><a href="https://dusyaya.github.io/dance_school_sharko/" target="_blank" rel="noopener noreferrer">Открыть сайт ' + arrowSvg('up-right') + '</a><a href="https://github.com/Dusyaya/dance_school_sharko" target="_blank" rel="noopener noreferrer">Посмотреть код на GitHub ' + arrowSvg('up-right') + '</a></div></section>'
     : '';
-  const owlPath = SITE_ROOT + 'projects/owl/';
-  const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + owlPath + 'owl-landing-1280.webp" srcset="' +
-    [680, 1280, 1920].map(width => owlPath + 'owl-landing-' + width + '.webp ' + width + 'w').join(', ') +
-    '" sizes="(max-width: 1250px) 88vw, 1100px" width="1920" height="9458" data-original="' +
-    owlPath + 'Сова и Лисенок.png" alt="Дизайн лендинга Сова и Лисёнок" loading="lazy" decoding="async"></section>' : '';
+  const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + imagePath('projects/owl/Сова и Лисенок.png') + '" alt="Дизайн лендинга Сова и Лисёнок" loading="eager"></section>' : '';
   const bakerHtml = project.id === 'baker'
-    ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>5 ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
+    ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>05 ЗАГРУЖЕННЫХ ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
       '<p class="baker-description">Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.</p>' +
       '<div class="baker-carousel"><div class="baker-slides">' +
       Array.from({length:5},(_,i)=>'<img src="' + imagePath('assets/projects/baker/screen-'+String(i+1).padStart(2,'0')+'.png') + '" alt="Весёлый Пекарь — экран '+(i+1)+'" loading="lazy"'+(i?' hidden':'')+'>').join('') +
@@ -157,38 +138,33 @@ if (!project) {
   ];
   const extraHtml = project.id === 'extra'
     ? '<section class="extra-cases"><div class="section-head"><span>ГАЛЕРЕИ РАБОТ</span><span>ИЛЛЮСТРАЦИИ / 3D</span></div>' +
-      extraGroups.map((group,i)=>'<article class="extra-case"><div class="extra-case-copy"><span class="eyebrow">0'+(i+1)+' / '+String(extraGroups.length).padStart(2,'0')+'</span><h2>'+group.title+'</h2><p>'+group.description+'</p></div>' +
+      extraGroups.map((group,i)=>'<article class="extra-case"><div class="extra-case-copy"><span class="eyebrow">0'+(i+1)+' / 03</span><h2>'+group.title+'</h2><p>'+group.description+'</p></div>' +
       '<div class="extra-carousel"><div class="extra-slides">' +
       Array.from({length:group.count},(_,j)=>'<img src="'+imagePath('assets/projects/extra/'+group.folder+'/'+String(j+1).padStart(2,'0')+'.jpg')+'" alt="'+group.title+', работа '+(j+1)+'" loading="lazy"'+(j?' hidden':'')+'>').join('') +
       '</div><div class="extra-controls"><button type="button" class="extra-prev" aria-label="Предыдущее изображение">' + arrowSvg('left') + '</button><span class="extra-count">01 / '+String(group.count).padStart(2,'0')+'</span><button type="button" class="extra-next" aria-label="Следующее изображение">' + arrowSvg('right') + '</button></div></div></article>').join('')+'</section>'
     : '';
   const sevstarHtml = project.id === 'sevstar'
-    ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 9 ЭКРАНОВ</span></div>' +
-      '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0">' +
+    ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
+      '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0" aria-label="Экран телевизора. Первый макет прокручивается вертикально.">' +
       Array.from({length:9},(_,i)=>'<div class="sevstar-slide"' +(i?' hidden':'')+ '><img src="' + imagePath('assets/projects/sevstar/Рисунок'+(i+1)+'.png') + '" alt="Севстар Кулинария, экран '+(i+1)+'" loading="'+(i?'lazy':'eager')+'"></div>').join('') +
-      '</div></div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint" id="sevstar-hint">' +
-      (window.PORTFOLIO_LANG === "en" ? "Scroll inside the TV to explore the first screen. Click to go to the next screen." :
-        "Первый экран прокручивается внутри телевизора. Нажмите на экран, чтобы перейти к следующему.") + '</p></section>'
+      '</div><img class="sevstar-tv-frame" src="' + imagePath('assets/projects/sevstar/tv.png') + '" alt="" aria-hidden="true">' +
+      '</div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint">Первый экран можно прокручивать вверх и вниз внутри телевизора.</p></section>'
     : '';
   const supertyazhHtml = project.id === 'supertyazh'
     ? (() => {
       const base = 'assets/projects/supertyazh/';
       const image = (name, alt, className = '') => '<img class="' + className + '" src="' + imagePath(base + name) + '" alt="' + escapeHtml(alt) + '" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="supertyazh-missing" hidden>Загрузите файл ' + escapeHtml(name) + '</span>';
       const slides = Array.from({length:11}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<div class="supertyazh-slide" data-index="' + i + '"' + (i?' hidden':'') + '>' + image('slide-'+n+'.jpg','СУПЕРТЯЖ — слайд презентации '+(i+1)) + '</div>';}).join('');
-      const results = Array.from({length:3}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('result-'+n+'.png','СУПЕРТЯЖ — вариант рекламного макета '+(i+1)) + '<figcaption>Вариант '+(i+1)+'</figcaption></figure>';}).join('');
-      const mockups = Array.from({length:2}, (_,i) => {
-        const filename = 'mockup-' + String(i+1).padStart(2,'0') + '.jpg';
-        return '<figure class="media-window supertyazh-mockup floating-window">' + windowBar(filename) +
-          image(filename, 'СУПЕРТЯЖ — мокап ' + (i+1)) + '</figure>';
-      }).join('');
+      const results = Array.from({length:3}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('result-'+n+'.png','СУПЕРТЯЖ — вариант рекламного макета '+(i+1)) + '<figcaption>Вариант '+n+'</figcaption></figure>';}).join('');
+      const mockups = Array.from({length:2}, (_,i) => {const n=String(i+1).padStart(2,'0');return '<figure class="supertyazh-work">' + image('mockup-'+n+'.jpg','СУПЕРТЯЖ — мокап '+(i+1)) + '</figure>';}).join('');
       return '<section class="supertyazh-story">' +
         '<div class="section-head"><span>ПРЕЗЕНТАЦИЯ ПРОЕКТА</span><span>11 СЛАЙДОВ</span></div>' +
         '<div class="supertyazh-deck" aria-label="Презентация СУПЕРТЯЖ">' +
         '<div class="supertyazh-slides">' + slides + '</div>' +
         '<div class="supertyazh-controls"><button type="button" class="supertyazh-prev" aria-label="Предыдущий слайд">' + arrowSvg('left') + '</button><span class="supertyazh-counter">01 / 11</span><button type="button" class="supertyazh-next" aria-label="Следующий слайд">' + arrowSvg('right') + '</button></div></div>' +
-        '<div class="section-head supertyazh-section-head"><span>ФИНАЛЬНЫЕ МАКЕТЫ</span><span>3 ВАРИАНТА</span></div>' +
+        '<div class="section-head supertyazh-section-head"><span>ФИНАЛЬНЫЕ МАКЕТЫ</span><span>03 ВАРИАНТА</span></div>' +
         '<div class="supertyazh-results">' + results + '</div>' +
-        '<div class="section-head supertyazh-section-head"><span>МОКАПЫ</span><span>2 ИЗОБРАЖЕНИЯ</span></div>' +
+        '<div class="section-head supertyazh-section-head"><span>МОКАПЫ</span><span>02 ИЗОБРАЖЕНИЯ</span></div>' +
         '<div class="supertyazh-mockups">' + mockups + '</div></section>';
     })()
     : '';
@@ -205,20 +181,82 @@ if (!project) {
   main.innerHTML =
     '<div class="wrap case">' +
     '<a class="back" href="' + SITE_ROOT + '#catalog">' + arrowSvg('left') + ' Вернуться к коллекции</a>' +
-    '<div class="case-hero"><header class="case-summary">' +
     '<div class="eyebrow">' + typography(project.category) + ' / ' +
     typography(project.field) + ' / ' + escapeHtml(project.year) + '</div>' +
-    '<h1>' + projectTitle(project) + '</h1>' +
-    '<div class="case-intro"><p>' + typography(project.short) + '</p></div>' +
-    caseTags(project) + '</header>' + caseCover(project) + '</div>' +
+    '<h1>' + typography(project.name) + '</h1>' +
+    '<div class="case-intro"><p>' + typography(project.short) + '</p>' +
+    '<div class="tags">' + project.tags.map(tag =>
+      '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div></div>' +
+    (project.id === 'owl' ? '' : '<div class="case-stage" style="--glow:' +
+    (COLORS[project.tone] || COLORS.silver) + '77">' +
+    productArtwork(project) + '</div>') +
     '<div class="case-rows">' + sections.map(([heading, description]) =>
       '<div class="case-row"><h2>' + typography(heading) + '</h2><p>' +
       typography(description) + '</p></div>').join("") + '</div>' +
     dancePostersHtml + danceWebsiteHtml + owlHtml + bakerHtml + extraHtml + showcaseHtml + danceHtml + sevstarHtml + supertyazhHtml + zinHtml + (project.id === "gold" ? '<section class="case-showcase zp-cases"><div class="section-head"><span>КЕЙСЫ</span><span>ЗОЛОТОЕ ПРАВИЛО</span></div>' + bannerSection + presentationHtml + merchHtml + printHtml + '</section>' : '') +
     (showcase.length || project.id === 'babushka' || project.id === 'dance' || project.id === 'owl' || project.id === 'baker' || project.id === 'dance-website' || project.id === 'dance-posters' || project.id === 'extra' || project.id === 'sevstar' || project.id === 'gold-ufa' || project.id === 'gold' || project.id === 'supertyazh' ? '' : '<div class="section-head"><span>ГАЛЕРЕЯ ПРОЕКТА</span><span>ФОТОГРАФИИ И МАКЕТЫ</span></div><div class="gallery">' + gallery + '</div>') +
-    projectNavigation(project) + '</div>';
-  main.querySelectorAll("img").forEach(image => { image.decoding = "async"; });
+    '<nav class="project-navigation" aria-label="Навигация по проектам"><a href="' + projectUrl(previous) + '">' + arrowSvg('left') + '<span>Предыдущий проект</span></a><a href="' + projectUrl(next) + '"><span>Следующий проект</span>' + arrowSvg('right') + '</a></nav></div>';
+  if (project.id === 'supertyazh') {
+    const slides = [...main.querySelectorAll('.supertyazh-slide')];
+    const counter = main.querySelector('.supertyazh-counter');
+    let active = 0;
+    const show = index => {
+      active = (index + slides.length) % slides.length;
+      slides.forEach((slide,i) => { slide.hidden = i !== active; });
+      counter.textContent = String(active+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+    };
+    main.querySelector('.supertyazh-prev').addEventListener('click', () => show(active-1));
+    main.querySelector('.supertyazh-next').addEventListener('click', () => show(active+1));
+  }
   bindImages(main);
+  main.querySelectorAll('.dance-carousel').forEach(carousel=>{
+    const slides=[...carousel.querySelectorAll('.dance-carousel-slide')];
+    const count=carousel.querySelector('.dance-carousel-count');
+    let current=0;
+    function show(index){current=(index+slides.length)%slides.length;slides.forEach((slide,i)=>{slide.hidden=i!==current;});count.textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');}
+    carousel.querySelector('.dance-carousel-prev').addEventListener('click',()=>show(current-1));
+    carousel.querySelector('.dance-carousel-next').addEventListener('click',()=>show(current+1));
+    show(0);
+  });
+  main.querySelectorAll('.extra-carousel').forEach(carousel=>{
+    const slides=[...carousel.querySelectorAll('.extra-slides img')];
+    const count=carousel.querySelector('.extra-count');
+    let active=0;
+    const show=()=>{slides.forEach((img,i)=>{img.hidden=i!==active;});count.textContent=String(active+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');};
+    carousel.querySelector('.extra-prev').addEventListener('click',()=>{active=(active-1+slides.length)%slides.length;show();});
+    carousel.querySelector('.extra-next').addEventListener('click',()=>{active=(active+1)%slides.length;show();});
+    show();
+  });
+  const bakerSlides=[...main.querySelectorAll('.baker-slides img')];
+  if(bakerSlides.length){
+    let index=0;
+    const show=()=>{bakerSlides.forEach((img,i)=>{img.hidden=i!==index;});main.querySelector('.baker-count').textContent=String(index+1).padStart(2,'0')+' / 05';};
+    main.querySelector('.baker-prev').addEventListener('click',()=>{index=(index+4)%5;show();});
+    main.querySelector('.baker-next').addEventListener('click',()=>{index=(index+1)%5;show();});
+    show();
+  }
+  const sevstarScreen=main.querySelector('.sevstar-screen');
+  if(sevstarScreen){
+    const slides=[...sevstarScreen.querySelectorAll('.sevstar-slide')];
+    const counter=main.querySelector('.sevstar-counter');
+    let active=0;
+    function showSevstar(n){
+      active=(n+slides.length)%slides.length;
+      slides.forEach((slide,i)=>{slide.hidden=i!==active;});
+      sevstarScreen.scrollTop=0;
+      sevstarScreen.classList.toggle('is-scrollable',active===0);
+      counter.textContent=String(active+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+    }
+    main.querySelector('.sevstar-prev').addEventListener('click',()=>showSevstar(active-1));
+    main.querySelector('.sevstar-next').addEventListener('click',()=>showSevstar(active+1));
+    showSevstar(0);
+    let pointerStartX=0,pointerStartY=0;
+    sevstarScreen.addEventListener('pointerdown',e=>{pointerStartX=e.clientX;pointerStartY=e.clientY;});
+    sevstarScreen.addEventListener('click',e=>{if(Math.abs(e.clientY-pointerStartY)>12||Math.abs(e.clientX-pointerStartX)>12)return;const box=sevstarScreen.getBoundingClientRect();if(e.clientX-box.left<box.width*.32)showSevstar(active-1);else if(e.clientX-box.left>box.width*.68)showSevstar(active+1);});
+    const label=document.createElement('div');label.className='sevstar-hotspots';label.innerHTML='<button type="button" class="sevstar-hotspot-left" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><button type="button" class="sevstar-hotspot-right" aria-label="Следующий экран">' + arrowSvg('right') + '</button>';sevstarScreen.parentElement.appendChild(label);
+    label.querySelector('.sevstar-hotspot-left').addEventListener('click',()=>showSevstar(active-1));
+    label.querySelector('.sevstar-hotspot-right').addEventListener('click',()=>showSevstar(active+1));
+  }
   const zinBook = main.querySelector('.zin-book');
   if (zinBook) {
     const spreads = [...zinBook.querySelectorAll('.zin-spread')];
@@ -264,15 +302,31 @@ if (!project) {
     prev.disabled=true;
   }
   // При воспроизведении одной афиши остальные останавливаются.
-  const posterVideos = [...main.querySelectorAll('.dance-poster-player')];
-  posterVideos.forEach(video => {
-    const frame = video.closest('.media-window');
-    video.addEventListener('play', () => {
-      frame.classList.add('is-playing');
-      posterVideos.forEach(other => { if (other !== video) other.pause(); });
-    });
-    video.addEventListener('pause', () => frame.classList.remove('is-playing'));
-  });
+  const posterVideos = [...main.querySelectorAll('.dance-poster-player video')];
+  posterVideos.forEach(video => video.addEventListener('play', () => {
+    posterVideos.forEach(other => { if (other !== video) other.pause(); });
+  }));
+  const zpSlides = [...main.querySelectorAll('.zp-presentation-slides img')];
+  if (zpSlides.length) {
+    let active = 0;
+    const showZpSlide = () => {
+      zpSlides.forEach((img, i) => {
+        const forward = (i - active + zpSlides.length) % zpSlides.length;
+        const offset = forward > zpSlides.length / 2 ? forward - zpSlides.length : forward;
+        img.hidden = Math.abs(offset) > 1;
+        img.classList.toggle('is-active', offset === 0);
+        img.style.setProperty('--slide-offset', String(offset));
+        img.style.setProperty('--slide-scale', offset === 0 ? '1' : '.78');
+        img.style.zIndex = String(3 - Math.abs(offset));
+        img.setAttribute('aria-hidden', String(offset !== 0));
+      });
+      main.querySelector('.zp-count').textContent = String(active + 1).padStart(2, '0') + ' / ' + String(zpSlides.length).padStart(2, '0');
+    };
+    main.querySelector('.zp-prev').addEventListener('click', () => { active = (active - 1 + zpSlides.length) % zpSlides.length; showZpSlide(); });
+    main.querySelector('.zp-next').addEventListener('click', () => { active = (active + 1) % zpSlides.length; showZpSlide(); });
+    showZpSlide();
+  }
+
   main.querySelectorAll(".showcase-media.is-email .showcase-slide").forEach(slide => {
     const img = slide.querySelector("img");
     const updateRatio = () => {
