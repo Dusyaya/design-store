@@ -148,10 +148,13 @@ function windowBar(title) {
   return '<figcaption class="window-bar">' + WINDOW_LIGHTS + '<span>' + escapeHtml(title) + '</span></figcaption>';
 }
 
-function coverBase(project) {
+function coverNumber(project) {
   const index = PROJECTS.filter(item => item.id !== "supertyazh").findIndex(item => item.id === project.id) + 1;
-  const number = project.id === "supertyazh" ? "12" : String(index).padStart(2, "0");
-  return imagePath("assets/project-covers/cover-" + number);
+  return project.id === "supertyazh" ? 12 : index;
+}
+
+function coverBase(project) {
+  return imagePath("assets/project-covers/cover-" + String(coverNumber(project)).padStart(2, "0"));
 }
 
 function productArtwork(project) {
@@ -162,12 +165,34 @@ function projectTitle(project) {
   return escapeHtml(project.name).replace(/\s+—\s+/g, "&nbsp;— ");
 }
 
+// Размер PNG и границы непрозрачной части: ширина, высота, слева, сверху, справа, снизу.
+const COVER_BOUNDS = [
+  [2048, 2048, 517, 50, 1598, 2026],
+  [2048, 2048, 517, 50, 1598, 2026],
+  [1385, 1136, 160, 71, 1225, 1065],
+  [1312, 1199, 177, 9, 1212, 1199],
+  [1385, 1136, 16, 179, 1311, 958],
+  [1385, 1136, 47, 150, 1338, 997],
+  [2048, 2048, 525, 46, 1606, 2024],
+  [1385, 1136, 16, 179, 1311, 958],
+  [1385, 1136, 0, 142, 1385, 998],
+  [1385, 1136, 16, 179, 1311, 958],
+  [1122, 1402, 107, 0, 1082, 1380],
+  [2951, 3643, 0, 0, 2950, 3643]
+];
+
 function caseCover(project) {
   const landscape = ["dance-website", "sevstar", "extra", "baker", "owl"].includes(project.id);
-  return '<figure class="case-cover floating-window' + (landscape ? ' is-landscape' : '') + '">' +
+  const [width, height, left, top, right, bottom] = COVER_BOUNDS[coverNumber(project) - 1];
+  const artWidth = right - left;
+  const artHeight = bottom - top;
+  return '<figure class="case-cover floating-window' + (landscape ? ' is-landscape' : '') +
+    '" style="--cover-ratio:' + artWidth / artHeight + '">' +
     windowBar(project.name + ".png") +
-    '<div class="case-cover-media"><img src="' + coverBase(project) +
-    '.png" alt="' + escapeHtml(project.name) + '" decoding="async" fetchpriority="high"></div></figure>';
+    '<div class="case-cover-media"><div class="case-cover-artwork"><img src="' + coverBase(project) +
+    '.png" alt="' + escapeHtml(project.name) + '" width="' + width + '" height="' + height +
+    '" style="--image-width:' + width / artWidth * 100 + '%;--image-left:' + -left / artWidth * 100 +
+    '%;--image-top:' + -top / artHeight * 100 + '%" decoding="async" fetchpriority="high"></div></div></figure>';
 }
 
 const RUSSIAN_TAGS = {

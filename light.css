@@ -490,26 +490,30 @@ footer {
   .supertyazh-missing, .showcase-counter, .dance-merch-media > p, .dance-website-preview > p, .sevstar-hint, .baker-description, figcaption) { color: var(--muted); }
 .case-hero .case-cover { --drift-y: -12px; }
 .case-cover {
-  --cover-padding: clamp(8px, 1.3vw, 24px);
+  --cover-padding: clamp(12px, 1.5vw, 28px);
+  --cover-max-height: clamp(300px, 24vw, 460px);
+  --cover-max-width: 660px;
   min-width: 0;
-  width: min(100%, calc(var(--lead-media-height) * .88 + 2 * var(--cover-padding)));
+  width: min(100%, var(--cover-max-width), calc(var(--cover-max-height) * var(--cover-ratio) + 2 * var(--cover-padding)));
   justify-self: end;
-  margin-top: clamp(26px, 3.4vw, 56px);
+  margin-top: clamp(24px, 3vw, 48px);
   background: #fff;
 }
-.case-cover.is-landscape { width: 100%; }
-.case-cover-media {
-  display: grid;
-  place-items: center;
-  padding: var(--cover-padding);
+.case-cover-media { padding: var(--cover-padding); }
+.case-cover-artwork {
+  position: relative;
+  aspect-ratio: var(--cover-ratio);
+  overflow: clip;
 }
-.case-cover-media img {
+.case-cover-artwork img {
+  position: absolute;
   display: block;
-  width: 100%;
-  height: var(--lead-media-height);
-  min-height: 0;
-  min-width: 0;
-  object-fit: contain;
+  top: var(--image-top);
+  left: var(--image-left);
+  width: var(--image-width);
+  max-width: none;
+  height: auto;
+  border-radius: 0 !important;
 }
 .floating-window {
   --drift-x: -20px;
@@ -526,8 +530,7 @@ footer {
 @media (max-width: 950px) {
   .case .case-hero { grid-template-columns: minmax(0, 1fr); gap: 25px; }
   .case-summary .tags { margin-top: 18px; }
-  .case-cover:not(.is-landscape) { width: min(calc(100% - 16px), calc(var(--lead-media-height) * .9 + 2 * var(--cover-padding))); }
-  .case-cover.is-landscape { width: calc(100% - 16px); }
+  .case-cover { --cover-max-height: 340px; max-width: calc(100% - 16px); }
   .case-hero .case-cover { --drift-x: -8px; }
   .case-cover { margin-top: 0; justify-self: center; }
 }
@@ -1001,8 +1004,7 @@ body.lightbox-open { overflow: hidden; }
   .case .supertyazh-deck { --presentation-width: .78; }
 }
 
-body[data-project="dance"] .case-cover { width: min(100%, clamp(210px, 24vw, 420px)); }
-body[data-project="dance"] .case-cover-media img { height: auto; }
+body[data-project="dance"] .case-cover { --cover-max-width: 420px; }
 
 .case .zp-print-carousel.portfolio-showcase-deck .image-carousel-controls,
 .case .image-carousel-controls.image-carousel-controls {
