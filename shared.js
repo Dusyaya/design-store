@@ -181,18 +181,77 @@ const COVER_BOUNDS = [
   [2951, 3643, 0, 0, 2950, 3643]
 ];
 
+const CASE_HERO_IMAGES = {
+  laser: [
+    ["laser/stories-01.jpg", "Сторис", "Story"],
+    ["laser/mailing-01.jpg", "Рассылка", "Email campaign"]
+  ],
+  gold: [
+    ["gold/banner-01-blue-preview.webp", "Наружная реклама", "Outdoor advertising", "assets/projects/gold/banner-01-blue.jpg"],
+    ["gold/banner-03-blue-preview.webp", "Баннер для ПроДокторов", "ProDoktorov banner", "assets/projects/gold/banner-03.jpg"]
+  ],
+  dance: [
+    ["dance/branding/poster.jpg", "Афиша", "Poster"],
+    ["dance/merch/merch-02.jpg", "Мерч", "Merchandise"]
+  ],
+  book: [
+    ["book/006.jpg", "Страница книги", "Book page"],
+    ["book/014.jpg", "Страница книги", "Book page"]
+  ],
+  supertyazh: [
+    ["supertyazh/mockup-01.jpg", "Уличный мокап", "Outdoor mockup"],
+    ["supertyazh/mockup-02.jpg", "Мокап в помещении", "Indoor mockup"]
+  ],
+  "dance-website": [["dance-website/preview.jpg", "Дизайн сайта", "Website design"]],
+  sevstar: [
+    ["sevstar/Рисунок2.png", "Экран приложения", "App screen"],
+    ["sevstar/Рисунок5.png", "Экран приложения", "App screen"]
+  ],
+  "dance-posters": [
+    ["dance-posters/hero-dasha.webp", "Даша Писанец", "Dasha Pisanets"],
+    ["dance-posters/hero-pantera.webp", "Пантера", "Pantera"]
+  ],
+  extra: [
+    ["extra/illustrations/02.jpg", "Иллюстрация", "Illustration"],
+    ["extra/3d/01.jpg", "3D-модель", "3D model"]
+  ],
+  baker: [
+    ["baker/screen-02.png", "Игровой экран", "Game screen"],
+    ["baker/screen-04.png", "Игровой экран", "Game screen"]
+  ],
+  owl: [["projects/owl/owl-hero-detail.webp", "Первый экран сайта", "Landing page", "projects/owl/Сова и Лисенок.png"]],
+  babushka: [
+    ["babushka/Babushka4.jpg", "Страница зина", "Zine page"],
+    ["babushka/Babushka11.jpg", "Страница зина", "Zine page"]
+  ]
+};
+
 function caseCover(project) {
   const landscape = ["dance-website", "sevstar", "extra", "baker", "owl"].includes(project.id);
   const [width, height, left, top, right, bottom] = COVER_BOUNDS[coverNumber(project) - 1];
   const artWidth = right - left;
   const artHeight = bottom - top;
-  return '<figure class="case-cover floating-window' + (landscape ? ' is-landscape' : '') +
+  const cover = '<figure class="case-cover floating-window case-cover-front' + (landscape ? ' is-landscape' : '') +
     '" style="--cover-ratio:' + artWidth / artHeight + '">' +
     windowBar(project.name + ".png") +
     '<div class="case-cover-media"><div class="case-cover-artwork"><img src="' + coverBase(project) +
     '.png" alt="' + escapeHtml(project.name) + '" width="' + width + '" height="' + height +
     '" style="--image-width:' + width / artWidth * 100 + '%;--image-left:' + -left / artWidth * 100 +
     '%;--image-top:' + -top / artHeight * 100 + '%" decoding="async" fetchpriority="high"></div></div></figure>';
+  const images = CASE_HERO_IMAGES[project.id];
+  if (!images) return cover;
+  const renderSide = ([file, ru, en, original], side) => {
+    const name = window.PORTFOLIO_LANG === "en" ? en : ru;
+    const path = file.startsWith("projects/") ? file : "assets/projects/" + file;
+    return '<figure class="case-cover floating-window case-side-window is-' + side + '">' +
+      windowBar(name) + '<div class="case-cover-media"><img src="' + escapeHtml(imagePath(path)) +
+      '" alt="' + escapeHtml(name) + '"' +
+      (original ? ' data-original="' + escapeHtml(SITE_ROOT + original) + '"' : '') +
+      ' decoding="async"></div></figure>';
+  };
+  const posters = project.id === "dance-posters" ? " poster-hero-windows" : "";
+  return '<div class="case-hero-windows' + posters + (images.length === 1 ? " has-one-side" : "") + '">' +
+    renderSide(images[0], "left") + cover + (images[1] ? renderSide(images[1], "right") : "") + '</div>';
 }
 
 const RUSSIAN_TAGS = {
