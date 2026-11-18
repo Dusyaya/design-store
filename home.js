@@ -14,6 +14,8 @@ document.querySelector(".portfolio-skills").innerHTML = hero.skills.map(skill =>
 ).join("");
 document.querySelector(".portrait-filename").textContent = hero.name + ".jpg";
 document.querySelector(".portrait-window img").alt = hero.name;
+document.querySelector(".about-portrait-filename").textContent = hero.name + ".jpg";
+document.querySelector(".about-portrait img").alt = hero.name;
 
 if (isEnglish) {
   document.title = "Portfolio — Darya Atrokhina";
@@ -86,6 +88,48 @@ renderCatalog();
 updateFilters();
 initSkillBadges();
 
+const home = document.querySelector("main");
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+const fixedArtwork = ".portrait-window, .about-portrait, .catalog-cover";
+let pull;
+
+home.addEventListener("pointerdown", event => {
+  if (!event.isPrimary || event.button !== 0) return;
+  const artwork = event.target.closest(fixedArtwork);
+  pull = artwork ? {artwork, id: event.pointerId, x: event.clientX, y: event.clientY} : undefined;
+});
+window.addEventListener("pointermove", event => {
+  if (event.pointerId !== pull?.id || pull.started) return;
+  const dx = event.clientX - pull.x;
+  const dy = event.clientY - pull.y;
+  const distance = Math.hypot(dx, dy);
+  if (distance < 5) return;
+  pull.started = true;
+  if (reducedMotion.matches) return;
+  const shift = amplitude => ({translate: dx / distance * amplitude + "px " + dy / distance * amplitude + "px"});
+  pull.artwork.getAnimations().forEach(animation => animation.cancel());
+  pull.artwork.animate([shift(0), shift(5), shift(-3), shift(1.5), shift(0)], {
+    duration: 320, easing: "ease-out"
+  });
+});
+window.addEventListener("pointerup", event => {
+  if (event.pointerId !== pull?.id) return;
+  if (pull.started) pull.id = null;
+  else pull = undefined;
+});
+window.addEventListener("pointercancel", event => {
+  if (event.pointerId === pull?.id) pull = undefined;
+});
+home.addEventListener("dragstart", event => {
+  if (event.target.closest(fixedArtwork) || pull?.artwork.closest(".catalog-card") === event.target) event.preventDefault();
+});
+home.addEventListener("click", event => {
+  if (!pull?.started || !event.detail) return;
+  if (pull.artwork.closest(".catalog-card") !== event.target.closest(".catalog-card")) return;
+  event.preventDefault();
+  pull = undefined;
+}, true);
+
 function initSkillBadges() {
   const orbit = document.querySelector(".skill-orbit");
   const badges = [...orbit.querySelectorAll(".skill-badge")];
@@ -102,6 +146,6 @@ function initSkillBadges() {
   for (const badge of badges) {
     const label = badge.querySelector(".skill-badge-visual > span:last-child").textContent;
     badge.setAttribute("aria-label", label);
-    enableFloatingItem(badge, orbit, {returnToDropPoint: true});
+    enableFloatingItem(badge, orbit);
   }
 }

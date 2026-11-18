@@ -27,8 +27,8 @@ function projectNavigation(project) {
   const previous = PROJECTS[(index - 1 + PROJECTS.length) % PROJECTS.length];
   const next = PROJECTS[(index + 1) % PROJECTS.length];
   const english = window.PORTFOLIO_LANG === "en";
-  const label = (item, direction) => '<span><strong>' + projectTitle(item) +
-    '</strong><small>' + direction + '</small></span>';
+  const label = (item, direction) => '<span><small>' + direction + '</small><strong>' +
+    projectTitle(item) + '</strong></span>';
   return '<nav class="project-navigation" aria-label="' + (english ? "Project navigation" : "Навигация по проектам") + '">' +
     '<a href="' + projectUrl(previous) + '" rel="prev">' + arrowSvg("left") +
     label(previous, english ? "Previous project" : "Предыдущий проект") + '</a>' +
@@ -82,16 +82,15 @@ function socialLinks() {
   const links = [
     ["Telegram", telegramContactUrl(), "telegram"],
     ["Instagram", SITE.contacts.instagram, "instagram"],
-    ["WhatsApp", whatsappContactUrl(), "whatsapp"]
+    ["WhatsApp", whatsappContactUrl(), "whatsapp"],
+    [window.PORTFOLIO_LANG === "en" ? "Email" : "Почта", emailContactUrl(), "mail"]
   ];
   return '<div class="social-links">' +
     links.map(([name, url, icon]) =>
       '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' +
-      '<img src="' + imagePath("assets/icons/" + icon + ".svg") + '" alt="" width="22" height="22" loading="lazy">' +
+      '<i class="social-icon social-' + icon + '" aria-hidden="true"></i>' +
       '<span>' + name + '</span></a>'
-    ).join("") +
-    '<a href="' + escapeHtml(emailContactUrl()) + '" target="_blank" rel="noopener noreferrer">' +
-    '<svg class="mail-symbol" viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/></svg><span>' + (window.PORTFOLIO_LANG === "en" ? "Email" : "Почта") + '</span></a></div>';
+    ).join("") + '</div>';
 }
 
 function renderLayout() {
@@ -154,7 +153,7 @@ function caseTags(project) {
     '<span class="tag">' + escapeHtml(tag) + '</span>').join("") + '</div>';
 }
 
-function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
+function enableFloatingItem(item, area, {returnToOrigin = false} = {}) {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let x = 0;
   let y = 0;
@@ -164,12 +163,14 @@ function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
   const position = (px, py) => px + "px " + py + "px";
 
   function bounded(nextX, nextY) {
-    const margin = reducedMotion.matches ? 0 : 16;
+    const margin = reducedMotion.matches ? 0 : returnToOrigin ? 4 : 16;
+    const horizontalMargin = Math.min(margin, Math.max(0, (area.clientWidth - item.offsetWidth) / 2));
+    const verticalMargin = Math.min(margin, Math.max(0, (area.clientHeight - item.offsetHeight) / 2));
     return [
-      Math.max(margin - item.offsetLeft, Math.min(nextX,
-        area.clientWidth - item.offsetLeft - item.offsetWidth - margin)),
-      Math.max(margin - item.offsetTop, Math.min(nextY,
-        area.clientHeight - item.offsetTop - item.offsetHeight - margin))
+      Math.max(horizontalMargin - item.offsetLeft, Math.min(nextX,
+        area.clientWidth - item.offsetLeft - item.offsetWidth - horizontalMargin)),
+      Math.max(verticalMargin - item.offsetTop, Math.min(nextY,
+        area.clientHeight - item.offsetTop - item.offsetHeight - verticalMargin))
     ];
   }
 
@@ -187,13 +188,36 @@ function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
     if (Number.isFinite(currentX)) moveTo(currentX, currentY);
   }
 
+  function animateRelease(keyframes, timing) {
+    item.classList.add("is-releasing");
+    const effect = item.animate(keyframes, timing);
+    releaseEffect = effect;
+    effect.onfinish = () => {
+      if (releaseEffect !== effect) return;
+      releaseEffect = undefined;
+      item.classList.remove("is-releasing");
+    };
+  }
+
+  function resetPosition() {
+    const from = position(x, y);
+    x = y = 0;
+    item.style.translate = "";
+    if (returnToOrigin && !reducedMotion.matches && from !== "0px 0px" && item.animate) {
+      animateRelease([{translate: from}, {translate: "0px 0px"}], {
+        duration: 760, easing: "cubic-bezier(.19,.86,.25,1)"
+      });
+    }
+  }
+
+  const pointerY = event => returnToOrigin ? event.pageY : event.clientY;
   item.addEventListener("pointerdown", event => {
     if (!event.isPrimary || event.button !== 0) return;
     stopRelease();
     suppressClick = false;
     drag = {
-      id: event.pointerId, originX: event.clientX - x, originY: event.clientY - y,
-      startX: event.clientX, startY: event.clientY, lastX: event.clientX, lastY: event.clientY,
+      id: event.pointerId, originX: event.clientX - x, originY: pointerY(event) - y,
+      startX: event.clientX, startY: pointerY(event), lastX: event.clientX, lastY: pointerY(event),
       time: event.timeStamp, vx: 0, vy: 0
     };
     // Захват на исходном элементе сохраняет клик по изображению внутри окна.
@@ -202,18 +226,28 @@ function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
   });
   item.addEventListener("pointermove", event => {
     if (event.pointerId !== drag?.id) return;
-    if (!suppressClick && Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) < 4) return;
+    const currentY = pointerY(event);
+    if (!suppressClick && Math.hypot(event.clientX - drag.startX, currentY - drag.startY) < 4) return;
     suppressClick = true;
     const elapsed = Math.max(8, event.timeStamp - drag.time);
     drag.vx = drag.vx * .35 + (event.clientX - drag.lastX) / elapsed * .65;
-    drag.vy = drag.vy * .35 + (event.clientY - drag.lastY) / elapsed * .65;
+    drag.vy = drag.vy * .35 + (currentY - drag.lastY) / elapsed * .65;
     drag.lastX = event.clientX;
-    drag.lastY = event.clientY;
+    drag.lastY = currentY;
+    drag.viewportY = event.clientY;
     drag.time = event.timeStamp;
-    moveTo(event.clientX - drag.originX, event.clientY - drag.originY);
+    moveTo(event.clientX - drag.originX, currentY - drag.originY);
   });
+  if (returnToOrigin) window.addEventListener("scroll", () => {
+    if (drag && suppressClick) moveTo(x, drag.viewportY + window.scrollY - drag.originY);
+  }, {passive: true});
   item.addEventListener("pointerup", event => {
-    if (event.pointerId !== drag?.id || !suppressClick || reducedMotion.matches || !item.animate) return;
+    if (event.pointerId !== drag?.id || !suppressClick) return;
+    if (returnToOrigin) {
+      resetPosition();
+      return;
+    }
+    if (reducedMotion.matches || !item.animate) return;
     const totalX = event.clientX - drag.startX;
     const totalY = event.clientY - drag.startY;
     const distance = Math.hypot(totalX, totalY);
@@ -224,25 +258,14 @@ function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
     const directionY = speed > .04 ? drag.vy / speed : totalY / distance;
     const from = position(x, y);
     const [peakX, peakY] = bounded(x + directionX * impulse, y + directionY * impulse);
-    const dx = peakX - x;
-    const dy = peakY - y;
-    const recoil = position(x + dx * .46, y + dy * .46);
-    if (!returnToDropPoint) moveTo(x + dx * .62, y + dy * .62);
-    item.classList.add("is-releasing");
-    const effect = item.animate([
+    animateRelease([
       {translate: from, offset: 0, easing: "cubic-bezier(.14,.72,.25,1)"},
-      {translate: position(peakX, peakY), offset: .32, easing: returnToDropPoint ? "ease-out" : "ease-in-out"},
-      ...(returnToDropPoint ? [] : [{translate: recoil, offset: .7, easing: "ease-out"}]),
-      {translate: position(x, y), offset: 1}
+      {translate: position(peakX, peakY), offset: .32, easing: "ease-out"},
+      {translate: from, offset: 1}
     ], {duration: 460});
-    releaseEffect = effect;
-    effect.onfinish = () => {
-      if (releaseEffect !== effect) return;
-      releaseEffect = undefined;
-      item.classList.remove("is-releasing");
-    };
   });
   item.addEventListener("lostpointercapture", () => {
+    if (returnToOrigin && drag && !releaseEffect && suppressClick) resetPosition();
     drag = undefined;
     item.classList.remove("is-grabbed");
   });
@@ -258,8 +281,7 @@ function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
     const directions = {ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step]};
     if (event.key === "Escape") {
       stopRelease();
-      x = y = 0;
-      item.style.translate = "";
+      resetPosition();
     } else if (directions[event.key]) {
       event.preventDefault();
       stopRelease();
@@ -267,8 +289,12 @@ function enableFloatingItem(item, area, {returnToDropPoint = false} = {}) {
       moveTo(x + dx, y + dy);
     }
   });
-  reducedMotion.addEventListener("change", stopRelease);
+  reducedMotion.addEventListener("change", () => {
+    stopRelease();
+    if (returnToOrigin && !drag) resetPosition();
+  });
   new ResizeObserver(() => {
+    if (returnToOrigin && releaseEffect) return;
     stopRelease();
     if (x || y) moveTo(x, y);
   }).observe(area);

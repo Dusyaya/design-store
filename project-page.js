@@ -57,13 +57,15 @@ if (!project) {
     : "";
 
   const bannerImages = [
-    ['banner-01-srgb.jpg', 1250, 624],
-    ['banner-02.jpg', 1500, 609],
-    ['banner-03.jpg', 1500, 223]
+    ['banner-01-srgb.jpg.webp', 'banner-01-srgb.jpg', 1250, 624],
+    ['banner-02-screen.webp', 'banner-02-srgb.webp', 1680, 682],
+    ['banner-03-screen.webp', 'banner-03-srgb.webp', 1680, 250]
   ];
   const bannerSection = (project.id === 'gold' || project.id === 'gold-ufa')
     ? '<article class="showcase-item zp-case"><div class="showcase-copy"><span class="eyebrow">01 / 04</span><h2>Рекламные баннеры</h2><p>Адаптация фирменного стиля «Золотого Правила» для масштабной рекламной кампании в Уфе: разработка широкоформатного рекламного баннера и баннеров для платформы «ПроДокторов». Цель — усилить узнаваемость бренда с помощью современной визуальной подачи и понятной иерархии информации.</p></div><div class="showcase-media zp-banner-stack">' +
-      bannerImages.map(([name, width, height], i) => '<img src="' + imagePath('assets/projects/gold/' + name) + '" alt="Рекламный баннер ' + (i+1) + '" width="' + width + '" height="' + height + '" loading="lazy">').join('') +
+      bannerImages.map(([name, original, width, height], i) => '<img src="' + SITE_ROOT + 'assets/projects/gold/' + name +
+        '" data-original="' + SITE_ROOT + 'assets/projects/gold/' + original + '" alt="Рекламный баннер ' + (i+1) +
+        '" width="' + width + '" height="' + height + '" loading="lazy">').join('') +
       '</div></article>'
     : '';
   const presentationHtml = project.id === 'gold'
@@ -98,9 +100,9 @@ if (!project) {
       danceImage('assets/projects/dance/branding/logo-before.png','Первый логотип Dance Soul') +
       '</figure><figure><figcaption>ПОСЛЕ / РЕБРЕНДИНГ</figcaption>' +
       danceImage('assets/projects/dance/branding/logo-after.png','Новый логотип Dance Soul') +
-      '</figure></div><div class="dance-poster"><p>Афиша для расклейки</p>' +
+      '</figure></div><figure class="dance-poster"><figcaption>Афиша для расклейки</figcaption>' +
       danceImage('assets/projects/dance/branding/poster.jpg','Афиша Dance Soul для расклейки') +
-      '</div></div></article>' +
+      '</figure></div></article>' +
       '<article class="dance-case"><div class="dance-case-copy"><span class="eyebrow">02 / 02</span><h2>Мерч</h2><p>Небольшое исследование и подбор визуальных направлений для будущего мерча студии: идеи, референсы и предложения по оформлению.</p></div><div class="dance-merch-media"><h3>Исследование и предложения</h3>' +
       danceCarousel(Array.from({length:7},(_,i)=>'assets/projects/dance/research/Slide 16_9 - '+i+'.jpg'),'research') +
       '<h3>Результат</h3><p>В результате созданы футболка с авторским принтом и свободные брюки с вышивкой и лампасами из гобелена с ковровым орнаментом. Контраст лаконичной чёрной основы и насыщенных узоров объединяет эстетику уличной одежды с характером танцевальной студии.</p>' +
@@ -131,7 +133,11 @@ if (!project) {
       '<div class="dance-site-preview"><img src="' + imagePath('assets/projects/dance-website/preview.jpg') + '" alt="Главная страница сайта танцевальной школы Алисы Шарко" loading="eager"></div>' +
       '<div class="dance-site-links"><a href="https://dusyaya.github.io/dance_school_sharko/" target="_blank" rel="noopener noreferrer">Открыть сайт ' + arrowSvg('up-right') + '</a><a href="https://github.com/Dusyaya/dance_school_sharko" target="_blank" rel="noopener noreferrer">Посмотреть код на GitHub ' + arrowSvg('up-right') + '</a></div></section>'
     : '';
-  const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + imagePath('projects/owl/Сова и Лисенок.png') + '" alt="Дизайн лендинга Сова и Лисёнок" loading="eager"></section>' : '';
+  const owlPath = SITE_ROOT + 'projects/owl/';
+  const owlHtml = project.id === 'owl' ? '<section class="owl-visual"><img src="' + owlPath + 'owl-landing-1280.webp" srcset="' +
+    [680, 1280, 1920].map(width => owlPath + 'owl-landing-' + width + '.webp ' + width + 'w').join(', ') +
+    '" sizes="(max-width: 1250px) 88vw, 1100px" width="1920" height="9458" data-original="' +
+    owlPath + 'Сова и Лисенок.png" alt="Дизайн лендинга Сова и Лисёнок" loading="lazy" decoding="async"></section>' : '';
   const bakerHtml = project.id === 'baker'
     ? '<section class="baker-case"><div class="section-head"><span>ЭКРАНЫ ИГРЫ</span><span>05 ЗАГРУЖЕННЫХ ЭКРАНОВ · АВТОРСКИЕ ИЛЛЮСТРАЦИИ</span></div>' +
       '<p class="baker-description">Для мобильной игры «Весёлый Пекарь» разработала интерфейс и самостоятельно нарисовала иллюстрации: персонажей, элементы окружения и игровую графику.</p>' +
@@ -152,9 +158,11 @@ if (!project) {
     : '';
   const sevstarHtml = project.id === 'sevstar'
     ? '<section class="sevstar-case"><div class="section-head"><span>ЭКРАНЫ ПРИЛОЖЕНИЯ</span><span>SMART TV · 09 ЭКРАНОВ</span></div>' +
-      '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0" aria-label="Экран телевизора. Первый макет прокручивается вертикально.">' +
+      '<div class="sevstar-tv"><div class="sevstar-screen" tabindex="0">' +
       Array.from({length:9},(_,i)=>'<div class="sevstar-slide"' +(i?' hidden':'')+ '><img src="' + imagePath('assets/projects/sevstar/Рисунок'+(i+1)+'.png') + '" alt="Севстар Кулинария, экран '+(i+1)+'" loading="'+(i?'lazy':'eager')+'"></div>').join('') +
-      '</div></div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint">Первый экран можно прокручивать вверх и вниз внутри телевизора.</p></section>'
+      '</div></div><div class="sevstar-controls"><button type="button" class="sevstar-prev" aria-label="Предыдущий экран">' + arrowSvg('left') + '</button><span class="sevstar-counter">01 / 09</span><button type="button" class="sevstar-next" aria-label="Следующий экран">' + arrowSvg('right') + '</button></div><p class="sevstar-hint" id="sevstar-hint">' +
+      (window.PORTFOLIO_LANG === "en" ? "Scroll inside the TV to explore the first screen. Click to go to the next screen." :
+        "Первый экран прокручивается внутри телевизора. Нажмите на экран, чтобы перейти к следующему.") + '</p></section>'
     : '';
   const supertyazhHtml = project.id === 'supertyazh'
     ? (() => {

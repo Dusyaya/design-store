@@ -595,7 +595,7 @@ body.lightbox-open{overflow:hidden}
 .dance-site-links a{padding:12px 18px;border:1px solid rgba(255,255,255,.3);border-radius:999px}
 
 
-/* ZP merch: keep the complete carousel in the right-hand column, vertically aligned with its copy. */
+/* Мерч ЗП: карусель в правой колонке. */
 .zp-cases .zp-case:has(.zp-merch) {
   display:grid!important;
   grid-template-columns:minmax(0, 42%) minmax(0, 58%)!important;
@@ -610,12 +610,12 @@ body.lightbox-open{overflow:hidden}
   grid-column:1!important;grid-row:1!important;
   position:relative!important;top:auto!important;left:auto!important;
   transform:none!important;width:auto!important;max-width:100%!important;
-  margin:0!important;align-self:center!important;z-index:2!important;
+  margin:0!important;z-index:2!important;
 }
 .zp-cases .zp-case:has(.zp-merch) > .zp-merch {
   grid-column:2!important;grid-row:1!important;
   position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
-  transform:none!important;align-self:center!important;
+  transform:none!important;
   width:100%!important;max-width:100%!important;
   min-height:0!important;height:auto!important;
   margin:0!important;padding:0 0 0 24px!important;

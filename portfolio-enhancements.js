@@ -67,7 +67,7 @@
     controls.hidden = viewing.images.length < 2;
     controls.querySelector("[role=status]").textContent = formatCount(viewing.index, viewing.images.length);
 
-    const originalUrl = originalImageUrl(thumbnail);
+    const originalUrl = image.dataset.original || originalImageUrl(thumbnail);
     if (originalUrl === thumbnail) return;
     const original = new Image();
     pendingOriginal = original;
@@ -249,7 +249,7 @@
           slide.setAttribute("aria-hidden", String(offstage));
           const image = images[position];
           if (!offstage && !image.hasAttribute("src")) image.src = image.dataset.src;
-          labelImage(image, selected ? labels.zoom : labels.select, !offstage);
+          if (!screen) labelImage(image, selected ? labels.zoom : labels.select, !offstage);
         });
         counter.textContent = formatCount(active, slides.length);
         if (screen) {
@@ -270,10 +270,22 @@
         if (images.includes(event.target)) images[active].focus({preventScroll: true});
       });
       bindSwipe(carousel, step);
-      images.forEach((image, index) => bindImage(image, () => {
-        if (index !== active) show(index);
-        else openPreview(images, index, show);
-      }));
+      if (screen) {
+        screen.setAttribute("role", "button");
+        screen.setAttribute("aria-label", english ? "Show next TV screen" : "Показать следующий экран телевизора");
+        screen.setAttribute("aria-describedby", "sevstar-hint");
+        screen.closest(".sevstar-tv").addEventListener("click", () => step(1));
+        screen.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          step(1);
+        });
+      } else {
+        images.forEach((image, index) => bindImage(image, () => {
+          if (index !== active) show(index);
+          else openPreview(images, index, show);
+        }));
+      }
       show(0);
     });
   });
@@ -295,9 +307,9 @@
     const coverWindow = image.closest(".case-cover");
     if (coverWindow) {
       image.setAttribute("aria-description", english
-        ? "Drag the window or use the arrow keys to move it. Click or press Enter to enlarge."
-        : "Перетащите окно или переместите его стрелками. Нажмите, чтобы увеличить изображение.");
-      enableFloatingItem(coverWindow, coverWindow.closest(".case-hero"));
+        ? "Drag the window around the page. Release it to return it to its place. Click or press Enter to enlarge."
+        : "Перетащите окно по странице. Отпустите, чтобы оно вернулось на место. Нажмите, чтобы увеличить изображение.");
+      enableFloatingItem(coverWindow, coverWindow.closest(".case"), {returnToOrigin: true});
     }
   });
 })();
