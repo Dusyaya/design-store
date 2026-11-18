@@ -165,9 +165,9 @@ function projectTitle(project) {
 function caseCover(project) {
   const landscape = ["dance-website", "sevstar", "extra", "baker", "owl"].includes(project.id);
   return '<figure class="case-cover floating-window' + (landscape ? ' is-landscape' : '') + '">' +
-    windowBar(project.name + ".webp") +
+    windowBar(project.name + ".png") +
     '<div class="case-cover-media"><img src="' + coverBase(project) +
-    '-hero.webp" alt="' + escapeHtml(project.name) + '" decoding="async" fetchpriority="high"></div></figure>';
+    '.png" alt="' + escapeHtml(project.name) + '" decoding="async" fetchpriority="high"></div></figure>';
 }
 
 function caseTags(project) {
