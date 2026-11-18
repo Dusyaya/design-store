@@ -608,6 +608,11 @@ footer {
 .project-navigation a span { min-width: 0; overflow-wrap: anywhere; }
 .project-navigation small, .project-navigation strong { display: block; }
 .project-navigation strong { display: block; }
+.project-navigation strong {
+  font-size: clamp(14px, 1.22vw, 19px);
+  font-weight: var(--heading-weight);
+  line-height: 1.2;
+}
 .project-navigation small {
   margin-bottom: 4px;
   color: var(--muted);
@@ -693,14 +698,7 @@ footer {
   .skill-badge { position: relative; inset: auto; width: 100%; }
   .catalog-section { padding-top: 18px; }
   .catalog-layout { grid-template-columns: minmax(0, 1fr); padding-right: 0; row-gap: 22px; }
-  .catalog-intro h2 {
-  margin: 0;
-  max-width: 11ch;
-  font-size: clamp(34px, 4.1vw, 84px);
-  line-height: .97;
-  letter-spacing: var(--heading-tracking);
-  font-weight: var(--heading-weight);
-}
+  .catalog-intro h2 { max-width: none; }
 }
 @media (max-width: 660px) {
   .topbar nav .language-switch { gap: 2px; }
