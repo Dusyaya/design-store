@@ -26,7 +26,9 @@ for (let index = 1; index < pages.length; index += 2) {
 function pageMarkup(index, side) {
   if (index === null) return '<div class="print-page ' + side + ' is-empty"></div>';
   const label = (english ? "Page " : "Страница ") + (index + 1);
-  return '<div class="print-page ' + side + '"><img alt="' + label + '" data-src="' + pageUrl(index) + '" decoding="async"></div>';
+  const path = "assets/projects/" + printProject.id + "/" + encodeURIComponent(pages[index]);
+  return '<div class="print-page ' + side + '"><picture><source media="(min-width: 1000px)"><img alt="' +
+    label + '" data-src="' + imagePath(path) + '" data-original="' + SITE_ROOT + path + '" decoding="async"></picture></div>';
 }
 
 book.innerHTML = pairs.map(pair => '<div class="print-spread">' +
@@ -38,16 +40,13 @@ const sheet = book.querySelector(".print-sheet");
 let current = 0;
 let busy = false;
 
-function pageUrl(index) {
-  return imagePath("assets/projects/" + printProject.id + "/" + encodeURIComponent(pages[index]));
-}
-
 const prepared = new Map();
 
 function prepareSpread(index) {
   if (index < 0 || index >= spreads.length || prepared.has(index)) return;
   const images = [...spreads[index].querySelectorAll("img")];
   prepared.set(index, Promise.allSettled(images.map(image => {
+    image.previousElementSibling.srcset = image.dataset.original;
     image.src = image.dataset.src;
     return image.decode();
   })));
@@ -81,10 +80,10 @@ async function turn(direction) {
   await prepared.get(target);
 
   if (!motion.matches && typeof sheet.animate === "function") {
-    const front = fromLeft ? pairs[current][0] : pairs[current][1];
-    const back = fromLeft ? pairs[target][1] : pairs[target][0];
-    sheet.querySelector(".print-front").style.backgroundImage = 'url("' + pageUrl(front) + '")';
-    sheet.querySelector(".print-back").style.backgroundImage = 'url("' + pageUrl(back) + '")';
+    const front = outgoing.querySelector(fromLeft ? ".left img" : ".right img");
+    const back = incoming.querySelector(fromLeft ? ".right img" : ".left img");
+    sheet.querySelector(".print-front").style.backgroundImage = front ? 'url("' + front.currentSrc + '")' : "none";
+    sheet.querySelector(".print-back").style.backgroundImage = back ? 'url("' + back.currentSrc + '")' : "none";
 
     incoming.classList.add("is-visible", fromLeft ? "hide-right" : "hide-left");
     outgoing.classList.add("is-outgoing", fromLeft ? "hide-left" : "hide-right");
